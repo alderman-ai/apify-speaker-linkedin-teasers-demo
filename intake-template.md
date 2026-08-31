@@ -47,16 +47,16 @@ duration_minutes:   ""              # number only — the card renders 10 (mins)
 # Values below are from the last run, not a specification.
 
 # actor card block — purple placeholder
-card_x:             150
-card_y:             769
-card_w:             900
-card_h:             346.2
+card_x:             147
+card_y:             766
+card_w:             901
+card_h:             350
 
-# speaker photo block — green placeholder
-speaker_x:          650
-speaker_y:          318
-speaker_w:          400
-speaker_h:          400
+# speaker photo block — green placeholder (photo area inside the blue ring)
+speaker_x:          711
+speaker_y:          340
+speaker_w:          339
+speaker_h:          391
 
 # --- 7. render options -------------------------------------------------------
 # output is optional. Default: processed/<this-file's-name>.png
@@ -147,8 +147,7 @@ Talk length in minutes — the number only, no unit; the card renders it as
 The short blurb under the speaker's name on the card. The number in the
 fence label is the enforced character budget: the measured two-line capacity
 of the **actor card's description text slot** with the card at its native
-CSS render width (`card_width: 400`) minus an 8% buffer — nothing to do with
-the 400×400 speaker image; the matching number is coincidence. Exceeding the
+CSS render width (`card_width: 400`) minus an 8% buffer. Exceeding the
 budget rejects the form; the card is never silently truncated.
 
 ```presentation-description-82-char-max
@@ -175,8 +174,8 @@ budget rejects the form; the card is never silently truncated.
 
 That's everything to type. Two things remain to **drop into this folder as
 files** (see the folder's README): the company logo (`company-logo.png`) and
-the speaker photo (`speaker.png`) — each either exactly 400×400, or any size
-with a visible mark drawn at the intended centre of the shot. Everything
+the speaker photo (`speaker.png`) — any size with a visible mark drawn at
+the intended centre of the shot (or exactly the template's photo-area size). Everything
 below this line is for the agents.
 
 ---
@@ -304,6 +303,12 @@ template missing either one is rejected before any rendering starts.
 |---|---|---|---|
 | **actor card** | purple `#AE81FF` | measured per run | the rendered card |
 | **speaker photo** | green `#20A34E` | measured per run | `speaker_image` |
+
+The speaker block wears a **10px Apify-blue border** (≈ rgb(36,109,255)),
+drawn in the template and **inclusive in the block's stated dimensions**:
+a printed panel on a bordered block gives the border-inclusive footprint,
+and the photo fills only the green area inside the ring. The ring stays
+visible around the finished portrait; nothing about it is an input.
 
 ### The template image is canon
 
@@ -491,9 +496,9 @@ The first fenced block after the frontmatter whose info string starts with
 
 - Inter 12px / 400 / `#a3a3a3`, clamped to `desc_lines` (2 lines).
 - **Budget: 82 characters** — the card's description text slot measured
-  with the card at its native CSS render width (`card_width: 400` — not the
-  400×400 speaker image): two-line capacity ~90 chars across mixed
-  real-text samples, worst sample 87, minus an 8% buffer. The budget is parsed from the fence label itself,
+  with the card at its native CSS render width (`card_width: 400`):
+  two-line capacity ~90 chars across mixed real-text samples, worst
+  sample 87, minus an 8% buffer. The budget is parsed from the fence label itself,
   so retuning it for a different card width means renaming the fence.
 - Newlines inside the fence are collapsed to spaces; leading/trailing
   whitespace is trimmed. Write one plain paragraph — no markdown.
@@ -538,10 +543,12 @@ The portrait image filling the green block. Resolved against `assets_root`.
 
 - Drawn at `speaker_w × speaker_h`, `object-fit: cover` — centre-cropped, never
   squashed.
-- Supply at **720 × 960 or larger** (2× the block) so it stays crisp; the block
-  is 3:4, so anything near that ratio crops cleanly.
-- Unlike the two card images this one has no border and no radius applied. If
-  you want rounded corners on it, say so — it is not in the card's CSS.
+- Supply at roughly **2× the photo area or larger** (≥ 680×780 for the
+  current template) so it stays crisp; the area is close to 7:8 portrait,
+  so anything near that ratio crops cleanly.
+- The 10px Apify-blue border around the finished portrait comes from the
+  template (§1b) — the render itself adds no border and no radius; the
+  photo simply fills the green area inside the ring.
 
 **States:** valid path → drawn · empty or omitted → **rejected**; both blocks
 must be filled · missing file → hard fail · wrong aspect → centre-cropped, which
@@ -616,8 +623,10 @@ processed/<speaker-folder>/      the whole folder lands here on success,
 
 For `speaker.png` (and `company-logo.png` alike, PNG or JPG/JPEG):
 
-- **Exactly 400×400** → used as-is; a correctly sized image also fully covers
-  a placeholder outline, which sits inside those bounds; or
+- **Exactly the template's photo-area size** (the green area inside the
+  blue ring — 339×391 on the current template) → used as-is; a correctly
+  sized image also fully covers a placeholder outline, which sits inside
+  those bounds; or
 - **any size, with a visible mark at the intended centre** — an "x", a
   scribble, any clear annotation drawn on the image. The skill reads the
   mark's position, records it as `speaker_focus: [x, y]`, and the generator

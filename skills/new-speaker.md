@@ -45,9 +45,9 @@ the intake form and (added by the operator) the two images.
    fenced inputs in `intake.md` (everything to type lives in the "Input
    presentation details here" section; the description fence label is its
    character budget), and drop in the two images —
-   `company-logo.(png/jpg)` and `speaker.(png/jpg)`, each either exactly
-   400×400 or any size with a visible mark at the intended centre. Then
-   "process the queue" generates the card.
+   `company-logo.(png/jpg)` and `speaker.(png/jpg)` — any size with a
+   visible mark at the intended centre, or exactly the template's photo-area
+   size. Then "process the queue" generates the card.
 
 ## Notes
 

@@ -84,6 +84,15 @@ with a zoomed read; note the readouts sit *inside* the blocks and the blocks
 may have rounded corners and can contain the white panel overlay — the block
 is the full coloured extent, not the first coloured run.
 
+**The blue-bordered speaker block:** the current design draws a solid
+Apify-blue ring (≈ rgb(36,109,255), ~10px at template scale) around the
+green area. The ring is part of the template and stays visible in the
+output; **the photo fills the green area only** — `speaker_*` values are the
+green mask bounds, never the ring's. If a printed panel accompanies a
+ringed block, it states the border-INCLUSIVE footprint: cross-check it
+against the ring's outer bounds (±6px), and expect the green area inset by
+the ring thickness on all sides. No ring → the plain rules above.
+
 Write the eight values back into the frontmatter (`card_x/y/w/h`,
 `speaker_x/y/w/h`) — they are outputs, never inputs.
 
@@ -174,6 +183,8 @@ totals. One bad folder never stops the rest.
   the card collapses to 137.667.
 - The footer circle icon is static on every card; never an input.
 - Text budgets (measured on the card's own text slots at the card's CSS
-  render width 400 — not the 400×400 speaker image — then −8%): name 30 ·
-  position/company 39 · description 82 (from the fence label) · topic 33.
+  render width 400, then −8%): name 30 · position/company 39 ·
+  description 82 (from the fence label) · topic 33.
+- The speaker photo's blue border comes from the template, not the render;
+  the photo covers only the green area inside it.
 - GT Walsheim is not part of the render and must never be added to this repo.

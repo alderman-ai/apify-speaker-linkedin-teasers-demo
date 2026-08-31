@@ -37,8 +37,8 @@ You only need two things that are almost certainly already on your machine:
 3. **Fill in the form's boxes** — name, role, company, talk blurb, topic,
    level, minutes; each box says what it wants and how long it can be —
    and **drop in two images**: the company logo and the speaker photo.
-   Either exactly 400×400, or any size with a visible "x" drawn where you
-   want the crop centred.
+   Any size works — just draw a visible "x" where you want the crop
+   centred (or supply the exact size named in the folder's README).
 4. Say **"process the queue"**. The finished 1200×1200 PNG lands in
    `processed/jana-novakova/`, ready to post.
 
@@ -102,8 +102,9 @@ A folder lives in exactly one queue. Successes move whole; failures stay put
 with a printed reason and never write partial output. Nothing is ever
 overwritten.
 
-**Images** can be exactly **400×400** (PNG/JPG), or **any size with a visible
-mark** — an "x" or scribble at the intended centre — which the skill reads and
+**Images** can be exactly the template's photo-area size (PNG/JPG), or **any
+size with a visible mark** — an "x" or scribble at the intended centre —
+which the skill reads and
 turns into a proportion-correct crop, leaving your original file untouched.
 **Missing images** stop that folder with a choice: resubmit, or render with a
 dashed in-block placeholder outline that a correctly sized image covers

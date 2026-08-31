@@ -66,14 +66,14 @@ body{ width:{{PAGE_W}}px; height:{{PAGE_H}}px; overflow:hidden;
   font-family:Inter,sans-serif;
   text-decoration:none;
   font-size:18px; line-height:28px;   /* -> 47.667px header row, see top note */
+  /* hover state rendered permanently on (operator direction): the live
+     card's :hover ring — box-shadow 0 0 0 2px #2a2a2a OUTSIDE the card,
+     so the edge reads ring / #1d1d1d shell / body, like a hovered card. */
+  box-shadow:0 0 0 2px var(--border);
 }
 .ActorCard *{ box-sizing:border-box; }
 .ActorCard-body{
   padding:16px; border-radius:6px; background-color:var(--bg); flex-grow:1;
-  /* hover state rendered permanently on (operator direction): the live
-     card's :hover ring — box-shadow 0 0 0 2px #2a2a2a around the body,
-     which reads as the lightened top/side border in the screenshot. */
-  box-shadow:0 0 0 2px var(--border);
 }
 .ActorCard-header{ display:flex; align-items:center; gap:12px; }
 .ActorCard-iconWrap{ position:relative; display:inline-block; flex-shrink:0; }
@@ -136,6 +136,12 @@ body{ width:{{PAGE_W}}px; height:{{PAGE_H}}px; overflow:hidden;
 <img id="base" src="{{BASE_IMAGE_URI}}" alt="">
 <img id="speaker" src="{{SPEAKER_IMAGE_URI}}" alt="">
 
+<!-- plate under the card: covers the whole purple block (its square
+     corners would otherwise peek past the card's rounded corners) -->
+<div id="cardplate" style="position:absolute;
+     left:calc({{CARD_X}}px - 1px); top:calc({{CARD_Y}}px - 1px);
+     width:calc({{CARD_W}}px + 2px); height:calc({{CARD_H}}px + 2px);
+     background:#020202"></div>
 <div id="cardmount">
 <a class="ActorCard">
   <div class="ActorCard-body">

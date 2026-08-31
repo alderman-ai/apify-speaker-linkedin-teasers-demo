@@ -10,9 +10,10 @@ Three things. The skill refuses (or asks about placeholders) until it has them.
 
 ## Image sizing — two accepted forms
 
-**Either** supply the image at **exactly 400×400** (PNG or JPG/JPEG) — it is
-used as-is and, dropped over a placeholder later, fully covers the
-placeholder's outline, which sits inside those bounds.
+**Either** supply the image at **exactly the template's photo-area size**
+(PNG or JPG/JPEG; 339×391 on the current template — the green area inside
+the blue ring) — it is used as-is and, dropped over a placeholder later,
+fully covers the placeholder's outline, which sits inside those bounds.
 
 **Or** supply any size of those file types **with a visible mark at the
 intended centre** — an "x", a scribble, any obvious annotation on top of the
