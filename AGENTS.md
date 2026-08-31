@@ -5,7 +5,9 @@ images for meetup speakers, styled as Apify actor cards. The operator fills
 one small markdown form per speaker; you render a pixel-faithful actor card
 and a speaker photo into a Canva-exported template and write a finished PNG.
 **You are the engine** — there are deliberately no build scripts and no
-package dependencies. Chrome is the only external requirement.
+package dependencies. The only external requirement is a Chromium-based
+browser for headless rendering — Chrome, or the Edge preinstalled on
+Windows; never download one.
 
 ## Asset map — every file you may need
 
@@ -55,7 +57,7 @@ Every subfolder carries its own small `README.md` index for routing.
   `new-speaker-<NN>` at the lowest free number).
 - **"process the queue"** → run every folder in `to-process/` through the
   skill's procedure: validate → read geometry off the template → ratio
-  check → render in headless Chrome → verify by inspection → move to
+  check → render in a headless Chromium browser → verify by inspection → move to
   `processed/`.
 
 ## Ground rules (the skill has the full list)

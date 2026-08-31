@@ -576,7 +576,7 @@ processed/<speaker-folder>/      the whole folder lands here on success,
    and validates them → checks both image assets
    are present (see below) → measures both placeholders off `base_image`
    (printed panel first, colour mask second, §1b) → card-ratio check →
-   renders at `card_width` in headless Chrome, all fonts local → scales and
+   renders at `card_width` in a headless Chromium browser, all fonts local → scales and
    composites → verifies output dimensions and pixels → writes the PNG into
    the folder → **moves the whole folder to `processed/`**, geometry written
    back into the form.

@@ -71,11 +71,11 @@ href:               ""
 These fields will be filled in by operator -- or by the assistant if the info was give during the new-speaker skill -- and as the first step of converting this intake form into a completed 1200x1200 LinkedIn teaser image, the assistant will transfer their contents to the appropriate frontheader variable state.
 
 >[! Instructions for the HUMAN]+
->`<from_alderman_ai>`
+>`<instructions_for_operator>`
 >
 >Hi! All you need to do is fill in these fields below, Ill let you know when the input sections are over. The rest of the document is for the agents.  And, um, delete the `[type here]` 🙂 Depending on how you used the skills for this repo, some may be filled in for you already.
 >
->`</from_alderman_ai>`
+>`</instructions_for_operator>`
 
 ## Speaker name
 
@@ -115,17 +115,24 @@ The track or theme, Title Case. Fits up to **33 characters**.
 
 ## Audience level
 
-Exactly one of: `all` · `easy` · `int.` · `adv.` — keep the trailing dot on
-the two abbreviations.
+Choose the level of complexity of the talk. See **audience level notes** below.
+Choose one of these **exactly**: 
+
+- `all`
+- `easy`
+- `int` 
+- `adv` 
 
 ```level
 [type here]
 ```
 
 ### Audience level notes
+
 - All --  mostly conceptual, all levels can benefit
 - Easy -- more basic, and specific enough that advanced might be bored
-- Int. -- Intermediate, for those who know what an md file and a 
+- Int -- Intermediate, for those who know what an md file and a repo are
+- Adv -- More technical topics that might be not very fun for a beginner.
 ## Duration
 
 Talk length in minutes — the number only, no unit; the card renders it as
@@ -145,10 +152,26 @@ the 400×400 speaker image; the matching number is coincidence. Exceeding the
 budget rejects the form; the card is never silently truncated.
 
 ```presentation-description-82-char-max
-[type here]
+
+[type here -- for reference this block of text including the brackets is 82 chars]
 ```
 
 ## End of inputs
+
+>[! Instructions for the HUMAN]+
+>`<instructions_for_operator>`
+>
+>You did it! all done! A couple things to couple check:
+>- (you did delete the `[brackets]` right?)
+>- this file should be in the `to-process/<speaker-name>/` along with:
+	>- their 400x400 px speaker photo
+	>- their company logo - **accepted file types**: (PNG | ICO | JPG | JPEG)
+
+
+
+
+
+>`</instructions_for_operator>`
 
 That's everything to type. Two things remain to **drop into this folder as
 files** (see the folder's README): the company logo (`company-logo.png`) and
@@ -575,7 +598,7 @@ processed/<speaker-folder>/      the whole folder lands here on success,
    and validates them → checks both image assets
    are present (see below) → measures both placeholders off `base_image`
    (printed panel first, colour mask second, §1b) → card-ratio check →
-   renders at `card_width` in headless Chrome, all fonts local → scales and
+   renders at `card_width` in a headless Chromium browser, all fonts local → scales and
    composites → verifies output dimensions and pixels → writes the PNG into
    the folder → **moves the whole folder to `processed/`**, geometry written
    back into the form.

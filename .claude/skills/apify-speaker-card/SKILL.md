@@ -11,8 +11,9 @@ description: >
 # Apify speaker card generator
 
 One speaker folder in → one finished template-sized PNG out. There is **no
-build script and no dependency beyond Chrome** — you are the engine. Everything
-is done with reading, writing, one headless-Chrome command, and your own eyes.
+build script and no dependency beyond a Chromium-based browser** (Chrome, or
+the Edge that ships with Windows) — you are the engine. Everything is done
+with reading, writing, one headless-browser command, and your own eyes.
 `intake-template.md` at the repo root is the input contract (the sibling
 `intake-template (completed example).md` is a filled reference copy); consult
 it for field rules rather than improvising.
@@ -127,8 +128,8 @@ the render must never touch a network). Replace every `{{TOKEN}}`:
 | `CROSS_ICON_URI` | `file:///` URL of `internal/render/footer-cross-icon.svg` |
 | `SPEAKER_NAME`, `POSITION_COMPANY` (join with `/`), `DESCRIPTION`, `TOPIC_CATEGORY`, `LEVEL`, `DURATION_MINUTES` (number only — the static `(mins)` is baked into the shell) | HTML-escaped text |
 
-Verify no `{{` remains. Then screenshot — **into the temp dir first; Chrome
-cannot write into Desktop folders** (observed: Access denied):
+Verify no `{{` remains. Then screenshot — **into the temp dir first; the
+browser cannot write into Desktop folders** (observed: Access denied):
 
 ```
 chrome --headless=new --disable-gpu --hide-scrollbars --force-color-profile=srgb
@@ -136,8 +137,12 @@ chrome --headless=new --disable-gpu --hide-scrollbars --force-color-profile=srgb
   --window-size=<PAGE_W>,<PAGE_H> --screenshot=<%TEMP% path> <file:/// url of _run page>
 ```
 
-Chrome lives at `C:\Program Files\Google\Chrome\Application\chrome.exe` or
-the CHROME env var.
+Any Chromium-based browser runs these exact flags. Find one, in order: the
+CHROME env var · Chrome at
+`C:\Program Files\Google\Chrome\Application\chrome.exe` · Edge (preinstalled
+on Windows) at `C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe` ·
+`google-chrome` / `chromium` / `msedge` on PATH. Never download a browser —
+one of these is already on the machine.
 
 ### 7 · Verify with your eyes, then deliver
 
