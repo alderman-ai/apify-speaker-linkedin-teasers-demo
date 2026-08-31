@@ -118,7 +118,8 @@ point, averaged over samples) minus an 8% buffer. Over-budget descriptions are
 rejected, not silently cut. The footer's small circle icon is static on every
 card and ships in `render/`.
 
-See `docs/Actor card field mapping.png` for the annotated picture.
+See `docs/Actor card field mapping.png` for the annotated picture and
+`docs/Actor card text budgets.png` for the budgets table.
 
 ## The template is canon
 

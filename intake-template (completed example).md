@@ -125,7 +125,8 @@ int.
 ### Audience level notes
 - All --  mostly conceptual, all levels can benefit
 - Easy -- more basic, and specific enough that advanced might be bored
-- Int. -- Intermediate, for those who know what an md file and a repo are
+- Int -- Intermediate, for those who know what an md file and a repo are
+- Adv -- More technical topics that might be not very fun for a beginner.
 ## Duration
 
 Talk length in minutes — the number only, no unit; the card renders it as

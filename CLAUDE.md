@@ -42,8 +42,9 @@ Reference:
 | path | what |
 |---|---|
 | `visual-templates/speaker-teaser-linkedin.png` | the one fixed base template (1200×1200): purple card block + green speaker block (+ optional printed Width/Height/X/Y panels) |
-| `docs/Actor card field mapping.png` | annotated picture of every field and its measured text budget |
-| `docs/field-mapping.html` | that graphic's source, re-renderable with headless Chrome |
+| `docs/Actor card field mapping.png` | annotated picture of every field and where it lands on the card |
+| `docs/Actor card text budgets.png` | the measured character-budget table for every text field |
+| `docs/field-mapping.html`, `docs/text-budgets.html` | those graphics' sources, re-renderable with headless Chrome |
 
 Every subfolder carries its own small `README.md` index for routing.
 
