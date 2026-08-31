@@ -52,18 +52,16 @@ Want to see what "done" looks like first? Open
 
 ## Where the skills are
 
-The "skills" — the assistant's step-by-step instructions — are plain
-markdown files in `.claude/skills/`, the standard place assistants look.
-Each file opens with a short description of when it kicks in:
+The "skills" — the assistant's step-by-step instructions — are two plain
+markdown files in the `skills/` folder. Any assistant can run one just by
+being pointed at it, and `CLAUDE.md` / `AGENTS.md` route the two operator
+phrases to them automatically. Each file opens with a short description of
+when it applies:
 
 | skill | file | what it does |
 |---|---|---|
-| `new-speaker` | `.claude/skills/new-speaker/SKILL.md` | scaffolds one speaker folder in `to-process/` — asks the name, or numbers the folder if you skip it |
-| `apify-speaker-card` | `.claude/skills/apify-speaker-card/SKILL.md` | the whole generator: validates the form, measures the template, renders the card, composites and verifies the PNG |
-
-Heads-up: folders starting with a dot are hidden by default in Windows
-Explorer and macOS Finder. They are perfectly visible on GitHub and inside
-any editor or assistant.
+| `new-speaker` | `skills/new-speaker.md` | scaffolds one speaker folder in `to-process/` — asks the name, or numbers the folder if you skip it |
+| `apify-speaker-card` | `skills/apify-speaker-card.md` | the whole generator: validates the form, measures the template, renders the card, composites and verifies the PNG |
 
 This README is written for you, the human; your assistant orients itself
 from `CLAUDE.md` / `AGENTS.md`.
@@ -160,8 +158,8 @@ docs/                         annotated field-mapping + text-budget graphics
 internal/                     machinery you never edit: the render page
                               (verified card CSS), static footer icon,
                               self-hosted OFL fonts, folder README template
-.claude/skills/new-speaker/         scaffolds a speaker folder
-.claude/skills/apify-speaker-card/  the generator — the entire engine
+skills/new-speaker.md         scaffolds a speaker folder
+skills/apify-speaker-card.md  the generator — the entire engine
 ```
 
 ## Fonts and licences

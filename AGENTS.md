@@ -15,8 +15,8 @@ Procedure and contract:
 
 | path | what |
 |---|---|
-| `.claude/skills/apify-speaker-card/SKILL.md` | **the generator's complete operating procedure — follow it, don't improvise** |
-| `.claude/skills/new-speaker/SKILL.md` | scaffolds one speaker folder (asks the name; declined -> `new-speaker-<NN>`, lowest free number) |
+| `skills/apify-speaker-card.md` | **the generator's complete operating procedure — follow it, don't improvise** |
+| `skills/new-speaker.md` | scaffolds one speaker folder (asks the name; declined -> `new-speaker-<NN>`, lowest free number) |
 | `intake-template.md` | the input contract: every field, budget, failure mode; everything the operator types lives in labelled body fences. Copied into each folder as `intake.md` |
 | `intake-template (completed example).md` | the same template with every fence and frontmatter value filled in — what "done" looks like |
 
