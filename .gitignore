@@ -1,0 +1,5 @@
+internal/render/_run-*.html
+to-process/*
+!to-process/.gitkeep
+Thumbs.db
+.DS_Store
