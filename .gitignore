@@ -1,5 +1,7 @@
 internal/render/_run-*.html
 to-process/*
 !to-process/.gitkeep
+!to-process/README.md
+.obsidian/
 Thumbs.db
 .DS_Store
