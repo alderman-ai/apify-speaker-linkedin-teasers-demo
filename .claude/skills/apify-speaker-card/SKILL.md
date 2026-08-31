@@ -27,11 +27,11 @@ A folder is always in exactly one queue. Failures stay put with the reason
 stated; nothing partial is ever written; nothing is ever overwritten — name
 collisions in processed/ are refusals.
 
-## Scaffolding ("new speaker Jana Novakova")
+## Scaffolding
 
-1. Folder `to-process/<kebab-name>/` (no name given → `new-speaker-<N>`).
-2. Copy `INTAKE-TEMPLATE.md` in as `intake.md`; prefill `speaker_name` if known.
-3. Copy `internal/speaker-folder-README.md` in as `README.md`.
+Handled by the sibling **`new-speaker`** skill (asks for the name; declined →
+`new-speaker-<NN>`, lowest free number, zero-padded). If the operator asks
+this skill to scaffold, invoke that one.
 
 ## Processing ("process the queue")
 
@@ -143,7 +143,7 @@ body. Anything off → halt that folder, delete the bad screenshot, report.
 
 Then: move the PNG into the speaker folder as `<kebab-name>.png`, delete the
 `_run-*.html`, and move the whole folder to `processed/<kebab-name>/`
-(renaming `new-speaker-<N>` to the kebab speaker name from the form).
+(renaming `new-speaker-<NN>` to the kebab speaker name from the form).
 
 ### 8 · Report
 

@@ -470,7 +470,8 @@ processed/<speaker-folder>/      the whole folder lands here on success,
                                  finished PNG inside it
 ```
 
-1. **Scaffold**: tell the assistant *"new speaker Jana Novakova"* — it creates
+1. **Scaffold**: tell the assistant *"new speaker Jana Novakova"* (the
+   `new-speaker` skill) — it creates
    `to-process/jana-novakova/` with the form (name pre-filled) and the README.
    With no name it creates `new-speaker-<N>/`, and the folder is renamed to
    the kebab speaker name from the form at processing time.

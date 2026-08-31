@@ -7,6 +7,32 @@ markdown form. A Claude Code skill renders a pixel-faithful actor card and a
 speaker photo into the template and writes a finished PNG. **No build scripts,
 no dependencies to audit — just Chrome and the skill.**
 
+## Start here (you, the human)
+
+This repo turns a one-page form into a finished LinkedIn teaser image, one
+per speaker, in your event's Apify-card style. You never touch design tools
+after the template exists — the whole loop is:
+
+1. **Open this folder in [Claude Code](https://claude.com/claude-code)**
+   (Chrome installed is the only requirement).
+2. Say **"new speaker Jana Novakova"** — you get a folder in `to-process/`
+   with a form and a note listing exactly what to drop in.
+3. **Fill the form** (name, role, talk blurb, level, minutes) and **drop in
+   two images** — company logo and speaker photo. Either exactly 400×400, or
+   any size with a visible "x" marked at the point you want centred.
+4. Say **"process the queue"**. Finished PNGs land in `processed/`, one
+   folder per speaker, ready to post.
+
+If something is off — blurb too long, an image missing, the template box the
+wrong shape — the run stops and tells you exactly what to fix. It never
+silently crops your text or stretches the card.
+
+This README is written for you; your assistant reads `CLAUDE.md` /
+`AGENTS.md` (identical files) and the skills in `.claude/skills/` for its
+operating procedure.
+
+---
+
 **Unofficial demo.** Not affiliated with or endorsed by Apify. The card is a
 reproduction of apify.com's public actor-card design, rebuilt from scratch as
 an homage for a non-commercial community-event teaser. Apify's name, logo and
@@ -59,22 +85,12 @@ covers completely post-hoc.
 
 ## Quick start
 
-Open this repo in [Claude Code](https://claude.com/claude-code) (Chrome
-installed is the only requirement) and say:
+Two skills ship in `.claude/skills/` and load automatically:
 
-```
-new speaker Jana Novakova
-```
-
-fill `to-process/jana-novakova/intake.md`, drop the two images into the
-folder, then say:
-
-```
-process the queue
-```
-
-The skill ships in the repo at `.claude/skills/apify-speaker-card/` and loads
-automatically. It reads the template's printed dimension panels (paste Canva's
+- **`new-speaker`** — asks for the speaker's name and scaffolds the folder
+  (declining the name gives `new-speaker-<NN>`, lowest free number).
+- **`apify-speaker-card`** — "process the queue": validates, renders,
+  verifies, delivers. It reads the template's printed dimension panels (paste Canva's
 Width/Height/X/Y readout into the placeholders for sub-pixel accuracy) and
 sanity-checks them against the visible blocks.
 
@@ -121,7 +137,8 @@ docs/                         the annotated field-mapping graphic
 internal/                     machinery you never edit: the render page
                               (verified card CSS), static footer icon,
                               self-hosted OFL fonts, folder README template
-.claude/skills/               the skill — the entire engine
+.claude/skills/new-speaker/         scaffolds a speaker folder
+.claude/skills/apify-speaker-card/  the generator — the entire engine
 ```
 
 ## Fonts and licences

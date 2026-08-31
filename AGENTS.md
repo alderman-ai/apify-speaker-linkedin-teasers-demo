@@ -11,7 +11,8 @@ package dependencies. Chrome is the only external requirement.
 
 | path | what |
 |---|---|
-| `.claude/skills/apify-speaker-card/SKILL.md` | **the complete operating procedure — follow it, don't improvise** |
+| `.claude/skills/apify-speaker-card/SKILL.md` | **the generator's complete operating procedure — follow it, don't improvise** |
+| `.claude/skills/new-speaker/SKILL.md` | scaffolds one speaker folder (asks the name; declined → `new-speaker-<NN>`, lowest free number) |
 | `INTAKE-TEMPLATE.md` | the input contract: every field, budget, and failure mode |
 | `to-process/` → `processed/` | the queue: one folder per speaker, moves whole on success |
 | `templates/` | Canva-exported base PNGs with two coloured placeholder blocks |
@@ -20,8 +21,9 @@ package dependencies. Chrome is the only external requirement.
 
 ## The two things operators say
 
-- **"new speaker Jana Novakova"** → scaffold `to-process/jana-novakova/`
-  (intake form + README).
+- **"new speaker Jana Novakova"** → the `new-speaker` skill scaffolds
+  `to-process/jana-novakova/` (intake form + README; without a name,
+  `new-speaker-<NN>` at the lowest free number).
 - **"process the queue"** → run every folder in `to-process/` through the
   skill's procedure: validate → read geometry off the template → ratio
   check → render in headless Chrome → verify by inspection → move to
