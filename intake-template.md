@@ -20,10 +20,8 @@ base_image:         "../../visual-templates/speaker-teaser-linkedin.png"
 # generated card and is bundled with the skill. It is not an input.
 assets_root:        ""              # images live beside this form, in the folder
 company_logo:       "company-logo.png"
-speaker_image:      "speaker.png"
-# speaker_focus:    [x, y]           # optional: centre of the crop, in pixels of
-                                     # speaker_image. Written by the skill when it
-                                     # reads a mark ("x"/scribble) off the photo.
+speaker_image:      "speaker.png"   # REQUIRED as an exact 262x262 square — the
+                                     # skill never reframes; wrong size halts.
 
 # --- 3. speaker -- WRITTEN BY ASSISTANT from the body fences -----------------
 speaker_name:       ""
@@ -47,19 +45,20 @@ duration_minutes:   ""              # number only — the card renders 10 (mins)
 # Values below are from the last run, not a specification.
 
 # actor card block — purple placeholder
-card_x:             147
-card_y:             766
-card_w:             901
-card_h:             350
+card_x:             200.5
+card_y:             748.028
+card_w:             799
+card_h:             306.949
 
-# speaker photo block — green placeholder (photo area inside the blue ring)
-speaker_x:          711
-speaker_y:          340
-speaker_w:          339
-speaker_h:          391
+# speaker card block — green placeholder (the full footprint of the
+# card-mimicking speaker component: square photo + "Join me in PRAGUE" bar)
+speaker_x:          705.5
+speaker_y:          345
+speaker_w:          294
+speaker_h:          336
 
 # --- 7. render options -------------------------------------------------------
-# output is optional. Default: processed/<this-file's-name>.png
+# output is optional. Default: final-output/<speaker-name>-final.png
 output:             ""
 card_width:         400
 desc_lines:         2
@@ -145,14 +144,15 @@ Talk length in minutes — the number only, no unit; the card renders it as
 ## Presentation description
 
 The short blurb under the speaker's name on the card. The number in the
-fence label is the enforced character budget: the measured two-line capacity
-of the **actor card's description text slot** with the card at its native
-CSS render width (`card_width: 400`) minus an 8% buffer. Exceeding the
-budget rejects the form; the card is never silently truncated.
+fence label is the enforced character budget: the two-line capacity of the
+**actor card's description text slot** with the card at its native CSS
+render width (`card_width: 400`), operator-calibrated against real renders
+(2026-08-31). Exceeding the budget rejects the form; the card is never
+silently truncated.
 
-```presentation-description-82-char-max
+```presentation-description-140-char-max
 
-[type here -- for reference this block of text including the brackets is 82 chars]
+[type here -- for reference this line of text including the brackets and running to the second line is exactly one hundred forty characters]
 ```
 
 ## End of inputs
@@ -163,19 +163,15 @@ budget rejects the form; the card is never silently truncated.
 >You did it! all done! A couple things to couple check:
 >- (you did delete the `[brackets]` right?)
 >- this file should be in the `to-process/<speaker-name>/` along with:
-	>- their 400x400 px speaker photo
+	>- their 262x262 px speaker photo
 	>- their company logo - **accepted file types**: (PNG | ICO | JPG | JPEG)
-
-
-
-
-
+>
 >`</instructions_for_operator>`
 
 That's everything to type. Two things remain to **drop into this folder as
 files** (see the folder's README): the company logo (`company-logo.png`) and
-the speaker photo (`speaker.png`) — any size with a visible mark drawn at
-the intended centre of the shot (or exactly the template's photo-area size). Everything
+the speaker photo (`speaker.png`) — **required as an exact 262×262 square**,
+framed the way you want it shown; the pipeline never reframes it. Everything
 below this line is for the agents.
 
 ---
@@ -201,9 +197,9 @@ The slot names are Apify's; the meanings are yours.
 |---|---|---|---|
 | `company_logo` | speaker's company logo | `[data-slot="icon"]` | `src`, via `assets_root` |
 | `speaker_name` | speaker's name | `[data-slot="title"]` | `textContent` |
-| `speaker_position` + `speaker_company` | position / company | `[data-slot="slug"]` | joined with `/`, see §2 |
+| `speaker_position` + `speaker_company` | position / company | `[data-slot="slug"]` | joined with ` / ` (spaced), see §2 |
 | *description fence (body)* | the talk blurb | `[data-slot="description"]` | `textContent`, from the fence, not frontmatter |
-| *(static, bundled)* | Apify cross in a circle | `[data-slot="authorAvatar"]` | fixed asset, **not an input** |
+| *(static, bundled)* | orange `?` in an orange-ringed circle | `[data-slot="authorAvatar"]` | fixed asset, **not an input** |
 | `topic_category` | e.g. "Content Ops" | `[data-slot="authorName"]` | `textContent` |
 | `level` | all / easy / int. / adv. | `[data-slot="users"]` | `textContent` |
 | `duration_minutes` | minutes, number only | `[data-slot="rating"]` | `textContent` |
@@ -284,7 +280,7 @@ All uniform on every corner.
 | Card shell — outer `<a>`, `#1d1d1d` | **8px** |
 | Body panel — inner `#020202` block | **6px** |
 | Company logo (`company_logo`), 40×40 | **8px** |
-| Footer cross icon (static), 20×20 | **100%** — full circle |
+| Footer help icon (static), 20×20 | **100%** — full circle |
 | Footer row, stat divider | 0 — square |
 
 The 8/6 pair is concentric, not arbitrary: the shell has 2px of padding, and
@@ -304,11 +300,16 @@ template missing either one is rejected before any rendering starts.
 | **actor card** | purple `#AE81FF` | measured per run | the rendered card |
 | **speaker photo** | green `#20A34E` | measured per run | `speaker_image` |
 
-The speaker block wears a **10px Apify-blue border** (≈ rgb(36,109,255)),
-drawn in the template and **inclusive in the block's stated dimensions**:
-a printed panel on a bordered block gives the border-inclusive footprint,
-and the photo fills only the green area inside the ring. The ring stays
-visible around the finished portrait; nothing about it is an input.
+The speaker block receives the shell's **`.SpeakerCard` component** — a
+`#454545` (button-grey) shell that IS the element's border, rendered 1:1
+at the block's own size (it spans the template's two central orange
+crosses vertically and is centred on the header's right title box).
+Inside it: the portrait as an **exact square**, inset 16px from the
+left, top and right edges; the remaining grey strip below holds only
+`Join me in PRAGUE` (PRAGUE in the crosses' orange `#f5641f`), its ink
+spanning 80% of the strip's width, centred on both axes. The component
+fills the green block's full footprint; nothing about its chrome or
+copy is an input.
 
 ### The template image is canon
 
@@ -448,12 +449,13 @@ The speaker's company logo, 40×40, upper-left of the card body.
 **States:** valid path → drawn · empty string → slot renders blank but the 40px
 box is still reserved, so the layout does not shift · missing file → hard fail.
 
-### The footer cross icon — **not an input**
+### The footer help icon — **not an input**
 
-The 20×20 circle in the footer is Apify's registration cross in the card's muted
-grey (`#a3a3a3`) on the shell colour, and is **identical on every generated
-card**. It ships with the skill as `assets/footer-cross-icon.svg` and cannot be
-overridden from an intake file. SVG, so it stays crisp at any render scale.
+The 20×20 circle in the footer is an orange (`#f5641f`) question mark on the
+shell colour, ringed by a 1px orange border (the border is CSS in the render
+shell; the `?` is the SVG), and is **identical on every generated card**. It
+ships as `internal/render/footer-help-icon.svg` and cannot be overridden from
+an intake file. SVG, so it stays crisp at any render scale.
 
 ### `speaker_name` — string, **required**
 
@@ -476,8 +478,8 @@ non-Inter text on the card.
 - IBM Plex Mono 12px / 500 / `#888888`.
 - **All lowercase, kebab-case**, mirroring Apify's `owner/actor-name` slug form
   — `head-of-growth/acme-analytics`. This is the pastiche; keep it.
-- Supply the two halves separately and **without** the slash. The skill joins
-  them.
+- Supply the two halves separately and **without** the slash. The skill
+  joins them with a spaced ` / ` (operator direction 2026-09-01).
 - Single line, ellipsises. Combined budget: **39 characters** including the
   slash (monospace, so this one is exact: 43 fit, minus 8%).
 
@@ -490,16 +492,17 @@ either half empty → the line collapses.
 The first fenced block after the frontmatter whose info string starts with
 `presentation-description`. The number in the label is the budget:
 
-    ```presentation-description-82-char-max
+    ```presentation-description-140-char-max
     How we cut lead research from six hours a week to twenty minutes.
     ```
 
 - Inter 12px / 400 / `#a3a3a3`, clamped to `desc_lines` (2 lines).
-- **Budget: 82 characters** — the card's description text slot measured
-  with the card at its native CSS render width (`card_width: 400`):
-  two-line capacity ~90 chars across mixed real-text samples, worst
-  sample 87, minus an 8% buffer. The budget is parsed from the fence label itself,
-  so retuning it for a different card width means renaming the fence.
+- **Budget: 140 characters** — the two-line capacity of the card's
+  description slot at its native CSS render width (`card_width: 400`),
+  operator-calibrated 2026-08-31 after real renders showed the earlier
+  measured 82 left most of the second line empty. The budget is parsed
+  from the fence label itself, so retuning it for a different card width
+  means renaming the fence.
 - Newlines inside the fence are collapsed to spaces; leading/trailing
   whitespace is trimmed. Write one plain paragraph — no markdown.
 
@@ -512,7 +515,7 @@ empty → rejected; the card without a description is 40px shorter and fails the
 
 The track or category, e.g. `Content Ops`, `Engineering`, `Growth`.
 
-- Inter 12px / 500 / `#a3a3a3`, immediately right of the footer cross icon.
+- Inter 12px / 500 / `#a3a3a3`, immediately right of the footer help icon.
 - Title Case. Single line, ellipsises. Budget: **33 characters** (measured
   ~36, minus 8%) before it collides with the footer's right-hand group.
 
@@ -539,24 +542,28 @@ Talk length in minutes, right of the ★ glyph.
 
 ### `speaker_image` — string, **required**
 
-The portrait image filling the green block. Resolved against `assets_root`.
+The portrait image filling the square photo slot of the speaker card (§1b).
+Resolved against `assets_root`.
 
-- Drawn at `speaker_w × speaker_h`, `object-fit: cover` — centre-cropped, never
-  squashed.
-- Supply at roughly **2× the photo area or larger** (≥ 680×780 for the
-  current template) so it stays crisp; the area is close to 7:8 portrait,
-  so anything near that ratio crops cleanly.
-- The 10px Apify-blue border around the finished portrait comes from the
-  template (§1b) — the render itself adds no border and no radius; the
-  photo simply fills the green area inside the ring.
+- **Required as an exact 262×262 square**, pre-framed by the operator —
+  the photo slot is square, so nothing is cropped. The skill never
+  reframes a photo and there is no mark-the-centre option.
+- Why 262: the speaker element is 294 wide (its 336 cross-to-cross height
+  × the locked 7:8 ratio) and the `#454545` border is 16px each side —
+  294 − 32 = 262 (verified on the delivered render). A template
+  rescale moves this number; re-measure.
+- The card chrome around the portrait (shell, radii, `Join me in PRAGUE`
+  bar) comes from the render shell, not from this asset — the photo simply
+  fills the square slot.
 
-**States:** valid path → drawn · empty or omitted → **rejected**; both blocks
-must be filled · missing file → hard fail · wrong aspect → centre-cropped, which
-may cut faces or text, so pre-crop anything composition-sensitive.
+**States:** valid 262×262 path → drawn · empty or omitted → **rejected**;
+both blocks must be filled · missing file → hard fail · any other
+dimensions → **halt**, actual size reported, 262×262 resubmit requested.
 
 ### `output` — string, **required**
 
 Destination for the finished PNG, relative to this intake file or absolute.
+Left empty, it defaults to `final-output/<speaker-name>-final.png`.
 
 **States:** path free → written · **file exists → the skill refuses and
 reports; it never overwrites.** Change `output` or move the old file.
@@ -587,8 +594,9 @@ to-process/<speaker-folder>/     one folder per card:
     README.md                      what belongs in the folder (auto-written)
     company-logo.png               the two image assets, beside the form
     speaker.png
-processed/<speaker-folder>/      the whole folder lands here on success,
-                                 finished PNG inside it
+processed/<speaker-folder>/      the whole folder lands here on success
+                                 (archive: form + assets)
+final-output/<speaker>-final.png the finished render, delivered separately
 ```
 
 1. **Scaffold**: tell the assistant *"new speaker Jana Novakova"* (the
@@ -606,9 +614,9 @@ processed/<speaker-folder>/      the whole folder lands here on success,
    are present (see below) → measures both placeholders off `base_image`
    (printed panel first, colour mask second, §1b) → card-ratio check →
    renders at `card_width` in a headless Chromium browser, all fonts local → scales and
-   composites → verifies output dimensions and pixels → writes the PNG into
-   the folder → **moves the whole folder to `processed/`**, geometry written
-   back into the form.
+   composites → verifies output dimensions and pixels → writes the PNG to
+   `final-output/<speaker>-final.png` → **moves the whole folder to
+   `processed/`**, geometry written back into the form.
 5. **Missing images**: the run stops for that folder and asks — *"resubmit
    with the image(s) added, or generate now with a placeholder outline?"* In
    placeholder mode the missing slot renders as a dashed outline drawn
@@ -616,24 +624,20 @@ processed/<speaker-folder>/      the whole folder lands here on success,
    real image pasted over it post-hoc covers it completely.
 6. **Failures** stay in `to-process/`, nothing partial is written, the reason
    is printed, the rest of the batch continues.
-7. **Nothing is ever overwritten** — a `processed/` name collision refuses
-   that folder.
+7. **Nothing is ever overwritten** — a name collision in `processed/` or
+   `final-output/` refuses that folder.
 
-### Image sizing — two accepted forms
+### Image sizing — required dimensions
 
-For `speaker.png` (and `company-logo.png` alike, PNG or JPG/JPEG):
+`speaker.png` (PNG or JPG/JPEG) is **required as an exact 262×262 square**,
+pre-framed by the operator. The card's photo slot is square, so nothing is
+cropped; a correctly sized image also fully covers a placeholder outline,
+which sits inside those bounds. There is no mark-the-centre option and the
+skill never reframes a photo — any other dimensions halt that folder with
+the actual size reported and a 262×262 resubmit requested.
 
-- **Exactly the template's photo-area size** (the green area inside the
-  blue ring — 339×391 on the current template) → used as-is; a correctly
-  sized image also fully covers a placeholder outline, which sits inside
-  those bounds; or
-- **any size, with a visible mark at the intended centre** — an "x", a
-  scribble, any clear annotation drawn on the image. The skill reads the
-  mark's position, records it as `speaker_focus: [x, y]`, and the generator
-  crops to the block's proportions around that point. The original file is
-  untouched.
-
-Odd-sized and unmarked → plain centre crop (`object-fit: cover`).
+`company-logo.png` stays flexible: square, ideally 80×80 or larger
+(`object-fit: cover` centre-crops a non-square logo).
 
 ## 4. Batch discipline
 

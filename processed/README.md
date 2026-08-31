@@ -1,8 +1,9 @@
-# processed/ — finished cards
+# processed/ — archived speaker folders
 
 Each subfolder arrived here from `to-process/` on a successful run: the
-finished `<speaker>.png`, the archived `intake.md` (with the measured
-geometry written back), and the assets it was built from.
+archived `intake.md` (with the measured geometry written back) and the
+assets it was built from. The finished PNG itself lives in
+`final-output/<speaker-name>-final.png`, not here.
 
 Treat as an archive: **nothing here is ever overwritten** — re-running a
 speaker requires renaming or clearing their folder first. `jana-novakova/`

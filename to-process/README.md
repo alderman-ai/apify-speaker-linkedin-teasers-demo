@@ -6,5 +6,6 @@ with its own README saying exactly what to drop in (the filled `intake.md`
 plus `company-logo` and `speaker` images).
 
 "Process the queue" runs every folder here; each success **moves whole** to
-`processed/`. Failures stay put with the reason. This file is not a speaker
-folder and is ignored by processing.
+`processed/` and its finished PNG lands in
+`final-output/<speaker>-final.png`. Failures stay put with the reason. This
+file is not a speaker folder and is ignored by processing.

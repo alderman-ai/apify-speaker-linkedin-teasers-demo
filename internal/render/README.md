@@ -6,6 +6,7 @@
   or Edge) at the template's size. Every double-brace token is documented in the generator SKILL.md;
   the card CSS is a pixel-verified reproduction of apify.com's actor card —
   its oddities are deliberate, do not tidy them.
-- `footer-cross-icon.svg` — the static 20x20 footer circle icon, identical
-  on every generated card, never an input.
+- `footer-help-icon.svg` — the static 20x20 footer circle icon (orange `?`;
+  its 1px orange ring is the avatar border in the shell CSS), identical on
+  every generated card, never an input.
 - `_run-*.html` — transient, gitignored; delete after capture.

@@ -18,6 +18,11 @@
      - .icon is display:inline so the header row is 47.667px, not 40px
      - stats row is row-reverse: DOM [level][divider][duration] paints
        duration (mins) | divider | level
+
+   The speaker portrait renders as a second component (.SpeakerCard):
+   a #454545 shell that IS the border — square photo inset 8px (output)
+   on left/top/right, "Join me in Prague !" centred in the grey strip
+   below at 80%-width ink — scaled with {{SPK_SCALE}}; see its comment.
    ========================================================================== */
 
 :root{
@@ -38,13 +43,45 @@ body{ width:{{PAGE_W}}px; height:{{PAGE_H}}px; overflow:hidden;
 #base{ position:absolute; left:0; top:0;
        width:{{PAGE_W}}px; height:{{PAGE_H}}px; display:block; }
 
-/* speaker photo, covering the green block */
-#speaker{ position:absolute; left:{{SPK_X}}px; top:{{SPK_Y}}px;
-          width:{{SPK_W}}px; height:{{SPK_H}}px;
-          object-fit:cover; display:block;
-          /* focus crop, CSS-only: percentages of the source image where the
-             operator's mark sits; 50% 50% = plain centre crop */
-          object-position:{{SPK_POS}}; }
+/* speaker card, covering the green block (operator layout, 2026-09-01):
+   rendered 1:1 (SPK_SCALE 1) at the block's own output size, spanning
+   from the top of the upper central orange cross to the bottom of the
+   lower one, centred on the header's right title box. The #454545
+   (button-grey) shell IS the border: the portrait sits inset 16px on
+   the LEFT, TOP and RIGHT; the remaining grey strip below holds only
+   "Join me in PRAGUE" (PRAGUE in the crosses' orange #f5641f), its ink
+   spanning 80% of the strip's width (width governs; measured 25.789px
+   at Inter 500 for the current 294-wide element), centred both axes.
+   Radii scale with the element (outer 15px / photo 11.3px = the
+   approved 18/13.5 look at this element's 0.84 size factor). No outer
+   ring. Re-measure the font/radii if the element is ever resized. */
+#spkmount{ position:absolute; left:{{SPK_X}}px; top:{{SPK_Y}}px;
+           width:{{SPK_W}}px; height:{{SPK_H}}px; }
+#spkmount .SpeakerCard{ transform:scale({{SPK_SCALE}}); transform-origin:top left; }
+.SpeakerCard{
+  box-sizing:border-box;
+  width:{{SPK_CSS_W}}px; height:{{SPK_CSS_H}}px;
+  display:flex; flex-direction:column;
+  padding:16px 16px 0 16px; border-radius:15px;
+  background:#454545;
+  font-family:Inter,sans-serif;
+}
+.SpeakerCard-photo{
+  width:calc({{SPK_CSS_W}}px - 32px); height:calc({{SPK_CSS_W}}px - 32px);
+  border-radius:11.3px; object-fit:cover; display:block;
+  background:var(--bg);
+  /* the input contract requires the photo at the slot's exact rendered
+     square size, so cover crops nothing; it only guards a stray asset */
+}
+.SpeakerCard-bar{
+  flex-grow:1;
+  display:flex; align-items:center; justify-content:center;
+  font-size:25.789px; line-height:1; font-weight:500; color:var(--text);
+  white-space:nowrap;
+}
+.SpeakerCard-bar .prague{ color:#f5641f; }
+  /* no vertical nudge on the text: measured on the render, plain flex
+     centering already puts the ink centre within 0.1px of the strip's */
 
 /* card mount: card renders at its native CSS width, then scales into the
    purple block. transform keeps type at production metrics. NOT a flex
@@ -113,7 +150,10 @@ body{ width:{{PAGE_W}}px; height:{{PAGE_H}}px; overflow:hidden;
 .ActorCard-author{ display:flex; align-items:center; gap:4px; overflow:hidden; }
 .ActorCard-authorAvatar{
   display:block; width:20px; height:20px;
-  border:1px solid var(--border); border-radius:100%;
+  /* operator direction 2026-08-31: the footer icon is an orange ? in a
+     circle with a 1px ORANGE border - this border IS that ring; the ?
+     itself lives in the static footer-help-icon.svg */
+  border:1px solid #f5641f; border-radius:100%;
   object-fit:cover; flex-shrink:0;
 }
 .ActorCard-authorName{
@@ -134,7 +174,19 @@ body{ width:{{PAGE_W}}px; height:{{PAGE_H}}px; overflow:hidden;
 <body>
 
 <img id="base" src="{{BASE_IMAGE_URI}}" alt="">
-<img id="speaker" src="{{SPEAKER_IMAGE_URI}}" alt="">
+
+<!-- plate under the speaker card: covers the whole green block (its square
+     corners would otherwise peek past the card's rounded corners) -->
+<div id="spkplate" style="position:absolute;
+     left:calc({{SPK_X}}px - 1px); top:calc({{SPK_Y}}px - 1px);
+     width:calc({{SPK_W}}px + 2px); height:calc({{SPK_H}}px + 2px);
+     background:#000"></div>
+<div id="spkmount">
+<div class="SpeakerCard">
+  <img class="SpeakerCard-photo" src="{{SPEAKER_IMAGE_URI}}" alt="">
+  <div class="SpeakerCard-bar"><span class="txt">Join me in <span class="prague">PRAGUE</span></span></div>
+</div>
+</div>
 
 <!-- plate under the card: covers the whole purple block (its square
      corners would otherwise peek past the card's rounded corners) -->
@@ -161,8 +213,10 @@ body{ width:{{PAGE_W}}px; height:{{PAGE_H}}px; overflow:hidden;
   <div class="ActorCard-info">
     <div class="ActorCard-author">
       <!-- static on every generated card -->
-      <img class="ActorCard-authorAvatar" width="20" height="20" src="{{CROSS_ICON_URI}}" alt="">
-      <p class="ActorCard-authorName">{{TOPIC_CATEGORY}}</p>
+      <img class="ActorCard-authorAvatar" width="20" height="20" src="{{HELP_ICON_URI}}" alt="">
+      <!-- operator direction 2026-09-01: two extra spaces between the
+           circle icon and the topic; the icon stays put, text moves right -->
+      <p class="ActorCard-authorName">&nbsp;&nbsp;{{TOPIC_CATEGORY}}</p>
     </div>
     <div class="ActorCard-stats">
       <!-- DOM order [level][divider][duration]; row-reverse paints the star pair first -->

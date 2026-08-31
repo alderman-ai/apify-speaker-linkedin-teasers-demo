@@ -36,19 +36,20 @@ You only need two things that are almost certainly already on your machine:
    with the form and a note listing exactly what goes in it.
 3. **Fill in the form's boxes** — name, role, company, talk blurb, topic,
    level, minutes; each box says what it wants and how long it can be —
-   and **drop in two images**: the company logo and the speaker photo.
-   Any size works — just draw a visible "x" where you want the crop
-   centred (or supply the exact size named in the folder's README).
+   and **drop in two images**: the company logo (square, 80×80 or larger)
+   and the speaker photo — **an exact 262×262 square**, framed the way you
+   want it shown; the pipeline never reframes it.
 4. Say **"process the queue"**. The finished 1200×1200 PNG lands in
-   `processed/jana-novakova/`, ready to post.
+   `final-output/jana-novakova-final.png`, ready to post; the folder is
+   archived to `processed/`.
 
 If anything is off — blurb too long, an image missing, a template box the
 wrong shape — the run stops and says exactly what to fix. It never silently
 crops your text or stretches the card.
 
 Want to see what "done" looks like first? Open
-`intake-template (completed example).md`, or the two finished examples in
-`processed/`.
+`intake-template (completed example).md`, or the finished PNGs in
+`final-output/`.
 
 ## Where the skills are
 
@@ -80,7 +81,7 @@ Canva template (exported PNG)          intake form (markdown)
         render the card in a headless Chromium browser →
         composite → verify by inspection
                              ▼
-        processed/<speaker>/  (finished PNG + archived form)
+   final-output/<speaker>-final.png  +  processed/<speaker>/ (archived form)
 ```
 
 The card is not a mock-up: it is Apify's `ActorStoreItem` rebuilt in plain
@@ -92,20 +93,19 @@ then scales into the template's block.
 ## The queue
 
 ```
-to-process/jana-novakova/     one folder per speaker: intake.md, README.md,
-                              company-logo.png, speaker.png
-processed/jana-novakova/      the whole folder moves here on success,
-                              finished PNG inside
+to-process/jana-novakova/          one folder per speaker: intake.md, README.md,
+                                   company-logo.png, speaker.png
+processed/jana-novakova/           the whole folder moves here on success (archive)
+final-output/jana-novakova-final.png   the finished render, ready to post
 ```
 
 A folder lives in exactly one queue. Successes move whole; failures stay put
 with a printed reason and never write partial output. Nothing is ever
 overwritten.
 
-**Images** can be exactly the template's photo-area size (PNG/JPG), or **any
-size with a visible mark** — an "x" or scribble at the intended centre —
-which the skill reads and
-turns into a proportion-correct crop, leaving your original file untouched.
+**The speaker photo** is required as an exact 262×262 square (PNG/JPG),
+framed the way you want it shown — the pipeline never reframes it, and any
+other size stops the folder with the actual dimensions reported.
 **Missing images** stop that folder with a choice: resubmit, or render with a
 dashed in-block placeholder outline that a correctly sized image covers
 completely afterwards.
@@ -122,11 +122,11 @@ processing time. The short version:
 | `company_logo` | 40×40 top-left | square image, ≥80×80 |
 | `speaker_name` | title | 30 chars |
 | `speaker_position` / `speaker_company` | monospace line, joined with `/` | 39 chars |
-| description *(its own labelled box)* | body, clamps at 2 lines | 82 chars |
+| description *(its own labelled box)* | body, clamps at 2 lines | 140 chars |
 | `topic_category` | footer left | 33 chars |
 | `level` | footer, after 👥 | `all` `easy` `int.` `adv.` |
 | `duration_minutes` | footer, after ★ | number only — card shows `10 (mins)` |
-| `speaker_image` | fills the green block | any portrait, centre-cropped |
+| `speaker_image` | square photo slot of the speaker card (green block) | square image, 262×262 |
 
 Budgets are measured on the rendered card (binary-searched to the truncation
 point, averaged over samples) minus an 8% buffer. Over-budget descriptions are
@@ -154,6 +154,7 @@ run halts and tells you the height the block should be.
 intake-template.md            the input contract (copied into each folder)
 intake-template (completed example).md   the same form, filled in
 to-process/  processed/       the queue — this is all you touch day to day
+final-output/                 the finished PNGs (<speaker>-final.png)
 visual-templates/             the one fixed base PNG (blocks + readouts)
 docs/                         annotated field-mapping + text-budget graphics
 internal/                     machinery you never edit: the render page

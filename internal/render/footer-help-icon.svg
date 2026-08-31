@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40" role="img" aria-label="">
+  <!-- Static footer icon for every generated card (operator direction,
+       2026-08-31): an orange question mark on the card shell colour. The
+       1px orange ring around it is NOT drawn here - it comes from the
+       .ActorCard-authorAvatar CSS border in the shell, recoloured #f5641f.
+       Replaces the earlier registration-cross icon (footer-cross-icon.svg). -->
+  <circle cx="20" cy="20" r="20" fill="#1d1d1d"/>
+  <text x="20" y="29.5" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"
+        font-size="27" font-weight="bold" fill="#f5641f">?</text>
+</svg>

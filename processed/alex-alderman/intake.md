@@ -19,24 +19,24 @@ base_image:         "../../visual-templates/speaker-teaser-linkedin.png"
 # NOTE: the small circle icon in the card footer is STATIC across every
 # generated card and is bundled with the skill. It is not an input.
 assets_root:        ""              # images live beside this form, in the folder
-company_logo:       "company-logo.png"
+company_logo:       "alderman-ai-mark-v1.png"
 speaker_image:      "speaker.png"   # REQUIRED as an exact 262x262 square — the
                                      # skill never reframes; wrong size halts.
 
 # --- 3. speaker -- WRITTEN BY ASSISTANT from the body fences -----------------
-speaker_name:       "Jana Novakova"
-speaker_position:   "head-of-growth"
-speaker_company:    "acme-analytics"
+speaker_name:       "alex alderman"
+speaker_position:   "gtm engineer"
+speaker_company:    "alderman ai"
 
 # --- 4. the talk -- WRITTEN BY ASSISTANT from the body fences ----------------
 # NOTE: the presentation description is NOT a frontmatter field. It lives in
 # the body below, in the presentation-description fence. See just under the
 # frontmatter, and §2.
-topic_category:     "Content Ops"
+topic_category:     "ai content ops"
 
 # --- 5. talk metadata (card footer, right) -- WRITTEN BY ASSISTANT -----------
-level:              "int."          # all | easy | int. | adv.
-duration_minutes:   "10"            # number only — the card renders 10 (mins)
+level:              "int."              # all | easy | int. | adv.
+duration_minutes:   "10"              # number only — the card renders 10 (mins)
 
 # --- 6. placement -- DERIVED, DO NOT AUTHOR ----------------------------------
 # The template image is canon. The skill measures both placeholders from
@@ -70,11 +70,11 @@ href:               ""
 These fields will be filled in by operator -- or by the assistant if the info was give during the new-speaker skill -- and as the first step of converting this intake form into a completed 1200x1200 LinkedIn teaser image, the assistant will transfer their contents to the appropriate frontheader variable state.
 
 >[! Instructions for the HUMAN]+
->`<from_alderman_ai>`
+>`<instructions_for_operator>`
 >
 >Hi! All you need to do is fill in these fields below, Ill let you know when the input sections are over. The rest of the document is for the agents.  And, um, delete the `[type here]` 🙂 Depending on how you used the skills for this repo, some may be filled in for you already.
 >
->`</from_alderman_ai>`
+>`</instructions_for_operator>`
 
 ## Speaker name
 
@@ -82,7 +82,7 @@ Title Case, the form the speaker uses publicly. Fits whole up to **30
 characters**; longer is cut off with `…` on the card.
 
 ```speaker-name
-Jana Novakova
+alex alderman
 ```
 
 ## Position
@@ -91,7 +91,7 @@ Lowercase kebab-case (words joined by `-`), mirroring Apify's slug style —
 that's the pastiche, keep it.
 
 ```speaker-position
-head-of-growth
+gtm engineer
 ```
 
 ## Company
@@ -101,7 +101,7 @@ Lowercase kebab-case again. Position and company render joined as
 slash.
 
 ```speaker-company
-acme-analytics
+alderman ai
 ```
 
 ## Topic category
@@ -109,19 +109,25 @@ acme-analytics
 The track or theme, Title Case. Fits up to **33 characters**.
 
 ```topic-category
-Content Ops
+ai content ops
 ```
 
 ## Audience level
 
-Exactly one of: `all` · `easy` · `int.` · `adv.` — keep the trailing dot on
-the two abbreviations.
+Choose the level of complexity of the talk. See **audience level notes** below.
+Choose one of these **exactly**: 
+
+- `all`
+- `easy`
+- `int` 
+- `adv` 
 
 ```level
 int.
 ```
 
 ### Audience level notes
+
 - All --  mostly conceptual, all levels can benefit
 - Easy -- more basic, and specific enough that advanced might be bored
 - Int -- Intermediate, for those who know what an md file and a repo are
@@ -145,10 +151,22 @@ render width (`card_width: 400`), operator-calibrated against real renders
 silently truncated.
 
 ```presentation-description-140-char-max
-How we cut lead research from six hours a week to twenty minutes.
+
+ai-slop >> ai-ops. How to automate pixel perfect branded visual assets :)
 ```
 
 ## End of inputs
+
+>[! Instructions for the HUMAN]+
+>`<instructions_for_operator>`
+>
+>You did it! all done! A couple things to couple check:
+>- (you did delete the `[brackets]` right?)
+>- this file should be in the `to-process/<speaker-name>/` along with:
+	>- their 262x262 px speaker photo
+	>- their company logo - **accepted file types**: (PNG | ICO | JPG | JPEG)
+>
+>`</instructions_for_operator>`
 
 That's everything to type. Two things remain to **drop into this folder as
 files** (see the folder's README): the company logo (`company-logo.png`) and
@@ -530,6 +548,10 @@ Resolved against `assets_root`.
 - **Required as an exact 262×262 square**, pre-framed by the operator —
   the photo slot is square, so nothing is cropped. The skill never
   reframes a photo and there is no mark-the-centre option.
+- Why 262: the speaker element is 294 wide (its 336 cross-to-cross height
+  × the locked 7:8 ratio) and the `#454545` border is 16px each side —
+  294 − 32 = 262 (verified on the delivered render). A template
+  rescale moves this number; re-measure.
 - The card chrome around the portrait (shell, radii, `Join me in PRAGUE`
   bar) comes from the render shell, not from this asset — the photo simply
   fills the square slot.

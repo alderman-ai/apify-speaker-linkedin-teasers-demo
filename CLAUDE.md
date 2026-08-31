@@ -25,14 +25,15 @@ The queue:
 | path | what |
 |---|---|
 | `to-process/<speaker>/` | one folder per pending card: `intake.md`, `README.md`, `company-logo.*`, `speaker.*` |
-| `processed/<speaker>/` | the folder after success, finished `<kebab-name>.png` inside. Never overwrite here |
+| `processed/<speaker>/` | the folder after success (archive — form + assets). Never overwrite here |
+| `final-output/<speaker>-final.png` | the finished render, one PNG per speaker. Never overwrite here |
 
 Render machinery (`internal/` — use, never restructure):
 
 | path | what |
 |---|---|
 | `internal/render/shell.html` | the render page: verified card CSS + all double-brace tokens. Fill a copy saved beside it as `_run-<name>.html` |
-| `internal/render/footer-cross-icon.svg` | the static footer circle icon — same on every card, never an input |
+| `internal/render/footer-help-icon.svg` | the static footer circle icon (orange `?`, orange ring) — same on every card, never an input |
 | `internal/fonts/fonts.css` | the @font-face set the shell links as `../fonts/fonts.css` — renders never touch a network |
 | `internal/fonts/*.woff2` | Inter 400/500/600 + IBM Plex Mono 500, latin + latin-ext |
 | `internal/fonts/licenses/` | the two OFL licence texts |
@@ -57,8 +58,8 @@ Every subfolder carries its own small `README.md` index for routing.
   `new-speaker-<NN>` at the lowest free number).
 - **"process the queue"** → run every folder in `to-process/` through the
   skill's procedure: validate → read geometry off the template → ratio
-  check → render in a headless Chromium browser → verify by inspection → move to
-  `processed/`.
+  check → render in a headless Chromium browser → verify by inspection →
+  PNG to `final-output/<speaker>-final.png`, folder to `processed/`.
 
 ## Ground rules (the skill has the full list)
 
@@ -67,7 +68,7 @@ Every subfolder carries its own small `README.md` index for routing.
   keys are outputs you write back, never inputs.
 - **Halt, don't degrade.** Over-budget description, missing assets (ask:
   resubmit vs placeholder outline), block/card ratio mismatch, geometry
-  disagreement, any name collision in `processed/` — each is a stop with a
+  disagreement, any name collision in `processed/` or `final-output/` — each is a stop with a
   clear report, never a silent workaround. Never trim operator text, never
   stretch the card, never overwrite anything.
 - **The card CSS is a verified reproduction** of apify.com's ActorStoreItem

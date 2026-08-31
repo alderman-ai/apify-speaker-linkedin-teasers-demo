@@ -8,4 +8,4 @@ description of when it applies.
 | file | say | what it does |
 |---|---|---|
 | `new-speaker.md` | "new speaker Jana Novakova" | scaffolds one folder in `to-process/` with the blank form and its README |
-| `apify-speaker-card.md` | "process the queue" | the generator: validate the form → measure the template → render the card → composite → verify → move to `processed/` |
+| `apify-speaker-card.md` | "process the queue" | the generator: validate the form → measure the template → render the card → composite → verify → PNG to `final-output/`, folder to `processed/` |
