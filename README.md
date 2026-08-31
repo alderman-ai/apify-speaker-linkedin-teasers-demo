@@ -42,8 +42,8 @@ visual design belong to Apify.
 
 ```
 Canva template (exported PNG)          intake form (markdown)
-  ├─ purple block  = card goes here      ├─ frontmatter: speaker, talk, images
-  └─ green block   = photo goes here     └─ fenced block: the description
+  ├─ purple block  = card goes here      ├─ labelled fences: all typed inputs
+  └─ green block   = photo goes here     └─ (frontmatter is machine-written)
                     │                        │
                     └────────┬───────────────┘
                              ▼
@@ -96,8 +96,11 @@ sanity-checks them against the visible blocks.
 
 ## The intake form
 
-`INTAKE-TEMPLATE.md` is the whole contract — field-by-field schema, measured
-character budgets, failure modes. The short version:
+`intake-template.md` is the whole contract — field-by-field schema, measured
+character budgets, failure modes. Everything you type lives in its labelled
+body fences; the assistant copies fence values into the frontmatter at
+processing time. `intake-template (completed example).md` beside it shows a
+finished one. The short version:
 
 | field | card position | budget |
 |---|---|---|
@@ -106,8 +109,8 @@ character budgets, failure modes. The short version:
 | `speaker_position` / `speaker_company` | monospace line, joined with `/` | 39 chars |
 | description *(fenced block, not frontmatter)* | body, clamps at 2 lines | 82 chars |
 | `topic_category` | footer left | 33 chars |
-| `level` | footer, after ★ | `all` `easy` `int.` `adv.` |
-| `duration` + `duration_unit` | footer, after 👥 | e.g. `10 (mins)` |
+| `level` | footer, after 👥 | `all` `easy` `int.` `adv.` |
+| `duration_minutes` | footer, after ★ | number only — card shows `10 (mins)` |
 | `speaker_image` | fills the green block | any portrait, centre-cropped |
 
 Budgets are measured on the rendered card (binary-searched to the truncation
@@ -130,9 +133,9 @@ run halts and tells you the height the block should be.
 ## Repo layout
 
 ```
-INTAKE-TEMPLATE.md            the input contract (copied into each folder)
+intake-template.md            the input contract (copied into each folder)
 to-process/  processed/       the queue — this is all you touch day to day
-templates/                    Canva-exported base PNGs (blocks + readouts)
+visual-templates/             the one fixed base PNG (blocks + readouts)
 docs/                         the annotated field-mapping graphic
 internal/                     machinery you never edit: the render page
                               (verified card CSS), static footer icon,

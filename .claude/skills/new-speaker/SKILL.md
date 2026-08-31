@@ -35,13 +35,16 @@ the intake form and (added by the operator) the two images.
    how to proceed — never overwrite or silently suffix.
 
 4. **Create the folder with two files:**
-   - `intake.md` — a copy of the repo-root `INTAKE-TEMPLATE.md`. If the name
-     is known, prefill `speaker_name: "<Name>"` in the frontmatter.
+   - `intake.md` — a copy of the repo-root `intake-template.md` (the blank
+     template, NOT the completed example). If the name is known, prefill it
+     in both the `speaker-name` body fence and the frontmatter
+     `speaker_name`.
    - `README.md` — a copy of `internal/speaker-folder-README.md`.
 
 5. **Tell the operator what the folder still needs**, briefly: fill the
-   frontmatter and the description fence in `intake.md` (the fence label is
-   the character budget), and drop in the two images —
+   fenced inputs in `intake.md` (everything to type lives in the "Input
+   presentation details here" section; the description fence label is its
+   character budget), and drop in the two images —
    `company-logo.(png/jpg)` and `speaker.(png/jpg)`, each either exactly
    400×400 or any size with a visible mark at the intended centre. Then
    "process the queue" generates the card.

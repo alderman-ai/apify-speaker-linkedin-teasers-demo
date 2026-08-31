@@ -4,7 +4,7 @@ Three things. The skill refuses (or asks about placeholders) until it has them.
 
 | file | what |
 |---|---|
-| `intake.md` | the filled-in form. Frontmatter + the description fence. |
+| `intake.md` | the filled-in form — type only in its labelled fences; the assistant fills the frontmatter from them |
 | `company-logo.(png/jpg)` | the speaker's company logo — square, ideally 80×80+ |
 | `speaker.(png/jpg)` | the speaker photo |
 

@@ -10,7 +10,7 @@
 # =============================================================================
 
 # --- 1. base template --------------------------------------------------------
-base_image:         "../../templates/02-pre-actor-card-block-template.png"
+base_image:         "../../visual-templates/speaker-teaser-linkedin.png"
 
 # --- 2. images ---------------------------------------------------------------
 # NOTE: the small circle icon in the card footer is STATIC across every

@@ -13,8 +13,9 @@ description: >
 One speaker folder in → one finished template-sized PNG out. There is **no
 build script and no dependency beyond Chrome** — you are the engine. Everything
 is done with reading, writing, one headless-Chrome command, and your own eyes.
-`INTAKE-TEMPLATE.md` at the repo root is the input contract; consult it for
-field rules rather than improvising.
+`intake-template.md` at the repo root is the input contract (the sibling
+`intake-template (completed example).md` is a filled reference copy); consult
+it for field rules rather than improvising.
 
 ## The queue
 
@@ -39,12 +40,18 @@ For each folder in `to-process/` (or the ones named), in order:
 
 ### 1 · Parse and validate `intake.md`
 
-- YAML frontmatter + the first ```presentation-description-NN-char-max fence.
+- Operator values arrive in labelled body fences: `speaker-name`,
+  `speaker-position`, `speaker-company`, `topic-category`, `level`,
+  `duration-minutes`, and the first ```presentation-description-NN-char-max
+  fence. **First: transfer each fence's trimmed contents into its matching
+  frontmatter variable** — fences win over any hand-typed frontmatter; a
+  fence that is empty or still reads `[type here]` counts as not provided.
 - The fence's NN **is** the description budget. Over budget → **reject the
   form with the count; never trim the text yourself.** Collapse internal
   newlines to spaces.
 - Required: base_image, company_logo, speaker_image, speaker_name,
-  speaker_position, speaker_company, topic_category, level, duration.
+  speaker_position, speaker_company, topic_category, level,
+  duration_minutes.
 - Warn (don't fail): `level` outside `all/easy/int./adv.`; position/company
   not lowercase-kebab.
 
@@ -118,7 +125,7 @@ the render must never touch a network). Replace every `{{TOKEN}}`:
 | `SPK_POS` | from step 5 |
 | `BASE_IMAGE_URI`, `COMPANY_LOGO_URI`, `SPEAKER_IMAGE_URI` | `file:///` absolute URLs (or the placeholder data URI) |
 | `CROSS_ICON_URI` | `file:///` URL of `internal/render/footer-cross-icon.svg` |
-| `SPEAKER_NAME`, `POSITION_COMPANY` (join with `/`), `DESCRIPTION`, `TOPIC_CATEGORY`, `LEVEL`, `DURATION_TEXT` (duration + space + duration_unit) | HTML-escaped text |
+| `SPEAKER_NAME`, `POSITION_COMPANY` (join with `/`), `DESCRIPTION`, `TOPIC_CATEGORY`, `LEVEL`, `DURATION_MINUTES` (number only — the static `(mins)` is baked into the shell) | HTML-escaped text |
 
 Verify no `{{` remains. Then screenshot — **into the temp dir first; Chrome
 cannot write into Desktop folders** (observed: Access denied):
@@ -138,7 +145,7 @@ Read the screenshot. Confirm: exact template dimensions; both blocks fully
 covered (no purple or green anywhere — check edges and corners, not just
 centres; a centre-only check once passed while most of a block showed);
 untouched template areas identical; text right; footer reads
-`(cross) topic · ★ level · 👥 N (mins)`; hover ring visible around the card
+`(cross) topic · ★ N (mins) · 👥 level`; hover ring visible around the card
 body. Anything off → halt that folder, delete the bad screenshot, report.
 
 Then: move the PNG into the speaker folder as `<kebab-name>.png`, delete the
@@ -161,6 +168,7 @@ totals. One bad folder never stops the rest.
   block's pixel width**; at ~900px the description rewraps to one line and
   the card collapses to 137.667.
 - The footer circle icon is static on every card; never an input.
-- Text budgets (measured at width 400, −8%): name 30 · position/company 39 ·
-  description 82 (from the fence label) · topic 33.
+- Text budgets (measured on the card's own text slots at the card's CSS
+  render width 400 — not the 400×400 speaker image — then −8%): name 30 ·
+  position/company 39 · description 82 (from the fence label) · topic 33.
 - GT Walsheim is not part of the render and must never be added to this repo.

@@ -15,7 +15,8 @@ Procedure and contract:
 |---|---|
 | `.claude/skills/apify-speaker-card/SKILL.md` | **the generator's complete operating procedure — follow it, don't improvise** |
 | `.claude/skills/new-speaker/SKILL.md` | scaffolds one speaker folder (asks the name; declined -> `new-speaker-<NN>`, lowest free number) |
-| `INTAKE-TEMPLATE.md` | the input contract: every field, budget, failure mode. Copied into each folder as `intake.md` |
+| `intake-template.md` | the input contract: every field, budget, failure mode; everything the operator types lives in labelled body fences. Copied into each folder as `intake.md` |
+| `intake-template (completed example).md` | the same template with every fence and frontmatter value filled in — what "done" looks like |
 
 The queue:
 
@@ -40,7 +41,7 @@ Reference:
 
 | path | what |
 |---|---|
-| `templates/02-pre-actor-card-block-template.png` | the current base template: purple card block + green speaker block (+ optional printed Width/Height/X/Y panels) |
+| `visual-templates/speaker-teaser-linkedin.png` | the one fixed base template (1200×1200): purple card block + green speaker block (+ optional printed Width/Height/X/Y panels) |
 | `docs/Actor card field mapping.png` | annotated picture of every field and its measured text budget |
 | `docs/field-mapping.html` | that graphic's source, re-renderable with headless Chrome |
 

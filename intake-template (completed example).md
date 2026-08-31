@@ -4,13 +4,16 @@
 # Lives as intake.md inside one speaker folder under to-process/.
 # Scaffold a folder by telling the assistant: new speaker "Name Surname"
 # Relative paths resolve from this file, i.e. from inside that folder.
-# Every field is documented in §2 below. The skill reads exactly two things
-# from this file: this frontmatter, and the presentation-description fence
-# directly below it. Everything else is documentation for humans.
+# Every field is documented in §2 below. Operators type ONLY in the fenced
+# input sections in the body ("Input presentation details here"); as step 1
+# of processing the assistant transfers each fence's contents into its
+# frontmatter variable here. This frontmatter is the machine record, not
+# the authoring surface. Everything else is documentation for humans.
 # =============================================================================
 
 # --- 1. base template --------------------------------------------------------
-base_image:         "../../templates/02-pre-actor-card-block-template.png"
+# Fixed for this demo: ONE visual template with fixed dimensions (1200x1200).
+base_image:         "../../visual-templates/speaker-teaser-linkedin.png"
 
 # --- 2. images ---------------------------------------------------------------
 # NOTE: the small circle icon in the card footer is STATIC across every
@@ -22,21 +25,20 @@ speaker_image:      "speaker.png"
                                      # speaker_image. Written by the skill when it
                                      # reads a mark ("x"/scribble) off the photo.
 
-# --- 3. speaker --------------------------------------------------------------
+# --- 3. speaker -- WRITTEN BY ASSISTANT from the body fences -----------------
 speaker_name:       "Jana Novakova"
 speaker_position:   "head-of-growth"
 speaker_company:    "acme-analytics"
 
-# --- 4. the talk -------------------------------------------------------------
+# --- 4. the talk -- WRITTEN BY ASSISTANT from the body fences ----------------
 # NOTE: the presentation description is NOT a frontmatter field. It lives in
 # the body below, in the presentation-description fence. See just under the
 # frontmatter, and §2.
 topic_category:     "Content Ops"
 
-# --- 5. talk metadata (card footer, right) -----------------------------------
+# --- 5. talk metadata (card footer, right) -- WRITTEN BY ASSISTANT -----------
 level:              "int."          # all | easy | int. | adv.
-duration:           "10"            # minutes, number only
-duration_unit:      "(mins)"
+duration_minutes:   "10"            # number only — the card renders 10 (mins)
 
 # --- 6. placement -- DERIVED, DO NOT AUTHOR ----------------------------------
 # The template image is canon. The skill measures both placeholders from
@@ -64,22 +66,104 @@ desc_lines:         2
 href:               ""
 ---
 
-# Presentation description
+# Input presentation details here
 
-The fence below is the talk blurb — the only thing the skill reads from the
-body. The number in the fence label is the enforced character budget
-(measured two-line capacity at 400px card width, minus an 8% buffer).
-Exceeding it rejects the form; the card is never silently truncated.
+These fields will be filled in by operator -- or by the assistant if the info was give during the new-speaker skill -- and as the first step of converting this intake form into a completed 1200x1200 LinkedIn teaser image, the assistant will transfer their contents to the appropriate frontheader variable state.
+
+>[! Instructions for the HUMAN]+
+>`<from_alderman_ai>`
+>
+>Hi! All you need to do is fill in these fields below, Ill let you know when the input sections are over. The rest of the document is for the agents.  And, um, delete the `[type here]` 🙂 Depending on how you used the skills for this repo, some may be filled in for you already.
+>
+>`</from_alderman_ai>`
+
+## Speaker name
+
+Title Case, the form the speaker uses publicly. Fits whole up to **30
+characters**; longer is cut off with `…` on the card.
+
+```speaker-name
+Jana Novakova
+```
+
+## Position
+
+Lowercase kebab-case (words joined by `-`), mirroring Apify's slug style —
+that's the pastiche, keep it.
+
+```speaker-position
+head-of-growth
+```
+
+## Company
+
+Lowercase kebab-case again. Position and company render joined as
+`position/company`; together they fit up to **39 characters** counting the
+slash.
+
+```speaker-company
+acme-analytics
+```
+
+## Topic category
+
+The track or theme, Title Case. Fits up to **33 characters**.
+
+```topic-category
+Content Ops
+```
+
+## Audience level
+
+Exactly one of: `all` · `easy` · `int.` · `adv.` — keep the trailing dot on
+the two abbreviations.
+
+```level
+int.
+```
+
+### Audience level notes
+- All --  mostly conceptual, all levels can benefit
+- Easy -- more basic, and specific enough that advanced might be bored
+- Int. -- Intermediate, for those who know what an md file and a repo are
+## Duration
+
+Talk length in minutes — the number only, no unit; the card renders it as
+`10 (mins)` automatically.
+
+```duration-minutes
+10
+```
+
+## Presentation description
+
+The short blurb under the speaker's name on the card. The number in the
+fence label is the enforced character budget: the measured two-line capacity
+of the **actor card's description text slot** with the card at its native
+CSS render width (`card_width: 400`) minus an 8% buffer — nothing to do with
+the 400×400 speaker image; the matching number is coincidence. Exceeding the
+budget rejects the form; the card is never silently truncated.
 
 ```presentation-description-82-char-max
 How we cut lead research from six hours a week to twenty minutes.
 ```
 
+## End of inputs
+
+That's everything to type. Two things remain to **drop into this folder as
+files** (see the folder's README): the company logo (`company-logo.png`) and
+the speaker photo (`speaker.png`) — each either exactly 400×400, or any size
+with a visible mark drawn at the intended centre of the shot. Everything
+below this line is for the agents.
+
+---
+
 # Actor Card — input contract
 
-This file is **input only**. All markup, CSS, fonts and render logic live in the
-skill. Filling this frontmatter and pointing the skill at the file is the entire
-authoring step.
+This file is **input only**. All markup, CSS, fonts and render logic live in
+the skill. Filling the fenced inputs above and pointing the skill at the file
+is the entire authoring step; the assistant copies each fence into its
+frontmatter variable (step 1 of processing) before anything renders.
 
 ---
 
@@ -99,9 +183,9 @@ The slot names are Apify's; the meanings are yours.
 | *description fence (body)* | the talk blurb | `[data-slot="description"]` | `textContent`, from the fence, not frontmatter |
 | *(static, bundled)* | Apify cross in a circle | `[data-slot="authorAvatar"]` | fixed asset, **not an input** |
 | `topic_category` | e.g. "Content Ops" | `[data-slot="authorName"]` | `textContent` |
-| `level` | all / easy / int. / adv. | `[data-slot="rating"]` | `textContent` |
-| `duration` | minutes | `[data-slot="users"]` | `textContent` |
-| `duration_unit` | e.g. `(mins)` | `[data-slot="ratingCount"]` | `textContent` — **see open question** |
+| `level` | all / easy / int. / adv. | `[data-slot="users"]` | `textContent` |
+| `duration_minutes` | minutes, number only | `[data-slot="rating"]` | `textContent` |
+| *(static, in the shell)* | the text `(mins)` | `[data-slot="ratingCount"]` | fixed text, **not an input** |
 | `href` | — | `a.ActorCard` | `href` attribute |
 | `card_width` | — | `:root` | CSS var `--actor-card-width` |
 | `desc_lines` | — | `:root` | CSS var `--actor-card-desc-lines` |
@@ -120,12 +204,13 @@ Visual positions, for orientation:
 │  │  presentation_description ............ │  │
 │  │  ..................................... │  │
 │  └────────────────────────────────────────┘  │
-│  (cross) topic_category  ★ level (unit) 👥 duration │
+│  (cross) topic_category  ★ duration (mins) 👥 level │
 └──────────────────────────────────────────────┘
 ```
 
-Note the footer order: `level` and `duration_unit` sit together to the LEFT of
-`duration`, because the stats row is `flex-direction: row-reverse`.
+Note the footer order: `duration_minutes` and its static `(mins)` sit together
+to the LEFT of `level`, because the stats row is `flex-direction: row-reverse`
+— the ★ pair paints first, the 👥 stat last.
 
 ---
 
@@ -200,9 +285,11 @@ template missing either one is rejected before any rendering starts.
 ### The template image is canon
 
 **Whatever is on the template is the geometry for that generation.** There are
-no canonical coordinates here and nothing to author. Resize, move or reshape
-either block in Canva, re-export, and the next run follows it. Turn the hero
-portrait, landscape or square — it needs no edit to this file.
+no canonical coordinates here and nothing to author: the skill re-measures the
+blocks every run, so a tweak to the template in Canva (re-exported over the
+same file) is picked up automatically. This demo ships exactly **one** visual
+template at fixed dimensions — `visual-templates/speaker-teaser-linkedin.png`,
+1200×1200 — and is not meant to support multiple templates.
 
 The eight `*_x / *_y / *_w / *_h` keys in the frontmatter are **outputs**. The
 skill measures both blocks, writes the values back into the intake file as a
@@ -290,11 +377,18 @@ it never appears in the output.
 
 ## 2. Field schema
 
+Operator-typed values (`speaker_name`, `speaker_position`, `speaker_company`,
+`topic_category`, `level`, `duration_minutes`, and the description) arrive via the
+fenced inputs in "Input presentation details here" and are transferred into
+the frontmatter by the assistant; on any disagreement the fences win. The
+schema below describes the frontmatter after that transfer.
+
 ### `base_image` — string, **required**
 
 Path to the template PNG containing the placeholder the card is composited into.
 
-- Placeholder must be a **black rectangle with a white border** on the template.
+- The template must carry the two coloured placeholder blocks of §1b
+  (purple card block, green speaker block).
 - Path is relative to this intake file, or absolute.
 - Format is preserved end to end: a PNG in produces a PNG out.
 - The template's dimensions define the output's dimensions. The skill will
@@ -373,9 +467,10 @@ The first fenced block after the frontmatter whose info string starts with
     ```
 
 - Inter 12px / 400 / `#a3a3a3`, clamped to `desc_lines` (2 lines).
-- **Budget: 82 characters** — the measured two-line capacity at
-  `card_width: 400` (~90 chars across mixed real-text samples; worst sample
-  87) minus an 8% buffer. The budget is parsed from the fence label itself,
+- **Budget: 82 characters** — the card's description text slot measured
+  with the card at its native CSS render width (`card_width: 400` — not the
+  400×400 speaker image): two-line capacity ~90 chars across mixed
+  real-text samples, worst sample 87, minus an 8% buffer. The budget is parsed from the fence label itself,
   so retuning it for a different card width means renaming the fence.
 - Newlines inside the fence are collapsed to spaces; leading/trailing
   whitespace is trimmed. Write one plain paragraph — no markdown.
@@ -395,7 +490,7 @@ The track or category, e.g. `Content Ops`, `Engineering`, `Growth`.
 
 ### `level` — string, **required**
 
-Audience level, immediately right of the ★ glyph.
+Audience level, immediately right of the 👥 glyph.
 
 - Inter 12px / 500 / `#a3a3a3`.
 - One of: `all` · `easy` · `int.` · `adv.` — including the trailing full stops
@@ -404,19 +499,15 @@ Audience level, immediately right of the ★ glyph.
 **States:** one of the four → renders · anything else → renders as given, and
 the skill flags it as off-vocabulary rather than failing.
 
-### `duration` — string, **required**
+### `duration_minutes` — string, **required**
 
-Talk length in minutes, right of the 👥 glyph.
+Talk length in minutes, right of the ★ glyph.
 
 - Inter 12px / 500 / `#a3a3a3`.
-- **Number only**, no unit — the unit is `duration_unit`. Quote it in YAML so
-  `10` stays a string.
-
-### `duration_unit` — string, optional, default `"(mins)"`
-
-- Same type spec. Sits between `level` and `duration` in the painted order.
-- Written verbatim, parentheses included — unlike Apify's review count, the
-  skill does **not** add them. See the open question in §1.
+- **Number only**, no unit — the card renders it as `10 (mins)`. The
+  `(mins)` text sits in Apify's review-count slot and is static in the
+  render shell, never an input. Quote the value in YAML so `10` stays a
+  string.
 
 ### `speaker_image` — string, **required**
 
@@ -475,11 +566,13 @@ processed/<speaker-folder>/      the whole folder lands here on success,
    `to-process/jana-novakova/` with the form (name pre-filled) and the README.
    With no name it creates `new-speaker-<N>/`, and the folder is renamed to
    the kebab speaker name from the form at processing time.
-2. **Fill**: the frontmatter, the description fence, and drop the two images
-   into the folder.
+2. **Fill**: the fenced inputs under "Input presentation details here", and
+   drop the two images into the folder. The assistant transfers the fence
+   values into the frontmatter at processing time.
 3. **Run**: tell the assistant *"process the queue"* — it takes every folder
    in `to-process/`, or just the ones you name. No batch cap.
-4. Per form the skill: reads frontmatter + fence → checks both image assets
+4. Per form the skill: transfers the fenced inputs into the frontmatter
+   and validates them → checks both image assets
    are present (see below) → measures both placeholders off `base_image`
    (printed panel first, colour mask second, §1b) → card-ratio check →
    renders at `card_width` in headless Chrome, all fonts local → scales and
