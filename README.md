@@ -36,7 +36,7 @@ You only need two things that are almost certainly already on your machine:
 ## Make a teaser in four steps
 
 1. **Open this folder in your AI assistant** and just talk to it.
-2. Say **"new speaker Jana Novakova"**. A folder appears in `to-process/`
+2. Say **"new speaker Alex Alderman"**. A folder appears in `to-process/`
    with the form and a note listing exactly what goes in it.
 3. **Fill in the form's boxes** — name, role, company, talk blurb, topic,
    level, minutes; each box says what it wants and how long it can be —
@@ -49,7 +49,7 @@ You only need two things that are almost certainly already on your machine:
      What it will never do is crop or reframe for you — square it
      yourself, framed the way you want to be seen.
 4. Say **"process the queue"**. The finished 1200×1200 PNG lands in
-   `generated-images/jana-novakova-final.png`, ready to post; your folder
+   `generated-images/alex-alderman-final.png`, ready to post; your folder
    is archived to `processed/`.
 
 If anything is off — blurb too long, an image missing or not square, a

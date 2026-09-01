@@ -6,9 +6,13 @@ assets it was built from. The finished PNG itself lives in
 `generated-images/<speaker-name>-final.png`, not here.
 
 Treat as an archive: **nothing here is ever overwritten** — re-running a
-speaker requires renaming or clearing their folder first. `jana-novakova/`
-and `petr-svoboda/` are worked examples built from synthetic sample assets
-(Petr shows the missing-image placeholder mode).
+speaker requires renaming or clearing their folder first. `alex-alderman/`
+is the live worked example (its render is
+`generated-images/alex-alderman-final.png`). The demo-era speakers were
+archived out of the live queue into
+`demo-and-more-help/fictional-speakers-as-demo/` (fictional characters and
+synthetic personas) and `demo-and-more-help/mid-project-snapshots/` (the
+simulated-"real" stress-test speakers).
 
 Archived files are historical records and are left as they ran: intakes
 archived before the 2026-09-01 tree reorganisation still reference the old

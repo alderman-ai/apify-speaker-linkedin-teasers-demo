@@ -11,6 +11,11 @@
 # the authoring surface. Everything else is documentation for humans.
 # =============================================================================
 
+# --- 0. template version -- DO NOT EDIT --------------------------------------
+# Bumped only when this template itself changes, never per speaker.
+version:            2
+versioned_at:       "2026-09-01 09:26"
+
 # --- 1. base template --------------------------------------------------------
 # Fixed for this demo: ONE visual template with fixed dimensions (1200x1200).
 base_image:         "../../_internal/core-templates-please-dont-touch/speaker-teaser-linkedin_v3.png"
@@ -26,19 +31,19 @@ speaker_image:      "speaker.png"   # square 1:1, PNG/JPG/JPEG, at most 800x800.
                                      # fit; anything off-spec halts the run.
 
 # --- 3. speaker -- WRITTEN BY ASSISTANT from the body fences -----------------
-speaker_name:       "Jana Novakova"
-speaker_position:   "head-of-growth"
-speaker_company:    "acme-analytics"
+speaker_name:       "Alex Alderman"
+speaker_position:   "gtm-engineer"
+speaker_company:    "alderman-ai"
 
 # --- 4. the talk -- WRITTEN BY ASSISTANT from the body fences ----------------
 # NOTE: the presentation description is NOT a frontmatter field. It lives in
 # the body below, in the presentation-description fence. See just under the
 # frontmatter, and §2.
-topic_category:     "Content Ops"
+topic_category:     "AI Content Ops"
 
 # --- 5. talk metadata (card footer, right) -- WRITTEN BY ASSISTANT -----------
-level:              "int."              # all | easy | int. | adv.
-duration_minutes:   "10"              # number only — the card renders 10 (mins)
+level:              "int."          # all | easy | int. | adv.
+duration_minutes:   "10"            # number only — the card renders 10 (mins)
 
 # --- 6. placement -- DERIVED, DO NOT AUTHOR ----------------------------------
 # The template image is canon. The skill measures both placeholders from
@@ -72,11 +77,11 @@ href:               ""
 These fields will be filled in by operator -- or by the assistant if the info was give during the new-speaker skill -- and as the first step of converting this intake form into a completed 1200x1200 LinkedIn teaser image, the assistant will transfer their contents to the appropriate frontheader variable state.
 
 >[! Instructions for the HUMAN]+
->`<from_alderman_ai>`
+>`<instructions_for_operator>`
 >
 >Hi! All you need to do is fill in these fields below, Ill let you know when the input sections are over. The rest of the document is for the agents.  And, um, delete the `[type here]` 🙂 Depending on how you used the skills for this repo, some may be filled in for you already.
 >
->`</from_alderman_ai>`
+>`</instructions_for_operator>`
 
 ## Speaker name
 
@@ -84,7 +89,7 @@ Title Case, the form the speaker uses publicly. Fits whole up to **30
 characters**; longer is cut off with `…` on the card.
 
 ```speaker-name
-Jana Novakova
+Alex Alderman
 ```
 
 ## Position
@@ -93,7 +98,7 @@ Lowercase kebab-case (words joined by `-`), mirroring Apify's slug style —
 that's the pastiche, keep it.
 
 ```speaker-position
-head-of-growth
+gtm-engineer
 ```
 
 ## Company
@@ -103,7 +108,7 @@ spaced slash as `position / company`; together they fit up to **39
 characters** counting the 3-character ` / ` joiner.
 
 ```speaker-company
-acme-analytics
+alderman-ai
 ```
 
 ## Topic category
@@ -111,7 +116,7 @@ acme-analytics
 The track or theme, Title Case. Fits up to **33 characters**.
 
 ```topic-category
-Content Ops
+AI Content Ops
 ```
 
 ## Audience level
@@ -154,14 +159,13 @@ render width (`card_width: 400`), operator-calibrated against real renders.
 Exceeding the budget rejects the form; the card is never silently truncated.
 
 ```presentation-description-140-char-max
-
-How we cut lead research from six hours a week to twenty minutes.
+ai-slop >> ai-ops. How to automate pixel perfect branded visual assets :)
 ```
 
 ## End of inputs
 
 >[! Instructions for the HUMAN]+
->`<from_alderman_ai>`
+>`<instructions_for_operator>`
 >
 >You did it! all done! A couple things to couple check:
 >- (you did delete the `[brackets]` right?)
@@ -169,7 +173,7 @@ How we cut lead research from six hours a week to twenty minutes.
 	>- their speaker photo — **square (1:1)**, PNG/JPG/JPEG, at most 800×800; 262×262 is the ideal supply
 	>- their company logo - **accepted file types**: (PNG | ICO | JPG | JPEG)
 >
->`</from_alderman_ai>`
+>`</instructions_for_operator>`
 
 That's everything to type. Two things remain to **drop into this folder as
 files** (see the folder's README): the company logo (`company-logo.png`) and
@@ -539,8 +543,8 @@ processed/<speaker-folder>/      the whole folder lands here on success
 generated-images/<speaker>-final.png the finished render, delivered separately
 ```
 
-1. **Scaffold**: tell the assistant *"new speaker Jana Novakova"* (the
-   `new-speaker` skill) — it creates `to-process/jana-novakova/` with the
+1. **Scaffold**: tell the assistant *"new speaker Alex Alderman"* (the
+   `new-speaker` skill) — it creates `to-process/alex-alderman/` with the
    form (name pre-filled) and the README. With no name it creates
    `new-speaker-<NN>/`, renamed to the kebab speaker name at processing.
 2. **Fill**: the fenced inputs under "Input presentation details here",

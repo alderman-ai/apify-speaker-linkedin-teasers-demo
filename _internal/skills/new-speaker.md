@@ -20,7 +20,7 @@ the intake form and (added by the operator) the two images.
 
 2. **Pick the folder name.**
    - **Name given** → kebab-case it: lowercase, every run of non-alphanumerics
-     becomes a single `-`, trimmed — `Jana Novakova` → `jana-novakova`.
+     becomes a single `-`, trimmed — `Alex Alderman` → `alex-alderman`.
    - **Declined / unknown** → `new-speaker-<NN>` where **NN is the LOWEST
      available number, zero-padded to two digits**. Scan `to-process/` for
      existing `new-speaker-<digits>` folders, reading any digit format as its

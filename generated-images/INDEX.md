@@ -11,6 +11,7 @@ The pipeline stages: `to-process/<speaker>/` (pending intake + assets) →
 **Nothing here is ever overwritten** — re-rendering a speaker requires
 moving or renaming their existing final first.
 
-`jana-novakova-final.png` and `petr-svoboda-final.png` predate the
-2026-08-31 redesign (speaker card, orange `?` footer icon, starfield) and
-are stale worked examples, kept until re-rendered.
+`alex-alderman-final.png` is the live worked example. The demo-era renders
+(fictional characters and the simulated-"real" stress-test speakers) were
+archived into `demo-and-more-help/fictional-speakers-as-demo/` and
+`demo-and-more-help/mid-project-snapshots/`.

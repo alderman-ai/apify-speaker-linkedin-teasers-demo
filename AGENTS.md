@@ -39,7 +39,7 @@ Render machinery (`_internal/` — use, never restructure):
 | `_internal/fonts/*.woff2` | Inter 400/500/600 + IBM Plex Mono 500, latin + latin-ext |
 | `_internal/fonts/licenses/` | the two OFL licence texts |
 | `_internal/speaker-folder-README.md` | copied into each new speaker folder as its `README.md` |
-| `_internal/sample-assets/` | synthetic sample logo + portrait used by the worked examples in `processed/` |
+| `_internal/sample-assets/` | synthetic sample logo + portrait used by the retired fictional worked examples in `demo-and-more-help/fictional-speakers-as-demo/` |
 | `_internal/core-templates-please-dont-touch/speaker-teaser-linkedin_v3.png` | the one canon template (1200×1200, currently v3), **machine-built**: baked gradient starfield + purple card block + green speaker block. Supersedes the operator's original Canva export |
 
 Reference (`demo-and-more-help/` — the operator-facing help and showcase folder):
@@ -51,6 +51,8 @@ Reference (`demo-and-more-help/` — the operator-facing help and showcase folde
 | `demo-and-more-help/field-mapping.html`, `demo-and-more-help/text-budgets.html` | those graphics' sources, re-renderable with headless Chrome |
 | `demo-and-more-help/scripts-and-security.md` | the plain-English inventory of every piece of code in this repo and when it runs. **If any change adds code or scripts anywhere in the repo, this file must be updated in the same change — keep it truthful** |
 | `demo-and-more-help/pipeline-evaluation.md` | the 2026-09-01 ten-speaker stress test of the docs and pipeline |
+| `demo-and-more-help/fictional-speakers-as-demo/` | the fictional demo speakers (folklore characters + synthetic personas), archived out of the live queue: `fictional-processed/` folders + `fictional-generated-images/` PNGs |
+| `demo-and-more-help/mid-project-snapshots/` | the simulated-"real" stress-test speakers (real Czech public figures), kept as mid-project snapshots: `processed/` + `generated-images/` |
 
 Every folder carries its own `INDEX.md` for routing. `README.md` is
 reserved for orientation: the root README (the human entry point), the
@@ -65,9 +67,9 @@ the matching skill file in full before acting. The trigger phrases here and
 in the skill descriptions are examples, not a grammar: operators paraphrase
 freely, and many have never seen this repo.
 
-- **Scaffold intent** — "new speaker Jana Novakova", "add a speaker",
-  "put Jana on the lineup", "set up a folder for our next speaker" → read
-  `_internal/skills/new-speaker.md`, then scaffold `to-process/jana-novakova/`
+- **Scaffold intent** — "new speaker Alex Alderman", "add a speaker",
+  "put Alex on the lineup", "set up a folder for our next speaker" → read
+  `_internal/skills/new-speaker.md`, then scaffold `to-process/alex-alderman/`
   (intake form + README; without a name, `new-speaker-<NN>` at the lowest
   free number).
 - **Generate intent** — "process the queue", "process the intake forms",

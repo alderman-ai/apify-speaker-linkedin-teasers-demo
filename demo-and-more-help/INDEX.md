@@ -19,6 +19,8 @@ Two jobs, one folder:
 | `Actor card text budgets.png` | the character budgets for every text field, as a table |
 | `field-mapping.html` / `text-budgets.html` | the sources of those two graphics; re-render with headless Chrome (the generator skill has the flags), window sizes 1400x440 and 1400x560 |
 | `pipeline-evaluation.md` | the 2026-09-01 stress test: ten speakers, two independent executors reading the docs cold — what it proved and what it found |
+| `fictional-speakers-as-demo/` | the fictional demo speakers — folklore characters and synthetic personas — archived out of the live queue: their `fictional-processed/` folders and `fictional-generated-images/` PNGs. Browse these to see the range of what the pipeline produces |
+| `mid-project-snapshots/` | the simulated-"real" stress-test speakers (real Czech public figures used during development), kept as snapshots: their `processed/` folders and `generated-images/` PNGs |
 
 Lost beyond what's here? Just ask the assistant in plain words — "what is
 this repo?", "how do I make a card?" — orientation is what it's for.
