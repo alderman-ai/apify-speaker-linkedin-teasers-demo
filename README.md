@@ -124,9 +124,9 @@ This demo ships exactly one visual template,
 `_internal/core-templates-please-dont-touch/speaker-teaser-linkedin_v3.png`
 (1200×1200). Whatever that PNG says, goes — the coloured placeholder blocks
 on it are measured per run and decide exactly where the two elements land.
-As the folder name suggests: don't touch it. It is integrity-checked
-before every run, and a drifted copy is bypassed and flagged, never
-silently used.
+As the folder name suggests: don't touch it — it's locked. Any edit to it
+is detected before the next run, automatically reverted to the committed
+version, and flagged; template changes are made only by the maintainer.
 
 The current template is **machine-built**: the original Canva export (the
 one with the green and purple squares) has been superseded by a version

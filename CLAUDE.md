@@ -83,6 +83,17 @@ freely, and many have never seen this repo.
   one question — process these now, or start a new speaker? If the queue
   is empty, take it as scaffold intent (e.g. *"Sure! First, what's the
   speaker's name?"*).
+- **Template-change intent** — "update the template", "change the intake
+  form", "new visual template", "edit the canon template", or any request
+  that would modify a file in `core-templates-please-dont-touch/`: the
+  core templates are **locked**. If a maintainer-local update procedure is
+  present in `_internal/skills/` beyond the two tracked skills (it ships
+  only on the maintainer's machine, not in this repo), read it in full and
+  follow it. If it is absent, decline the change — offer instead a local
+  fork in `_internal/local-forks/` (gitignored, never committed): copy the
+  template there with a `.fork.` name marker, apply the changes to the
+  copy, and point that speaker's `base_image` at it. Canon stays locked
+  either way.
 - **Lost human** — "what is this?", "how does this work?": orient them
   from the root `README.md` and point them at `demo-and-more-help/`.
 
@@ -91,15 +102,17 @@ freely, and many have never seen this repo.
 - **The template image is canon.** Placeholder geometry is read from it per
   run — purple block = actor card, green block = speaker element.
   Frontmatter geometry keys are outputs you write back, never inputs.
-- **Template integrity and the MISMATCH tag.** Both skills verify the two
-  core templates against pristine reference copies before using them; a
-  drifted live file is bypassed (the reference is used), the operator is
-  told, and any commit made while the drift exists carries `MISMATCH` in
-  its subject. **At the start of work in this repo, run
-  `git log --oneline -20 --grep=MISMATCH`; on any hit, alert the operator**
-  that a template drift occurred and needs reconciling before it fades from
-  memory. The reference copies' location is deliberately not documented
-  here — the skills know it; do not surface or restructure it.
+- **Core templates are locked; git is the reference.** Both skills diff
+  `core-templates-please-dont-touch/` against git HEAD before using it
+  and **auto-restore any drift** (`git restore`), telling the operator
+  what was reverted and tagging that session's commits `MISMATCH` in the
+  subject. Never edit those files, never commit a change to them, and
+  never bypass or weaken the auto-restore. **At the start of work in this
+  repo, run `git log --oneline -20 --grep=MISMATCH`; on any hit, alert
+  the operator** that a drift event occurred. Template changes are made
+  only by the maintainer, from their machine, through the local procedure
+  described under routing — its commits move the baseline, which is why a
+  sanctioned change is never reverted.
 - **Halt, don't degrade.** Over-budget description, missing assets (ask:
   resubmit vs placeholder outline), an off-spec speaker photo (must be an
   exact square PNG/JPG/JPEG ≤800×800 — you scale it to the slot, you never

@@ -38,10 +38,10 @@ nothing triggered by cloning, opening, or browsing this folder.
 
 - The two generation sources (the canon template image and the blank
   intake form) live in `_internal/core-templates-please-dont-touch/` and
-  are integrity-checked against pristine reference copies before every
-  run. If either was edited, the run uses the pristine reference instead,
-  says so, and tags any commit `MISMATCH` — a stray edit can't silently
-  change your images. Details in that folder's README.
+  are **locked**: before every run they are diffed against the committed
+  version and any edit is automatically reverted and flagged — a stray
+  edit can't silently change your images. Template changes are made only
+  by the maintainer. Details in that folder's README.
 - Nothing in the pipeline ever overwrites your files: over-budget text,
   off-spec images, or geometry mismatches halt with a printed reason.
 - The bundled fonts (Inter, IBM Plex Mono) are under the SIL Open Font

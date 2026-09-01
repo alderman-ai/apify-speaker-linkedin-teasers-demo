@@ -90,17 +90,20 @@ The company logo stays flexible: square, ideally 80×80 or larger
 
 ### 3 · Geometry — the template image is canon
 
-**Canon-template integrity preflight** (once per batch): when `base_image`
-is the canon template
-(`_internal/core-templates-please-dont-touch/speaker-teaser-linkedin_v3.png`),
-hash-compare it against its reference copy
-`_internal/fonts/jic/BU_speaker-teaser-linkedin_v3.png`. On a mismatch,
-**render from the reference copy** (`BU_`) — never from the drifted live
-file — tell the operator plainly that the canon template has drifted, and
-include the tag `MISMATCH` in the subject line of any commit made while
-the drift exists. An intentional template change is fine — it updates both
-copies together (bumping the `_v<N>` suffix in both filenames and every
-reference), and then no mismatch exists.
+**Canon-template integrity preflight** (once per batch): the core
+templates are locked; **git HEAD is their reference**. Run
+`git status --porcelain -- _internal/core-templates-please-dont-touch/`.
+Any modification or deletion there → **auto-restore immediately**:
+`git restore _internal/core-templates-please-dont-touch/`, tell the
+operator exactly what was reverted, and include the tag `MISMATCH` in the
+subject line of any commit made this session. Render from the restored
+file. Where there is no git history (a zip download), hash-compare the
+canon PNG against its reference copy
+`_internal/fonts/jic/BU_speaker-teaser-linkedin_v3.png` and copy the
+reference over a drifted live file instead. Template changes are made
+only by the maintainer, from their machine, via a local procedure that is
+not part of this repo — never edit the templates yourself, and never
+commit a template change.
 
 Read `base_image` (the Read tool shows its true pixel size — use that as
 page size, don't assume 1200×1200). Two placeholders: **purple `#AE81FF` =

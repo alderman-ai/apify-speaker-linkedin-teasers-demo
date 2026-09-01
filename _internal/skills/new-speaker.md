@@ -40,18 +40,21 @@ the intake form and (added by the operator) the two images.
    `speaker_name` frontmatter stays the human's real name and may repeat
    freely across folders.
 
-4. **Template integrity preflight — before copying anything.** The blank
-   template must be pristine. Compare
-   `_internal/core-templates-please-dont-touch/intake-template.md` against
-   its reference copy `_internal/fonts/jic/BU_intake-template.md`: the
-   frontmatter `version` values must match, and the file hashes must be
-   equal. On a mismatch, **scaffold from the reference copy** (`BU_`) —
-   never from the drifted live file — then: tell the operator plainly that
-   the live template has drifted, and include the tag `MISMATCH` in the
-   subject line of any commit made while the drift exists, so it is
-   discoverable later. An *intentional* template change is fine — it bumps
-   `version`/`versioned_at` and updates both copies together, and then no
-   mismatch exists.
+4. **Template integrity preflight — before copying anything.** The core
+   templates are locked; **git HEAD is their reference**. Run
+   `git status --porcelain -- _internal/core-templates-please-dont-touch/`.
+   Any modification or deletion there → **auto-restore immediately**:
+   `git restore _internal/core-templates-please-dont-touch/`, tell the
+   operator exactly what was reverted (show the discarded diff), and
+   include the tag `MISMATCH` in the subject line of any commit made this
+   session, so the event is discoverable later. Then scaffold from the
+   restored file. Where there is no git history (a zip download), compare
+   the live file's hash against its reference copy
+   `_internal/fonts/jic/BU_intake-template.md` and copy the reference
+   over a drifted live file instead. Template changes are made only by
+   the maintainer, from their machine, via a local procedure that is not
+   part of this repo — never edit the templates yourself, and never
+   commit a template change.
 
 5. **Create the folder with two files:**
    - `intake.md` — a copy of
