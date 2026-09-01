@@ -19,6 +19,10 @@ visual design belong to Apify.
 Nothing to install. The repo is 100% self-contained — fonts, card code,
 template and instructions all ship inside this folder; nothing is fetched
 from the internet at any point, and there are no scripts or packages.
+Wary of cloned repos? Good instinct —
+`demo-and-more-help/scripts-and-security.md` is a plain-English inventory
+of every piece of code in this project and when it runs (short version:
+there are **zero executable scripts** here).
 
 You only need two things that are almost certainly already on your machine:
 
@@ -45,8 +49,8 @@ You only need two things that are almost certainly already on your machine:
      What it will never do is crop or reframe for you — square it
      yourself, framed the way you want to be seen.
 4. Say **"process the queue"**. The finished 1200×1200 PNG lands in
-   `final-output/jana-novakova-final.png`, ready to post; your folder is
-   archived to `processed/`.
+   `generated-images/jana-novakova-final.png`, ready to post; your folder
+   is archived to `processed/`.
 
 If anything is off — blurb too long, an image missing or not square, a
 template box the wrong shape — the run stops and says exactly what to fix.
@@ -54,8 +58,8 @@ It never silently crops your text, reframes your photo, or stretches the
 card.
 
 Want to see what "done" looks like first? Open
-`intake-template (completed example).md`, or the finished PNGs in
-`final-output/`.
+`demo-and-more-help/intake-template-completed-example.md`, or the finished
+PNGs in `generated-images/`.
 
 ## What the image looks like
 
@@ -75,10 +79,10 @@ template):
 ## The three queue stages
 
 ```
-to-process/<speaker>/            you fill this: intake.md, README.md,
-                                 company-logo.png, speaker.png
-processed/<speaker>/             the folder moves here on success (archive)
-final-output/<speaker>-final.png the finished render — publish from here
+to-process/<speaker>/                 you fill this: intake.md, README.md,
+                                      company-logo.png, speaker.png
+processed/<speaker>/                  the folder moves here on success (archive)
+generated-images/<speaker>-final.png  the finished render — publish from here
 ```
 
 A folder lives in exactly one stage. Successes move whole; failures stay
@@ -91,10 +95,10 @@ afterwards.
 
 ## The intake form
 
-`intake-template.md` is the whole contract — field-by-field schema,
-character budgets, failure modes. Everything you type lives in its labelled
-boxes; the assistant copies your entries into the machine-read frontmatter
-at processing time. The short version:
+The `intake.md` that appears in your speaker folder is the whole contract —
+field-by-field schema, character budgets, failure modes. Everything you
+type lives in its labelled boxes; the assistant copies your entries into
+the machine-read frontmatter at processing time. The short version:
 
 | field | where it lands | budget |
 |---|---|---|
@@ -110,21 +114,25 @@ at processing time. The short version:
 Over-budget descriptions are rejected, not silently cut. The footer's small
 orange `?` circle is static on every card and ships with the repo.
 
-See `docs/Actor card field mapping.png` for the annotated picture and
-`docs/Actor card text budgets.png` for the budgets table.
+See `demo-and-more-help/Actor card field mapping.png` for the annotated
+picture and `demo-and-more-help/Actor card text budgets.png` for the
+budgets table.
 
 ## The template is canon
 
 This demo ships exactly one visual template,
-`visual-templates/speaker-teaser-linkedin.png` (1200×1200). Whatever that
-PNG says, goes — the coloured placeholder blocks on it are measured per run
-and decide exactly where the two elements land.
+`_internal/core-templates-please-dont-touch/speaker-teaser-linkedin_v3.png`
+(1200×1200). Whatever that PNG says, goes — the coloured placeholder blocks
+on it are measured per run and decide exactly where the two elements land.
+As the folder name suggests: don't touch it. It is integrity-checked
+before every run, and a drifted copy is bypassed and flagged, never
+silently used.
 
 The current template is **machine-built**: the original Canva export (the
 one with the green and purple squares) has been superseded by a version
 with the starfield baked in and the blocks redrawn at the confirmed layout.
-The rebuild recipe lives in `visual-templates/README.md`, so a future
-design change is a re-run of that recipe, not a hunt.
+The rebuild recipe lives in that folder's README, so a future design
+change is a re-run of that recipe, not a hunt.
 
 One rule is enforced every run: **the purple block's proportions must match
 the card as it actually renders** (±2px at render scale). The card's height
@@ -135,14 +143,14 @@ be.
 ## Where the skills are
 
 The "skills" — the assistant's step-by-step instructions — are two plain
-markdown files in the `skills/` folder. Any assistant can run one just by
+markdown files in `_internal/skills/`. Any assistant can run one just by
 being pointed at it, and `CLAUDE.md` / `AGENTS.md` route the two operator
 phrases to them automatically:
 
 | skill | file | what it does |
 |---|---|---|
-| `new-speaker` | `skills/new-speaker.md` | scaffolds one speaker folder in `to-process/` — asks the name, or numbers the folder if you skip it |
-| `apify-speaker-card` | `skills/apify-speaker-card.md` | the whole generator: validates the form, measures the template, renders, verifies, delivers |
+| `new-speaker` | `_internal/skills/new-speaker.md` | scaffolds one speaker folder in `to-process/` — asks the name, or numbers the folder if you skip it |
+| `apify-speaker-card` | `_internal/skills/apify-speaker-card.md` | the whole generator: validates the form, measures the template, renders, verifies, delivers |
 
 This README is written for you, the human; your assistant orients itself
 from `CLAUDE.md` / `AGENTS.md`.
@@ -150,23 +158,24 @@ from `CLAUDE.md` / `AGENTS.md`.
 ## Repo layout
 
 ```
-intake-template.md            the input contract (copied into each folder)
-intake-template (completed example).md   the same form, filled in
+README.md                     you are here — the only doc you need to start
 to-process/  processed/       the queue — this is all you touch day to day
-final-output/                 the finished PNGs (<speaker>-final.png)
-visual-templates/             the canon template + the starfield pattern
-docs/                         annotated field-mapping + text-budget graphics
-internal/                     machinery you never edit: the render page
-                              (verified card CSS + speaker element), static
-                              footer icon, self-hosted OFL fonts
-skills/new-speaker.md         scaffolds a speaker folder
-skills/apify-speaker-card.md  the generator — the entire engine
+generated-images/             the finished PNGs (<speaker>-final.png)
+demo-and-more-help/           lost, curious, or cautious? the filled-in
+                              example, annotated graphics, the security
+                              briefing, and the pipeline stress test
+_internal/                    machinery you never edit: the skills, the
+                              render page, self-hosted fonts, and the two
+                              core templates everything is generated from
+CLAUDE.md / AGENTS.md         how your assistant orients itself
 ```
+
+Every folder carries its own `INDEX.md` describing what's inside.
 
 ## Fonts and licences
 
 Bundled: **Inter** and **IBM Plex Mono** — exactly what apify.com serves for
 the card — under the SIL Open Font License 1.1
-(`internal/fonts/licenses/`), freely redistributable, self-hosted so renders
-never depend on a CDN. GT Walsheim (apify.com's heading face) is a
+(`_internal/fonts/licenses/`), freely redistributable, self-hosted so
+renders never depend on a CDN. GT Walsheim (apify.com's heading face) is a
 commercial font and is deliberately not part of this repo.

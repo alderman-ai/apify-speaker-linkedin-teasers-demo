@@ -7,5 +7,5 @@ plus `company-logo` and `speaker` images).
 
 "Process the queue" runs every folder here; each success **moves whole** to
 `processed/` and its finished PNG lands in
-`final-output/<speaker>-final.png`. Failures stay put with the reason. This
-file is not a speaker folder and is ignored by processing.
+`generated-images/<speaker>-final.png`. Failures stay put with the reason.
+This file is not a speaker folder and is ignored by processing.

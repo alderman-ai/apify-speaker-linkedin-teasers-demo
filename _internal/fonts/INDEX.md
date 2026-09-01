@@ -1,4 +1,4 @@
-# internal/fonts/
+# _internal/fonts/
 
 Self-hosted webfonts the render shell links relatively
 (`../fonts/fonts.css`) so a capture never depends on a network fetch:

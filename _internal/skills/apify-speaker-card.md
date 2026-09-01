@@ -15,21 +15,21 @@ One speaker folder in → one finished template-sized PNG out. There is **no
 build script and no dependency beyond a Chromium-based browser** (Chrome, or
 the Edge that ships with Windows) — you are the engine. Everything is done
 with reading, writing, one headless-browser command, and your own eyes.
-`intake-template.md` at the repo root is the input contract (the sibling
-`intake-template (completed example).md` is a filled reference copy); consult
-it for field rules rather than improvising.
+`_internal/core-templates-please-dont-touch/intake-template.md` is the input
+contract (`demo-and-more-help/intake-template-completed-example.md` is a
+filled reference copy); consult it for field rules rather than improvising.
 
 ## The queue
 
 ```
 to-process/<speaker>/              intake.md + README.md + company-logo + speaker images
 processed/<speaker>/               the whole folder moves here on success (archive)
-final-output/<speaker>-final.png   the finished render, delivered separately
+generated-images/<speaker>-final.png   the finished render, delivered separately
 ```
 
 A folder is always in exactly one queue. Failures stay put with the reason
 stated; nothing partial is ever written; nothing is ever overwritten — a
-name already taken in processed/ or final-output/ gets a `-<NN>` suffix
+name already taken in processed/ or generated-images/ gets a `-<NN>` suffix
 (lowest free number, first dupe = 01), never a refusal and never a
 replacement.
 
@@ -90,6 +90,18 @@ The company logo stays flexible: square, ideally 80×80 or larger
 
 ### 3 · Geometry — the template image is canon
 
+**Canon-template integrity preflight** (once per batch): when `base_image`
+is the canon template
+(`_internal/core-templates-please-dont-touch/speaker-teaser-linkedin_v3.png`),
+hash-compare it against its reference copy
+`_internal/fonts/jic/BU_speaker-teaser-linkedin_v3.png`. On a mismatch,
+**render from the reference copy** (`BU_`) — never from the drifted live
+file — tell the operator plainly that the canon template has drifted, and
+include the tag `MISMATCH` in the subject line of any commit made while
+the drift exists. An intentional template change is fine — it updates both
+copies together (bumping the `_v<N>` suffix in both filenames and every
+reference), and then no mismatch exists.
+
 Read `base_image` (the Read tool shows its true pixel size — use that as
 page size, don't assume 1200×1200). Two placeholders: **purple `#AE81FF` =
 actor card block, green `#20A34E` = speaker element block**; both must
@@ -137,7 +149,7 @@ Worked against the current template: `scale = 799/400 = 1.9975`,
 
 ### 5 · Fill the shell and render
 
-Copy `internal/render/shell.html` to `internal/render/_run-<name>.html`
+Copy `_internal/render/shell.html` to `_internal/render/_run-<name>.html`
 (same folder, so `../fonts/fonts.css` resolves — fonts are local on
 purpose; the render must never touch a network). Replace every `{{TOKEN}}`:
 
@@ -151,7 +163,7 @@ purpose; the render must never touch a network). Replace every `{{TOKEN}}`:
 | `SPK_CSS_W`, `SPK_CSS_H` | `spk_w`, `spk_h` verbatim (1:1) |
 | `DESC_LINES` | `desc_lines` (default 2) |
 | `BASE_IMAGE_URI`, `COMPANY_LOGO_URI`, `SPEAKER_IMAGE_URI` | `file:///` absolute URLs (or the placeholder data URI) |
-| `HELP_ICON_URI` | `file:///` URL of `internal/render/footer-help-icon.svg` |
+| `HELP_ICON_URI` | `file:///` URL of `_internal/render/footer-help-icon.svg` |
 | `SPEAKER_NAME`, `POSITION_COMPANY` (join with a spaced ` / `), `DESCRIPTION`, `TOPIC_CATEGORY`, `LEVEL`, `DURATION_MINUTES` (number only — the static `(mins)` is baked into the shell) | HTML-escaped text |
 
 Verify no `{{` remains. Then screenshot — **into the temp dir first; the
@@ -183,11 +195,11 @@ the speaker element shows a square portrait framed by the `#454545` shell
 (PRAGUE orange); starfield visible below the actor card. Anything off →
 halt that folder, delete the bad screenshot, report.
 
-Then: move the PNG to `final-output/<kebab-name>-final.png`, delete the
+Then: move the PNG to `generated-images/<kebab-name>-final.png`, delete the
 `_run-*.html`, and move the whole folder to `processed/<kebab-name>/`
 (renaming `new-speaker-<NN>` to the kebab speaker name from the form).
 **Duplicate names suffix, never refuse**: if `<kebab-name>` is already
-taken in `processed/` or `final-output/`, use `<kebab-name>-<NN>` — the
+taken in `processed/` or `generated-images/`, use `<kebab-name>-<NN>` — the
 lowest number (zero-padded, first dupe = 01) free in BOTH locations, the
 same NN on the folder and the PNG so archive and render stay paired.
 Duplicates are detected by folder/file names only — never by frontmatter
@@ -212,7 +224,7 @@ warning. Then totals. One bad folder never stops the rest.
   it renders 1:1 at the block's own size.
 - The footer circle icon (orange `?`, 1px orange ring) is static on every
   card; never an input. The ring is the avatar's CSS border in the shell;
-  the `?` is `internal/render/footer-help-icon.svg`.
+  the `?` is `_internal/render/footer-help-icon.svg`.
 - Text budgets: name 30 · position/company 39 (including the 3-char
   ` / ` joiner) · description 140 (from the fence label,
   operator-calibrated against real two-line renders at width 400) ·
@@ -222,7 +234,8 @@ warning. Then totals. One bad folder never stops the rest.
   cropped or reframed, and the element's chrome and `Join me in PRAGUE`
   copy live in the shell, not in any asset.
 - The canon template is machine-built (baked gradient starfield, drawn
-  blocks — recipe in `visual-templates/README.md`) and supersedes the
+  blocks — recipe in `_internal/core-templates-please-dont-touch/README.md`)
+  and supersedes the
   operator's original Canva export.
 - GT Walsheim is not part of the render and must never be added to this
   repo.

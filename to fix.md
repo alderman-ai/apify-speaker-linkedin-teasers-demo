@@ -1,4 +1,0 @@
-assets roots on intake folder should be filled in at time of new-speaker. As far as the names of the assets they should be filled in at time of processing. They don't need to name them the EXACT thing. Look at the file dimensions, you can probably tell which is which. if ambiguous, then look at them to decide as part of apify speaker card. Also, ditch the mark as center of image. If it's a face, center on the face if it's not the ideal file size. Also, you should ask for the 350x400 wxh and just apply the border on top of it. Don't make the px diminsions hard to remember. 
-
-
-the image files frontheader don't need to be filled in ahead of time, they get filled in at processing OR get renamed at processing.

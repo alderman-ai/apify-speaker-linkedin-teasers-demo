@@ -33,21 +33,35 @@ the intake form and (added by the operator) the two images.
 3. **Suffix duplicates — never block, never overwrite.** Repeat names are
    legitimate (a rebuilt card, a fresh start after text edits, a true
    namesake). If the chosen name already exists in `to-process/`,
-   `processed/`, or as a `final-output/` PNG, create `<name>-<NN>`
+   `processed/`, or as a `generated-images/` PNG, create `<name>-<NN>`
    instead — NN the LOWEST number free across all three locations,
    zero-padded to two digits, **first dupe = 01**. Say what you created
    and why. Duplicates are detected by folder and file names only; the
    `speaker_name` frontmatter stays the human's real name and may repeat
    freely across folders.
 
-4. **Create the folder with two files:**
-   - `intake.md` — a copy of the repo-root `intake-template.md` (the blank
-     template, NOT the completed example). If the name is known, prefill it
-     in both the `speaker-name` body fence and the frontmatter
-     `speaker_name`.
-   - `README.md` — a copy of `internal/speaker-folder-README.md`.
+4. **Template integrity preflight — before copying anything.** The blank
+   template must be pristine. Compare
+   `_internal/core-templates-please-dont-touch/intake-template.md` against
+   its reference copy `_internal/fonts/jic/BU_intake-template.md`: the
+   frontmatter `version` values must match, and the file hashes must be
+   equal. On a mismatch, **scaffold from the reference copy** (`BU_`) —
+   never from the drifted live file — then: tell the operator plainly that
+   the live template has drifted, and include the tag `MISMATCH` in the
+   subject line of any commit made while the drift exists, so it is
+   discoverable later. An *intentional* template change is fine — it bumps
+   `version`/`versioned_at` and updates both copies together, and then no
+   mismatch exists.
 
-5. **Tell the operator what the folder still needs**, briefly: fill the
+5. **Create the folder with two files:**
+   - `intake.md` — a copy of
+     `_internal/core-templates-please-dont-touch/intake-template.md` (the
+     blank template, NOT the completed example in `demo-and-more-help/`).
+     If the name is known, prefill it in both the `speaker-name` body fence
+     and the frontmatter `speaker_name`.
+   - `README.md` — a copy of `_internal/speaker-folder-README.md`.
+
+6. **Tell the operator what the folder still needs**, briefly: fill the
    fenced inputs in `intake.md` (everything to type lives in the "Input
    presentation details here" section; the description fence label is its
    character budget), and drop in the two images —

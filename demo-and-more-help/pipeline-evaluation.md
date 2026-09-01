@@ -1,5 +1,10 @@
 # Pipeline efficiency evaluation — 2026-09-01
 
+> **Note:** written before the same-day file-tree reorganisation; paths
+> named below are the old layout (`final-output/` is now
+> `generated-images/`, `visual-templates/` and `skills/` now live under
+> `_internal/`). Findings unchanged.
+
 Scope: the **skills, input contract, and generation pipeline** — scaffold →
 intake form → validate → geometry → token fill → render → verify → deliver.
 The speaker research and the subagent-as-operator role-play used to drive the

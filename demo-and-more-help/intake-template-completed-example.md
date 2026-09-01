@@ -13,7 +13,7 @@
 
 # --- 1. base template --------------------------------------------------------
 # Fixed for this demo: ONE visual template with fixed dimensions (1200x1200).
-base_image:         "../../visual-templates/speaker-teaser-linkedin.png"
+base_image:         "../../_internal/core-templates-please-dont-touch/speaker-teaser-linkedin_v3.png"
 
 # --- 2. images ---------------------------------------------------------------
 # NOTE: the small circle icon in the card footer is STATIC across every
@@ -60,7 +60,7 @@ speaker_w:          294
 speaker_h:          336
 
 # --- 7. render options -------------------------------------------------------
-# output is optional. Default: final-output/<speaker-name>-final.png
+# output is optional. Default: generated-images/<speaker-name>-final.png
 output:             ""
 card_width:         400
 desc_lines:         2
@@ -325,7 +325,8 @@ card pasted inside a block), the printed values win after agreeing with
 the mask within 6px — a disagreement halts with both numbers reported.
 
 The current canon template is **machine-built** (see
-`visual-templates/README.md`): baked starfield, blocks drawn at the locked
+`_internal/core-templates-please-dont-touch/README.md`): baked starfield,
+blocks drawn at the locked
 layout. It supersedes the operator's original Canva export. Re-exporting
 over it means re-staging that recipe, not just dropping in a new PNG.
 
@@ -497,13 +498,13 @@ flagged as off-vocabulary rather than failing.
 The 20×20 circle in the footer: an orange (`#f5641f`) question mark on the
 shell colour, ringed by a 1px orange border (the ring is CSS in the render
 shell; the `?` is the SVG). Identical on every generated card. Ships as
-`internal/render/footer-help-icon.svg`; SVG, so it stays crisp at any
+`_internal/render/footer-help-icon.svg`; SVG, so it stays crisp at any
 scale.
 
 ### `output` — string, optional
 
 Destination for the finished PNG. Left empty, it defaults to
-`final-output/<speaker-name>-final.png`.
+`generated-images/<speaker-name>-final.png`.
 
 **States:** path free → written · file exists → written under a `-<NN>`
 suffix (lowest free number, first dupe = 01) and reported; **the existing
@@ -535,7 +536,7 @@ to-process/<speaker-folder>/     one folder per card:
     speaker.png
 processed/<speaker-folder>/      the whole folder lands here on success
                                  (archive: form + assets)
-final-output/<speaker>-final.png the finished render, delivered separately
+generated-images/<speaker>-final.png the finished render, delivered separately
 ```
 
 1. **Scaffold**: tell the assistant *"new speaker Jana Novakova"* (the
@@ -552,7 +553,7 @@ final-output/<speaker>-final.png the finished render, delivered separately
    `base_image` (colour mask; printed panels win when present, §1b) →
    card-ratio check → renders in a headless Chromium browser, all fonts
    local → verifies output dimensions and pixels by inspection → writes
-   the PNG to `final-output/<speaker>-final.png` → **moves the whole
+   the PNG to `generated-images/<speaker>-final.png` → **moves the whole
    folder to `processed/`**, geometry written back into the form.
 5. **Missing images**: the run stops for that folder and asks —
    *"resubmit with the image(s) added, or generate now with a placeholder
@@ -562,7 +563,7 @@ final-output/<speaker>-final.png the finished render, delivered separately
 6. **Failures** stay in `to-process/`, nothing partial is written, the
    reason is printed, the rest of the batch continues.
 7. **Nothing is ever overwritten** — a name already taken in `processed/`
-   or `final-output/` lands under `<name>-<NN>` (lowest free number,
+   or `generated-images/` lands under `<name>-<NN>` (lowest free number,
    first dupe = 01), the same NN on the archive folder and the PNG.
    Duplicate names are legitimate (a rebuilt card, a fresh start, a
    namesake) and are detected by folder/file names only — a repeated
