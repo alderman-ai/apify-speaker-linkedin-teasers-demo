@@ -4,7 +4,7 @@ Everything in here is used by the skills and never edited day to day.
 
 | path | what |
 |---|---|
-| `render/` | the render shell (verified card CSS + tokens) and the static footer icon |
+| `render/` | the render shell (verified card CSS + the speaker element + tokens) and the static footer icon |
 | `fonts/` | self-hosted Inter + IBM Plex Mono (OFL) the shell links; renders never touch a network |
 | `speaker-folder-README.md` | template copied into each new speaker folder |
 | `sample-assets/` | synthetic images used by the worked examples in `processed/` |

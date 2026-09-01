@@ -31,8 +31,9 @@ the intake form and (added by the operator) the two images.
      - `new-speaker-1` + `new-speaker-3` exist → create `new-speaker-02`
 
 3. **Refuse collisions.** If the chosen folder already exists in
-   `to-process/` (or, for a named speaker, in `processed/`), say so and ask
-   how to proceed — never overwrite or silently suffix.
+   `to-process/` (or, for a named speaker, in `processed/` or as a
+   `final-output/` PNG), say so and ask how to proceed — never overwrite or
+   silently suffix.
 
 4. **Create the folder with two files:**
    - `intake.md` — a copy of the repo-root `intake-template.md` (the blank
@@ -45,10 +46,10 @@ the intake form and (added by the operator) the two images.
    fenced inputs in `intake.md` (everything to type lives in the "Input
    presentation details here" section; the description fence label is its
    character budget), and drop in the two images —
-   `company-logo.(png/jpg)` (square, ideally 80×80+) and
-   `speaker.(png/jpg)`, **required as an exact 262×262 square**, pre-framed;
-   the pipeline never reframes it. Then "process the queue" generates the
-   card.
+   `company-logo.(png/jpg)` (square, ideally 80×80+) and the speaker photo:
+   **square (1:1), PNG/JPG/JPEG, at most 800×800** — 262×262 is the ideal
+   supply, and the generator scales any accepted square into the slot
+   without cropping. Then "process the queue" generates the card.
 
 ## Notes
 

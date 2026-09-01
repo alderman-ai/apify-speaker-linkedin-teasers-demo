@@ -3,11 +3,11 @@
 You are in a self-contained demo repo that mass-produces LinkedIn teaser
 images for meetup speakers, styled as Apify actor cards. The operator fills
 one small markdown form per speaker; you render a pixel-faithful actor card
-and a speaker photo into a Canva-exported template and write a finished PNG.
-**You are the engine** — there are deliberately no build scripts and no
-package dependencies. The only external requirement is a Chromium-based
-browser for headless rendering — Chrome, or the Edge preinstalled on
-Windows; never download one.
+and a card-style speaker portrait element into the canon template and
+deliver a finished PNG. **You are the engine** — there are deliberately no
+build scripts and no package dependencies. The only external requirement is
+a Chromium-based browser for headless rendering — Chrome, or the Edge
+preinstalled on Windows; never download one.
 
 ## Asset map — every file you may need
 
@@ -32,8 +32,8 @@ Render machinery (`internal/` — use, never restructure):
 
 | path | what |
 |---|---|
-| `internal/render/shell.html` | the render page: verified card CSS + all double-brace tokens. Fill a copy saved beside it as `_run-<name>.html` |
-| `internal/render/footer-help-icon.svg` | the static footer circle icon (orange `?`, orange ring) — same on every card, never an input |
+| `internal/render/shell.html` | the render page: verified card CSS, the `.SpeakerCard` element, all double-brace tokens. Fill a copy saved beside it as `_run-<name>.html` |
+| `internal/render/footer-help-icon.svg` | the static footer circle icon (orange `?`; its 1px orange ring is CSS in the shell) — same on every card, never an input |
 | `internal/fonts/fonts.css` | the @font-face set the shell links as `../fonts/fonts.css` — renders never touch a network |
 | `internal/fonts/*.woff2` | Inter 400/500/600 + IBM Plex Mono 500, latin + latin-ext |
 | `internal/fonts/licenses/` | the two OFL licence texts |
@@ -44,9 +44,10 @@ Reference:
 
 | path | what |
 |---|---|
-| `visual-templates/speaker-teaser-linkedin.png` | the one fixed base template (1200×1200): purple card block + green speaker block (+ optional printed Width/Height/X/Y panels) |
+| `visual-templates/speaker-teaser-linkedin.png` | the one canon template (1200×1200), **machine-built**: baked gradient starfield + purple card block + green speaker block. Supersedes the operator's original Canva export |
+| `visual-templates/particles.svg` | apify.com's particle pattern — the starfield's source; rebuild recipe in that folder's README |
 | `docs/Actor card field mapping.png` | annotated picture of every field and where it lands on the card |
-| `docs/Actor card text budgets.png` | the measured character-budget table for every text field |
+| `docs/Actor card text budgets.png` | the character-budget table for every text field |
 | `docs/field-mapping.html`, `docs/text-budgets.html` | those graphics' sources, re-renderable with headless Chrome |
 
 Every subfolder carries its own small `README.md` index for routing.
@@ -64,17 +65,21 @@ Every subfolder carries its own small `README.md` index for routing.
 ## Ground rules (the skill has the full list)
 
 - **The template image is canon.** Placeholder geometry is read from it per
-  run — purple block = card, green = speaker photo. Frontmatter geometry
-  keys are outputs you write back, never inputs.
+  run — purple block = actor card, green block = speaker element.
+  Frontmatter geometry keys are outputs you write back, never inputs.
 - **Halt, don't degrade.** Over-budget description, missing assets (ask:
-  resubmit vs placeholder outline), block/card ratio mismatch, geometry
-  disagreement, any name collision in `processed/` or `final-output/` — each is a stop with a
-  clear report, never a silent workaround. Never trim operator text, never
-  stretch the card, never overwrite anything.
+  resubmit vs placeholder outline), an off-spec speaker photo (must be an
+  exact square PNG/JPG/JPEG ≤800×800 — you scale it to the slot, you never
+  crop or reframe it), block/card ratio mismatch, geometry disagreement,
+  any name collision in `processed/` or `final-output/` — each is a stop
+  with a clear report, never a silent workaround. Never trim operator
+  text, never stretch the card, never overwrite anything.
 - **The card CSS is a verified reproduction** of apify.com's ActorStoreItem
   (400 × 153.667 at width 400; heights quantised 113.667 / 121.667 /
   137.667 / 153.667 / 169.667 by description lines). Its oddities are
-  load-bearing — do not tidy them.
+  load-bearing — do not tidy them. The speaker element (`.SpeakerCard`)
+  renders 1:1 with fixed chrome and the fixed `Join me in PRAGUE` copy;
+  only its photo changes per speaker.
 - **Fonts are local** (Inter + IBM Plex Mono, OFL, in `internal/fonts/`).
   Renders never fetch from a network. **GT Walsheim must never be added to
   this repo** — it is a commercial Grilli Type font; apify.com's headings
