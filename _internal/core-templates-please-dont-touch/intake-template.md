@@ -13,8 +13,8 @@
 
 # --- 0. template version -- DO NOT EDIT --------------------------------------
 # Bumped only when this template itself changes, never per speaker.
-version:            1
-versioned_at:       "2026-09-01 09:10"
+version:            2
+versioned_at:       "2026-09-01 09:26"
 
 # --- 1. base template --------------------------------------------------------
 # Fixed for this demo: ONE visual template with fixed dimensions (1200x1200).
@@ -544,8 +544,8 @@ processed/<speaker-folder>/      the whole folder lands here on success
 generated-images/<speaker>-final.png the finished render, delivered separately
 ```
 
-1. **Scaffold**: tell the assistant *"new speaker Jana Novakova"* (the
-   `new-speaker` skill) — it creates `to-process/jana-novakova/` with the
+1. **Scaffold**: tell the assistant *"new speaker Alex Alderman"* (the
+   `new-speaker` skill) — it creates `to-process/alex-alderman/` with the
    form (name pre-filled) and the README. With no name it creates
    `new-speaker-<NN>/`, renamed to the kebab speaker name at processing.
 2. **Fill**: the fenced inputs under "Input presentation details here",
