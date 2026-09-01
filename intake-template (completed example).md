@@ -505,8 +505,9 @@ scale.
 Destination for the finished PNG. Left empty, it defaults to
 `final-output/<speaker-name>-final.png`.
 
-**States:** path free → written · **file exists → the skill refuses and
-reports; it never overwrites.**
+**States:** path free → written · file exists → written under a `-<NN>`
+suffix (lowest free number, first dupe = 01) and reported; **the existing
+file is never touched.**
 
 ### `card_width` — integer, optional, default `400`
 
@@ -560,8 +561,12 @@ final-output/<speaker>-final.png the finished render, delivered separately
    post-hoc covers it completely.
 6. **Failures** stay in `to-process/`, nothing partial is written, the
    reason is printed, the rest of the batch continues.
-7. **Nothing is ever overwritten** — a name collision in `processed/` or
-   `final-output/` refuses that folder.
+7. **Nothing is ever overwritten** — a name already taken in `processed/`
+   or `final-output/` lands under `<name>-<NN>` (lowest free number,
+   first dupe = 01), the same NN on the archive folder and the PNG.
+   Duplicate names are legitimate (a rebuilt card, a fresh start, a
+   namesake) and are detected by folder/file names only — a repeated
+   `speaker_name` in the frontmatter breaks nothing.
 
 ## 4. Batch discipline
 

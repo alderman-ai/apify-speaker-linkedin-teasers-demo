@@ -28,8 +28,10 @@ final-output/<speaker>-final.png   the finished render, delivered separately
 ```
 
 A folder is always in exactly one queue. Failures stay put with the reason
-stated; nothing partial is ever written; nothing is ever overwritten — name
-collisions in processed/ or final-output/ are refusals.
+stated; nothing partial is ever written; nothing is ever overwritten — a
+name already taken in processed/ or final-output/ gets a `-<NN>` suffix
+(lowest free number, first dupe = 01), never a refusal and never a
+replacement.
 
 ## Scaffolding
 
@@ -184,6 +186,13 @@ halt that folder, delete the bad screenshot, report.
 Then: move the PNG to `final-output/<kebab-name>-final.png`, delete the
 `_run-*.html`, and move the whole folder to `processed/<kebab-name>/`
 (renaming `new-speaker-<NN>` to the kebab speaker name from the form).
+**Duplicate names suffix, never refuse**: if `<kebab-name>` is already
+taken in `processed/` or `final-output/`, use `<kebab-name>-<NN>` — the
+lowest number (zero-padded, first dupe = 01) free in BOTH locations, the
+same NN on the folder and the PNG so archive and render stay paired.
+Duplicates are detected by folder/file names only — never by frontmatter
+`speaker_name`, which may legitimately repeat (a rebuilt card, a restart
+after text edits, a namesake).
 
 ### 7 · Report
 

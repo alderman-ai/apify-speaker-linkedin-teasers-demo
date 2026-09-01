@@ -30,10 +30,15 @@ the intake form and (added by the operator) the two images.
      - `new-speaker-02` + `new-speaker-04` exist → create `new-speaker-01`
      - `new-speaker-1` + `new-speaker-3` exist → create `new-speaker-02`
 
-3. **Refuse collisions.** If the chosen folder already exists in
-   `to-process/` (or, for a named speaker, in `processed/` or as a
-   `final-output/` PNG), say so and ask how to proceed — never overwrite or
-   silently suffix.
+3. **Suffix duplicates — never block, never overwrite.** Repeat names are
+   legitimate (a rebuilt card, a fresh start after text edits, a true
+   namesake). If the chosen name already exists in `to-process/`,
+   `processed/`, or as a `final-output/` PNG, create `<name>-<NN>`
+   instead — NN the LOWEST number free across all three locations,
+   zero-padded to two digits, **first dupe = 01**. Say what you created
+   and why. Duplicates are detected by folder and file names only; the
+   `speaker_name` frontmatter stays the human's real name and may repeat
+   freely across folders.
 
 4. **Create the folder with two files:**
    - `intake.md` — a copy of the repo-root `intake-template.md` (the blank

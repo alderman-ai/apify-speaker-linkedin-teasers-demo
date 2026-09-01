@@ -15,8 +15,8 @@ Procedure and contract:
 
 | path | what |
 |---|---|
-| `skills/apify-speaker-card.md` | **the generator's complete operating procedure — follow it, don't improvise** |
-| `skills/new-speaker.md` | scaffolds one speaker folder (asks the name; declined -> `new-speaker-<NN>`, lowest free number) |
+| `skills/apify-speaker-card.md` | **the generator's complete operating procedure — read it in full before processing anything; follow it, don't improvise.** Mass-produces Apify-styled speaker teaser images: renders a pixel-faithful Apify actor card (repurposed as a speaker card) and a card-style speaker portrait element into the canon template, one finished PNG per speaker. Use when the operator says "process the intake forms", "process the queue", "generate the speaker cards", "new speaker <name>", or drops folders into `to-process/` |
+| `skills/new-speaker.md` | **the scaffolder's complete procedure — read it in full before scaffolding.** Adds a new speaker folder to the queue — the single place to drop all the visual assets needed to generate that speaker's teaser image (asks the name; declined → `new-speaker-<NN>`, lowest free number; a repeat name → `<name>-<NN>`, first dupe = 01). Use when the operator says "new speaker", "/new-speaker", "add a speaker", "scaffold a speaker folder", or names a person to add to the lineup |
 | `intake-template.md` | the input contract: every field, budget, failure mode; everything the operator types lives in labelled body fences. Copied into each folder as `intake.md` |
 | `intake-template (completed example).md` | the same template with every fence and frontmatter value filled in — what "done" looks like |
 
@@ -25,8 +25,8 @@ The queue:
 | path | what |
 |---|---|
 | `to-process/<speaker>/` | one folder per pending card: `intake.md`, `README.md`, `company-logo.*`, `speaker.*` |
-| `processed/<speaker>/` | the folder after success (archive — form + assets). Never overwrite here |
-| `final-output/<speaker>-final.png` | the finished render, one PNG per speaker. Never overwrite here |
+| `processed/<speaker>/` | the folder after success (archive — form + assets). Never overwrite here — a taken name gets `-<NN>` |
+| `final-output/<speaker>-final.png` | the finished render, one PNG per speaker. Never overwrite here — a taken name gets `-<NN>` |
 
 Render machinery (`internal/` — use, never restructure):
 
@@ -52,15 +52,32 @@ Reference:
 
 Every subfolder carries its own small `README.md` index for routing.
 
-## The two things operators say
+## What operators say — routing requests
 
-- **"new speaker Jana Novakova"** → the `new-speaker` skill scaffolds
-  `to-process/jana-novakova/` (intake form + README; without a name,
-  `new-speaker-<NN>` at the lowest free number).
-- **"process the queue"** → run every folder in `to-process/` through the
-  skill's procedure: validate → read geometry off the template → ratio
-  check → render in a headless Chromium browser → verify by inspection →
-  PNG to `final-output/<speaker>-final.png`, folder to `processed/`.
+The `skills/` files are plain markdown procedures, **not deployed harness
+skills — nothing auto-loads them**. You route by intent and read the
+matching skill file in full before acting. The trigger phrases here and in
+the skill descriptions are examples, not a grammar: operators paraphrase
+freely, and many have never seen this repo.
+
+- **Scaffold intent** — "new speaker Jana Novakova", "add a speaker",
+  "put Jana on the lineup", "set up a folder for our next speaker" → read
+  `skills/new-speaker.md`, then scaffold `to-process/jana-novakova/`
+  (intake form + README; without a name, `new-speaker-<NN>` at the lowest
+  free number).
+- **Generate intent** — "process the queue", "process the intake forms",
+  "generate the speaker cards", "run the pipeline", "render the pending
+  ones" → read `skills/apify-speaker-card.md`, then run every folder in
+  `to-process/` (or the ones named) through its procedure: validate →
+  read geometry off the template → ratio check → render in a headless
+  Chromium browser → verify by inspection → PNG to
+  `final-output/<speaker>-final.png`, folder to `processed/`.
+- **Ambiguous ask** — "make me an image", "create a teaser", "I need a
+  card for LinkedIn", and similar requests that name neither workflow:
+  check `to-process/` first. If candidates are waiting, name them and ask
+  one question — process these now, or start a new speaker? If the queue
+  is empty, take it as scaffold intent (e.g. *"Sure! First, what's the
+  speaker's name?"*).
 
 ## Ground rules (the skill has the full list)
 
@@ -70,10 +87,16 @@ Every subfolder carries its own small `README.md` index for routing.
 - **Halt, don't degrade.** Over-budget description, missing assets (ask:
   resubmit vs placeholder outline), an off-spec speaker photo (must be an
   exact square PNG/JPG/JPEG ≤800×800 — you scale it to the slot, you never
-  crop or reframe it), block/card ratio mismatch, geometry disagreement,
-  any name collision in `processed/` or `final-output/` — each is a stop
-  with a clear report, never a silent workaround. Never trim operator
-  text, never stretch the card, never overwrite anything.
+  crop or reframe it), block/card ratio mismatch, geometry disagreement —
+  each is a stop with a clear report, never a silent workaround. Never
+  trim operator text, never stretch the card, never overwrite anything.
+- **Duplicate names suffix, never block.** A repeat name is legitimate (a
+  rebuilt card, a fresh start after text edits, a namesake): wherever the
+  name is already taken — scaffolding into `to-process/`, or delivering
+  into `processed/` / `final-output/` — use `<name>-<NN>`, the lowest
+  free number, zero-padded, **first dupe = 01** (same NN on the archive
+  folder and the PNG). Detection is by folder/file names only; a repeated
+  frontmatter `speaker_name` breaks nothing and is never consulted.
 - **The card CSS is a verified reproduction** of apify.com's ActorStoreItem
   (400 × 153.667 at width 400; heights quantised 113.667 / 121.667 /
   137.667 / 153.667 / 169.667 by description lines). Its oddities are
