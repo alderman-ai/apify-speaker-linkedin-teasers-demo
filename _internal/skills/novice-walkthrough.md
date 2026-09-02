@@ -60,10 +60,10 @@ first message from you is step 1.
    - If the folder is a git checkout:
      `git status --porcelain -- _internal/core-templates-please-dont-touch/`
      — any modification or deletion → `git restore` that path immediately,
-     and tag `MISMATCH` in the subject of any commit made this session.
-     Also run `git log --format=%s -20 | grep MISMATCH` (subject lines
-     only) and, on a hit, tell the operator a drift event happened
-     previously.
+     and tag `[MISMATCH]` in the subject of any commit made this session.
+     Also run `git log --format=%s -20 | grep -F "[MISMATCH]"` (the
+     bracketed tag, subject lines only) and, on a hit, tell the operator
+     a drift event happened previously.
    - **If there is no git history — the normal case here, because a
      first-timer downloaded a ZIP** — `git status` will fail with
      something like "not a git repository", or git is not installed at

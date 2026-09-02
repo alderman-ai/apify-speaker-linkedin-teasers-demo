@@ -103,7 +103,7 @@ templates are locked; **git HEAD is their reference**. Run
 `git status --porcelain -- _internal/core-templates-please-dont-touch/`.
 Any modification or deletion there → **auto-restore immediately**:
 `git restore _internal/core-templates-please-dont-touch/`, tell the
-operator exactly what was reverted, and include the tag `MISMATCH` in the
+operator exactly what was reverted, and include the tag `[MISMATCH]` in the
 subject line of any commit made this session. Render from the restored
 file. Where there is no git history (a zip download), hash-compare the
 canon PNG against its reference copy

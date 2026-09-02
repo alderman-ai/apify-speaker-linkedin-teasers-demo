@@ -130,13 +130,13 @@ freely, and many have never seen this repo.
 - **Core templates are locked; git is the reference.** Both skills diff
   `core-templates-please-dont-touch/` against git HEAD before using it
   and **auto-restore any drift** (`git restore`), telling the operator
-  what was reverted and tagging that session's commits `MISMATCH` in the
+  what was reverted and tagging that session's commits `[MISMATCH]` in the
   subject. Never edit those files, never commit a change to them, and
   never bypass or weaken the auto-restore. **At the start of work in this
-  repo, run `git log --format=%s -20 | grep MISMATCH` (subjects only: the
-  tag lives in the subject line, and commit bodies that merely describe
-  this rule must not trigger it); on any hit, alert the operator** that a
-  drift event occurred. **Where there is no `.git`
+  repo, run `git log --format=%s -20 | grep -F "[MISMATCH]"` (the bracketed
+  tag in subject lines only, so commits that merely mention the word do
+  not trigger it); on any hit, alert the operator** that a drift event
+  occurred. **Where there is no `.git`
   directory — the normal case for a ZIP download — skip the MISMATCH log
   check and instead hash-compare each core template against its reference
   copy in `_internal/fonts/jic/` (`BU_intake-template.md`,

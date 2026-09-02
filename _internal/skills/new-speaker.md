@@ -51,7 +51,7 @@ PowerShell and on macOS.
    Any modification or deletion there → **auto-restore immediately**:
    `git restore _internal/core-templates-please-dont-touch/`, tell the
    operator exactly what was reverted (show the discarded diff), and
-   include the tag `MISMATCH` in the subject line of any commit made this
+   include the tag `[MISMATCH]` in the subject line of any commit made this
    session, so the event is discoverable later. Then scaffold from the
    restored file. Where there is no git history (a zip download), compare
    the live file's hash against its reference copy
