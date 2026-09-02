@@ -13,7 +13,11 @@ Three things. The skill refuses (or asks about placeholders) until it has them.
 **Square, PNG/JPG/JPEG, no bigger than 800×800.** The perfect supply is
 **262×262** — the photo slot's exact size on the current template — but any
 square within the cap works: the generator scales it into the slot without
-cropping a single pixel, and archives the slot-sized copy it used.
+cropping a single pixel, and archives the slot-sized copy it used as
+`speaker.png`. If your file was already called `speaker.<ext>`, yours is
+renamed to `speaker-original.<ext>` first — so two photos in the archive
+means the original plus the resized copy that was actually drawn, and
+nothing of yours was thrown away.
 
 Frame it yourself, the way you want to be seen. The pipeline **never crops,
 pads or reframes** a photo — a non-square, oversized or wrong-format image
@@ -30,6 +34,8 @@ corner rounding).
 ## Text limits
 
 name 30 · position/company 39 (including the ` / ` joiner) ·
-description 140 · topic 33.
+description 100 · topic 33.
+Every count is characters including spaces and punctuation, and the assistant
+counts it with a script rather than by eye.
 The description budget is enforced from the fence label; over it, the form is
 rejected rather than truncated. Everything else ellipsises.

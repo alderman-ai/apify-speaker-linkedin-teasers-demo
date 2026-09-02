@@ -13,8 +13,8 @@
 
 # --- 0. template version -- DO NOT EDIT --------------------------------------
 # Bumped only when this template itself changes, never per speaker.
-version:            2
-versioned_at:       "2026-09-01 09:26"
+version:            3
+versioned_at:       "2026-09-02 12:12"
 
 # --- 1. base template --------------------------------------------------------
 # Fixed for this demo: ONE visual template with fixed dimensions (1200x1200).
@@ -155,9 +155,9 @@ Talk length in minutes — the number only, no unit; the card renders it as
 The short blurb under the speaker's name on the card. The number in the
 fence label is the enforced character budget: the two-line capacity of the
 **actor card's description text slot** with the card at its native CSS
-render width (`card_width: 400`), measured against real renders. It counts
-characters including spaces and punctuation, and the assistant counts it
-with a script, never by eye.
+render width (`card_width: 400`), measured 2026-09-02 against real renders.
+It counts characters including spaces and punctuation, and the assistant
+counts it with a script, never by eye.
 Exceeding the budget rejects the form; the card is never silently truncated.
 
 ```presentation-description-100-char-max

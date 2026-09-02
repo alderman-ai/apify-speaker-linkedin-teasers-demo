@@ -133,8 +133,10 @@ freely, and many have never seen this repo.
   what was reverted and tagging that session's commits `MISMATCH` in the
   subject. Never edit those files, never commit a change to them, and
   never bypass or weaken the auto-restore. **At the start of work in this
-  repo, run `git log --oneline -20 --grep=MISMATCH`; on any hit, alert
-  the operator** that a drift event occurred. **Where there is no `.git`
+  repo, run `git log --format=%s -20 | grep MISMATCH` (subjects only: the
+  tag lives in the subject line, and commit bodies that merely describe
+  this rule must not trigger it); on any hit, alert the operator** that a
+  drift event occurred. **Where there is no `.git`
   directory — the normal case for a ZIP download — skip the MISMATCH log
   check and instead hash-compare each core template against its reference
   copy in `_internal/fonts/jic/` (`BU_intake-template.md`,
