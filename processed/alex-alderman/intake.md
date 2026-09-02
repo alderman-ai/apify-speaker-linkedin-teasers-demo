@@ -1,70 +1,28 @@
 ---
-# =============================================================================
-# ACTOR CARD INTAKE  —  one file = one rendered card
-# Lives as intake.md inside one speaker folder under to-process/.
-# Scaffold a folder by telling the assistant: new speaker "Name Surname"
-# Relative paths resolve from this file, i.e. from inside that folder.
-# Every field is documented in §2 below. Operators type ONLY in the fenced
-# input sections in the body ("Input presentation details here"); as step 1
-# of processing the assistant transfers each fence's contents into its
-# frontmatter variable here. This frontmatter is the machine record, not
-# the authoring surface. Everything else is documentation for humans.
-# =============================================================================
-
-# --- 1. base template --------------------------------------------------------
-# Fixed for this demo: ONE visual template with fixed dimensions (1200x1200).
-base_image:         "../../visual-templates/speaker-teaser-linkedin.png"
-
-# --- 2. images ---------------------------------------------------------------
-# NOTE: the small circle icon in the card footer is STATIC across every
-# generated card and is bundled with the skill. It is not an input.
-assets_root:        ""              # images live beside this form, in the folder
-company_logo:       "alderman-ai-mark-v1.png"
-speaker_image:      "speaker.png"   # square 1:1, PNG/JPG/JPEG, at most 800x800.
-                                     # Ideal: 262x262 (the slot's exact size).
-                                     # The skill scales an accepted square to
-                                     # fit; anything off-spec halts the run.
-
-# --- 3. speaker -- WRITTEN BY ASSISTANT from the body fences -----------------
-speaker_name:       "alex alderman"
-speaker_position:   "gtm engineer"
-speaker_company:    "alderman ai"
-
-# --- 4. the talk -- WRITTEN BY ASSISTANT from the body fences ----------------
-# NOTE: the presentation description is NOT a frontmatter field. It lives in
-# the body below, in the presentation-description fence. See just under the
-# frontmatter, and §2.
-topic_category:     "ai content ops"
-
-# --- 5. talk metadata (card footer, right) -- WRITTEN BY ASSISTANT -----------
-level:              "int."              # all | easy | int. | adv.
-duration_minutes:   "10"              # number only — the card renders 10 (mins)
-
-# --- 6. placement -- DERIVED, DO NOT AUTHOR ----------------------------------
-# The template image is canon. The skill measures both placeholders from
-# base_image at generation time and writes the eight values back here as a
-# record of what it used. Anything you type is overwritten. See §1b.
-# Values below are from the last run, not a specification.
-
-# actor card block — purple placeholder
-card_x:             200.5
-card_y:             748.028
-card_w:             799
-card_h:             306.949
-
-# speaker card block — green placeholder (the full footprint of the
-# card-style speaker component: square photo + "Join me in PRAGUE" bar)
-speaker_x:          705.5
-speaker_y:          345
-speaker_w:          294
-speaker_h:          336
-
-# --- 7. render options -------------------------------------------------------
-# output is optional. Default: final-output/<speaker-name>-final.png
-output:             ""
-card_width:         400
-desc_lines:         2
-href:               ""
+version: 3
+versioned_at: 2026-09-03 00:50
+base_image: ../../_internal/core-templates-please-dont-touch/speaker-teaser-linkedin_v3.png
+assets_root: ""
+company_logo: company-logo.png
+speaker_image: speaker.png
+speaker_name: alex alderman
+speaker_position: gtm-engineer
+speaker_company: alderman-ai
+topic_category: Agentic Social Content Ops
+level: For All Levels
+duration_minutes: 10
+card_x: 201
+card_y: 748
+card_w: 799
+card_h: 307
+speaker_x: 706
+speaker_y: 345
+speaker_w: 294
+speaker_h: 336
+output: ""
+card_width: 400
+desc_lines: 2
+href: ""
 ---
 
 # Input presentation details here
@@ -80,7 +38,7 @@ These fields will be filled in by operator -- or by the assistant if the info wa
 
 ## Speaker name
 
-Title Case, the form the speaker uses publicly. Fits whole up to **30
+for alex, part of his brand identity is all lowercased name. Fits whole up to **30
 characters**; longer is cut off with `…` on the card.
 
 ```speaker-name
@@ -93,7 +51,7 @@ Lowercase kebab-case (words joined by `-`), mirroring Apify's slug style —
 that's the pastiche, keep it.
 
 ```speaker-position
-gtm engineer
+gtm-engineer
 ```
 
 ## Company
@@ -103,38 +61,23 @@ spaced slash as `position / company`; together they fit up to **39
 characters** counting the 3-character ` / ` joiner.
 
 ```speaker-company
-alderman ai
+alderman-ai
 ```
 
 ## Topic category
 
-The track or theme, Title Case. Fits up to **33 characters**.
+The track or theme, Title Case. Fits up to **26 characters** (the fixed
+`For All Levels` on the footer's right shortened this from 33).
 
 ```topic-category
-ai content ops
+Agentic Social Content Ops
 ```
 
-## Audience level
+## Audience level — fixed, nothing to type
 
-Choose the level of complexity of the talk. See **audience level notes**
-below. Choose one of these **exactly** (keep the trailing dot on the two
-abbreviations):
-
-- `all`
-- `easy`
-- `int.`
-- `adv.`
-
-```level
-int.
-```
-
-### Audience level notes
-
-- All --  mostly conceptual, all levels can benefit
-- Easy -- more basic, and specific enough that advanced might be bored
-- Int. -- Intermediate, for those who know what an md file and a repo are
-- Adv. -- More technical topics that might be not very fun for a beginner.
+Since template v3 every card reads **For All Levels** after the 👥 glyph.
+There is no fence for it; the assistant leaves the frontmatter `level`
+value exactly as it is.
 
 ## Duration
 
@@ -153,9 +96,8 @@ fence label is the enforced character budget: the two-line capacity of the
 render width (`card_width: 400`), operator-calibrated against real renders.
 Exceeding the budget rejects the form; the card is never silently truncated.
 
-```presentation-description-140-char-max
-
-ai-slop >> ai-ops. How to automate pixel perfect branded visual assets :)
+```presentation-description-100-char-max
+from ai-slop to ai-ops -- your agentic workflows for branded visual assets need to be pixel-perfect. let me show you how!
 ```
 
 ## End of inputs
@@ -207,7 +149,7 @@ element (§1b).
 | *description fence (body)* | the talk blurb | `[data-slot="description"]` | `textContent`, from the fence, not frontmatter |
 | *(static, bundled)* | orange `?` in an orange-ringed circle | `[data-slot="authorAvatar"]` | fixed asset, **not an input** |
 | `topic_category` | e.g. "Content Ops" | `[data-slot="authorName"]` | `textContent`, two spaces after the icon |
-| `level` | all / easy / int. / adv. | `[data-slot="users"]` | `textContent` |
+| *(static, since v3)* | the text `For All Levels` | `[data-slot="users"]` | fixed text from the frontmatter `level`, **not an input** |
 | `duration_minutes` | minutes, number only | `[data-slot="rating"]` | `textContent` |
 | *(static, in the shell)* | the text `(mins)` | `[data-slot="ratingCount"]` | fixed text, **not an input** |
 | `speaker_image` | the portrait | `.SpeakerCard-photo` | square photo slot of the speaker element, §1b |
@@ -325,7 +267,8 @@ card pasted inside a block), the printed values win after agreeing with
 the mask within 6px — a disagreement halts with both numbers reported.
 
 The current canon template is **machine-built** (see
-`visual-templates/README.md`): baked starfield, blocks drawn at the locked
+`_internal/core-templates-please-dont-touch/README.md`): baked starfield,
+blocks drawn at the locked
 layout. It supersedes the operator's original Canva export. Re-exporting
 over it means re-staging that recipe, not just dropping in a new PNG.
 
@@ -370,7 +313,7 @@ opposite: it renders 1:1 at the block's own size, no scaling.
 ## 2. Field schema
 
 Operator-typed values (`speaker_name`, `speaker_position`,
-`speaker_company`, `topic_category`, `level`, `duration_minutes`, and the
+`speaker_company`, `topic_category`, `duration_minutes`, and the
 description) arrive via the fenced inputs in "Input presentation details
 here" and are transferred into the frontmatter by the assistant; on any
 disagreement the fences win. The schema below describes the frontmatter
@@ -433,14 +376,14 @@ resubmit requested.
 The first fenced block after the frontmatter whose info string starts with
 `presentation-description`. The number in the label is the budget:
 
-    ```presentation-description-140-char-max
+    ```presentation-description-100-char-max
     How we cut lead research from six hours a week to twenty minutes.
     ```
 
 - Inter 12px / 400 / `#a3a3a3`, clamped to `desc_lines` (2 lines).
-- **Budget: 140 characters** — the two-line capacity of the description
-  slot at the card's native CSS render width, operator-calibrated against
-  real renders. The budget is parsed from the fence label itself, so
+- **Budget: 100 characters** — a safe two-line capacity of the description
+  slot at the card's native CSS render width, measured 2026-09-03 against
+  real renders (ordinary prose fits 114–123, wide capitals as few as 72). The budget is parsed from the fence label itself, so
   retuning it for a different card width means renaming the fence.
 - Newlines inside the fence are collapsed to spaces; leading/trailing
   whitespace is trimmed. One plain paragraph — no markdown.
@@ -476,16 +419,18 @@ off-spec · either half empty → the line collapses.
 
 - Inter 12px / 500 / `#a3a3a3`, right of the footer help icon with two
   spaces of clearance. Title Case. Single line, ellipsises.
-- Budget: **33 characters** before it collides with the footer's
-  right-hand group.
+- Budget: **26 characters** before it collides with the footer's
+  right-hand group (shortened from 33 when `level` became the fixed
+  `For All Levels`, template v3).
 
-### `level` — string, **required**
+### `level` — **fixed, not an input**
 
-- One of exactly: `all` · `easy` · `int.` · `adv.` — including the
-  trailing dot on the two abbreviations. Renders right of the 👥 glyph.
+- Every card reads `For All Levels` right of the 👥 glyph (template v3).
+  The frontmatter value ships filled; the assistant leaves it alone. If a
+  future footer change makes it clip, the sanctioned fallback is
+  `All Levels`.
 
-**States:** one of the four → renders · anything else → renders as given,
-flagged as off-vocabulary rather than failing.
+**States:** always renders.
 
 ### `duration_minutes` — string, **required**
 
@@ -497,16 +442,17 @@ flagged as off-vocabulary rather than failing.
 The 20×20 circle in the footer: an orange (`#f5641f`) question mark on the
 shell colour, ringed by a 1px orange border (the ring is CSS in the render
 shell; the `?` is the SVG). Identical on every generated card. Ships as
-`internal/render/footer-help-icon.svg`; SVG, so it stays crisp at any
+`_internal/render/footer-help-icon.svg`; SVG, so it stays crisp at any
 scale.
 
 ### `output` — string, optional
 
 Destination for the finished PNG. Left empty, it defaults to
-`final-output/<speaker-name>-final.png`.
+`generated-images/<speaker-name>-final.png`.
 
-**States:** path free → written · **file exists → the skill refuses and
-reports; it never overwrites.**
+**States:** path free → written · file exists → written under a `-<NN>`
+suffix (lowest free number, first dupe = 01) and reported; **the existing
+file is never touched.**
 
 ### `card_width` — integer, optional, default `400`
 
@@ -534,11 +480,11 @@ to-process/<speaker-folder>/     one folder per card:
     speaker.png
 processed/<speaker-folder>/      the whole folder lands here on success
                                  (archive: form + assets)
-final-output/<speaker>-final.png the finished render, delivered separately
+generated-images/<speaker>-final.png the finished render, delivered separately
 ```
 
-1. **Scaffold**: tell the assistant *"new speaker Jana Novakova"* (the
-   `new-speaker` skill) — it creates `to-process/jana-novakova/` with the
+1. **Scaffold**: tell the assistant *"new speaker Alex Alderman"* (the
+   `new-speaker` skill) — it creates `to-process/alex-alderman/` with the
    form (name pre-filled) and the README. With no name it creates
    `new-speaker-<NN>/`, renamed to the kebab speaker name at processing.
 2. **Fill**: the fenced inputs under "Input presentation details here",
@@ -551,7 +497,7 @@ final-output/<speaker>-final.png the finished render, delivered separately
    `base_image` (colour mask; printed panels win when present, §1b) →
    card-ratio check → renders in a headless Chromium browser, all fonts
    local → verifies output dimensions and pixels by inspection → writes
-   the PNG to `final-output/<speaker>-final.png` → **moves the whole
+   the PNG to `generated-images/<speaker>-final.png` → **moves the whole
    folder to `processed/`**, geometry written back into the form.
 5. **Missing images**: the run stops for that folder and asks —
    *"resubmit with the image(s) added, or generate now with a placeholder
@@ -560,8 +506,12 @@ final-output/<speaker>-final.png the finished render, delivered separately
    post-hoc covers it completely.
 6. **Failures** stay in `to-process/`, nothing partial is written, the
    reason is printed, the rest of the batch continues.
-7. **Nothing is ever overwritten** — a name collision in `processed/` or
-   `final-output/` refuses that folder.
+7. **Nothing is ever overwritten** — a name already taken in `processed/`
+   or `generated-images/` lands under `<name>-<NN>` (lowest free number,
+   first dupe = 01), the same NN on the archive folder and the PNG.
+   Duplicate names are legitimate (a rebuilt card, a fresh start, a
+   namesake) and are detected by folder/file names only — a repeated
+   `speaker_name` in the frontmatter breaks nothing.
 
 ## 4. Batch discipline
 

@@ -158,7 +158,7 @@ implied_h = card_h / scale
 
 `implied_h` must land within **±2px** of the card's real height for this
 form's text — the quantised table: no desc 113.667 · empty-string desc
-121.667 · 1 line 137.667 · 2 lines 153.667 · 3 lines 169.667. (A ≤100-char
+121.667 · 1 line 137.667 · 2 lines 153.667 · 3 lines 169.667. (A ≤115-char
 description at width 400 renders 2 lines when over ~70 chars, 1 line under.)
 On failure, report the height the block should be (`actual_h × scale`) and
 halt that folder. **Never stretch, letterbox or crop the card to fit.**
@@ -245,7 +245,7 @@ warning. Then totals. One bad folder never stops the rest.
   card; never an input. The ring is the avatar's CSS border in the shell;
   the `?` is `_internal/render/footer-help-icon.svg`.
 - Text budgets: name 30 · position/company 39 (including the 3-char
-  ` / ` joiner) · description 100 (from the fence label,
+  ` / ` joiner) · description 115 (from the fence label,
   measured against real two-line renders at width 400 on 2026-09-03) ·
   topic 26 (shortened from 33 by the fixed level text). `level` is
   static since template v3: `For All Levels`, never an input.

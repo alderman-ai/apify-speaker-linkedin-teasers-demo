@@ -60,7 +60,7 @@ operator tells you in chat. The operator never has to open the form.
      they fit 39 characters including the ` / ` joiner
    - **topic category** — Title Case, up to 26 characters
    - **duration** — minutes, number only
-   - **blurb** — one plain paragraph, up to 100 characters
+   - **blurb** — one plain paragraph, up to 115 characters
    - **company logo** — a path to a square image, ideally 80×80 or larger
    - **speaker photo** — a path to an exactly square PNG/JPG/JPEG, at most
      800×800 (262×262 is the perfect fit); it is scaled into the slot,
