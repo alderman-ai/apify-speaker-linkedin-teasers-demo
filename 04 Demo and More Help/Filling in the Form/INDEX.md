@@ -1,4 +1,4 @@
-# filling-in-the-form/
+# Filling in the Form/
 
 Everything that answers "what goes in this field, and how much of it?"
 Reference material for whoever is writing an intake form — none of it is
@@ -29,4 +29,4 @@ its fonts and icon — repoint the paths in the same change.
 
 `field-mapping.html` contains the only JavaScript in the repo (~25 lines,
 drawing the grey connector wires). It is inventoried in
-`../about-this-project/scripts-and-security.md`.
+`../About This Project/scripts-and-security.md`.

@@ -1,4 +1,4 @@
-# about-this-project/
+# About This Project/
 
 The two documents about the project rather than the pipeline: what code is
 in here, and how well it stood up to testing.
@@ -17,11 +17,11 @@ updated in the same change.** A stale inventory is worse than none.
 ## Reading the evaluation
 
 `pipeline-evaluation.md` opens with a note that it names the pre-2026-09-01
-layout (`final-output/` is now `generated-images/`; `visual-templates/` and
+layout (`final-output/` is now `03 Generated Images/`; `visual-templates/` and
 `skills/` now live under `_internal/`). Its findings are unchanged; only
 the paths moved.
 
 The five simulated speakers it used are archived at
-`../example-speakers/real-people-stress-test/`, including the one PNG that
+`../Example Speakers/Real People Stress Test/`, including the one PNG that
 shipped with the known clipped description — finding #1, kept as evidence
 rather than quietly regenerated.

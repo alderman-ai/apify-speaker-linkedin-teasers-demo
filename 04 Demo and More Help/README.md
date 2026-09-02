@@ -1,18 +1,18 @@
-# demo-and-more-help/
+# 04 Demo and More Help/
 
 Everything that isn't the pipeline itself: what to read when you're stuck,
 what the output actually looks like, and what's really inside the repo you
 just cloned.
 
 None of it is needed to make a teaser. The pipeline lives in the folders
-next door — you fill in a form in `to-process/`, say "process the queue",
-and a finished PNG lands in `generated-images/`; the root `README.md`
+next door — you fill in a form in `01 To Process/`, say "process the queue",
+and a finished PNG lands in `03 Generated Images/`; the root `README.md`
 walks through that in four steps. This folder is for the moments around
 the edges.
 
 ## "I'm filling in the form and I don't know what fits where"
 
-→ **`filling-in-the-form/`**
+→ **`Filling in the Form/`**
 
 An annotated picture of the card with every field labelled and a line
 drawn to where it lands, the character budget for each one, and a complete
@@ -21,7 +21,7 @@ say "process the queue".
 
 ## "What does this thing actually produce?"
 
-→ **`example-speakers/`**
+→ **`Example Speakers/`**
 
 Twelve speakers that have already been through the pipeline, each with
 their finished 1200×1200 PNG *and* the exact folder that produced it — so
@@ -31,7 +31,7 @@ material in the other.
 
 ## "I cloned a repo off the internet. Is it going to do something to my machine?"
 
-→ **`about-this-project/scripts-and-security.md`**
+→ **`About This Project/scripts-and-security.md`**
 
 Good instinct. That file is a plain-English inventory of every piece of
 code in the project and when it runs. Short version: there are **zero
@@ -42,13 +42,6 @@ it. Nothing is fetched from the internet at any point.
 The same folder holds `pipeline-evaluation.md`, the ten-speaker stress
 test, if you'd like evidence the thing actually works before you trust it
 with a real speaker.
-
-## For assistants
-
-**Read `INDEX.md` instead of this page.** It sits next to this file and is
-the routing table for the whole folder — every subfolder and file with a
-one-line description of what it's for and who to send there. This page is
-written for the human; the INDEX is written for you.
 
 ## Still lost?
 

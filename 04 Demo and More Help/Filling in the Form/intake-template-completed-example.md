@@ -1,7 +1,7 @@
 ---
 # =============================================================================
 # ACTOR CARD INTAKE  —  one file = one rendered card
-# Lives as intake.md inside one speaker folder under to-process/.
+# Lives as intake.md inside one speaker folder under "01 To Process/".
 # Scaffold a folder by telling the assistant: new speaker "Name Surname"
 # Relative paths resolve from this file, i.e. from inside that folder.
 # Every field is documented in §2 below. Operators type ONLY in the fenced
@@ -65,7 +65,7 @@ speaker_w:          294
 speaker_h:          336
 
 # --- 7. render options -------------------------------------------------------
-# output is optional. Default: generated-images/<speaker-name>-final.png
+# output is optional. Default: "03 Generated Images/<speaker-name>-final.png"
 output:             ""
 card_width:         400
 desc_lines:         2
@@ -169,7 +169,7 @@ ai-slop >> ai-ops. How to automate pixel perfect branded visual assets :)
 >
 >You did it! all done! A couple things to couple check:
 >- (you did delete the `[brackets]` right?)
->- this file should be in the `to-process/<speaker-name>/` along with:
+>- this file should be in the `01 To Process/<speaker-name>/` along with:
 	>- their speaker photo — **square (1:1)**, PNG/JPG/JPEG, at most 800×800; 262×262 is the ideal supply
 	>- their company logo - **accepted file types**: (PNG | ICO | JPG | JPEG)
 >
@@ -508,7 +508,7 @@ scale.
 ### `output` — string, optional
 
 Destination for the finished PNG. Left empty, it defaults to
-`generated-images/<speaker-name>-final.png`.
+`03 Generated Images/<speaker-name>-final.png`.
 
 **States:** path free → written · file exists → written under a `-<NN>`
 suffix (lowest free number, first dupe = 01) and reported; **the existing
@@ -533,41 +533,41 @@ Sets the `href` on the wrapping `<a>`. Cosmetic for a static render.
 ## 3. Process — the queue
 
 ```
-to-process/<speaker-folder>/     one folder per card:
-    intake.md                      the filled form (this file)
-    README.md                      what belongs in the folder (auto-written)
-    company-logo.png               the two image assets, beside the form
+01 To Process/<speaker-folder>/        one folder per card:
+    intake.md                           the filled form (this file)
+    README.md                           what belongs in the folder (auto-written)
+    company-logo.png                    the two image assets, beside the form
     speaker.png
-processed/<speaker-folder>/      the whole folder lands here on success
-                                 (archive: form + assets)
-generated-images/<speaker>-final.png the finished render, delivered separately
+02 Processed/<speaker-folder>/        the whole folder lands here on success
+                                      (archive: form + assets)
+03 Generated Images/<speaker>-final.png  the finished render, delivered separately
 ```
 
 1. **Scaffold**: tell the assistant *"new speaker Alex Alderman"* (the
-   `new-speaker` skill) — it creates `to-process/alex-alderman/` with the
+   `new-speaker` skill) — it creates `01 To Process/alex-alderman/` with the
    form (name pre-filled) and the README. With no name it creates
    `new-speaker-<NN>/`, renamed to the kebab speaker name at processing.
 2. **Fill**: the fenced inputs under "Input presentation details here",
    and drop the two images into the folder.
 3. **Run**: tell the assistant *"process the queue"* — it takes every
-   folder in `to-process/`, or just the ones you name. No batch cap.
+   folder in `01 To Process/`, or just the ones you name. No batch cap.
 4. Per form the skill: transfers the fenced inputs into the frontmatter
    and validates them → checks both image assets are present and the
    photo is an accepted square (§2) → measures both placeholders off
    `base_image` (colour mask; printed panels win when present, §1b) →
    card-ratio check → renders in a headless Chromium browser, all fonts
    local → verifies output dimensions and pixels by inspection → writes
-   the PNG to `generated-images/<speaker>-final.png` → **moves the whole
-   folder to `processed/`**, geometry written back into the form.
+   the PNG to `03 Generated Images/<speaker>-final.png` → **moves the whole
+   folder to `02 Processed/`**, geometry written back into the form.
 5. **Missing images**: the run stops for that folder and asks —
    *"resubmit with the image(s) added, or generate now with a placeholder
    outline?"* In placeholder mode the missing slot renders as a dashed
    outline drawn INSIDE the block, so the real image pasted over it
    post-hoc covers it completely.
-6. **Failures** stay in `to-process/`, nothing partial is written, the
+6. **Failures** stay in `01 To Process/`, nothing partial is written, the
    reason is printed, the rest of the batch continues.
-7. **Nothing is ever overwritten** — a name already taken in `processed/`
-   or `generated-images/` lands under `<name>-<NN>` (lowest free number,
+7. **Nothing is ever overwritten** — a name already taken in `02 Processed/`
+   or `03 Generated Images/` lands under `<name>-<NN>` (lowest free number,
    first dupe = 01), the same NN on the archive folder and the PNG.
    Duplicate names are legitimate (a rebuilt card, a fresh start, a
    namesake) and are detected by folder/file names only — a repeated

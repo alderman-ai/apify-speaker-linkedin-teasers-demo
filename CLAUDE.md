@@ -15,18 +15,18 @@ Procedure and contract (`_internal/`):
 
 | path | what |
 |---|---|
-| `_internal/skills/apify-speaker-card.md` | **the generator's complete operating procedure — read it in full before processing anything; follow it, don't improvise.** Mass-produces Apify-styled speaker teaser images: renders a pixel-faithful Apify actor card (repurposed as a speaker card) and a card-style speaker portrait element into the canon template, one finished PNG per speaker. Use when the operator says "process the intake forms", "process the queue", "generate the speaker cards", "new speaker <name>", or drops folders into `to-process/` |
+| `_internal/skills/apify-speaker-card.md` | **the generator's complete operating procedure — read it in full before processing anything; follow it, don't improvise.** Mass-produces Apify-styled speaker teaser images: renders a pixel-faithful Apify actor card (repurposed as a speaker card) and a card-style speaker portrait element into the canon template, one finished PNG per speaker. Use when the operator says "process the intake forms", "process the queue", "generate the speaker cards", "new speaker <name>", or drops folders into `01 To Process/` |
 | `_internal/skills/new-speaker.md` | **the scaffolder's complete procedure — read it in full before scaffolding.** Adds a new speaker folder to the queue — the single place to drop all the visual assets needed to generate that speaker's teaser image (asks the name; declined → `new-speaker-<NN>`, lowest free number; a repeat name → `<name>-<NN>`, first dupe = 01). Use when the operator says "new speaker", "/new-speaker", "add a speaker", "scaffold a speaker folder", or names a person to add to the lineup |
 | `_internal/core-templates-please-dont-touch/intake-template.md` | the input contract: every field, budget, failure mode; everything the operator types lives in labelled body fences. Versioned in its frontmatter (`version` / `versioned_at`). Copied into each folder as `intake.md` |
-| `demo-and-more-help/filling-in-the-form/intake-template-completed-example.md` | the same template with every fence and frontmatter value filled in — what "done" looks like |
+| `04 Demo and More Help/Filling in the Form/intake-template-completed-example.md` | the same template with every fence and frontmatter value filled in — what "done" looks like |
 
 The queue:
 
 | path | what |
 |---|---|
-| `to-process/<speaker>/` | one folder per pending card: `intake.md`, `README.md`, `company-logo.*`, `speaker.*` |
-| `processed/<speaker>/` | the folder after success (archive — form + assets). Never overwrite here — a taken name gets `-<NN>`. Archives are historical: intakes from before the 2026-09-01 tree reorganisation reference old paths; never take current paths from an archive |
-| `generated-images/<speaker>-final.png` | the finished render, one PNG per speaker. Never overwrite here — a taken name gets `-<NN>` |
+| `01 To Process/<speaker>/` | one folder per pending card: `intake.md`, `README.md`, `company-logo.*`, `speaker.*` |
+| `02 Processed/<speaker>/` | the folder after success (archive — form + assets). Never overwrite here — a taken name gets `-<NN>`. Archives are historical: every archived intake predates the 2026-09-01 tree reorganisation and the 2026-09-02 folder renaming, so it still says `to-process/` / `processed/` / `generated-images/`; never take current paths from an archive |
+| `03 Generated Images/<speaker>-final.png` | the finished render, one PNG per speaker. Never overwrite here — a taken name gets `-<NN>` |
 
 Render machinery (`_internal/` — use, never restructure):
 
@@ -39,27 +39,29 @@ Render machinery (`_internal/` — use, never restructure):
 | `_internal/fonts/*.woff2` | Inter 400/500/600 + IBM Plex Mono 500, latin + latin-ext |
 | `_internal/fonts/licenses/` | the two OFL licence texts |
 | `_internal/speaker-folder-README.md` | copied into each new speaker folder as its `README.md` |
-| `_internal/sample-assets/` | synthetic sample logo + portrait used by the retired fictional worked examples in `demo-and-more-help/example-speakers/fictional-characters/` |
+| `_internal/sample-assets/` | synthetic sample logo + portrait used by the retired fictional worked examples in `04 Demo and More Help/Example Speakers/Fictional Characters/` |
 | `_internal/core-templates-please-dont-touch/speaker-teaser-linkedin_v3.png` | the one canon template (1200×1200, currently v3), **machine-built**: baked gradient starfield + purple card block + green speaker block. Supersedes the operator's original Canva export |
 
-Reference (`demo-and-more-help/` — the operator-facing help and showcase
+Reference (`04 Demo and More Help/` — the operator-facing help and showcase
 folder; its root holds only `INDEX.md` and `README.md`, everything else
-sits in `filling-in-the-form/`, `example-speakers/` or `about-this-project/`):
+sits in `Getting Started/`, `Filling in the Form/`, `Example Speakers/` or
+`About This Project/`):
 
 | path | what |
 |---|---|
-| `demo-and-more-help/filling-in-the-form/Actor card field mapping.png` | annotated picture of every field and where it lands on the card |
-| `demo-and-more-help/filling-in-the-form/Actor card text budgets.png` | the character-budget table for every text field |
-| `demo-and-more-help/filling-in-the-form/field-mapping.html`, `demo-and-more-help/filling-in-the-form/text-budgets.html` | those graphics' sources, re-renderable with headless Chrome |
-| `demo-and-more-help/about-this-project/scripts-and-security.md` | the plain-English inventory of every piece of code in this repo and when it runs. **If any change adds code or scripts anywhere in the repo, this file must be updated in the same change — keep it truthful** |
-| `demo-and-more-help/about-this-project/pipeline-evaluation.md` | the 2026-09-01 ten-speaker stress test of the docs and pipeline |
-| `demo-and-more-help/example-speakers/fictional-characters/` | the fictional demo speakers (folklore characters + synthetic personas), archived out of the live queue: `processed/` folders + `generated-images/` PNGs |
-| `demo-and-more-help/example-speakers/real-people-stress-test/` | the simulated-"real" stress-test speakers (real Czech public figures), kept as mid-project snapshots: `processed/` + `generated-images/` |
+| `04 Demo and More Help/Getting Started/` | the novice entrance: a linear human page for people who have never used GitHub or an AI coding tool, paired with the novice-walkthrough skill |
+| `04 Demo and More Help/Filling in the Form/Actor card field mapping.png` | annotated picture of every field and where it lands on the card |
+| `04 Demo and More Help/Filling in the Form/Actor card text budgets.png` | the character-budget table for every text field |
+| `04 Demo and More Help/Filling in the Form/field-mapping.html`, `04 Demo and More Help/Filling in the Form/text-budgets.html` | those graphics' sources, re-renderable with headless Chrome |
+| `04 Demo and More Help/About This Project/scripts-and-security.md` | the plain-English inventory of every piece of code in this repo and when it runs. **If any change adds code or scripts anywhere in the repo, this file must be updated in the same change — keep it truthful** |
+| `04 Demo and More Help/About This Project/pipeline-evaluation.md` | the 2026-09-01 ten-speaker stress test of the docs and pipeline |
+| `04 Demo and More Help/Example Speakers/Fictional Characters/` | the fictional demo speakers (folklore characters + synthetic personas), archived out of the live queue: `Processed/` folders + `Generated Images/` PNGs |
+| `04 Demo and More Help/Example Speakers/Real People Stress Test/` | the simulated-"real" stress-test speakers (real Czech public figures), kept as mid-project snapshots: `Processed/` + `Generated Images/` |
 
 Every folder carries its own `INDEX.md` for routing. `README.md` is
 reserved for orientation: the root README (the human entry point), the
 core-templates README (a warning plus the template recipe), the
-`demo-and-more-help/` README (help-folder orientation, pointing
+`04 Demo and More Help/` README (help-folder orientation, pointing
 assistants at its INDEX), and each speaker folder's README (its
 checklist).
 
@@ -73,19 +75,19 @@ freely, and many have never seen this repo.
 
 - **Scaffold intent** — "new speaker Alex Alderman", "add a speaker",
   "put Alex on the lineup", "set up a folder for our next speaker" → read
-  `_internal/skills/new-speaker.md`, then scaffold `to-process/alex-alderman/`
+  `_internal/skills/new-speaker.md`, then scaffold `01 To Process/alex-alderman/`
   (intake form + README; without a name, `new-speaker-<NN>` at the lowest
   free number).
 - **Generate intent** — "process the queue", "process the intake forms",
   "generate the speaker cards", "run the pipeline", "render the pending
   ones" → read `_internal/skills/apify-speaker-card.md`, then run every
-  folder in `to-process/` (or the ones named) through its procedure:
+  folder in `01 To Process/` (or the ones named) through its procedure:
   validate → read geometry off the template → ratio check → render in a
   headless Chromium browser → verify by inspection → PNG to
-  `generated-images/<speaker>-final.png`, folder to `processed/`.
+  `03 Generated Images/<speaker>-final.png`, folder to `02 Processed/`.
 - **Ambiguous ask** — "make me an image", "create a teaser", "I need a
   card for LinkedIn", and similar requests that name neither workflow:
-  check `to-process/` first. If candidates are waiting, name them and ask
+  check `01 To Process/` first. If candidates are waiting, name them and ask
   one question — process these now, or start a new speaker? If the queue
   is empty, take it as scaffold intent (e.g. *"Sure! First, what's the
   speaker's name?"*).
@@ -101,7 +103,7 @@ freely, and many have never seen this repo.
   copy, and point that speaker's `base_image` at it. Canon stays locked
   either way.
 - **Lost human** — "what is this?", "how does this work?": orient them
-  from the root `README.md` and point them at `demo-and-more-help/`.
+  from the root `README.md` and point them at `04 Demo and More Help/`.
 
 ## Ground rules (the skill has the full list)
 
@@ -127,8 +129,8 @@ freely, and many have never seen this repo.
   trim operator text, never stretch the card, never overwrite anything.
 - **Duplicate names suffix, never block.** A repeat name is legitimate (a
   rebuilt card, a fresh start after text edits, a namesake): wherever the
-  name is already taken — scaffolding into `to-process/`, or delivering
-  into `processed/` / `generated-images/` — use `<name>-<NN>`, the lowest
+  name is already taken — scaffolding into `01 To Process/`, or delivering
+  into `02 Processed/` / `03 Generated Images/` — use `<name>-<NN>`, the lowest
   free number, zero-padded, **first dupe = 01** (same NN on the archive
   folder and the PNG). Detection is by folder/file names only; a repeated
   frontmatter `speaker_name` breaks nothing and is never consulted.
@@ -144,6 +146,20 @@ freely, and many have never seen this repo.
   use it, this pipeline does not need it.
 - This is an unofficial, non-commercial demo. Apify's name, logo and visual
   design belong to Apify.
+
+### One file, one audience
+
+- **The filename declares the audience.** `README.md` and the human help
+  pages under `04 Demo and More Help/` are written for people; `INDEX.md`,
+  `CLAUDE.md` / `AGENTS.md` and the files in `_internal/skills/` are
+  written for you.
+- **Cross-references go one way.** Assistant docs may point at human docs;
+  human docs never point at assistant docs, beyond one line noting that
+  the assistant orients itself from `CLAUDE.md` / `AGENTS.md`.
+- **The shapes differ and never mix.** Human docs are linear numbered
+  steps; assistant docs are routing tables and procedures.
+- **When orienting a person, read human docs as content to relay, never as
+  procedure.** Your procedure comes only from the assistant tree.
 
 `CLAUDE.md` and `AGENTS.md` are identical by design — same orientation
 regardless of which assistant harness reads it.

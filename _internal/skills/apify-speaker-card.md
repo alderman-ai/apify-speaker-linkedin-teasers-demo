@@ -6,7 +6,7 @@ description: >
   portrait element into the canon template, one finished PNG per speaker.
   Use when the operator says "process the intake forms", "process the
   queue", "generate the speaker cards", "new speaker <name>", or drops
-  folders into to-process/.
+  folders into 01 To Process/.
 ---
 
 # Apify speaker card generator
@@ -16,20 +16,24 @@ build script and no dependency beyond a Chromium-based browser** (Chrome, or
 the Edge that ships with Windows) — you are the engine. Everything is done
 with reading, writing, one headless-browser command, and your own eyes.
 `_internal/core-templates-please-dont-touch/intake-template.md` is the input
-contract (`demo-and-more-help/filling-in-the-form/intake-template-completed-example.md` is a
+contract (`04 Demo and More Help/Filling in the Form/intake-template-completed-example.md` is a
 filled reference copy); consult it for field rules rather than improvising.
 
 ## The queue
 
 ```
-to-process/<speaker>/              intake.md + README.md + company-logo + speaker images
-processed/<speaker>/               the whole folder moves here on success (archive)
-generated-images/<speaker>-final.png   the finished render, delivered separately
+01 To Process/<speaker>/                  intake.md + README.md + company-logo + speaker images
+02 Processed/<speaker>/                   the whole folder moves here on success (archive)
+03 Generated Images/<speaker>-final.png   the finished render, delivered separately
 ```
+
+Folder names now carry digits and spaces. **Quote every path in every shell
+command** — `"01 To Process/alex-alderman"`, not `01 To Process/...` — so it
+works the same in Git Bash, PowerShell and on macOS.
 
 A folder is always in exactly one queue. Failures stay put with the reason
 stated; nothing partial is ever written; nothing is ever overwritten — a
-name already taken in processed/ or generated-images/ gets a `-<NN>` suffix
+name already taken in `02 Processed/` or `03 Generated Images/` gets a `-<NN>` suffix
 (lowest free number, first dupe = 01), never a refusal and never a
 replacement.
 
@@ -41,7 +45,7 @@ this skill to scaffold, invoke that one.
 
 ## Processing ("process the queue")
 
-For each folder in `to-process/` (or the ones named), in order:
+For each folder in `01 To Process/` (or the ones named), in order:
 
 ### 1 · Parse and validate `intake.md`
 
@@ -198,11 +202,11 @@ the speaker element shows a square portrait framed by the `#454545` shell
 (PRAGUE orange); starfield visible below the actor card. Anything off →
 halt that folder, delete the bad screenshot, report.
 
-Then: move the PNG to `generated-images/<kebab-name>-final.png`, delete the
-`_run-*.html`, and move the whole folder to `processed/<kebab-name>/`
+Then: move the PNG to `03 Generated Images/<kebab-name>-final.png`, delete the
+`_run-*.html`, and move the whole folder to `02 Processed/<kebab-name>/`
 (renaming `new-speaker-<NN>` to the kebab speaker name from the form).
 **Duplicate names suffix, never refuse**: if `<kebab-name>` is already
-taken in `processed/` or `generated-images/`, use `<kebab-name>-<NN>` — the
+taken in `02 Processed/` or `03 Generated Images/`, use `<kebab-name>-<NN>` — the
 lowest number (zero-padded, first dupe = 01) free in BOTH locations, the
 same NN on the folder and the PNG so archive and render stay paired.
 Duplicates are detected by folder/file names only — never by frontmatter

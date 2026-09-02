@@ -9,8 +9,13 @@ description: >
 
 # new-speaker — scaffold one speaker folder
 
-Creates one folder under `to-process/` holding everything one card needs:
+Creates one folder under `01 To Process/` holding everything one card needs:
 the intake form and (added by the operator) the two images.
+
+The queue folder names carry digits and spaces. **Quote every path in every
+shell command** — `mkdir "01 To Process/alex-alderman"`, never
+`mkdir 01 To Process/alex-alderman` — so it behaves identically in Git Bash,
+PowerShell and on macOS.
 
 ## Procedure
 
@@ -22,7 +27,7 @@ the intake form and (added by the operator) the two images.
    - **Name given** → kebab-case it: lowercase, every run of non-alphanumerics
      becomes a single `-`, trimmed — `Alex Alderman` → `alex-alderman`.
    - **Declined / unknown** → `new-speaker-<NN>` where **NN is the LOWEST
-     available number, zero-padded to two digits**. Scan `to-process/` for
+     available number, zero-padded to two digits**. Scan `01 To Process/` for
      existing `new-speaker-<digits>` folders, reading any digit format as its
      number (`new-speaker-1` counts as 1, `new-speaker-04` as 4), and take
      the smallest positive integer not in use. Accept N as input; always emit
@@ -32,8 +37,8 @@ the intake form and (added by the operator) the two images.
 
 3. **Suffix duplicates — never block, never overwrite.** Repeat names are
    legitimate (a rebuilt card, a fresh start after text edits, a true
-   namesake). If the chosen name already exists in `to-process/`,
-   `processed/`, or as a `generated-images/` PNG, create `<name>-<NN>`
+   namesake). If the chosen name already exists in `01 To Process/`,
+   `02 Processed/`, or as a `03 Generated Images/` PNG, create `<name>-<NN>`
    instead — NN the LOWEST number free across all three locations,
    zero-padded to two digits, **first dupe = 01**. Say what you created
    and why. Duplicates are detected by folder and file names only; the
@@ -60,7 +65,7 @@ the intake form and (added by the operator) the two images.
    - `intake.md` — a copy of
      `_internal/core-templates-please-dont-touch/intake-template.md` (the
      blank template, NOT the completed example in
-     `demo-and-more-help/filling-in-the-form/`).
+     `04 Demo and More Help/Filling in the Form/`).
      If the name is known, prefill it in both the `speaker-name` body fence
      and the frontmatter `speaker_name`.
    - `README.md` — a copy of `_internal/speaker-folder-README.md`.

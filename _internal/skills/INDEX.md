@@ -7,8 +7,8 @@ description of when it applies.
 
 | file | say | what it does |
 |---|---|---|
-| `new-speaker.md` | "new speaker Alex Alderman" | scaffolds one folder in `to-process/` with the blank form and its README |
-| `apify-speaker-card.md` | "process the queue" | the generator: validate the form → measure the template → render the card → composite → verify → PNG to `generated-images/`, folder to `processed/` |
+| `new-speaker.md` | "new speaker Alex Alderman" | scaffolds one folder in `01 To Process/` with the blank form and its README |
+| `apify-speaker-card.md` | "process the queue" | the generator: validate the form → measure the template → render the card → composite → verify → PNG to `03 Generated Images/`, folder to `02 Processed/` |
 
 The core templates the skills consume are locked — drift is auto-restored
 from git; changes are maintainer-only (see `CLAUDE.md`).

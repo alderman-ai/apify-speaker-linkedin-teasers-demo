@@ -20,7 +20,7 @@ Nothing to install. The repo is 100% self-contained — fonts, card code,
 template and instructions all ship inside this folder; nothing is fetched
 from the internet at any point, and there are no scripts or packages.
 Wary of cloned repos? Good instinct —
-`demo-and-more-help/about-this-project/scripts-and-security.md` is a plain-English inventory
+`04 Demo and More Help/About This Project/scripts-and-security.md` is a plain-English inventory
 of every piece of code in this project and when it runs (short version:
 there are **zero executable scripts** here).
 
@@ -36,7 +36,7 @@ You only need two things that are almost certainly already on your machine:
 ## Make a teaser in four steps
 
 1. **Open this folder in your AI assistant** and just talk to it.
-2. Say **"new speaker Alex Alderman"**. A folder appears in `to-process/`
+2. Say **"new speaker Alex Alderman"**. A folder appears in `01 To Process/`
    with the form and a note listing exactly what goes in it.
 3. **Fill in the form's boxes** — name, role, company, talk blurb, topic,
    level, minutes; each box says what it wants and how long it can be —
@@ -49,8 +49,8 @@ You only need two things that are almost certainly already on your machine:
      What it will never do is crop or reframe for you — square it
      yourself, framed the way you want to be seen.
 4. Say **"process the queue"**. The finished 1200×1200 PNG lands in
-   `generated-images/alex-alderman-final.png`, ready to post; your folder
-   is archived to `processed/`.
+   `03 Generated Images/alex-alderman-final.png`, ready to post; your folder
+   is archived to `02 Processed/`.
 
 If anything is off — blurb too long, an image missing or not square, a
 template box the wrong shape — the run stops and says exactly what to fix.
@@ -58,8 +58,8 @@ It never silently crops your text, reframes your photo, or stretches the
 card.
 
 Want to see what "done" looks like first? Open
-`demo-and-more-help/filling-in-the-form/intake-template-completed-example.md`, or the finished
-PNGs in `generated-images/`.
+`04 Demo and More Help/Filling in the Form/intake-template-completed-example.md`, or the finished
+PNGs in `03 Generated Images/`.
 
 ## What the image looks like
 
@@ -79,10 +79,10 @@ template):
 ## The three queue stages
 
 ```
-to-process/<speaker>/                 you fill this: intake.md, README.md,
-                                      company-logo.png, speaker.png
-processed/<speaker>/                  the folder moves here on success (archive)
-generated-images/<speaker>-final.png  the finished render — publish from here
+01 To Process/<speaker>/                    you fill this: intake.md, README.md,
+                                            company-logo.png, speaker.png
+02 Processed/<speaker>/                     the folder moves here on success (archive)
+03 Generated Images/<speaker>-final.png     the finished render — publish from here
 ```
 
 A folder lives in exactly one stage. Successes move whole; failures stay
@@ -97,8 +97,7 @@ afterwards.
 
 The `intake.md` that appears in your speaker folder is the whole contract —
 field-by-field schema, character budgets, failure modes. Everything you
-type lives in its labelled boxes; the assistant copies your entries into
-the machine-read frontmatter at processing time. The short version:
+type lives in its labelled boxes. The short version:
 
 | field | where it lands | budget |
 |---|---|---|
@@ -114,8 +113,8 @@ the machine-read frontmatter at processing time. The short version:
 Over-budget descriptions are rejected, not silently cut. The footer's small
 orange `?` circle is static on every card and ships with the repo.
 
-See `demo-and-more-help/filling-in-the-form/Actor card field mapping.png` for the annotated
-picture and `demo-and-more-help/filling-in-the-form/Actor card text budgets.png` for the
+See `04 Demo and More Help/Filling in the Form/Actor card field mapping.png` for the annotated
+picture and `04 Demo and More Help/Filling in the Form/Actor card text budgets.png` for the
 budgets table.
 
 ## The template is canon
@@ -140,18 +139,6 @@ is quantised by its description line count, so it cannot be stretched to
 fit a wrong box — the run halts and tells you the height the block should
 be.
 
-## Where the skills are
-
-The "skills" — the assistant's step-by-step instructions — are two plain
-markdown files in `_internal/skills/`. Any assistant can run one just by
-being pointed at it, and `CLAUDE.md` / `AGENTS.md` route the two operator
-phrases to them automatically:
-
-| skill | file | what it does |
-|---|---|---|
-| `new-speaker` | `_internal/skills/new-speaker.md` | scaffolds one speaker folder in `to-process/` — asks the name, or numbers the folder if you skip it |
-| `apify-speaker-card` | `_internal/skills/apify-speaker-card.md` | the whole generator: validates the form, measures the template, renders, verifies, delivers |
-
 This README is written for you, the human; your assistant orients itself
 from `CLAUDE.md` / `AGENTS.md`.
 
@@ -159,11 +146,13 @@ from `CLAUDE.md` / `AGENTS.md`.
 
 ```
 README.md                     you are here — the only doc you need to start
-to-process/  processed/       the queue — this is all you touch day to day
-generated-images/             the finished PNGs (<speaker>-final.png)
-demo-and-more-help/           lost, curious, or cautious? three subfolders:
-                              filling-in-the-form/, example-speakers/ and
-                              about-this-project/ — start at its README.md
+01 To Process/                the queue — this is all you touch day to day
+02 Processed/                 your speaker folders after a successful run
+03 Generated Images/          the finished PNGs (<speaker>-final.png)
+04 Demo and More Help/        lost, curious, or cautious? four subfolders:
+                              Getting Started/, Filling in the Form/,
+                              Example Speakers/ and About This Project/ —
+                              start at its README.md
 _internal/                    machinery you never edit: the skills, the
                               render page, self-hosted fonts, and the two
                               core templates everything is generated from

@@ -1,9 +1,12 @@
 # Pipeline efficiency evaluation — 2026-09-01
 
-> **Note:** written before the same-day file-tree reorganisation; paths
-> named below are the old layout (`final-output/` is now
-> `generated-images/`, `visual-templates/` and `skills/` now live under
-> `_internal/`). Findings unchanged.
+> **Note:** written before the same-day file-tree reorganisation, and
+> before the 2026-09-02 folder renaming; every path named below is an old
+> one. Current names: `final-output/` → `03 Generated Images/`,
+> `to-process/` → `01 To Process/`, `processed/` → `02 Processed/`,
+> `demo-and-more-help/` → `04 Demo and More Help/`; `visual-templates/`
+> and `skills/` now live under `_internal/`. Findings unchanged; only the
+> paths moved.
 
 Scope: the **skills, input contract, and generation pipeline** — scaffold →
 intake form → validate → geometry → token fill → render → verify → deliver.

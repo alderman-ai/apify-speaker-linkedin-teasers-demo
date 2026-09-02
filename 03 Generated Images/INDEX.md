@@ -1,17 +1,17 @@
-# generated-images/ — the deliverables
+# 03 Generated Images/ — the deliverables
 
 One finished 1200×1200 PNG per speaker, named `<speaker-name>-final.png`.
 This is the only folder anything gets published from — grab the image here,
-not from `processed/`.
+not from `02 Processed/`.
 
-The pipeline stages: `to-process/<speaker>/` (pending intake + assets) →
-`processed/<speaker>/` (the archived folder after a successful run) →
-`generated-images/<speaker-name>-final.png` (the render itself).
+The pipeline stages: `01 To Process/<speaker>/` (pending intake + assets) →
+`02 Processed/<speaker>/` (the archived folder after a successful run) →
+`03 Generated Images/<speaker-name>-final.png` (the render itself).
 
 **Nothing here is ever overwritten** — re-rendering a speaker requires
 moving or renaming their existing final first.
 
 `alex-alderman-final.png` is the live worked example. The demo-era renders
 (fictional characters and the simulated-"real" stress-test speakers) were
-archived into `demo-and-more-help/example-speakers/fictional-characters/` and
-`demo-and-more-help/example-speakers/real-people-stress-test/`.
+archived into `04 Demo and More Help/Example Speakers/Fictional Characters/` and
+`04 Demo and More Help/Example Speakers/Real People Stress Test/`.
