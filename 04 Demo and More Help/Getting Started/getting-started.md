@@ -127,7 +127,7 @@ need to open it.)*
 
 ## Step 5 — What to expect while it runs
 
-- **It will ask permission to run a command, once or twice.** A box will
+- **It will ask permission to run a command a few times, especially near the start.** A box will
   pop up asking you to **Allow** it. This is normal and it's how the app
   checks with you before doing anything. You can read what the command is
   before you allow it.

@@ -12,4 +12,6 @@ description of when it applies.
 | `apify-speaker-card.md` | "process the queue" | the generator: validate the form → measure the template → render the card → composite → verify → PNG to `03 Generated Images/`, folder to `02 Processed/` |
 
 The core templates the skills consume are locked — drift is auto-restored
-from git; changes are maintainer-only (see `CLAUDE.md`).
+from git, or from the reference copies in `_internal/fonts/jic/` when there
+is no git history (a ZIP download); changes are maintainer-only (see
+`CLAUDE.md`).

@@ -60,8 +60,10 @@ sits in `Getting Started/`, `Filling in the Form/`, `Example Speakers/` or
 | `04 Demo and More Help/Example Speakers/Fictional Characters/` | the fictional demo speakers (folklore characters + synthetic personas), archived out of the live queue: `Processed/` folders + `Generated Images/` PNGs |
 | `04 Demo and More Help/Example Speakers/Real People Stress Test/` | the simulated-"real" stress-test speakers (real Czech public figures), kept as mid-project snapshots: `Processed/` + `Generated Images/` |
 
-Every folder carries its own `INDEX.md` for routing (`_internal/fonts/licenses/`,
-which holds only the two licence texts, excepted). `README.md` is
+Every folder carries its own `INDEX.md` for routing, with three exceptions:
+the repo root and `_internal/core-templates-please-dont-touch/`, whose
+`README.md` serves that role, and `_internal/fonts/licenses/`, which holds
+only the two licence texts. `README.md` is
 reserved for orientation: the root README (the human entry point), the
 core-templates README (a warning plus the template recipe), the
 `04 Demo and More Help/` README (help-folder orientation, pointing

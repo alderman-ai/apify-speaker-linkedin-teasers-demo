@@ -43,7 +43,10 @@ You only need two things that are almost certainly already on your machine:
 
 ## Make a teaser in four steps
 
-1. **Open this folder in your AI assistant** and just talk to it.
+1. **Open this folder in your AI assistant** and just talk to it. First
+   time with any of this? Say **"Walk me through making my first speaker
+   card"** instead and it will guide you through the rest one question at
+   a time.
 2. Say **"new speaker Alex Alderman"**. A folder appears in `01 To Process/`
    with the form and a note listing exactly what goes in it.
 3. **Fill in the form's boxes** — name, role, company, talk blurb, topic,
@@ -170,9 +173,10 @@ _internal/                    machinery you never edit: the skills, the
 CLAUDE.md / AGENTS.md         how your assistant orients itself
 ```
 
-Every folder carries its own `INDEX.md` describing what's inside (the font
-licence folder under `_internal/fonts/` excepted — it holds only the two
-licence texts).
+Every folder carries its own `INDEX.md` describing what's inside, except
+the three whose `README.md` already does that job or that hold nothing but
+licence texts: this root folder, the core-templates folder, and the font
+licence folder under `_internal/fonts/`.
 
 ## Fonts and licences
 

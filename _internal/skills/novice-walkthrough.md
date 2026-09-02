@@ -65,8 +65,11 @@ first message from you is step 1.
      the operator a drift event happened previously.
    - **If there is no git history — the normal case here, because a
      first-timer downloaded a ZIP** — `git status` will fail with
-     something like "not a git repository". That is expected, not an
-     error to report. Fall back to the hash comparison the skills define:
+     something like "not a git repository", or git is not installed at
+     all and the command is not found. Either is expected, not an error
+     to report. Fall back to the hash comparison the skills define, using
+     a built-in tool (PowerShell `Get-FileHash -Algorithm SHA256 "<file>"`
+     on Windows, `shasum -a 256 "<file>"` on macOS):
      compare `_internal/core-templates-please-dont-touch/intake-template.md`
      against `_internal/fonts/jic/BU_intake-template.md`, and
      `..._internal/core-templates-please-dont-touch/speaker-teaser-linkedin_v3.png`
@@ -164,6 +167,10 @@ One question first:
 Wait. Then take one of two branches.
 
 **(a) They have edited markdown before.**
+
+Still offer the interview first: *"I can type it in for you anyway if
+you'd rather answer questions. Otherwise, here's the file."* If they take
+the offer, switch to branch (b). If not:
 
 Open `01 To Process/<slug>/intake.md` for them — Windows:
 `Invoke-Item "01 To Process/<slug>/intake.md"`; macOS:
