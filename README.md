@@ -118,14 +118,16 @@ type lives in its labelled boxes. The short version:
 | `company_logo` | 40×40 top-left of the card | square image, ≥80×80 |
 | `speaker_name` | card title | 30 chars |
 | `speaker_position` / `speaker_company` | monospace line, joined as `position / company` | 39 chars incl. the ` / ` |
-| description *(its own labelled box)* | card body, clamps at 2 lines | 140 chars |
+| description *(its own labelled box)* | card body, clamps at 2 lines | 100 chars |
 | `topic_category` | card footer left | 33 chars |
 | `level` | card footer, after 👥 | `all` `easy` `int.` `adv.` |
 | `duration_minutes` | card footer, after ★ | number only — card shows `10 (mins)` |
 | `speaker_image` | square photo slot of the speaker element | square PNG/JPG/JPEG ≤800×800 (262×262 ideal) |
 
-Over-budget descriptions are rejected, not silently cut. The footer's small
-orange `?` circle is static on every card and ships with the repo.
+Over-budget descriptions are rejected, not silently cut. Every budget counts
+characters including spaces and punctuation, and the assistant counts them
+with a script — never by eye. The footer's small orange `?` circle is static
+on every card and ships with the repo.
 
 See `04 Demo and More Help/Filling in the Form/Actor card field mapping.png` for the annotated
 picture and `04 Demo and More Help/Filling in the Form/Actor card text budgets.png` for the

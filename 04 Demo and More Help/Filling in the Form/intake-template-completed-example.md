@@ -155,10 +155,12 @@ Talk length in minutes — the number only, no unit; the card renders it as
 The short blurb under the speaker's name on the card. The number in the
 fence label is the enforced character budget: the two-line capacity of the
 **actor card's description text slot** with the card at its native CSS
-render width (`card_width: 400`), operator-calibrated against real renders.
+render width (`card_width: 400`), measured against real renders. It counts
+characters including spaces and punctuation, and the assistant counts it
+with a script, never by eye.
 Exceeding the budget rejects the form; the card is never silently truncated.
 
-```presentation-description-140-char-max
+```presentation-description-100-char-max
 ai-slop >> ai-ops. How to automate pixel perfect branded visual assets :)
 ```
 
@@ -438,15 +440,18 @@ resubmit requested.
 The first fenced block after the frontmatter whose info string starts with
 `presentation-description`. The number in the label is the budget:
 
-    ```presentation-description-140-char-max
+    ```presentation-description-100-char-max
     How we cut lead research from six hours a week to twenty minutes.
     ```
 
 - Inter 12px / 400 / `#a3a3a3`, clamped to `desc_lines` (2 lines).
-- **Budget: 140 characters** — the two-line capacity of the description
-  slot at the card's native CSS render width, operator-calibrated against
-  real renders. The budget is parsed from the fence label itself, so
-  retuning it for a different card width means renaming the fence.
+- **Budget: 100 characters** — the two-line capacity of the description
+  slot at the card's native CSS render width, measured 2026-09-02 against
+  real renders (ordinary prose first fails to fit at 111 characters; the
+  budget is that figure cut 5% and rounded down). The count is characters
+  **including spaces and punctuation**, and the assistant counts it with a
+  script, never by eye. The budget is parsed from the fence label itself,
+  so retuning it for a different card width means renaming the fence.
 - Newlines inside the fence are collapsed to spaces; leading/trailing
   whitespace is trimmed. One plain paragraph — no markdown.
 

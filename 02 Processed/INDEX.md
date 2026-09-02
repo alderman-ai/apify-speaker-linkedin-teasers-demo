@@ -13,9 +13,10 @@ to make room. `alex-alderman/`
 is the live worked example (its render is
 `03 Generated Images/alex-alderman-final.png`). The demo-era speakers were
 archived out of the live queue into
-`04 Demo and More Help/Example Speakers/Fictional Characters/` (fictional characters and
-synthetic personas) and `04 Demo and More Help/Example Speakers/Real People Stress Test/` (the
-simulated-"real" stress-test speakers).
+`04 Demo and More Help/Example Speakers/Fictional Characters/` (the folklore
+characters) and `04 Demo and More Help/Example Speakers/Mid-Project Snapshots/`
+(the simulated-"real" stress-test speakers and the two early synthetic
+personas).
 
 Archived files are historical records and are left as they ran: intakes
 archived before the 2026-09-01 tree reorganisation still reference the old

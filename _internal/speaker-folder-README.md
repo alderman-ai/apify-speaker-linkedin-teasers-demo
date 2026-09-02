@@ -34,6 +34,8 @@ corner rounding).
 ## Text limits
 
 name 30 · position/company 39 (including the ` / ` joiner) ·
-description 140 · topic 33.
+description 100 · topic 33.
+Every count is characters including spaces and punctuation, and the assistant
+counts it with a script rather than by eye.
 The description budget is enforced from the fence label; over it, the form is
 rejected rather than truncated. Everything else ellipsises.

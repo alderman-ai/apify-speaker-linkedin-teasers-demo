@@ -41,9 +41,11 @@ say "process the queue".
 
 Twelve speakers that have already been through the pipeline, each with
 their finished 1200×1200 PNG *and* the exact folder that produced it — so
-you can read a real filled-in form next to the image it became. Folklore
-characters in one half, real Czech public figures used as stress-test
-material in the other.
+you can read a real filled-in form next to the image it became. Five
+folklore characters in one half; in the other, seven mid-project
+snapshots — real Czech public figures used as stress-test material, plus
+the two earliest synthetic personas, made before the pipeline was
+finished.
 
 ## "I cloned a repo off the internet. Is it going to do something to my machine?"
 

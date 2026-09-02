@@ -33,11 +33,11 @@
 <p class="sub">Measured on the rendered card at its 400 px CSS render width · companion to “Actor card field mapping”</p>
 
 <table>
-  <caption>Text budgets — measured on the rendered card at 400&nbsp;px width (description operator-calibrated 2026-08-31)</caption>
+  <caption>Text budgets — measured on the rendered card at 400&nbsp;px width (description re-measured 2026-09-02)</caption>
   <tr><th>field</th><th>card position</th><th>format</th><th>max chars</th><th>overflow behaviour</th></tr>
   <tr><td class="k">speaker_name</td><td class="m">top, line 1</td><td>Title Case</td><td class="n"><b>30</b> <span style="color:#888">(fits ~33)</span></td><td class="m">one line, cut with …</td></tr>
   <tr><td class="k">speaker_position/company</td><td class="m">top, line 2 · monospace</td><td>lowercase-kebab/lowercase-kebab</td><td class="n"><b>39</b> <span style="color:#888">(fits 43 — mono, exact)</span></td><td class="m">one line, cut with …</td></tr>
-  <tr><td class="k">presentation_description</td><td class="m">body</td><td>sentence case</td><td class="n"><b>140</b> <span style="color:#888">(two-line capacity)</span></td><td class="m">two lines, then cut with …</td></tr>
+  <tr><td class="k">presentation_description</td><td class="m">body</td><td>sentence case</td><td class="n"><b>100</b> <span style="color:#888">(two-line capacity)</span></td><td class="m">two lines, then cut with …</td></tr>
   <tr><td class="k">topic_category</td><td class="m">footer left</td><td>Title Case</td><td class="n"><b>33</b> <span style="color:#888">(fits ~36)</span></td><td class="m">one line, cut with …</td></tr>
   <tr><td class="k">duration_minutes</td><td class="m">footer, after ★</td><td>number — rendered 10 (mins), "(mins)" static</td><td class="n">—</td><td class="m">number only</td></tr>
   <tr><td class="k">level</td><td class="m">footer, after 👥</td><td>all · easy · int. · adv.</td><td class="n">—</td><td class="m">fixed vocabulary</td></tr>
@@ -46,7 +46,7 @@
   <tr class="static"><td class="k">(footer help icon)</td><td class="m">footer left, 20×20 circle</td><td>orange ? in an orange-ringed circle, bundled</td><td class="n">—</td><td class="m">static on every generated card</td></tr>
 </table>
 
-<p class="foot">Budgets are averages over mixed real-text samples in Inter (proportional), so treat them as budgets, not guarantees — a name in wide capitals fits fewer characters. The monospace line is exact. Method: binary-search the longest string that renders without truncation on the live card, no screenshots involved.</p>
+<p class="foot">Counts are characters <b>including spaces and punctuation</b>, measured with a script — never by eye. Inter is proportional, so these are budgets, not guarantees: wide capitals fit fewer characters. The monospace line is exact. Method: sweep assembled prose strings per length on the live card, take the longest length every sample still fits (111 is where prose first clips), cut 5%, round down.</p>
 
 </body>
 </html>

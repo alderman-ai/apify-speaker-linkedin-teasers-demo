@@ -27,9 +27,7 @@ instructed to keep it truthful.
 | the `.svg` files | vector images, **no scripts inside** | displayed as images | draw shapes |
 | `_internal/fonts/fonts.css` | a stylesheet: `@font-face` rules pointing at the bundled `.woff2` files next to it — **not executable, no JavaScript** | loaded by `shell.html` during a render | tells the browser which local font file to use for which weight. It names only files inside this folder, so a render never reaches the network |
 
-Everything else in the repo is markdown, PNG/JPG images, font files, and
-one empty `.gitkeep` placeholder that keeps the empty `01 To Process/`
-folder in version control.
+Everything else in the repo is markdown, PNG/JPG images and font files.
 
 ## When does anything execute at all?
 

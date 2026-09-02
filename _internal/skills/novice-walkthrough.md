@@ -182,10 +182,11 @@ Open `01 To Process/<slug>/intake.md` for them — Windows:
 - Type only between those lines; leave the rest of the file alone
   (the part above is the machine's record, and you fill it in for them at
   processing time).
-- The number in a label is a limit: `presentation-description-140-char-max`
-  means the blurb can be at most 140 characters. Also mention: name 30,
+- The number in a label is a limit: `presentation-description-100-char-max`
+  means the blurb can be at most 100 characters. Also mention: name 30,
   position and company together 39 (the ` / ` between them counts),
-  topic 33.
+  topic 33. Every limit counts characters including spaces and
+  punctuation — and you check it with a script, never by eye.
 - Tell them to delete any `[type here]` placeholders.
 
 Then say *"Tell me when you've saved it and I'll check it over"* and
@@ -205,8 +206,8 @@ Ask for **one field per message**, in this order, waiting each time:
    company together: they must fit **39 characters including the ` / `
    that joins them**.
 4. **Blurb** — *"Now the one-or-two-line description of the talk, the bit
-   that appears under their name. Up to 140 characters — roughly one
-   long sentence."*
+   that appears under their name. Up to 100 characters — roughly one
+   sentence."*
 5. **Topic** — *"What's the talk's topic or track, in a few words? Up to
    33 characters. Something like 'AI Content Ops'."*
 6. **Level** — *"Who's it pitched at? Pick one: `all` (anyone),
@@ -215,14 +216,17 @@ Ask for **one field per message**, in this order, waiting each time:
    confirm the mapping in half a sentence.
 7. **Minutes** — *"How long is the talk, in minutes? Just the number."*
 
-**Count the characters of every answer as it arrives** and say the count
-back for the two tight ones (position/company and the blurb). If an answer
-is over budget:
+**Count the characters of every answer as it arrives — with a script, never
+by eye** (PowerShell `"<text>".Length`, or a Python/Node one-liner), counting
+spaces and punctuation like any other character — and say the count back for
+the two tight ones (position/company and the blurb). Eyeballed counts are how
+the old, too-generous budget went unnoticed for so long. If an answer is over
+budget:
 
-- Say the actual number and the limit, plainly: *"That's 168 characters
-  and the limit is 140 — 28 too many."*
+- Say the actual number and the limit, plainly: *"That's 128 characters
+  and the limit is 100 — 28 too many."*
 - **Offer a shortened version and ask them to approve it.** *"Here's a
-  140-character version that keeps the meaning: '…'. Want to use that,
+  100-character version that keeps the meaning: '…'. Want to use that,
   or would you rather rewrite it yourself?"*
 - **Wait for a yes.** Never trim, paraphrase or silently shorten their
   words on your own authority. This is the same rule the generator
@@ -340,7 +344,7 @@ fix, and loop back:
 
 | what halted | what you say | go back to |
 |---|---|---|
-| description over budget | "The blurb is N characters and the limit is 140. Want me to suggest a shorter version?" | step 3 |
+| description over budget | "The blurb is N characters and the limit is 100. Want me to suggest a shorter version?" | step 3 |
 | photo not square / too big / wrong format | "The photo is WxH — it needs to be square and no more than 800×800." Re-offer the three options. | step 4 |
 | an image missing | "I can't find the logo / photo in the folder. Want to add it, or shall I use a dashed outline?" | step 4 |
 | block/card ratio mismatch, geometry disagreement | "Something's off with the background template's layout — that's a maintainer problem, not something you did wrong." Report the numbers and stop. | halt |

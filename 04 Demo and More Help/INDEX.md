@@ -15,7 +15,7 @@ its subfolders.
 |---|---|---|
 | `Getting Started/` | they have never used GitHub or an AI coding tool, don't know where to start, or say it's their first time | the six-step human entrance — download, install an assistant, open the folder, paste one sentence — which routes them to `_internal/skills/novice-walkthrough.md` |
 | `Filling in the Form/` | they're writing an intake and don't know what a field means, where it lands on the card, or how much text fits | the annotated field-mapping graphic, the character-budget table, both HTML sources, and a fully filled-in example intake |
-| `Example Speakers/` | they want to see the range of output, or a real example of a completed speaker folder | twelve speakers already through the pipeline — finished PNGs plus the archived folders that produced them |
+| `Example Speakers/` | they want to see the range of output, or a real example of a completed speaker folder | twelve speakers already through the pipeline — finished PNGs plus the archived folders that produced them, split into `Fictional Characters/` (5 folklore characters) and `Mid-Project Snapshots/` (7 — the stress-test five plus two early synthetic personas) |
 | `About This Project/` | they're wary of running a cloned repo, or want evidence the pipeline holds up | the code-and-security inventory and the ten-speaker stress-test report |
 
 Each subfolder carries its own `INDEX.md` with file-level detail.
@@ -38,10 +38,12 @@ Filling in the Form/
   text-budgets.html                source of the budgets graphic (1400x560)
 
 Example Speakers/
-  Fictional Characters/            7 speakers — folklore + synthetic personas
+  Fictional Characters/            5 speakers — folklore characters
     Generated Images/              their finished 1200x1200 PNGs
     Processed/                     their archived folders (form + assets)
-  Real People Stress Test/         5 speakers — real Czech public figures
+  Mid-Project Snapshots/           7 speakers — 5 real Czech public figures
+                                   used as stress-test material, plus 2 early
+                                   synthetic personas
     Generated Images/              their finished 1200x1200 PNGs
     Processed/                     their archived folders (form + assets)
 

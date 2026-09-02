@@ -93,6 +93,7 @@ triggers.
    correct, so the two did opposite things. `vaclav-havel-final.png`
    shipped with its description clipped mid-sentence and needs a
    re-render once the budget question is settled.*
+   *Resolved 2026-09-02: budget set to 100 characters from measurement.*
 2. **The green colour-mask rule is ambiguous on the canon template** — it
    also matches the Apify wordmark's green triangle; a literal bounding-box
    read returns a 3×-wrong speaker block. Both executors had to invent a
@@ -187,7 +188,8 @@ the folder (it should; both executors should have behaved identically).
 *Status at time of writing: the ten test teasers were delivered to
 `final-output/` (`vaclav-havel` still needed a re-render once the budget
 decision landed; three fantasy descriptions were legitimately re-authored
-shorter by the executor after a halt). Three
-fantasy portraits and the Czech-outline logo are CC BY-SA — publishing
-those four teasers carries an attribution obligation; exact credit lines
-are in the prep manifests.*
+shorter by the executor after a halt).*
+
+*Struck 2026-09-02: the attribution note that stood here referred to
+manifests that never existed; the example images carry no such
+obligation.*

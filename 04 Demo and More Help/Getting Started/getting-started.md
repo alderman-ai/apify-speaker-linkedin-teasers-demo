@@ -154,7 +154,7 @@ The three things that stop it most often:
 
 | What it says | What to do |
 |---|---|
-| The blurb is too long (over 140 characters) | Shorten it, or say yes to the shorter version it offers you. It will never cut your words without asking. |
+| The blurb is too long (over 100 characters) | Shorten it, or say yes to the shorter version it offers you. It will never cut your words without asking. |
 | The photo isn't square | Crop it to a square. On a phone: open the photo, tap Edit, choose the **Square** or **1:1** crop, save. On a computer: Paint (Windows) or Preview (Mac). Then drop the new file in. |
 | It can't find a picture in the folder | Drag the missing one in, or let it draw a dashed box where the picture goes and add the real one later. |
 

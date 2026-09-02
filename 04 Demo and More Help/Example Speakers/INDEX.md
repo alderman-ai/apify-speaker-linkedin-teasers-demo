@@ -10,18 +10,15 @@ live tree shape, so a folder here reads exactly like a folder there:
 
 | folder | speakers | what it's for |
 |---|---|---|
-| `Fictional Characters/` | 7 — folklore characters (Baba Yaga, Krteček, Pat a Mat, Santa Claus, Vodník) and synthetic personas (Jana Novakova, Petr Svoboda) | showing the range of what the pipeline produces, with nobody real involved |
-| `Real People Stress Test/` | 5 — real Czech public figures (Antonín Dvořák, Jaromír Jágr, Karel Čapek, Martina Navrátilová, Václav Havel) | the 2026-09-01 stress test, kept as a record of the project mid-flight |
+| `Fictional Characters/` | 5 — folklore characters (Baba Yaga, Krteček, Pat a Mat, Santa Claus, Vodník) | showing the range of what the pipeline produces, with nobody real involved |
+| `Mid-Project Snapshots/` | 7 — five real Czech public figures (Antonín Dvořák, Jaromír Jágr, Karel Čapek, Martina Navrátilová, Václav Havel) used as stress-test material, plus two early synthetic personas (Jana Novakova, Petr Svoboda) made before the pipeline was finished | a record of the project mid-flight: the 2026-09-01 stress test and the earliest demo runs |
 
-## Three cautions
+## Two cautions
 
 - **Archived intakes reference the old pre-2026-09-01 paths.** They are
   historical records, deliberately not rewritten — never take a current
   path from one.
-- **Some fictional portraits and one logo derive from CC BY-SA sources.**
-  Publishing those images carries an attribution obligation; the credit
-  lines are in the prep manifests inside the folders.
-- **The real-people set uses real names and likenesses for an internal
+- **The stress-test half uses real names and likenesses for an internal
   test.** Don't publish any of it as real event material.
 
 The pipeline's own live output goes to the repo root's `03 Generated Images/`,

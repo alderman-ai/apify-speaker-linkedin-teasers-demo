@@ -41,7 +41,7 @@ Render machinery (`_internal/` — use, never restructure):
 | `_internal/fonts/licenses/` | the two OFL licence texts |
 | `_internal/fonts/jic/` | byte-identical reference copies of the two core templates (`BU_intake-template.md`, `BU_speaker-teaser-linkedin_v3.png`) — the drift check falls back to these when there is no `.git` |
 | `_internal/speaker-folder-README.md` | copied into each new speaker folder as its `README.md` |
-| `_internal/sample-assets/` | synthetic sample logo + portrait used by the retired fictional worked examples in `04 Demo and More Help/Example Speakers/Fictional Characters/` |
+| `_internal/sample-assets/` | synthetic sample logo + portrait used by the retired worked examples archived under `04 Demo and More Help/Example Speakers/` |
 | `_internal/core-templates-please-dont-touch/speaker-teaser-linkedin_v3.png` | the one canon template (1200×1200, currently v3), **machine-built**: baked gradient starfield + purple card block + green speaker block. Supersedes the operator's original Canva export |
 
 Reference (`04 Demo and More Help/` — the operator-facing help and showcase
@@ -57,8 +57,8 @@ sits in `Getting Started/`, `Filling in the Form/`, `Example Speakers/` or
 | `04 Demo and More Help/Filling in the Form/field-mapping.html`, `04 Demo and More Help/Filling in the Form/text-budgets.html` | those graphics' sources, re-renderable with headless Chrome |
 | `04 Demo and More Help/About This Project/scripts-and-security.md` | the plain-English inventory of every piece of code in this repo and when it runs. **If any change adds code or scripts anywhere in the repo, this file must be updated in the same change — keep it truthful** |
 | `04 Demo and More Help/About This Project/pipeline-evaluation.md` | the 2026-09-01 ten-speaker stress test of the docs and pipeline |
-| `04 Demo and More Help/Example Speakers/Fictional Characters/` | the fictional demo speakers (folklore characters + synthetic personas), archived out of the live queue: `Processed/` folders + `Generated Images/` PNGs |
-| `04 Demo and More Help/Example Speakers/Real People Stress Test/` | the simulated-"real" stress-test speakers (real Czech public figures), kept as mid-project snapshots: `Processed/` + `Generated Images/` |
+| `04 Demo and More Help/Example Speakers/Fictional Characters/` | the five folklore demo speakers, archived out of the live queue: `Processed/` folders + `Generated Images/` PNGs |
+| `04 Demo and More Help/Example Speakers/Mid-Project Snapshots/` | seven records of the project mid-flight: the five simulated-"real" stress-test speakers (real Czech public figures) plus the two early synthetic personas (`jana-novakova`, `petr-svoboda`) made before the pipeline was finished — `Processed/` + `Generated Images/` |
 
 Every folder carries its own `INDEX.md` for routing, with three exceptions:
 the repo root and `_internal/core-templates-please-dont-touch/`, whose

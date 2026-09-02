@@ -150,8 +150,8 @@ implied_h = card_h / scale
 
 `implied_h` must land within **±2px** of the card's real height for this
 form's text — the quantised table: no desc 113.667 · empty-string desc
-121.667 · 1 line 137.667 · 2 lines 153.667 · 3 lines 169.667. (A ≤140-char
-description at width 400 renders 2 lines when over ~70 chars, 1 line under.)
+121.667 · 1 line 137.667 · 2 lines 153.667 · 3 lines 169.667. (A ≤100-char
+description at width 400 renders 2 lines when over ~60 chars, 1 line under.)
 On failure, report the height the block should be (`actual_h × scale`) and
 halt that folder. **Never stretch, letterbox or crop the card to fit.**
 
@@ -244,9 +244,14 @@ warning. Then totals. One bad folder never stops the rest.
   card; never an input. The ring is the avatar's CSS border in the shell;
   the `?` is `_internal/render/footer-help-icon.svg`.
 - Text budgets: name 30 · position/company 39 (including the 3-char
-  ` / ` joiner) · description 140 (from the fence label,
-  operator-calibrated against real two-line renders at width 400) ·
-  topic 33.
+  ` / ` joiner) · description 100 (from the fence label; measured
+  2026-09-02 against real two-line renders at width 400 — 364px content
+  width — where ordinary prose stops fitting at 111 chars, then cut 5%
+  and rounded down) · topic 33. Every budget counts characters
+  **including spaces and punctuation**, and you count them **with a
+  script** (`"<text>".Length` in PowerShell, or a one-line Python/Node
+  equivalent) — never by eye. Miscounting by hand is how the old 140
+  budget survived as long as it did.
 - The speaker photo is accepted as any exact square PNG/JPG/JPEG up to
   800×800 and scaled to the slot (262×262 currently); it is never
   cropped or reframed, and the element's chrome and `Join me in PRAGUE`

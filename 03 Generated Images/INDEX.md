@@ -15,6 +15,7 @@ lowest free number, zero-padded, first duplicate = `01`, carrying the same
 an existing final to make room.
 
 `alex-alderman-final.png` is the live worked example. The demo-era renders
-(fictional characters and the simulated-"real" stress-test speakers) were
-archived into `04 Demo and More Help/Example Speakers/Fictional Characters/` and
-`04 Demo and More Help/Example Speakers/Real People Stress Test/`.
+were archived into `04 Demo and More Help/Example Speakers/Fictional Characters/`
+(the folklore characters) and
+`04 Demo and More Help/Example Speakers/Mid-Project Snapshots/` (the
+simulated-"real" stress-test speakers and the two early synthetic personas).

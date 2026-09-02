@@ -22,6 +22,6 @@ layout (`final-output/` is now `03 Generated Images/`; `visual-templates/` and
 the paths moved.
 
 The five simulated speakers it used are archived at
-`../Example Speakers/Real People Stress Test/`, including the one PNG that
+`../Example Speakers/Mid-Project Snapshots/`, including the one PNG that
 shipped with the known clipped description — finding #1, kept as evidence
 rather than quietly regenerated.
