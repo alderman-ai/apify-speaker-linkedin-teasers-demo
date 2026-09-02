@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="../../_internal/fonts/fonts.css">
 <style>
   html,body{margin:0;padding:0}
-  body{width:1400px;height:560px;background:#020202;color:#dfdfdf;
+  body{width:1400px;height:640px;background:#020202;color:#dfdfdf;
        font-family:Inter,sans-serif;position:relative;overflow:hidden}
 
   h1{position:absolute;left:60px;top:36px;margin:0;font-size:22px;font-weight:600}
@@ -24,7 +24,7 @@
   td.m{color:#a3a3a3}
   td.n{font-variant-numeric:tabular-nums;white-space:nowrap}
   tr.static td.k{color:#8ab4ff}
-  .foot{position:absolute;left:60px;top:490px;font-size:11.5px;color:#888;width:1280px}
+  .foot{position:absolute;left:60px;top:560px;font-size:11.5px;color:#888;width:1280px}
 </style>
 </head>
 <body>
@@ -33,14 +33,14 @@
 <p class="sub">Measured on the rendered card at its 400 px CSS render width · companion to “Actor card field mapping”</p>
 
 <table>
-  <caption>Text budgets — measured on the rendered card at 400&nbsp;px width (description operator-calibrated 2026-08-31)</caption>
+  <caption>Text budgets — measured on the rendered card at 400&nbsp;px width (description and topic re-measured 2026-09-03, template v3)</caption>
   <tr><th>field</th><th>card position</th><th>format</th><th>max chars</th><th>overflow behaviour</th></tr>
   <tr><td class="k">speaker_name</td><td class="m">top, line 1</td><td>Title Case</td><td class="n"><b>30</b> <span style="color:#888">(fits ~33)</span></td><td class="m">one line, cut with …</td></tr>
   <tr><td class="k">speaker_position/company</td><td class="m">top, line 2 · monospace</td><td>lowercase-kebab/lowercase-kebab</td><td class="n"><b>39</b> <span style="color:#888">(fits 43 — mono, exact)</span></td><td class="m">one line, cut with …</td></tr>
-  <tr><td class="k">presentation_description</td><td class="m">body</td><td>sentence case</td><td class="n"><b>140</b> <span style="color:#888">(two-line capacity)</span></td><td class="m">two lines, then cut with …</td></tr>
-  <tr><td class="k">topic_category</td><td class="m">footer left</td><td>Title Case</td><td class="n"><b>33</b> <span style="color:#888">(fits ~36)</span></td><td class="m">one line, cut with …</td></tr>
+  <tr><td class="k">presentation_description</td><td class="m">body</td><td>sentence case</td><td class="n"><b>100</b> <span style="color:#888">(safe two-line capacity; prose fits ~115)</span></td><td class="m">two lines, then cut with …</td></tr>
+  <tr><td class="k">topic_category</td><td class="m">footer left</td><td>Title Case</td><td class="n"><b>26</b> <span style="color:#888">(fits ~27)</span></td><td class="m">one line, cut with …</td></tr>
   <tr><td class="k">duration_minutes</td><td class="m">footer, after ★</td><td>number — rendered 10 (mins), "(mins)" static</td><td class="n">—</td><td class="m">number only</td></tr>
-  <tr><td class="k">level</td><td class="m">footer, after 👥</td><td>all · easy · int. · adv.</td><td class="n">—</td><td class="m">fixed vocabulary</td></tr>
+  <tr><td class="k">level</td><td class="m">footer, after 👥</td><td>For All Levels</td><td class="n">—</td><td class="m">static since template v3 — not an input</td></tr>
   <tr><td class="k">company_logo</td><td class="m">top left, 40×40, radius 8</td><td>square image ≥ 80×80</td><td class="n">—</td><td class="m">centre-cropped; sits on #f3f3f3 plate</td></tr>
   <tr><td class="k">speaker_image</td><td class="m">speaker element, square photo slot</td><td>square PNG/JPG/JPEG ≤ 800×800 (262×262 ideal)</td><td class="n">—</td><td class="m">scaled to the slot, never cropped; off-spec halts the run</td></tr>
   <tr class="static"><td class="k">(footer help icon)</td><td class="m">footer left, 20×20 circle</td><td>orange ? in an orange-ringed circle, bundled</td><td class="n">—</td><td class="m">static on every generated card</td></tr>

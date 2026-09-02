@@ -5,9 +5,9 @@ what the output actually looks like, and what's really inside the repo you
 just cloned.
 
 None of it is needed to make a teaser. The pipeline lives in the folders
-next door — you fill in a form in `to-process/`, say "process the queue",
-and a finished PNG lands in `generated-images/`; the root `README.md`
-walks through that in four steps. This folder is for the moments around
+next door — you tell the assistant a speaker's details in chat, and a
+finished PNG lands in `generated-images/`; the root `README.md` says how
+to start (say "show me the demo"). This folder is for the moments around
 the edges.
 
 ## "I'm filling in the form and I don't know what fits where"
@@ -16,8 +16,8 @@ the edges.
 
 An annotated picture of the card with every field labelled and a line
 drawn to where it lands, the character budget for each one, and a complete
-filled-in intake form showing exactly what "done" looks like before you
-say "process the queue".
+filled-in intake form showing exactly what "done" looks like before it is
+rendered.
 
 ## "What does this thing actually produce?"
 

@@ -1,13 +1,46 @@
 # Assistant orientation — Apify Speaker LinkedIn Teasers
 
 You are in a self-contained demo repo that mass-produces LinkedIn teaser
-images for meetup speakers, styled as Apify actor cards. The operator fills
-one small markdown form per speaker; you render a pixel-faithful actor card
-and a card-style speaker portrait element into the canon template and
-deliver a finished PNG. **You are the engine** — there are deliberately no
-build scripts and no package dependencies. The only external requirement is
-a Chromium-based browser for headless rendering — Chrome, or the Edge
-preinstalled on Windows; never download one.
+images for meetup speakers, styled as Apify actor cards. The operator gives
+you a handful of details per speaker — in chat — and two square images;
+you render a pixel-faithful actor card and a card-style speaker portrait
+element into the canon template and deliver a finished PNG. **You are the
+engine** — there are deliberately no build scripts and no package
+dependencies. The only external requirement is a Chromium-based browser for
+headless rendering — Chrome, or the Edge preinstalled on Windows; never
+download one. The repo assumes an agentic assistant (Claude Code, or
+another lab's equivalent) that can read and write files here and run one
+shell command; there is no non-agentic path.
+
+## Session opener — the three lines
+
+This is a demo, and most people opening it have never seen it. **On the
+first message of a session, present this menu before doing anything else**,
+whatever that message says ("show me the demo", "hi", "what is this?").
+The one exception: a first message that is already an unambiguous
+scaffold, generate or template-change request (see routing below) — route
+it directly, no menu.
+
+> This repo turns a few speaker details into a finished LinkedIn teaser
+> image, styled as an Apify actor card. Three lines — pick one:
+>
+> 1. **See the workflow in action** and generate a templated social media
+>    image.
+> 2. **Learn about text-field-mapped visual assets** in general, and why
+>    they enable pixel-perfect branded content.
+> 3. **Find out how this demo was built.**
+
+- **Line 1** → the demo run. Read `_internal/skills/apify-speaker-card.md`
+  in full and follow its **"Demo run"** section: copy the bundled demo
+  speaker (`_internal/demo-speaker/` — the repo author) into the queue,
+  process that copy end to end while narrating each stage in a line, then
+  offer to do the same for a real speaker.
+- **Line 2 or 3** → reply with exactly this sentence, then show the menu
+  again: `Sorry, this option is temporarily out of order, please try again
+  from another line.` Do not improvise content for these lines; they are
+  not built yet.
+- Anything else (a number outside 1–3, a question) → answer in a line,
+  then show the menu again.
 
 ## Asset map — every file you may need
 
@@ -15,10 +48,11 @@ Procedure and contract (`_internal/`):
 
 | path | what |
 |---|---|
-| `_internal/skills/apify-speaker-card.md` | **the generator's complete operating procedure — read it in full before processing anything; follow it, don't improvise.** Mass-produces Apify-styled speaker teaser images: renders a pixel-faithful Apify actor card (repurposed as a speaker card) and a card-style speaker portrait element into the canon template, one finished PNG per speaker. Use when the operator says "process the intake forms", "process the queue", "generate the speaker cards", "new speaker <name>", or drops folders into `to-process/` |
-| `_internal/skills/new-speaker.md` | **the scaffolder's complete procedure — read it in full before scaffolding.** Adds a new speaker folder to the queue — the single place to drop all the visual assets needed to generate that speaker's teaser image (asks the name; declined → `new-speaker-<NN>`, lowest free number; a repeat name → `<name>-<NN>`, first dupe = 01). Use when the operator says "new speaker", "/new-speaker", "add a speaker", "scaffold a speaker folder", or names a person to add to the lineup |
-| `_internal/core-templates-please-dont-touch/intake-template.md` | the input contract: every field, budget, failure mode; everything the operator types lives in labelled body fences. Versioned in its frontmatter (`version` / `versioned_at`). Copied into each folder as `intake.md` |
-| `demo-and-more-help/filling-in-the-form/intake-template-completed-example.md` | the same template with every fence and frontmatter value filled in — what "done" looks like |
+| `_internal/skills/apify-speaker-card.md` | **the generator's complete operating procedure — read it in full before processing anything; follow it, don't improvise.** Mass-produces Apify-styled speaker teaser images: renders a pixel-faithful Apify actor card (repurposed as a speaker card) and a card-style speaker portrait element into the canon template, one finished PNG per speaker. Holds the **"Demo run"** section that line 1 of the session menu executes. Use when the operator picks line 1, says "process the intake forms", "process the queue", "generate the speaker cards", "new speaker <name>", or drops folders into `to-process/` |
+| `_internal/skills/new-speaker.md` | **the scaffolder's complete procedure — read it in full before scaffolding.** Adds a new speaker folder to the queue and collects that speaker's details in chat — name, role, company, topic, minutes, blurb and the two images (audience level is fixed) — writing them into the form itself (asks the name; declined → `new-speaker-<NN>`, lowest free number; a repeat name → `<name>-<NN>`, first dupe = 01). Use when the operator says "new speaker", "/new-speaker", "add a speaker", "scaffold a speaker folder", or names a person to add to the lineup |
+| `_internal/demo-speaker/` | the bundled demo speaker: a complete, ready-to-run speaker folder (filled `intake.md`, `README.md`, `company-logo.png`, `speaker.png`) for the repo author. Line 1 of the menu copies it into `to-process/` and processes the copy. **Never process or edit it in place** |
+| `_internal/core-templates-please-dont-touch/intake-template.md` | the input contract: every field, budget, failure mode; the operator's values live in labelled body fences that you fill from chat, mirrored into the frontmatter. Versioned in its frontmatter (`version` / `versioned_at`). Copied into each folder as `intake.md` |
+| `demo-and-more-help/filling-in-the-form/intake-template-completed-example.md` | the same template with every fence and frontmatter value filled in — what "done" looks like (byte-identical to the demo speaker's `intake.md`) |
 
 The queue:
 
@@ -69,13 +103,17 @@ The `_internal/skills/` files are plain markdown procedures, **not deployed
 harness skills — nothing auto-loads them**. You route by intent and read
 the matching skill file in full before acting. The trigger phrases here and
 in the skill descriptions are examples, not a grammar: operators paraphrase
-freely, and many have never seen this repo.
+freely, and many have never seen this repo. When in doubt on a first
+message, show the session menu.
 
 - **Scaffold intent** — "new speaker Alex Alderman", "add a speaker",
-  "put Alex on the lineup", "set up a folder for our next speaker" → read
-  `_internal/skills/new-speaker.md`, then scaffold `to-process/alex-alderman/`
-  (intake form + README; without a name, `new-speaker-<NN>` at the lowest
-  free number).
+  "put Alex on the lineup", "make me a card for Alex", "set up a folder
+  for our next speaker" → read `_internal/skills/new-speaker.md`, then
+  scaffold `to-process/alex-alderman/` (intake form + README; without a
+  name, `new-speaker-<NN>` at the lowest free number) and **collect the
+  rest of the details in chat**, writing them into the form yourself. If
+  the operator asked for the image, not just the folder, and everything
+  is present, continue straight into generation.
 - **Generate intent** — "process the queue", "process the intake forms",
   "generate the speaker cards", "run the pipeline", "render the pending
   ones" → read `_internal/skills/apify-speaker-card.md`, then run every
@@ -83,6 +121,9 @@ freely, and many have never seen this repo.
   validate → read geometry off the template → ratio check → render in a
   headless Chromium browser → verify by inspection → PNG to
   `generated-images/<speaker>-final.png`, folder to `processed/`.
+- **Demo intent** — "show me the demo", "demo", "run the example", or a
+  pick of line 1 from the menu → the "Demo run" section of
+  `_internal/skills/apify-speaker-card.md`.
 - **Ambiguous ask** — "make me an image", "create a teaser", "I need a
   card for LinkedIn", and similar requests that name neither workflow:
   check `to-process/` first. If candidates are waiting, name them and ask
@@ -91,34 +132,42 @@ freely, and many have never seen this repo.
   speaker's name?"*).
 - **Template-change intent** — "update the template", "change the intake
   form", "new visual template", "edit the canon template", or any request
-  that would modify a file in `core-templates-please-dont-touch/`: the
-  core templates are **locked**. If a maintainer-local update procedure is
-  present in `_internal/skills/` beyond the two tracked skills (it ships
-  only on the maintainer's machine, not in this repo), read it in full and
-  follow it. If it is absent, decline the change — offer instead a local
-  fork in `_internal/local-forks/` (gitignored, never committed): copy the
-  template there with a `.fork.` name marker, apply the changes to the
-  copy, and point that speaker's `base_image` at it. Canon stays locked
-  either way.
-- **Lost human** — "what is this?", "how does this work?": orient them
-  from the root `README.md` and point them at `demo-and-more-help/`.
+  that would modify a file in `core-templates-please-dont-touch/`: those
+  two files are what every card is generated from, so make the change
+  deliberately, as a versioned event — the intake form bumps `version` /
+  `versioned_at` in its frontmatter (and the completed example plus the
+  demo speaker's `intake.md` are refreshed from it); the visual template
+  bumps its `_v<N>` filename suffix and every reference to it (this file,
+  both skills, the READMEs, the completed example, the demo speaker).
+  Render one card afterwards to confirm. That folder's README has the
+  details and the starfield rebuild recipe.
+- **Maintainer-local slash skills** — on the author's machine only:
+  `/init-new-speaker <name>` (scaffold the folder for manual intake and
+  stop), `/create-speaker <name>` (chat intake → render; a folder that
+  already holds all three assets is processed as is), `/create-speaker`
+  with no argument (process every complete folder in `to-process/`, skip
+  the rest) and `/create-fictional-speaker <name>` (real name →
+  researched persona → render → published at alderman.ai/apify-live-demo).
+  They wrap the two procedure files above, live in `~/.claude/skills/`,
+  not in this repo; nothing here depends on them.
+- **Lost human** — "what is this?", "how does this work?": show the
+  session menu; if they want more, orient them from the root `README.md`
+  and point them at `demo-and-more-help/`.
 
 ## Ground rules (the skill has the full list)
 
+- **Input is collected in chat.** The intake form is the machine record
+  and the contract; the operator never has to open it. Ask for each field
+  with its budget, validate as you go (character counts, kebab-case — offer the fix, never silently alter), and write
+  the value into both its body fence and its frontmatter key yourself.
+  Images arrive as file paths; copy them into the folder, never move the
+  original. A form someone filled by hand is still accepted as is.
 - **The template image is canon.** Placeholder geometry is read from it per
   run — purple block = actor card, green block = speaker element.
   Frontmatter geometry keys are outputs you write back, never inputs.
-- **Core templates are locked; git is the reference.** Both skills diff
-  `core-templates-please-dont-touch/` against git HEAD before using it
-  and **auto-restore any drift** (`git restore`), telling the operator
-  what was reverted and tagging that session's commits `MISMATCH` in the
-  subject. Never edit those files, never commit a change to them, and
-  never bypass or weaken the auto-restore. **At the start of work in this
-  repo, run `git log --oneline -20 --grep=MISMATCH`; on any hit, alert
-  the operator** that a drift event occurred. Template changes are made
-  only by the maintainer, from their machine, through the local procedure
-  described under routing — its commits move the baseline, which is why a
-  sanctioned change is never reverted.
+- **Core templates change on purpose only.** A run reads them and never
+  writes them; a deliberate change follows the versioning convention
+  under template-change routing above.
 - **Halt, don't degrade.** Over-budget description, missing assets (ask:
   resubmit vs placeholder outline), an off-spec speaker photo (must be an
   exact square PNG/JPG/JPEG ≤800×800 — you scale it to the slot, you never
@@ -126,12 +175,13 @@ freely, and many have never seen this repo.
   each is a stop with a clear report, never a silent workaround. Never
   trim operator text, never stretch the card, never overwrite anything.
 - **Duplicate names suffix, never block.** A repeat name is legitimate (a
-  rebuilt card, a fresh start after text edits, a namesake): wherever the
-  name is already taken — scaffolding into `to-process/`, or delivering
-  into `processed/` / `generated-images/` — use `<name>-<NN>`, the lowest
-  free number, zero-padded, **first dupe = 01** (same NN on the archive
-  folder and the PNG). Detection is by folder/file names only; a repeated
-  frontmatter `speaker_name` breaks nothing and is never consulted.
+  rebuilt card, a fresh start after text edits, a namesake, a demo run):
+  wherever the name is already taken — scaffolding into `to-process/`, or
+  delivering into `processed/` / `generated-images/` — use `<name>-<NN>`,
+  the lowest free number, zero-padded, **first dupe = 01** (same NN on the
+  archive folder and the PNG). Detection is by folder/file names only; a
+  repeated frontmatter `speaker_name` breaks nothing and is never
+  consulted.
 - **The card CSS is a verified reproduction** of apify.com's ActorStoreItem
   (400 × 153.667 at width 400; heights quantised 113.667 / 121.667 /
   137.667 / 153.667 / 169.667 by description lines). Its oddities are

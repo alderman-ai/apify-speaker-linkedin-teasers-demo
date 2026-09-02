@@ -4,9 +4,10 @@ description: >
   Mass-produce Apify-styled speaker teaser images: renders a pixel-faithful
   Apify actor card (repurposed as a speaker card) and a card-style speaker
   portrait element into the canon template, one finished PNG per speaker.
-  Use when the operator says "process the intake forms", "process the
-  queue", "generate the speaker cards", "new speaker <name>", or drops
-  folders into to-process/.
+  Use when the operator picks line 1 of the session menu ("see the workflow
+  in action" / "show me the demo" — the Demo run section), says "process
+  the intake forms", "process the queue", "generate the speaker cards",
+  "new speaker <name>", or drops folders into to-process/.
 ---
 
 # Apify speaker card generator
@@ -35,9 +36,37 @@ replacement.
 
 ## Scaffolding
 
-Handled by the sibling **`new-speaker`** skill (asks for the name; declined →
-`new-speaker-<NN>`, lowest free number, zero-padded). If the operator asks
-this skill to scaffold, invoke that one.
+Handled by the sibling **`new-speaker`** skill (asks for the name, then
+collects every other field and the two images in chat and writes them into
+the form; declined name → `new-speaker-<NN>`, lowest free number,
+zero-padded). If the operator asks this skill to scaffold, invoke that one.
+
+## Demo run (line 1 of the session menu — "show me the demo")
+
+The bundled demo speaker lives in `_internal/demo-speaker/`: a complete
+speaker folder (filled `intake.md`, `README.md`, `company-logo.png`,
+`speaker.png`) for the repo author, Alex Alderman. It is input, never a
+working folder — **never process or edit it in place.**
+
+1. Say in one line what is about to happen: the bundled demo speaker is
+   copied into the queue, then goes through exactly the pipeline a real
+   speaker goes through.
+2. **Copy** (never move) the whole folder to `to-process/alex-alderman/`,
+   applying the `new-speaker` duplicate rule: if `alex-alderman` is already
+   taken in `to-process/`, `processed/` or `generated-images/` — it is in
+   the shipped repo, where the author's own card sits as the worked
+   example — the copy becomes `to-process/alex-alderman-<NN>/`, lowest
+   free number, first dupe = 01. Say which name it got and why (nothing is
+   ever overwritten).
+3. Process **that one folder** with the procedure below, narrating each
+   stage in a single line as you pass it: form validated → both assets
+   checked → geometry measured off the template → card-ratio check →
+   rendered headless → verified by inspection → delivered.
+4. Report as in step 7, show the finished PNG's path, and offer the next
+   step: the same for a real speaker — name, role, company, blurb, topic,
+   minutes and two square images, all given here in chat (the
+   `new-speaker` skill). Line 1 of the menu asks no further questions
+   before running; the offer at the end is the only prompt.
 
 ## Processing ("process the queue")
 
@@ -45,20 +74,22 @@ For each folder in `to-process/` (or the ones named), in order:
 
 ### 1 · Parse and validate `intake.md`
 
-- Operator values arrive in labelled body fences: `speaker-name`,
-  `speaker-position`, `speaker-company`, `topic-category`, `level`,
+- Operator values live in labelled body fences: `speaker-name`,
+  `speaker-position`, `speaker-company`, `topic-category`,
   `duration-minutes`, and the first ```presentation-description-NN-char-max
-  fence. **First: transfer each fence's trimmed contents into its matching
+  fence. The `new-speaker` skill normally wrote them there from chat,
+  mirrored into the frontmatter already; a hand-filled form has fences
+  only. **First: transfer each fence's trimmed contents into its matching
   frontmatter variable** — fences win over any hand-typed frontmatter; a
   fence that is empty or still reads `[type here]` counts as not provided.
 - The fence's NN **is** the description budget. Over budget → **reject the
   form with the count; never trim the text yourself.** Collapse internal
   newlines to spaces.
 - Required: base_image, company_logo, speaker_image, speaker_name,
-  speaker_position, speaker_company, topic_category, level,
-  duration_minutes.
-- Warn (don't fail): `level` outside `all/easy/int./adv.`; position/company
-  not lowercase-kebab.
+  speaker_position, speaker_company, topic_category, duration_minutes.
+  `level` is fixed at `For All Levels` since template v3 — never an input;
+  fill `{{LEVEL}}` from the frontmatter value as is.
+- Warn (don't fail): position/company not lowercase-kebab.
 
 ### 2 · Check the two image assets
 
@@ -89,21 +120,6 @@ The company logo stays flexible: square, ideally 80×80 or larger
 (`object-fit: cover` centre-crops a non-square logo).
 
 ### 3 · Geometry — the template image is canon
-
-**Canon-template integrity preflight** (once per batch): the core
-templates are locked; **git HEAD is their reference**. Run
-`git status --porcelain -- _internal/core-templates-please-dont-touch/`.
-Any modification or deletion there → **auto-restore immediately**:
-`git restore _internal/core-templates-please-dont-touch/`, tell the
-operator exactly what was reverted, and include the tag `MISMATCH` in the
-subject line of any commit made this session. Render from the restored
-file. Where there is no git history (a zip download), hash-compare the
-canon PNG against its reference copy
-`_internal/fonts/jic/BU_speaker-teaser-linkedin_v3.png` and copy the
-reference over a drifted live file instead. Template changes are made
-only by the maintainer, from their machine, via a local procedure that is
-not part of this repo — never edit the templates yourself, and never
-commit a template change.
 
 Read `base_image` (the Read tool shows its true pixel size — use that as
 page size, don't assume 1200×1200). Two placeholders: **purple `#AE81FF` =
@@ -142,7 +158,7 @@ implied_h = card_h / scale
 
 `implied_h` must land within **±2px** of the card's real height for this
 form's text — the quantised table: no desc 113.667 · empty-string desc
-121.667 · 1 line 137.667 · 2 lines 153.667 · 3 lines 169.667. (A ≤140-char
+121.667 · 1 line 137.667 · 2 lines 153.667 · 3 lines 169.667. (A ≤100-char
 description at width 400 renders 2 lines when over ~70 chars, 1 line under.)
 On failure, report the height the block should be (`actual_h × scale`) and
 halt that folder. **Never stretch, letterbox or crop the card to fit.**
@@ -167,7 +183,7 @@ purpose; the render must never touch a network). Replace every `{{TOKEN}}`:
 | `DESC_LINES` | `desc_lines` (default 2) |
 | `BASE_IMAGE_URI`, `COMPANY_LOGO_URI`, `SPEAKER_IMAGE_URI` | `file:///` absolute URLs (or the placeholder data URI) |
 | `HELP_ICON_URI` | `file:///` URL of `_internal/render/footer-help-icon.svg` |
-| `SPEAKER_NAME`, `POSITION_COMPANY` (join with a spaced ` / `), `DESCRIPTION`, `TOPIC_CATEGORY`, `LEVEL`, `DURATION_MINUTES` (number only — the static `(mins)` is baked into the shell) | HTML-escaped text |
+| `SPEAKER_NAME`, `POSITION_COMPANY` (join with a spaced ` / `), `DESCRIPTION`, `TOPIC_CATEGORY`, `LEVEL` (the fixed `For All Levels`), `DURATION_MINUTES` (number only — the static `(mins)` is baked into the shell) | HTML-escaped text |
 
 Verify no `{{` remains. Then screenshot — **into the temp dir first; the
 browser cannot write into Desktop folders** (observed: Access denied):
@@ -191,7 +207,7 @@ Read the screenshot. Confirm: exact template dimensions; both blocks fully
 covered (no purple or green anywhere — check edges and corners, not just
 centres; a centre-only check once passed while most of a block showed);
 untouched template areas identical; text right; footer reads
-`(?) topic · ★ N (mins) · 👥 level` with the `?` icon orange-ringed and two
+`(?) topic · ★ N (mins) · 👥 For All Levels` with the `?` icon orange-ringed and two
 spaces before the topic; hover ring visible around the actor card body;
 the speaker element shows a square portrait framed by the `#454545` shell
 (16px border on its left/top/right) over a centred `Join me in PRAGUE`
@@ -229,9 +245,10 @@ warning. Then totals. One bad folder never stops the rest.
   card; never an input. The ring is the avatar's CSS border in the shell;
   the `?` is `_internal/render/footer-help-icon.svg`.
 - Text budgets: name 30 · position/company 39 (including the 3-char
-  ` / ` joiner) · description 140 (from the fence label,
-  operator-calibrated against real two-line renders at width 400) ·
-  topic 33.
+  ` / ` joiner) · description 100 (from the fence label,
+  measured against real two-line renders at width 400 on 2026-09-03) ·
+  topic 26 (shortened from 33 by the fixed level text). `level` is
+  static since template v3: `For All Levels`, never an input.
 - The speaker photo is accepted as any exact square PNG/JPG/JPEG up to
   800×800 and scaled to the slot (262×262 currently); it is never
   cropped or reframed, and the element's chrome and `Join me in PRAGUE`

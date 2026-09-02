@@ -1,37 +1,31 @@
 # core-templates-please-dont-touch/ — stop, read this first
 
 The two **source-of-truth files every card is generated from**. Do not
-edit, re-save, re-export, rename or "tidy" either of them — every future
-card inherits any change, silently. This folder is **locked**: the skills
-diff it against git before every run and any drift is **automatically
-restored** — an edit made here simply gets reverted, the operator is
-told, and the event is tagged `MISMATCH` in that session's commits.
+edit, re-save, re-export, rename or "tidy" either of them in passing —
+every future card inherits any change, silently. A run only ever reads
+them.
 
 | file | what |
 |---|---|
 | `speaker-teaser-linkedin_v3.png` | the canon visual template (1200×1200), currently version 3. Its coloured blocks ARE the layout: purple = actor card, green = speaker element; geometry is measured off this image every run |
 | `intake-template.md` | the blank intake form — the whole input contract, versioned in its own frontmatter (`version` / `versioned_at`). Copied into each new speaker folder as `intake.md`; the copy is what operators fill, never this file |
 
-## If a run reports a MISMATCH restore
+## Changing a template
 
-Someone (or something) edited a file here; the run reverted it to the
-committed version and continued. Nothing needs fixing — but find out what
-made the edit.
+A template change is a deliberate, versioned event:
 
-## Changing a template — maintainer only
+- the intake form bumps `version` / `versioned_at` in its frontmatter, and
+  the two filled copies are refreshed from it — the completed example in
+  `demo-and-more-help/filling-in-the-form/` and the bundled demo speaker's
+  `intake.md` in `_internal/demo-speaker/`;
+- the visual template bumps its `_v<N>` filename suffix and every
+  reference to it (`CLAUDE.md` / `AGENTS.md`, both skills, the READMEs,
+  the completed example in `demo-and-more-help/filling-in-the-form/`, the
+  demo speaker's `intake.md`);
+- render one card afterwards to confirm the result.
 
-Template changes are made **only by the maintainer, from their own
-machine**, through a local update procedure that is deliberately not part
-of this repo. It verifies the maintainer's GitHub identity, applies the
-change as a versioned event (the intake form bumps `version` /
-`versioned_at`; the visual template bumps its `_v<N>` filename suffix and
-every reference), and **commits it — which moves the baseline the
-auto-restore checks against**, so a sanctioned change is never reverted.
-
-Want a different template for your own use? Keep a local fork:
-`_internal/local-forks/` is gitignored — copy a template there with a
-`.fork.` name marker, edit the copy, and point your speaker's
-`base_image` at it. Canon stays locked; your fork stays yours.
+Want a different look for one speaker without changing canon? Copy the
+template, edit the copy, and point that speaker's `base_image` at it.
 
 ## About the canon template
 

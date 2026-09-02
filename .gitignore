@@ -1,9 +1,8 @@
 _internal/render/_run-*.html
-_internal/local-forks/
-_internal/skills/update-template.md
 to-process/*
 !to-process/.gitkeep
 !to-process/INDEX.md
 .obsidian/
 Thumbs.db
 .DS_Store
+.claude/

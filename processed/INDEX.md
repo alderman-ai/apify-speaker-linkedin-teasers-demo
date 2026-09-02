@@ -8,7 +8,8 @@ assets it was built from. The finished PNG itself lives in
 Treat as an archive: **nothing here is ever overwritten** — re-running a
 speaker requires renaming or clearing their folder first. `alex-alderman/`
 is the live worked example (its render is
-`generated-images/alex-alderman-final.png`). The demo-era speakers were
+`generated-images/alex-alderman-final.png`); demo runs from the session
+menu land beside it as `alex-alderman-<NN>/`. The demo-era speakers were
 archived out of the live queue into
 `demo-and-more-help/example-speakers/fictional-characters/` (fictional characters and
 synthetic personas) and `demo-and-more-help/example-speakers/real-people-stress-test/` (the

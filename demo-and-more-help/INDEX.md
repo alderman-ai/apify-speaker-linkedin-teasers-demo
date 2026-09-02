@@ -30,7 +30,7 @@ filling-in-the-form/
   Actor card text budgets.png      character budget per text field, as a table
   intake-template-completed-example.md   what a finished intake looks like
   field-mapping.html               source of the mapping graphic (1400x440)
-  text-budgets.html                source of the budgets graphic (1400x560)
+  text-budgets.html                source of the budgets graphic (1400x640)
 
 example-speakers/
   fictional-characters/            7 speakers — folklore + synthetic personas
@@ -44,6 +44,7 @@ about-this-project/
   scripts-and-security.md          every piece of code in the repo, and when
                                    it runs (short version: no scripts at all)
   pipeline-evaluation.md           the 2026-09-01 ten-speaker stress test
+  apify-live-demo-qr.png           QR code for alderman.ai/apify-live-demo (slide asset)
 ```
 
 ## Two standing cautions

@@ -11,7 +11,8 @@ The pipeline stages: `to-process/<speaker>/` (pending intake + assets) →
 **Nothing here is ever overwritten** — re-rendering a speaker requires
 moving or renaming their existing final first.
 
-`alex-alderman-final.png` is the live worked example. The demo-era renders
+`alex-alderman-final.png` is the live worked example; demo runs from the
+session menu land beside it as `alex-alderman-<NN>-final.png`. The demo-era renders
 (fictional characters and the simulated-"real" stress-test speakers) were
 archived into `demo-and-more-help/example-speakers/fictional-characters/` and
 `demo-and-more-help/example-speakers/real-people-stress-test/`.

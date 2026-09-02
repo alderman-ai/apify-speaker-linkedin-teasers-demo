@@ -1,7 +1,7 @@
 # Apify Speaker LinkedIn Teasers — demo
 
-One small form in → one finished LinkedIn teaser image out, styled as an
-[Apify](https://apify.com) actor card.
+A few speaker details in → one finished LinkedIn teaser image out, styled
+as an [Apify](https://apify.com) actor card.
 
 Built by [Alex Alderman](https://alderman.agency) as the live demo for the
 AI marketing meetup — and left fully working on purpose. If you ever want
@@ -16,50 +16,45 @@ visual design belong to Apify.
 
 ## What you need
 
-Nothing to install. The repo is 100% self-contained — fonts, card code,
-template and instructions all ship inside this folder; nothing is fetched
-from the internet at any point, and there are no scripts or packages.
-Wary of cloned repos? Good instinct —
-`demo-and-more-help/about-this-project/scripts-and-security.md` is a plain-English inventory
-of every piece of code in this project and when it runs (short version:
-there are **zero executable scripts** here).
-
-You only need two things that are almost certainly already on your machine:
-
-- **An AI coding assistant** — any of them. Claude Code, Cursor, Copilot,
-  Codex… they all read the same instruction files here (`CLAUDE.md` and
-  `AGENTS.md` are identical copies, one name per convention).
+- **An agentic AI coding assistant** — Claude Code, or another lab's
+  equivalent: something that can open this folder, read and write files in
+  it, and run a shell command. It orients itself from `CLAUDE.md` /
+  `AGENTS.md` (identical copies, one name per convention). A chat-only
+  assistant that can't touch files can't run this.
 - **A Chromium browser** — Google Chrome, or the Microsoft Edge that comes
   preinstalled with Windows. The assistant drives it invisibly ("headless")
   to draw the image; you never open it yourself.
 
-## Make a teaser in four steps
+Nothing to install beyond that. The repo is 100% self-contained — fonts,
+card code, template and instructions all ship inside this folder; nothing
+is fetched from the internet at any point, and there are no scripts or
+packages. Wary of cloned repos? Good instinct —
+`demo-and-more-help/about-this-project/scripts-and-security.md` is a
+plain-English inventory of every piece of code in this project and when it
+runs (short version: there are **zero executable scripts** here).
 
-1. **Open this folder in your AI assistant** and just talk to it.
-2. Say **"new speaker Alex Alderman"**. A folder appears in `to-process/`
-   with the form and a note listing exactly what goes in it.
-3. **Fill in the form's boxes** — name, role, company, talk blurb, topic,
-   level, minutes; each box says what it wants and how long it can be —
-   and **drop in two images**:
-   - the company logo (square, 80×80 or larger), and
-   - the speaker photo — **a square image** (same width as height),
-     PNG/JPG/JPEG, **no bigger than 800×800**. If you can supply exactly
-     262×262 that's the perfect fit, but any square within the cap works:
-     the pipeline scales it into place without cropping a single pixel.
-     What it will never do is crop or reframe for you — square it
-     yourself, framed the way you want to be seen.
-4. Say **"process the queue"**. The finished 1200×1200 PNG lands in
-   `generated-images/alex-alderman-final.png`, ready to post; your folder
-   is archived to `processed/`.
+## Start here
+
+Open this folder in your assistant and say:
+
+> show me the demo
+
+It answers with a short menu. Pick the first line and it runs the whole
+pipeline in front of you on the bundled demo speaker — form checked,
+template measured, card rendered in a headless browser, result inspected,
+finished PNG delivered to `generated-images/`. Then it offers to do the same
+for a real speaker: you give it the name, role, company, talk blurb, topic,
+minutes and two square images right there in chat, and it
+takes it from there. (The other two menu lines aren't built yet.)
 
 If anything is off — blurb too long, an image missing or not square, a
 template box the wrong shape — the run stops and says exactly what to fix.
 It never silently crops your text, reframes your photo, or stretches the
 card.
 
-Want to see what "done" looks like first? Open
-`demo-and-more-help/filling-in-the-form/intake-template-completed-example.md`, or the finished
-PNGs in `generated-images/`.
+Want to see what "done" looks like first? The finished PNG in
+`generated-images/` is the author's own card, and
+`demo-and-more-help/example-speakers/` holds twelve more.
 
 ## What the image looks like
 
@@ -69,8 +64,8 @@ template):
 
 - **The actor card** — Apify's `ActorStoreItem` rebuilt in plain HTML/CSS
   and verified box-for-box against the live site to 0.001px. Your name,
-  role / company, blurb, topic, talk length and audience level fill its
-  slots; real Inter and IBM Plex Mono, real ellipsis behaviour, the real
+  role / company, blurb, topic and talk length fill its slots (the
+  audience level is fixed at "For All Levels"); real Inter and IBM Plex Mono, real ellipsis behaviour, the real
   hover ring.
 - **The speaker element** — a matching grey-framed card holding your
   square photo with **Join me in PRAGUE** underneath. Its frame, corners
@@ -79,7 +74,8 @@ template):
 ## The three queue stages
 
 ```
-to-process/<speaker>/                 you fill this: intake.md, README.md,
+to-process/<speaker>/                 the assistant builds this from what you
+                                      tell it: intake.md, README.md,
                                       company-logo.png, speaker.png
 processed/<speaker>/                  the folder moves here on success (archive)
 generated-images/<speaker>-final.png  the finished render — publish from here
@@ -87,36 +83,44 @@ generated-images/<speaker>-final.png  the finished render — publish from here
 
 A folder lives in exactly one stage. Successes move whole; failures stay
 put with a printed reason and never write partial output. Nothing is ever
-overwritten — re-running a speaker means clearing their old results first.
+overwritten — a name that's already taken gets a `-01`, `-02`… suffix,
+which is also why the demo run lands as `alex-alderman-01`: the author's
+original card already holds the bare name.
 
 **Missing images** stop the run with a choice: resubmit, or render now with
 a dashed placeholder outline that a correctly sized image covers completely
 afterwards.
 
-## The intake form
+## The details it asks for
 
-The `intake.md` that appears in your speaker folder is the whole contract —
-field-by-field schema, character budgets, failure modes. Everything you
-type lives in its labelled boxes; the assistant copies your entries into
-the machine-read frontmatter at processing time. The short version:
+The `intake.md` in each speaker folder is the machine record and the whole
+contract — field-by-field schema, character budgets, failure modes. You
+don't have to open it: the assistant writes in what you tell it and checks
+the budgets as it goes. (Filling it by hand still works if you prefer; its
+labelled boxes say what goes where.) The short version:
 
 | field | where it lands | budget |
 |---|---|---|
-| `company_logo` | 40×40 top-left of the card | square image, ≥80×80 |
-| `speaker_name` | card title | 30 chars |
-| `speaker_position` / `speaker_company` | monospace line, joined as `position / company` | 39 chars incl. the ` / ` |
-| description *(its own labelled box)* | card body, clamps at 2 lines | 140 chars |
-| `topic_category` | card footer left | 33 chars |
-| `level` | card footer, after 👥 | `all` `easy` `int.` `adv.` |
-| `duration_minutes` | card footer, after ★ | number only — card shows `10 (mins)` |
-| `speaker_image` | square photo slot of the speaker element | square PNG/JPG/JPEG ≤800×800 (262×262 ideal) |
+| company logo | 40×40 top-left of the card | square image, ≥80×80 |
+| speaker name | card title | 30 chars |
+| position / company | monospace line, joined as `position / company` | 39 chars incl. the ` / ` |
+| description | card body, clamps at 2 lines | 100 chars |
+| topic category | card footer left | 26 chars |
+| level | card footer, after 👥 | fixed: `For All Levels` — not an input |
+| duration | card footer, after ★ | number only — card shows `10 (mins)` |
+| speaker photo | square photo slot of the speaker element | square PNG/JPG/JPEG ≤800×800 (262×262 ideal) |
 
-Over-budget descriptions are rejected, not silently cut. The footer's small
-orange `?` circle is static on every card and ships with the repo.
+The speaker photo must be **square** (same width as height) and no bigger
+than 800×800. The pipeline scales it into place without cropping a single
+pixel; what it will never do is crop or reframe for you — square it
+yourself, framed the way you want to be seen. Over-budget descriptions are
+rejected, not silently cut. The footer's small orange `?` circle is static
+on every card and ships with the repo.
 
-See `demo-and-more-help/filling-in-the-form/Actor card field mapping.png` for the annotated
-picture and `demo-and-more-help/filling-in-the-form/Actor card text budgets.png` for the
-budgets table.
+See `demo-and-more-help/filling-in-the-form/Actor card field mapping.png`
+for the annotated picture and
+`demo-and-more-help/filling-in-the-form/Actor card text budgets.png` for
+the budgets table.
 
 ## The template is canon
 
@@ -124,9 +128,8 @@ This demo ships exactly one visual template,
 `_internal/core-templates-please-dont-touch/speaker-teaser-linkedin_v3.png`
 (1200×1200). Whatever that PNG says, goes — the coloured placeholder blocks
 on it are measured per run and decide exactly where the two elements land.
-As the folder name suggests: don't touch it — it's locked. Any edit to it
-is detected before the next run, automatically reverted to the committed
-version, and flagged; template changes are made only by the maintainer.
+As the folder name suggests: don't touch it in passing. A deliberate
+template change is a versioned event — that folder's README says how.
 
 The current template is **machine-built**: the original Canva export (the
 one with the green and purple squares) has been superseded by a version
@@ -143,14 +146,14 @@ be.
 ## Where the skills are
 
 The "skills" — the assistant's step-by-step instructions — are two plain
-markdown files in `_internal/skills/`. Any assistant can run one just by
-being pointed at it, and `CLAUDE.md` / `AGENTS.md` route the two operator
-phrases to them automatically:
+markdown files in `_internal/skills/`. Any agentic assistant runs one just
+by being pointed at it, and `CLAUDE.md` / `AGENTS.md` route your requests
+to them:
 
 | skill | file | what it does |
 |---|---|---|
-| `new-speaker` | `_internal/skills/new-speaker.md` | scaffolds one speaker folder in `to-process/` — asks the name, or numbers the folder if you skip it |
-| `apify-speaker-card` | `_internal/skills/apify-speaker-card.md` | the whole generator: validates the form, measures the template, renders, verifies, delivers |
+| `new-speaker` | `_internal/skills/new-speaker.md` | scaffolds one speaker folder in `to-process/` and collects the speaker's details from you in chat, writing them into the form |
+| `apify-speaker-card` | `_internal/skills/apify-speaker-card.md` | the whole generator: validates the form, measures the template, renders, verifies, delivers — and holds the demo run the menu's first line executes |
 
 This README is written for you, the human; your assistant orients itself
 from `CLAUDE.md` / `AGENTS.md`.
@@ -159,14 +162,15 @@ from `CLAUDE.md` / `AGENTS.md`.
 
 ```
 README.md                     you are here — the only doc you need to start
-to-process/  processed/       the queue — this is all you touch day to day
+to-process/  processed/       the queue — built and moved by the assistant
 generated-images/             the finished PNGs (<speaker>-final.png)
 demo-and-more-help/           lost, curious, or cautious? three subfolders:
                               filling-in-the-form/, example-speakers/ and
                               about-this-project/ — start at its README.md
 _internal/                    machinery you never edit: the skills, the
-                              render page, self-hosted fonts, and the two
-                              core templates everything is generated from
+                              bundled demo speaker, the render page,
+                              self-hosted fonts, and the two core templates
+                              everything is generated from
 CLAUDE.md / AGENTS.md         how your assistant orients itself
 ```
 

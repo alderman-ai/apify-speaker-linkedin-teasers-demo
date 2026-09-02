@@ -37,11 +37,9 @@ nothing triggered by cloning, opening, or browsing this folder.
 ## Related safety rails
 
 - The two generation sources (the canon template image and the blank
-  intake form) live in `_internal/core-templates-please-dont-touch/` and
-  are **locked**: before every run they are diffed against the committed
-  version and any edit is automatically reverted and flagged — a stray
-  edit can't silently change your images. Template changes are made only
-  by the maintainer. Details in that folder's README.
+  intake form) live in `_internal/core-templates-please-dont-touch/`. A
+  run only reads them, never writes them; changing one is a deliberate,
+  versioned edit. Details in that folder's README.
 - Nothing in the pipeline ever overwrites your files: over-budget text,
   off-spec images, or geometry mismatches halt with a printed reason.
 - The bundled fonts (Inter, IBM Plex Mono) are under the SIL Open Font

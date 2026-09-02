@@ -13,8 +13,8 @@
 
 # --- 0. template version -- DO NOT EDIT --------------------------------------
 # Bumped only when this template itself changes, never per speaker.
-version:            2
-versioned_at:       "2026-09-01 09:26"
+version:            3
+versioned_at:       "2026-09-03 00:50"
 
 # --- 1. base template --------------------------------------------------------
 # Fixed for this demo: ONE visual template with fixed dimensions (1200x1200).
@@ -42,7 +42,9 @@ speaker_company:    ""
 topic_category:     ""
 
 # --- 5. talk metadata (card footer, right) -- WRITTEN BY ASSISTANT -----------
-level:              ""              # all | easy | int. | adv.
+# level is FIXED since template v3: every card reads "For All Levels". Not an
+# input — the assistant leaves it as is. Fallback if it ever clips: "All Levels".
+level:              "For All Levels"
 duration_minutes:   ""              # number only — the card renders 10 (mins)
 
 # --- 6. placement -- DERIVED, DO NOT AUTHOR ----------------------------------
@@ -113,33 +115,18 @@ characters** counting the 3-character ` / ` joiner.
 
 ## Topic category
 
-The track or theme, Title Case. Fits up to **33 characters**.
+The track or theme, Title Case. Fits up to **26 characters** (the fixed
+`For All Levels` on the footer's right shortened this from 33).
 
 ```topic-category
 [type here]
 ```
 
-## Audience level
+## Audience level — fixed, nothing to type
 
-Choose the level of complexity of the talk. See **audience level notes**
-below. Choose one of these **exactly** (keep the trailing dot on the two
-abbreviations):
-
-- `all`
-- `easy`
-- `int.`
-- `adv.`
-
-```level
-[type here]
-```
-
-### Audience level notes
-
-- All --  mostly conceptual, all levels can benefit
-- Easy -- more basic, and specific enough that advanced might be bored
-- Int. -- Intermediate, for those who know what an md file and a repo are
-- Adv. -- More technical topics that might be not very fun for a beginner.
+Since template v3 every card reads **For All Levels** after the 👥 glyph.
+There is no fence for it; the assistant leaves the frontmatter `level`
+value exactly as it is.
 
 ## Duration
 
@@ -158,9 +145,9 @@ fence label is the enforced character budget: the two-line capacity of the
 render width (`card_width: 400`), operator-calibrated against real renders.
 Exceeding the budget rejects the form; the card is never silently truncated.
 
-```presentation-description-140-char-max
+```presentation-description-100-char-max
 
-[type here -- for reference this line of text including the brackets and running to the second line is exactly one hundred forty characters]
+[type here -- for reference this bracketed line including the brackets is exactly one hundred chars]
 ```
 
 ## End of inputs
@@ -212,7 +199,7 @@ element (§1b).
 | *description fence (body)* | the talk blurb | `[data-slot="description"]` | `textContent`, from the fence, not frontmatter |
 | *(static, bundled)* | orange `?` in an orange-ringed circle | `[data-slot="authorAvatar"]` | fixed asset, **not an input** |
 | `topic_category` | e.g. "Content Ops" | `[data-slot="authorName"]` | `textContent`, two spaces after the icon |
-| `level` | all / easy / int. / adv. | `[data-slot="users"]` | `textContent` |
+| *(static, since v3)* | the text `For All Levels` | `[data-slot="users"]` | fixed text from the frontmatter `level`, **not an input** |
 | `duration_minutes` | minutes, number only | `[data-slot="rating"]` | `textContent` |
 | *(static, in the shell)* | the text `(mins)` | `[data-slot="ratingCount"]` | fixed text, **not an input** |
 | `speaker_image` | the portrait | `.SpeakerCard-photo` | square photo slot of the speaker element, §1b |
@@ -376,7 +363,7 @@ opposite: it renders 1:1 at the block's own size, no scaling.
 ## 2. Field schema
 
 Operator-typed values (`speaker_name`, `speaker_position`,
-`speaker_company`, `topic_category`, `level`, `duration_minutes`, and the
+`speaker_company`, `topic_category`, `duration_minutes`, and the
 description) arrive via the fenced inputs in "Input presentation details
 here" and are transferred into the frontmatter by the assistant; on any
 disagreement the fences win. The schema below describes the frontmatter
@@ -439,14 +426,14 @@ resubmit requested.
 The first fenced block after the frontmatter whose info string starts with
 `presentation-description`. The number in the label is the budget:
 
-    ```presentation-description-140-char-max
+    ```presentation-description-100-char-max
     How we cut lead research from six hours a week to twenty minutes.
     ```
 
 - Inter 12px / 400 / `#a3a3a3`, clamped to `desc_lines` (2 lines).
-- **Budget: 140 characters** — the two-line capacity of the description
-  slot at the card's native CSS render width, operator-calibrated against
-  real renders. The budget is parsed from the fence label itself, so
+- **Budget: 100 characters** — a safe two-line capacity of the description
+  slot at the card's native CSS render width, measured 2026-09-03 against
+  real renders (ordinary prose fits 114–123, wide capitals as few as 72). The budget is parsed from the fence label itself, so
   retuning it for a different card width means renaming the fence.
 - Newlines inside the fence are collapsed to spaces; leading/trailing
   whitespace is trimmed. One plain paragraph — no markdown.
@@ -482,16 +469,18 @@ off-spec · either half empty → the line collapses.
 
 - Inter 12px / 500 / `#a3a3a3`, right of the footer help icon with two
   spaces of clearance. Title Case. Single line, ellipsises.
-- Budget: **33 characters** before it collides with the footer's
-  right-hand group.
+- Budget: **26 characters** before it collides with the footer's
+  right-hand group (shortened from 33 when `level` became the fixed
+  `For All Levels`, template v3).
 
-### `level` — string, **required**
+### `level` — **fixed, not an input**
 
-- One of exactly: `all` · `easy` · `int.` · `adv.` — including the
-  trailing dot on the two abbreviations. Renders right of the 👥 glyph.
+- Every card reads `For All Levels` right of the 👥 glyph (template v3).
+  The frontmatter value ships filled; the assistant leaves it alone. If a
+  future footer change makes it clip, the sanctioned fallback is
+  `All Levels`.
 
-**States:** one of the four → renders · anything else → renders as given,
-flagged as off-vocabulary rather than failing.
+**States:** always renders.
 
 ### `duration_minutes` — string, **required**
 
