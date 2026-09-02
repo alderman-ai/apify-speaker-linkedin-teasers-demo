@@ -14,6 +14,14 @@ reproduction of apify.com's public actor-card design, rebuilt from scratch as
 an homage for a non-commercial community-event teaser. Apify's name, logo and
 visual design belong to Apify.
 
+## Never used GitHub or an AI coding tool? Start here
+
+Read **`04 Demo and More Help/Getting Started/getting-started.md`** — six
+steps from "download the folder" to "post the picture", no jargon, no
+account needed. Short version: download the ZIP, install
+[Claude Code](https://claude.com/claude-code), open this folder in it, and
+paste **"Walk me through making my first speaker card"** into the chat.
+
 ## What you need
 
 Nothing to install. The repo is 100% self-contained — fonts, card code,
@@ -87,7 +95,10 @@ template):
 
 A folder lives in exactly one stage. Successes move whole; failures stay
 put with a printed reason and never write partial output. Nothing is ever
-overwritten — re-running a speaker means clearing their old results first.
+overwritten — re-run a speaker as often as you like and the new results
+land alongside the old ones under a numbered name: `<speaker>-01`, then
+`-02`, the lowest free number, with the same number on the archived folder
+and the PNG.
 
 **Missing images** stop the run with a choice: resubmit, or render now with
 a dashed placeholder outline that a correctly sized image covers completely
@@ -159,7 +170,9 @@ _internal/                    machinery you never edit: the skills, the
 CLAUDE.md / AGENTS.md         how your assistant orients itself
 ```
 
-Every folder carries its own `INDEX.md` describing what's inside.
+Every folder carries its own `INDEX.md` describing what's inside (the font
+licence folder under `_internal/fonts/` excepted — it holds only the two
+licence texts).
 
 ## Fonts and licences
 

@@ -6,7 +6,7 @@ in here, and how well it stood up to testing.
 | file | what |
 |---|---|
 | `scripts-and-security.md` | **read this if you're wary of cloned repos** — a plain-English inventory of every piece of code in this project, what it does, and when it runs (short version: there are no executable scripts at all) |
-| `pipeline-evaluation.md` | the 2026-09-01 stress test: ten speakers, two independent executors reading the docs cold — what it proved, and the four findings it turned up |
+| `pipeline-evaluation.md` | the 2026-09-01 stress test: ten speakers, two independent executors reading the docs cold — what it proved, and the findings it turned up |
 
 ## Keeping the inventory truthful
 

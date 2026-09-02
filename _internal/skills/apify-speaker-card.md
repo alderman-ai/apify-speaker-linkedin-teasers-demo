@@ -83,8 +83,12 @@ fetch a real stand-in image.
 - **Accepted**: any **exactly square (1:1)** PNG / JPG / JPEG up to
   **800×800**. Scale an accepted square to the slot size with
   high-quality resampling and archive the result beside the form as
-  `speaker.png` (keep the operator's original file untouched); the render
-  uses the slot-sized copy. Square onto square — nothing is ever cropped.
+  `speaker.png`; the render uses that slot-sized copy. The operator's own
+  file is never destroyed: if it is already called `speaker.<ext>`, rename
+  it to `speaker-original.<ext>` first, then write the slot-sized copy as
+  `speaker.png`; if it has any other name, leave it exactly as it is and
+  write the slot-sized copy alongside it as `speaker.png`. Square onto
+  square — nothing is ever cropped.
 - **Halt** that folder, reporting the actual dimensions/format, for
   anything non-square, larger than 800×800, or in another format. Never
   crop, pad or reframe a photo — squaring it is the operator's decision.
@@ -173,19 +177,26 @@ purpose; the render must never touch a network). Replace every `{{TOKEN}}`:
 | `HELP_ICON_URI` | `file:///` URL of `_internal/render/footer-help-icon.svg` |
 | `SPEAKER_NAME`, `POSITION_COMPANY` (join with a spaced ` / `), `DESCRIPTION`, `TOPIC_CATEGORY`, `LEVEL`, `DURATION_MINUTES` (number only — the static `(mins)` is baked into the shell) | HTML-escaped text |
 
-Verify no `{{` remains. Then screenshot — **into the temp dir first; the
-browser cannot write into Desktop folders** (observed: Access denied):
+Verify no `{{` remains. Then screenshot — **into the temp dir first**
+(`%TEMP%` on Windows, `$TMPDIR` or `/tmp` on macOS/Linux), then copy the
+PNG to its destination:
 
 ```
 chrome --headless=new --disable-gpu --hide-scrollbars --force-color-profile=srgb
   --force-device-scale-factor=1 --virtual-time-budget=4000
-  --window-size=<PAGE_W>,<PAGE_H> --screenshot=<%TEMP% path> <file:/// url of _run page>
+  --window-size=<PAGE_W>,<PAGE_H> --screenshot=<temp-dir path> <file:/// url of _run page>
 ```
+
+**Windows quirk:** the browser cannot write into Desktop folders there
+(observed: Access denied) — which is why the temp dir is not optional on
+Windows even when the destination looks writable.
 
 Any Chromium-based browser runs these exact flags. Find one, in order: the
 CHROME env var · Chrome at
 `C:\Program Files\Google\Chrome\Application\chrome.exe` · Edge (preinstalled
 on Windows) at `C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe` ·
+on macOS `/Applications/Google Chrome.app/Contents/MacOS/Google Chrome`, then
+`/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge` ·
 `google-chrome` / `chromium` / `msedge` on PATH. Never download a browser —
 one of these is already on the machine.
 

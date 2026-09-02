@@ -10,6 +10,22 @@ and a finished PNG lands in `03 Generated Images/`; the root `README.md`
 walks through that in four steps. This folder is for the moments around
 the edges.
 
+## "I've never used GitHub or an AI coding tool"
+
+→ **`Getting Started/getting-started.md`**
+
+Six steps, plain words, no account needed: download the folder from
+GitHub, install an AI assistant (Claude Code is the easy one), open the
+folder in it, and paste one sentence into the chat —
+**"Walk me through making my first speaker card"**. From there the
+assistant asks you one question at a time and does the typing, the
+checking and the drawing. About ten minutes end to end, and it tells you
+plainly if anything needs fixing.
+
+Start there rather than with the root `README.md` if words like *repo*,
+*markdown* or *terminal* are unfamiliar — the README assumes you've used
+one of these tools before.
+
 ## "I'm filling in the form and I don't know what fits where"
 
 → **`Filling in the Form/`**

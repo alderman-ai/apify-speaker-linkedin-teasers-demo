@@ -13,7 +13,11 @@ Three things. The skill refuses (or asks about placeholders) until it has them.
 **Square, PNG/JPG/JPEG, no bigger than 800×800.** The perfect supply is
 **262×262** — the photo slot's exact size on the current template — but any
 square within the cap works: the generator scales it into the slot without
-cropping a single pixel, and archives the slot-sized copy it used.
+cropping a single pixel, and archives the slot-sized copy it used as
+`speaker.png`. If your file was already called `speaker.<ext>`, yours is
+renamed to `speaker-original.<ext>` first — so two photos in the archive
+means the original plus the resized copy that was actually drawn, and
+nothing of yours was thrown away.
 
 Frame it yourself, the way you want to be seen. The pipeline **never crops,
 pads or reframes** a photo — a non-square, oversized or wrong-format image

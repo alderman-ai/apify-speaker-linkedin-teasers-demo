@@ -1,4 +1,5 @@
 ---
+# Historical archive from before the 2026-09-01 redesign: the paths and the python commands below never existed in the shipped repo; the pipeline has no scripts. Kept unedited as a record.
 # =============================================================================
 # ACTOR CARD INTAKE  —  one file = one rendered card
 # Lives as intake.md inside one speaker folder under to-process/.

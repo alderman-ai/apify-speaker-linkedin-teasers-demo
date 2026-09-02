@@ -15,6 +15,7 @@ Procedure and contract (`_internal/`):
 
 | path | what |
 |---|---|
+| `_internal/skills/novice-walkthrough.md` | **the guided first-run procedure — read it in full before walking anyone through.** A wrapper for people who have never used GitHub, a terminal, or an AI coding tool: silent preflight (both skills read, drift check, browser detection), folder tour, then one question at a time through scaffolding, the form, the two images and the render — delegating to `new-speaker.md` and `apify-speaker-card.md` at the right moments rather than re-implementing them. Use when the operator says "Walk me through making my first speaker card", "I'm new to this", "hold my hand", "guide me step by step", or otherwise sounds like they have never seen this repo |
 | `_internal/skills/apify-speaker-card.md` | **the generator's complete operating procedure — read it in full before processing anything; follow it, don't improvise.** Mass-produces Apify-styled speaker teaser images: renders a pixel-faithful Apify actor card (repurposed as a speaker card) and a card-style speaker portrait element into the canon template, one finished PNG per speaker. Use when the operator says "process the intake forms", "process the queue", "generate the speaker cards", "new speaker <name>", or drops folders into `01 To Process/` |
 | `_internal/skills/new-speaker.md` | **the scaffolder's complete procedure — read it in full before scaffolding.** Adds a new speaker folder to the queue — the single place to drop all the visual assets needed to generate that speaker's teaser image (asks the name; declined → `new-speaker-<NN>`, lowest free number; a repeat name → `<name>-<NN>`, first dupe = 01). Use when the operator says "new speaker", "/new-speaker", "add a speaker", "scaffold a speaker folder", or names a person to add to the lineup |
 | `_internal/core-templates-please-dont-touch/intake-template.md` | the input contract: every field, budget, failure mode; everything the operator types lives in labelled body fences. Versioned in its frontmatter (`version` / `versioned_at`). Copied into each folder as `intake.md` |
@@ -25,7 +26,7 @@ The queue:
 | path | what |
 |---|---|
 | `01 To Process/<speaker>/` | one folder per pending card: `intake.md`, `README.md`, `company-logo.*`, `speaker.*` |
-| `02 Processed/<speaker>/` | the folder after success (archive — form + assets). Never overwrite here — a taken name gets `-<NN>`. Archives are historical: every archived intake predates the 2026-09-01 tree reorganisation and the 2026-09-02 folder renaming, so it still says `to-process/` / `processed/` / `generated-images/`; never take current paths from an archive |
+| `02 Processed/<speaker>/` | the folder after success (archive — form + assets). Never overwrite here — a taken name gets `-<NN>`. Archives are historical: every archived intake predates the 2026-09-01 tree reorganisation and the 2026-09-02 folder renaming, so it still uses the old un-numbered folder names; never take current paths from an archive |
 | `03 Generated Images/<speaker>-final.png` | the finished render, one PNG per speaker. Never overwrite here — a taken name gets `-<NN>` |
 
 Render machinery (`_internal/` — use, never restructure):
@@ -38,6 +39,7 @@ Render machinery (`_internal/` — use, never restructure):
 | `_internal/fonts/fonts.css` | the @font-face set the shell links as `../fonts/fonts.css` — renders never touch a network |
 | `_internal/fonts/*.woff2` | Inter 400/500/600 + IBM Plex Mono 500, latin + latin-ext |
 | `_internal/fonts/licenses/` | the two OFL licence texts |
+| `_internal/fonts/jic/` | byte-identical reference copies of the two core templates (`BU_intake-template.md`, `BU_speaker-teaser-linkedin_v3.png`) — the drift check falls back to these when there is no `.git` |
 | `_internal/speaker-folder-README.md` | copied into each new speaker folder as its `README.md` |
 | `_internal/sample-assets/` | synthetic sample logo + portrait used by the retired fictional worked examples in `04 Demo and More Help/Example Speakers/Fictional Characters/` |
 | `_internal/core-templates-please-dont-touch/speaker-teaser-linkedin_v3.png` | the one canon template (1200×1200, currently v3), **machine-built**: baked gradient starfield + purple card block + green speaker block. Supersedes the operator's original Canva export |
@@ -58,7 +60,8 @@ sits in `Getting Started/`, `Filling in the Form/`, `Example Speakers/` or
 | `04 Demo and More Help/Example Speakers/Fictional Characters/` | the fictional demo speakers (folklore characters + synthetic personas), archived out of the live queue: `Processed/` folders + `Generated Images/` PNGs |
 | `04 Demo and More Help/Example Speakers/Real People Stress Test/` | the simulated-"real" stress-test speakers (real Czech public figures), kept as mid-project snapshots: `Processed/` + `Generated Images/` |
 
-Every folder carries its own `INDEX.md` for routing. `README.md` is
+Every folder carries its own `INDEX.md` for routing (`_internal/fonts/licenses/`,
+which holds only the two licence texts, excepted). `README.md` is
 reserved for orientation: the root README (the human entry point), the
 core-templates README (a warning plus the template recipe), the
 `04 Demo and More Help/` README (help-folder orientation, pointing
@@ -85,12 +88,24 @@ freely, and many have never seen this repo.
   validate → read geometry off the template → ratio check → render in a
   headless Chromium browser → verify by inspection → PNG to
   `03 Generated Images/<speaker>-final.png`, folder to `02 Processed/`.
+- **Walkthrough intent** — "Walk me through making my first speaker card"
+  (the exact sentence the getting-started page tells them to paste),
+  "walk me through", "I'm new to this", "I've never done this before",
+  "hold my hand", "guide me step by step", "first time", "start the
+  walkthrough" → read `_internal/skills/novice-walkthrough.md` in full and
+  run it: one guided session, one question per turn, ending in a finished
+  PNG. It wraps the other two skills — it never replaces them and never
+  relaxes a ground rule to keep a beginner moving.
 - **Ambiguous ask** — "make me an image", "create a teaser", "I need a
   card for LinkedIn", and similar requests that name neither workflow:
   check `01 To Process/` first. If candidates are waiting, name them and ask
   one question — process these now, or start a new speaker? If the queue
   is empty, take it as scaffold intent (e.g. *"Sure! First, what's the
   speaker's name?"*).
+  If they sound new to the repo at all — asking what to do next, unsure
+  where files live, apologising for not knowing — offer the walkthrough
+  instead of a bare scaffold: *"Happy to walk you through the whole thing
+  step by step — want that?"* → `_internal/skills/novice-walkthrough.md`.
 - **Template-change intent** — "update the template", "change the intake
   form", "new visual template", "edit the canon template", or any request
   that would modify a file in `core-templates-please-dont-touch/`: the
@@ -117,7 +132,12 @@ freely, and many have never seen this repo.
   subject. Never edit those files, never commit a change to them, and
   never bypass or weaken the auto-restore. **At the start of work in this
   repo, run `git log --oneline -20 --grep=MISMATCH`; on any hit, alert
-  the operator** that a drift event occurred. Template changes are made
+  the operator** that a drift event occurred. **Where there is no `.git`
+  directory — the normal case for a ZIP download — skip the MISMATCH log
+  check and instead hash-compare each core template against its reference
+  copy in `_internal/fonts/jic/` (`BU_intake-template.md`,
+  `BU_speaker-teaser-linkedin_v3.png`), copying the reference over a
+  drifted live file**, exactly as both skills prescribe. Template changes are made
   only by the maintainer, from their machine, through the local procedure
   described under routing — its commits move the baseline, which is why a
   sanctioned change is never reverted.

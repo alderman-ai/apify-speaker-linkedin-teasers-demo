@@ -26,22 +26,6 @@ their steps here, never simplify them, and never relax a single ground
 rule to keep a beginner moving — a halt is still a halt; you just
 translate it into plain words and help them fix it.
 
-## Folder names — read this before quoting a path
-
-The operator-facing folders are numbered:
-
-| the skills say | the folder is actually called |
-|---|---|
-| `to-process/` | `01 To Process/` |
-| `processed/` | `02 Processed/` |
-| `generated-images/` | `03 Generated Images/` |
-| `demo-and-more-help/` | `04 Demo and More Help/` |
-
-`_internal/` and the speaker slug folders (`alex-alderman`) are unchanged.
-When `new-speaker.md` or `apify-speaker-card.md` names an old path, map it
-onto the numbered folder. **Every path has spaces in it — quote it in every
-shell command** (`"01 To Process/alex-alderman"`).
-
 ## Tone
 
 - **Short messages. One question per turn.** Ask, stop, wait for the reply.
@@ -56,6 +40,8 @@ shell command** (`"01 To Process/alex-alderman"`).
   tool calls.
 - **Offer to do the typing.** The default assumption is that they would
   rather answer a question than edit a file.
+- **The operator-facing folder names contain spaces — quote every path in
+  every shell command** (`"01 To Process/alex-alderman"`).
 - Warm, plain, unhurried. No emoji. No "simply" or "just".
 - If they answer something you didn't ask, take the answer, thank them,
   and ask your question again.
@@ -309,14 +295,16 @@ Details for options 2 and 3:
   behaviour. Answer its "resubmit or placeholder?" question with
   "placeholder" on their behalf in step 5, and say clearly that the
   finished picture will have a dashed box in it.
-- **Option 3 (practice run):** use `_internal/sample-assets/top-left-actor.png`
-  as the logo. **Check the sample portrait's dimensions before offering
-  it** — `_internal/sample-assets/speaker.png` is currently 720×960 and
-  would be rejected by the same rule. If it isn't an accepted square, take
-  a square stand-in portrait from an archived example instead, e.g.
+- **Option 3 (practice run):** `_internal/sample-assets/top-left-actor.png`
+  (160×160) works as the logo, but **not** the sample portrait beside it —
+  `_internal/sample-assets/speaker.png` is 720×960, not square, and the
+  same rule would reject it. Take a square stand-in portrait from an
+  archived example instead:
   `04 Demo and More Help/Example Speakers/Fictional Characters/Processed/baba-yaga/speaker.png`
-  (262×262), copy it into the speaker folder as `speaker.png`, and say in
-  plain words that it is a stand-in face, not theirs.
+  (262×262, the photo slot's exact size), with `company-logo.png`
+  (400×400) from that same folder if you want a matching logo. Copy the
+  portrait into the speaker folder as `speaker.png`, and say in plain
+  words that it is a stand-in face, not theirs.
 
 If the **logo** is missing or is not square, it is much less strict —
 non-square logos are centre-cropped by the card itself. Mention it, don't

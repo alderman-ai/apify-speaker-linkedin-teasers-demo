@@ -10,6 +10,8 @@ queue, purely to show what the pipeline produces.
 - `Generated Images/` — their finished 1200×1200 PNGs.
 - `Processed/` — their archived speaker folders (form + assets), exactly
   as they ran; intakes reference the old pre-reorganisation paths.
+  `Processed/petr-svoboda/` holds only `README.md` and `intake.md` — its
+  logo and photo were not retained; the finished PNG still ships.
 
 Attribution note: some folklore portraits and one logo derive from
 CC BY-SA sources — publishing those images carries an attribution

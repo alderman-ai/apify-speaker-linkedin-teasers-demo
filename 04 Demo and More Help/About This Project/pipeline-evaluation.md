@@ -129,6 +129,10 @@ triggers.
   scripts in a session scratchpad that dies with the machine. Fix: commit
   the source PNG into `visual-templates/`; decide separately on the recipe
   (next point).
+  *Superseded: the template is now machine-built and committed as
+  `_internal/core-templates-please-dont-touch/speaker-teaser-linkedin_v3.png`,
+  with its rebuild recipe in that folder's README — Tier 2 is no longer
+  blocked.*
 - **The `.ps1` question (evaluated, per operator request — nothing removed).**
   The repo currently ships **zero executable scripts**; that is a feature,
   not an accident — "the assistant is the engine" is the design, and it
@@ -171,18 +175,19 @@ once, and neither half adds a shell script to the repo.)
    of costing one executor ten calls to diagnose and the other a defective
    deliverable.
 
-Runner-up (cheap, worth doing regardless): fix the five §2 doc defects —
+Runner-up (cheap, worth doing regardless): fix the six §2 doc defects —
 budget number or line-gate, largest-component mask rule, drop the dilation
 for machine-built templates, integer worked example, name the derived
-photo file — and define explicitly whether a rendered-line overflow halts
+photo file, and the smaller frictions in §2.6 — and define explicitly
+whether a rendered-line overflow halts
 the folder (it should; both executors should have behaved identically).
 
 ---
 
-*Status at time of writing: the ten test teasers are in `final-output/`
-(`vaclav-havel` needs a re-render once the budget decision lands; three
-fantasy descriptions were legitimately re-authored shorter by the executor
-after a halt). The regenerated docs and this file are uncommitted. Three
+*Status at time of writing: the ten test teasers were delivered to
+`final-output/` (`vaclav-havel` still needed a re-render once the budget
+decision landed; three fantasy descriptions were legitimately re-authored
+shorter by the executor after a halt). Three
 fantasy portraits and the Czech-outline logo are CC BY-SA — publishing
 those four teasers carries an attribution obligation; exact credit lines
 are in the prep manifests.*

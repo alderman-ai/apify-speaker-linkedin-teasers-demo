@@ -8,7 +8,10 @@ executable scripts** — no PowerShell (`.ps1`), no shell scripts, no batch
 files, no Python, no standalone JavaScript, no binaries, no installers, no
 package manifests that pull dependencies. That's deliberate design, not an
 accident: the AI assistant *is* the engine, following plain-markdown
-procedures you can read yourself in `_internal/skills/`.
+procedures you can read yourself in `_internal/skills/`. There are three
+such procedure files — a guided first-run walkthrough, the speaker-folder
+scaffolder, and the generator — and all three are markdown instructions
+for the assistant to read, not code that runs.
 
 ## Every piece of code in this repo, itemised
 
@@ -22,8 +25,11 @@ instructed to keep it truthful.
 | `04 Demo and More Help/Filling in the Form/text-budgets.html` | HTML + CSS only — **no JavaScript** | opened manually, same as above | displays a static table |
 | `_internal/render/shell.html` | HTML + CSS only — **no JavaScript** | the assistant screenshots a filled copy of it with a headless browser during "process the queue" | displays the card so the browser can photograph it |
 | the `.svg` files | vector images, **no scripts inside** | displayed as images | draw shapes |
+| `_internal/fonts/fonts.css` | a stylesheet: `@font-face` rules pointing at the bundled `.woff2` files next to it — **not executable, no JavaScript** | loaded by `shell.html` during a render | tells the browser which local font file to use for which weight. It names only files inside this folder, so a render never reaches the network |
 
-Everything else in the repo is markdown, PNG/JPG images, and font files.
+Everything else in the repo is markdown, PNG/JPG images, font files, and
+one empty `.gitkeep` placeholder that keeps the empty `01 To Process/`
+folder in version control.
 
 ## When does anything execute at all?
 
@@ -33,6 +39,17 @@ to screenshot the render page — using local files only. The repo's docs
 explicitly forbid downloading a browser, fetching from the network during
 renders, or adding scripts. There are no hooks, no auto-run configuration,
 nothing triggered by cloning, opening, or browsing this folder.
+
+One command the assistant may run on your behalf is worth naming, because
+it writes to disk: the drift check it performs before scaffolding a
+speaker or rendering a card. If the folder is a git checkout and one of
+the two locked template files has been modified, the assistant runs
+`git restore` on `_internal/core-templates-please-dont-touch/`; if there
+is no git history (you downloaded a ZIP), it instead copies the matching
+reference file from `_internal/fonts/jic/` over the drifted one. Either
+way it only ever puts those two locked template files back to their
+original state, touches nothing else anywhere in the repo or on your
+machine, and tells you exactly what it reverted.
 
 ## Related safety rails
 
