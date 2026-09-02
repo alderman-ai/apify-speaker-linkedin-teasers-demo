@@ -9,7 +9,7 @@
   oddities are deliberate, do not tidy them), and `.SpeakerCard` is the
   grey-framed speaker element with its fixed `Join me in PRAGUE` copy.
   It contains **no JavaScript** — see
-  `demo-and-more-help/scripts-and-security.md`.
+  `demo-and-more-help/about-this-project/scripts-and-security.md`.
 - `footer-help-icon.svg` — the static 20x20 footer circle icon (orange `?`;
   its 1px orange ring is the avatar border in the shell CSS), identical on
   every generated card, never an input.

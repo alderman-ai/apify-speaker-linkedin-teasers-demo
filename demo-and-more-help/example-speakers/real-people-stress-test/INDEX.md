@@ -1,15 +1,15 @@
-# mid-project-snapshots/
+# real-people-stress-test/
 
 Snapshots from the 2026-09-01 pipeline stress test (see
-`../pipeline-evaluation.md`): five real Czech public figures — Antonín
-Dvořák, Jaromír Jágr, Karel Čapek, Martina Navrátilová, Václav Havel —
-were simulated as meetup speakers to exercise the docs and generator.
-Archived here, out of the live queue, as a record of the project
-mid-flight.
+`../../about-this-project/pipeline-evaluation.md`): five real Czech public
+figures — Antonín Dvořák, Jaromír Jágr, Karel Čapek, Martina Navrátilová,
+Václav Havel — were simulated as meetup speakers to exercise the docs and
+generator. Archived here, out of the live queue, as a record of the
+project mid-flight.
 
 - `generated-images/` — their finished 1200×1200 PNGs
   (`vaclav-havel-final.png` shipped with a known clipped description —
-  finding #1 of the evaluation).
+  finding #1 of the evaluation, kept as evidence rather than regenerated).
 - `processed/` — their archived speaker folders (form + assets), exactly
   as they ran; intakes reference the old pre-reorganisation paths.
 

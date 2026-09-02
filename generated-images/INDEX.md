@@ -13,5 +13,5 @@ moving or renaming their existing final first.
 
 `alex-alderman-final.png` is the live worked example. The demo-era renders
 (fictional characters and the simulated-"real" stress-test speakers) were
-archived into `demo-and-more-help/fictional-speakers-as-demo/` and
-`demo-and-more-help/mid-project-snapshots/`.
+archived into `demo-and-more-help/example-speakers/fictional-characters/` and
+`demo-and-more-help/example-speakers/real-people-stress-test/`.

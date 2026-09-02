@@ -20,7 +20,7 @@ Nothing to install. The repo is 100% self-contained — fonts, card code,
 template and instructions all ship inside this folder; nothing is fetched
 from the internet at any point, and there are no scripts or packages.
 Wary of cloned repos? Good instinct —
-`demo-and-more-help/scripts-and-security.md` is a plain-English inventory
+`demo-and-more-help/about-this-project/scripts-and-security.md` is a plain-English inventory
 of every piece of code in this project and when it runs (short version:
 there are **zero executable scripts** here).
 
@@ -58,7 +58,7 @@ It never silently crops your text, reframes your photo, or stretches the
 card.
 
 Want to see what "done" looks like first? Open
-`demo-and-more-help/intake-template-completed-example.md`, or the finished
+`demo-and-more-help/filling-in-the-form/intake-template-completed-example.md`, or the finished
 PNGs in `generated-images/`.
 
 ## What the image looks like
@@ -114,8 +114,8 @@ the machine-read frontmatter at processing time. The short version:
 Over-budget descriptions are rejected, not silently cut. The footer's small
 orange `?` circle is static on every card and ships with the repo.
 
-See `demo-and-more-help/Actor card field mapping.png` for the annotated
-picture and `demo-and-more-help/Actor card text budgets.png` for the
+See `demo-and-more-help/filling-in-the-form/Actor card field mapping.png` for the annotated
+picture and `demo-and-more-help/filling-in-the-form/Actor card text budgets.png` for the
 budgets table.
 
 ## The template is canon
@@ -161,9 +161,9 @@ from `CLAUDE.md` / `AGENTS.md`.
 README.md                     you are here — the only doc you need to start
 to-process/  processed/       the queue — this is all you touch day to day
 generated-images/             the finished PNGs (<speaker>-final.png)
-demo-and-more-help/           lost, curious, or cautious? the filled-in
-                              example, annotated graphics, the security
-                              briefing, and the pipeline stress test
+demo-and-more-help/           lost, curious, or cautious? three subfolders:
+                              filling-in-the-form/, example-speakers/ and
+                              about-this-project/ — start at its README.md
 _internal/                    machinery you never edit: the skills, the
                               render page, self-hosted fonts, and the two
                               core templates everything is generated from

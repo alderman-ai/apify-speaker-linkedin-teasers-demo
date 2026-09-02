@@ -16,7 +16,7 @@ build script and no dependency beyond a Chromium-based browser** (Chrome, or
 the Edge that ships with Windows) — you are the engine. Everything is done
 with reading, writing, one headless-browser command, and your own eyes.
 `_internal/core-templates-please-dont-touch/intake-template.md` is the input
-contract (`demo-and-more-help/intake-template-completed-example.md` is a
+contract (`demo-and-more-help/filling-in-the-form/intake-template-completed-example.md` is a
 filled reference copy); consult it for field rules rather than improvising.
 
 ## The queue

@@ -59,7 +59,8 @@ the intake form and (added by the operator) the two images.
 5. **Create the folder with two files:**
    - `intake.md` — a copy of
      `_internal/core-templates-please-dont-touch/intake-template.md` (the
-     blank template, NOT the completed example in `demo-and-more-help/`).
+     blank template, NOT the completed example in
+     `demo-and-more-help/filling-in-the-form/`).
      If the name is known, prefill it in both the `speaker-name` body fence
      and the frontmatter `speaker_name`.
    - `README.md` — a copy of `_internal/speaker-folder-README.md`.

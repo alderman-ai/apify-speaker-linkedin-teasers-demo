@@ -10,8 +10,8 @@ speaker requires renaming or clearing their folder first. `alex-alderman/`
 is the live worked example (its render is
 `generated-images/alex-alderman-final.png`). The demo-era speakers were
 archived out of the live queue into
-`demo-and-more-help/fictional-speakers-as-demo/` (fictional characters and
-synthetic personas) and `demo-and-more-help/mid-project-snapshots/` (the
+`demo-and-more-help/example-speakers/fictional-characters/` (fictional characters and
+synthetic personas) and `demo-and-more-help/example-speakers/real-people-stress-test/` (the
 simulated-"real" stress-test speakers).
 
 Archived files are historical records and are left as they ran: intakes

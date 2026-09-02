@@ -18,7 +18,7 @@ Procedure and contract (`_internal/`):
 | `_internal/skills/apify-speaker-card.md` | **the generator's complete operating procedure — read it in full before processing anything; follow it, don't improvise.** Mass-produces Apify-styled speaker teaser images: renders a pixel-faithful Apify actor card (repurposed as a speaker card) and a card-style speaker portrait element into the canon template, one finished PNG per speaker. Use when the operator says "process the intake forms", "process the queue", "generate the speaker cards", "new speaker <name>", or drops folders into `to-process/` |
 | `_internal/skills/new-speaker.md` | **the scaffolder's complete procedure — read it in full before scaffolding.** Adds a new speaker folder to the queue — the single place to drop all the visual assets needed to generate that speaker's teaser image (asks the name; declined → `new-speaker-<NN>`, lowest free number; a repeat name → `<name>-<NN>`, first dupe = 01). Use when the operator says "new speaker", "/new-speaker", "add a speaker", "scaffold a speaker folder", or names a person to add to the lineup |
 | `_internal/core-templates-please-dont-touch/intake-template.md` | the input contract: every field, budget, failure mode; everything the operator types lives in labelled body fences. Versioned in its frontmatter (`version` / `versioned_at`). Copied into each folder as `intake.md` |
-| `demo-and-more-help/intake-template-completed-example.md` | the same template with every fence and frontmatter value filled in — what "done" looks like |
+| `demo-and-more-help/filling-in-the-form/intake-template-completed-example.md` | the same template with every fence and frontmatter value filled in — what "done" looks like |
 
 The queue:
 
@@ -39,25 +39,29 @@ Render machinery (`_internal/` — use, never restructure):
 | `_internal/fonts/*.woff2` | Inter 400/500/600 + IBM Plex Mono 500, latin + latin-ext |
 | `_internal/fonts/licenses/` | the two OFL licence texts |
 | `_internal/speaker-folder-README.md` | copied into each new speaker folder as its `README.md` |
-| `_internal/sample-assets/` | synthetic sample logo + portrait used by the retired fictional worked examples in `demo-and-more-help/fictional-speakers-as-demo/` |
+| `_internal/sample-assets/` | synthetic sample logo + portrait used by the retired fictional worked examples in `demo-and-more-help/example-speakers/fictional-characters/` |
 | `_internal/core-templates-please-dont-touch/speaker-teaser-linkedin_v3.png` | the one canon template (1200×1200, currently v3), **machine-built**: baked gradient starfield + purple card block + green speaker block. Supersedes the operator's original Canva export |
 
-Reference (`demo-and-more-help/` — the operator-facing help and showcase folder):
+Reference (`demo-and-more-help/` — the operator-facing help and showcase
+folder; its root holds only `INDEX.md` and `README.md`, everything else
+sits in `filling-in-the-form/`, `example-speakers/` or `about-this-project/`):
 
 | path | what |
 |---|---|
-| `demo-and-more-help/Actor card field mapping.png` | annotated picture of every field and where it lands on the card |
-| `demo-and-more-help/Actor card text budgets.png` | the character-budget table for every text field |
-| `demo-and-more-help/field-mapping.html`, `demo-and-more-help/text-budgets.html` | those graphics' sources, re-renderable with headless Chrome |
-| `demo-and-more-help/scripts-and-security.md` | the plain-English inventory of every piece of code in this repo and when it runs. **If any change adds code or scripts anywhere in the repo, this file must be updated in the same change — keep it truthful** |
-| `demo-and-more-help/pipeline-evaluation.md` | the 2026-09-01 ten-speaker stress test of the docs and pipeline |
-| `demo-and-more-help/fictional-speakers-as-demo/` | the fictional demo speakers (folklore characters + synthetic personas), archived out of the live queue: `fictional-processed/` folders + `fictional-generated-images/` PNGs |
-| `demo-and-more-help/mid-project-snapshots/` | the simulated-"real" stress-test speakers (real Czech public figures), kept as mid-project snapshots: `processed/` + `generated-images/` |
+| `demo-and-more-help/filling-in-the-form/Actor card field mapping.png` | annotated picture of every field and where it lands on the card |
+| `demo-and-more-help/filling-in-the-form/Actor card text budgets.png` | the character-budget table for every text field |
+| `demo-and-more-help/filling-in-the-form/field-mapping.html`, `demo-and-more-help/filling-in-the-form/text-budgets.html` | those graphics' sources, re-renderable with headless Chrome |
+| `demo-and-more-help/about-this-project/scripts-and-security.md` | the plain-English inventory of every piece of code in this repo and when it runs. **If any change adds code or scripts anywhere in the repo, this file must be updated in the same change — keep it truthful** |
+| `demo-and-more-help/about-this-project/pipeline-evaluation.md` | the 2026-09-01 ten-speaker stress test of the docs and pipeline |
+| `demo-and-more-help/example-speakers/fictional-characters/` | the fictional demo speakers (folklore characters + synthetic personas), archived out of the live queue: `processed/` folders + `generated-images/` PNGs |
+| `demo-and-more-help/example-speakers/real-people-stress-test/` | the simulated-"real" stress-test speakers (real Czech public figures), kept as mid-project snapshots: `processed/` + `generated-images/` |
 
 Every folder carries its own `INDEX.md` for routing. `README.md` is
 reserved for orientation: the root README (the human entry point), the
-core-templates README (a warning plus the template recipe), and each
-speaker folder's README (its checklist).
+core-templates README (a warning plus the template recipe), the
+`demo-and-more-help/` README (help-folder orientation, pointing
+assistants at its INDEX), and each speaker folder's README (its
+checklist).
 
 ## What operators say — routing requests
 

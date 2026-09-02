@@ -18,8 +18,8 @@ instructed to keep it truthful.
 
 | where | what it is | when it runs | what it can do |
 |---|---|---|---|
-| `demo-and-more-help/field-mapping.html` | one embedded `<script>` block, ~25 lines of JavaScript | **only** if a person deliberately opens this HTML file in a browser | draws the grey connector wires on the annotation graphic by measuring where the labels sit on the page. It stays entirely inside its own page: no network requests, no file access, no storage, no downloads |
-| `demo-and-more-help/text-budgets.html` | HTML + CSS only — **no JavaScript** | opened manually, same as above | displays a static table |
+| `demo-and-more-help/filling-in-the-form/field-mapping.html` | one embedded `<script>` block, ~25 lines of JavaScript | **only** if a person deliberately opens this HTML file in a browser | draws the grey connector wires on the annotation graphic by measuring where the labels sit on the page. It stays entirely inside its own page: no network requests, no file access, no storage, no downloads |
+| `demo-and-more-help/filling-in-the-form/text-budgets.html` | HTML + CSS only — **no JavaScript** | opened manually, same as above | displays a static table |
 | `_internal/render/shell.html` | HTML + CSS only — **no JavaScript** | the assistant screenshots a filled copy of it with a headless browser during "process the queue" | displays the card so the browser can photograph it |
 | the `.svg` files | vector images, **no scripts inside** | displayed as images | draw shapes |
 
