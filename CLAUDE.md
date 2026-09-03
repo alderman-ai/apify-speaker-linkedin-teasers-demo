@@ -73,7 +73,6 @@ Render machinery (`_internal/` — use, never restructure):
 | `_internal/fonts/*.woff2` | Inter 400/500/600 + IBM Plex Mono 500, latin + latin-ext |
 | `_internal/fonts/licenses/` | the two OFL licence texts |
 | `_internal/speaker-folder-README.md` | copied into each new speaker folder as its `README.md` |
-| `_internal/sample-assets/` | synthetic sample logo + portrait used by the retired fictional worked examples in `demo-and-more-help/example-speakers/fictional-characters/` |
 | `_internal/core-templates-please-dont-touch/speaker-teaser-linkedin_v3.png` | the one canon template (1200×1200, currently v3), **machine-built**: baked gradient starfield + purple card block + green speaker block. Supersedes the operator's original Canva export |
 
 Reference (`demo-and-more-help/` — the operator-facing help and showcase

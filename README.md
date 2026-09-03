@@ -1,13 +1,24 @@
-# Apify Speaker LinkedIn Teasers — demo
+# AI Marketing Meetup – hosted by [Apify](https://apify.com)
+## (demo by [alex alderman](https://alderman.ai))
 
-A few speaker details in → one finished LinkedIn teaser image out, styled
-as an [Apify](https://apify.com) actor card.
+>[!Brand disclaimer]+
+> Apify's name, logo and visual design belong to Apify. No social or custom-coded web assets were **==` seriously  harmed`== ** in the process of making this demo, **==` just a minor scrape `==** 🥰
+# Start here
 
-Built by [Alex Alderman](https://alderman.agency) as the live demo for the
-AI marketing meetup — and left fully working on purpose. If you ever want
-real speaker teasers for LinkedIn, this will happily generate them for you.
-No pressure to use it either way — I obviously don't know your brand rules
-as well as you do. :)
+Want to just dive in?
+```path-1-create-new-image
+
+```
+
+
+## Demo Summary
+
+- `_IN_` A few speaker details + IMG files into a fully agentic pipeline 
+- `_OUT_` one pixel-perfect, Apify branded LinkedIn image
+- `_OR_` 30 images? 50? Just like at the arcade, you can play until you're out of tokens.
+- `_WITH_` no brand kit, no Apify design assets 😇 ... asked for.
+
+Built by [Alex Alderman](https://alderman.agency) for a live demo at the AI marketing meetup 17.09.
 
 **Unofficial demo.** Not affiliated with or endorsed by Apify. The card is a
 reproduction of apify.com's public actor-card design, rebuilt from scratch as
@@ -19,8 +30,7 @@ visual design belong to Apify.
 - **An agentic AI coding assistant** — Claude Code, or another lab's
   equivalent: something that can open this folder, read and write files in
   it, and run a shell command. It orients itself from `CLAUDE.md` /
-  `AGENTS.md` (identical copies, one name per convention). A chat-only
-  assistant that can't touch files can't run this.
+  `AGENTS.md` (identical copies, one name per convention). 
 - **A Chromium browser** — Google Chrome, or the Microsoft Edge that comes
   preinstalled with Windows. The assistant drives it invisibly ("headless")
   to draw the image; you never open it yourself.
@@ -33,7 +43,7 @@ packages. Wary of cloned repos? Good instinct —
 plain-English inventory of every piece of code in this project and when it
 runs (short version: there are **zero executable scripts** here).
 
-## Start here
+
 
 Open this folder in your assistant and say:
 

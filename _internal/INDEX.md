@@ -12,4 +12,3 @@ files; do not restructure this folder.
 | `render/` | the render shell (verified card CSS + the speaker element + tokens), the static footer icon, and `particles.svg` (the starfield's source pattern) |
 | `fonts/` | self-hosted Inter + IBM Plex Mono (OFL) the shell links; renders never touch a network |
 | `speaker-folder-README.md` | template copied into each new speaker folder as its `README.md` |
-| `sample-assets/` | synthetic images used by the retired fictional worked examples in `demo-and-more-help/example-speakers/fictional-characters/` |

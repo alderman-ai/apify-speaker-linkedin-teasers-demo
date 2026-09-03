@@ -6,3 +6,4 @@ to-process/*
 Thumbs.db
 .DS_Store
 .claude/
+live-demo/
