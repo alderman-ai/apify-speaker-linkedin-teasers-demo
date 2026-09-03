@@ -60,7 +60,11 @@ takes it from there. (The other two menu lines aren't built yet.)
 If anything is off — blurb too long, an image missing or not square, a
 template box the wrong shape — the run stops and says exactly what to fix.
 It never silently crops your text, reframes your photo, or stretches the
-card.
+card. And it works on a branch of its own: unless you are the author, the
+assistant puts your session on `session/<date>-<NN>` before it touches
+anything, so `main` — and the core template every card is built from —
+stays exactly as you cloned it. `git switch main` gets you back to a clean
+slate at any time.
 
 Want to see what "done" looks like first? The finished PNG in
 `generated-images/` is the author's own card, and

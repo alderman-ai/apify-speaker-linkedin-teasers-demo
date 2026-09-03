@@ -34,12 +34,24 @@ explicitly forbid downloading a browser, fetching from the network during
 renders, or adding scripts. There are no hooks, no auto-run configuration,
 nothing triggered by cloning, opening, or browsing this folder.
 
+One other thing the assistant is told to run, and it is worth knowing
+about: at the **start of a session**, if this folder is a git repo and you
+are not the author, it reads `git config user.email` and puts you on a
+branch of your own (`git switch -c session/<date>-<NN>`) so your run can't
+overwrite anyone else's work or the core template. That is ordinary local
+git — three read-only queries and one branch switch, nothing published,
+nothing sent anywhere. If the folder isn't a git repo, it is skipped
+silently.
+
 ## Related safety rails
 
 - The two generation sources (the canon template image and the blank
   intake form) live in `_internal/core-templates-please-dont-touch/`. A
   run only reads them, never writes them; changing one is a deliberate,
   versioned edit. Details in that folder's README.
+- Sessions are branch-isolated (above), so a damaged core template is one
+  `git checkout main -- _internal/core-templates-please-dont-touch/` away
+  from being restored.
 - Nothing in the pipeline ever overwrites your files: over-budget text,
   off-spec images, or geometry mismatches halt with a printed reason.
 - The bundled fonts (Inter, IBM Plex Mono) are under the SIL Open Font
