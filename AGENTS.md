@@ -67,12 +67,19 @@ it directly, no menu.
 
 - **Line 1** → the visitor makes a card. Read both skill files in full
   and follow the **"Line 1"** section of
-  `_internal/skills/apify-speaker-card.md`: ask the speaker's name,
+  `_internal/skills/apify-speaker-card.md`: **first open the finished
+  example card for the visitor** (`_internal/demo-speaker/alex-alderman-final.png`,
+  in their image viewer — reading it yourself shows them nothing) and say
+  in plain words what they will supply; then ask the speaker's name,
   scaffold the folder, then offer the fork — fill the form yourself and
   say "done" (the assistant reverts any frontmatter edits, then asks
   inline for anything missing and fills it in), or give the answers in
-  chat and the assistant fills it. Then process that
-  folder end to end, narrating each stage in a line.
+  chat and the assistant fills it. Then process that folder end to end,
+  narrating each stage in a line. **Every line addressed to the visitor
+  is in everyday words** — no "fence", "frontmatter", "numbered folder",
+  "actor card", "square images" — per that skill's "Talking to a visitor"
+  rules; a visitor who says they don't understand is shown the example
+  again and told what it is, not asked the same question twice.
 - **Line 2 or 3** → reply with exactly this sentence, then show the menu
   again: `Sorry, this option is temporarily out of order, please try again
   from another line.` Do not improvise content for these lines; they are
@@ -88,7 +95,7 @@ Procedure and contract (`_internal/`):
 |---|---|
 | `_internal/skills/apify-speaker-card.md` | **the generator's complete operating procedure — read it in full before processing anything; follow it, don't improvise.** Mass-produces Apify-styled speaker teaser images: renders a pixel-faithful Apify actor card (repurposed as a speaker card) and a card-style speaker portrait element into the canon template at its fixed geometry, one finished PNG per speaker. Holds the **"Line 1"** section that line 1 of the session menu executes (name → scaffold → fill-it-yourself or fill-it-in-chat fork → gate → render). Use when the operator picks line 1, says "process the intake forms", "process the queue", "generate the speaker cards", "new speaker <name>", or drops folders into `to-process/` |
 | `_internal/skills/new-speaker.md` | **the scaffolder's complete procedure — read it in full before scaffolding.** Adds a new speaker folder to the queue, then offers the fork: the operator fills the form by hand and says "done" (the generator's gate reverts frontmatter edits and asks for what's missing), or gives the details in chat — name, role, company, topic, minutes, blurb and the two images (audience level is fixed) — and the assistant writes them into the form (asks the name; declined → `new-speaker-<NN>`, lowest free number; a repeat name → `<name>-<NN>`, first dupe = 01). Use when the operator says "new speaker", "/new-speaker", "add a speaker", "scaffold a speaker folder", or names a person to add to the lineup |
-| `_internal/demo-speaker/` | the bundled demo speaker: a complete, filled speaker folder (`intake.md`, `README.md`, `company-logo.png`, `speaker.png`) for the repo author — the worked example of a finished form, shown to visitors who ask what "done" looks like. Not an input to line 1. **Never process or edit it in place**; an explicit request to render it copies it into `to-process/` under the duplicate rule |
+| `_internal/demo-speaker/` | the bundled demo speaker: a complete, filled speaker folder (`intake.md`, `README.md`, `company-logo.png`, `speaker.png`) for the repo author plus its finished card, `alex-alderman-final.png` — the worked example. Line 1 opens that PNG for the visitor before asking anything; the form is shown to visitors who ask what "done" looks like. Not an input to line 1. **Never process or edit it in place**; an explicit request to render it copies it into `to-process/` under the duplicate rule |
 | `_internal/core-templates-please-dont-touch/intake-template.md` | the input contract: every field, budget, failure mode; the operator's values live in labelled body fences (typed by hand, or filled from chat by you), mirrored into the frontmatter. Section 6 of its frontmatter holds the template's **fixed block geometry** — constants, never measured per run and never edited per speaker. Versioned in its frontmatter (`version` / `versioned_at`, currently v4). Copied into each folder as `intake.md` |
 | `demo-and-more-help/filling-in-the-form/intake-template-completed-example.md` | the same template with every fence and frontmatter value filled in — what "done" looks like (byte-identical to the demo speaker's `intake.md`) |
 

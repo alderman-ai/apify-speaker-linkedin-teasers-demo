@@ -19,9 +19,10 @@ folders are scaffolded from the blank contract at
 `_internal/core-templates-please-dont-touch/intake-template.md`, and the
 assistant fills them from what the operator says in chat. Copying the
 completed example into a speaker folder would carry Alex Alderman's
-answers in with it — the one place that is meant to happen is the demo
-run, which copies `_internal/demo-speaker/` (the same form plus the two
-images) into the queue.
+answers in with it — the one place that is meant to happen is an
+explicit request to render the author's card, which copies
+`_internal/demo-speaker/` (the same form, the two images and the
+finished PNG) into the queue under a numbered suffix.
 
 ## The two HTML files are depth-sensitive
 

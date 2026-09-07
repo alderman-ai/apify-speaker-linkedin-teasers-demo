@@ -47,27 +47,49 @@ Line 1 is the whole demo: the visitor makes a card for a speaker of their
 choosing, in about ten minutes, and sees exactly where the pipeline's
 inputs stop and its fixed parts begin. Nothing about geometry is ever
 asked or explained during it — the template's block positions are
-constants (step 3) and the visitor only supplies text and two images.
+constants (step 3 of processing) and the visitor only supplies text and
+two images.
 
-1. **Ask for the speaker's name** — one question. Then scaffold the folder
-   with the `new-speaker` skill (steps 1–4 there): `to-process/<name>/`
-   holding a fresh copy of the intake form (name pre-filled) and the
-   README. Say the folder's path.
-2. **Offer the fork** — one question, two options, verbatim in spirit:
-   - **Fill it in yourself.** *"Open `<absolute path>/intake.md`, type in
-     each labelled fence under 'Input presentation details here', drop the
-     two square images into the folder as `company-logo.png` and
-     `speaker.png`, and tell me 'done' when it's ready. I'll check it
-     and ask you here for anything that's missing."*
-   - **Give me the answers here.** *"Tell me the role, company, topic,
-     minutes, blurb and the two image paths, in any order, and I'll fill
-     the form for you."* → continue with `new-speaker` steps 5–7.
-3. **Self-filled path — the gate.** On "done" (or any message saying the
+**The visitor has never seen the finished image and knows none of this
+repo's vocabulary.** A run of the demo on 2026-09-07 failed on exactly
+that: the assistant asked for a name "or 'skip' for a numbered folder",
+then for "two square images" and "labelled fences", and the visitor —
+who had no idea what was being built — gave up after four turns. So the
+demo *starts by showing the finished card*, and every line addressed to
+the visitor follows the "Talking to a visitor" rules below.
+
+1. **Show what they are about to make.** Put the finished example card in
+   front of the visitor — `_internal/demo-speaker/alex-alderman-final.png`
+   — using the "Showing a visitor an image" method below (open it in their
+   image viewer and say its path; the Read tool shows it to you only).
+   Then, in one short plain-English paragraph, say what it is and what
+   they will supply: *"This is the finished thing — a LinkedIn teaser
+   announcing one person as a meetup speaker. Everything on it is fixed
+   except what you give me: the speaker's name, job title, company, talk
+   topic, talk length in minutes, a one-sentence blurb, a square photo of
+   the speaker, and a logo."*
+2. **Ask for the speaker's name** — one question, plain words: *"Who's the
+   speaker? Usually that's you. (No name yet? Say 'skip'.)"* Then scaffold
+   the folder with the `new-speaker` skill (steps 2–4 there):
+   `to-process/<name>/` holding a fresh copy of the intake form (name
+   pre-filled) and the README. Say the folder's path.
+3. **Offer the fork** — one question, two options, verbatim in spirit:
+   - **Fill it in yourself.** *"Open `<absolute path>/intake.md` in any
+     text editor — it's a form with a labelled box for each answer. Type
+     your answers into the boxes, copy the two pictures into that same
+     folder as `speaker.png` (the square photo) and `company-logo.png`
+     (the logo), and tell me 'done'. I'll check it and ask you here for
+     anything that's missing."*
+   - **Give me the answers here.** *"Tell me the job title, company,
+     topic, minutes and blurb, and where the two pictures are on your
+     computer — in any order — and I'll fill the form for you."*
+     → continue with `new-speaker` steps 5–7.
+4. **Self-filled path — the gate.** On "done" (or any message saying the
    form is ready), run step 1 and step 2 of the processing procedure below
    on that folder. Step 1 begins with the **frontmatter check**: anything
    the visitor changed in the frontmatter is reverted and mentioned in a
    friendly line. Then:
-   - **Everything present and compliant** → continue straight to 4.
+   - **Everything present and compliant** → continue straight to 5.
    - **Something missing** — an empty or `[type here]` fence, a missing
      image — → ask for exactly those things, inline, in one message; as
      each answer arrives, write it into the form yourself (fence and
@@ -80,18 +102,64 @@ constants (step 3) and the visitor only supplies text and two images.
      value on your own; the kebab-case offer used on a "yes" is the one
      exception.
    Repeat until the form is complete, then continue.
-4. **Process that one folder** with the procedure below, narrating each
+5. **Process that one folder** with the procedure below, narrating each
    stage in a single line as you pass it: form validated → both assets
    checked → fixed geometry loaded → card-ratio sanity check → rendered
    headless → verified by inspection → delivered.
-5. Report as in step 7 and show the finished PNG's path.
+6. Report as in step 7 of processing, say the finished PNG's path, and
+   open the PNG for the visitor the same way as in step 1.
 
 The bundled demo speaker in `_internal/demo-speaker/` (the repo author's
-complete, filled folder) is the **worked example** of a finished form, not
-an input to line 1. Point a visitor at it when they ask what a filled form
-looks like. **Never process or edit it in place**; if someone explicitly
-asks to render it, copy it into `to-process/` under the `new-speaker`
-duplicate rule (`alex-alderman-<NN>`) and process the copy.
+complete, filled folder plus its finished card) is the **worked example**,
+not an input to line 1: its PNG is what step 1 shows, its `intake.md` is
+what to point at when a visitor asks what a filled form looks like.
+**Never process or edit it in place**; if someone explicitly asks to
+render it, copy it into `to-process/` under the `new-speaker` duplicate
+rule (`alex-alderman-<NN>`) and process the copy.
+
+### Talking to a visitor
+
+- **Plain words only.** The vocabulary of this repo — fence, frontmatter,
+  scaffold, queue, actor card, geometry, kebab-case, numbered folder,
+  template block, `to-process/` — is for you and the docs, never for a
+  line addressed to the visitor. Say "the form", "a labelled box in the
+  form", "the folder I just made", "the finished card", "your photo",
+  "the logo". If a term is unavoidable (a filename they must type), say
+  what it is in the same sentence.
+- **Never lead with a mechanism.** The visitor decides between *giving a
+  name* and *not giving one*, not between a named and a numbered folder;
+  the folder name is your bookkeeping. Same for image sizes: ask for "a
+  square photo of the speaker" and check the pixels yourself; mention
+  the 800×800 limit only if a photo actually breaks it.
+- **Lost visitor.** If they say anything like "I don't understand what
+  we're doing" or "I've never seen the image", do not repeat the last
+  question. Show the finished example (step 1's method) again, explain it
+  in one paragraph of everyday words, and only then ask the one thing
+  you need next.
+- **Show, don't describe.** Any time an image would answer the question
+  (what does it look like, what is "done", where does the logo go), open
+  the image for them rather than describing it in prose.
+
+### Showing a visitor an image
+
+Reading a PNG with the Read tool puts the picture in *your* context only —
+the visitor's terminal shows nothing, and telling them "here it is" after
+a Read is the exact failure from 2026-09-07. To actually show an image:
+
+1. **Open it in their default image viewer** with a shell command, then
+   say the absolute path in the same message so they can find it
+   themselves if the window opened behind the terminal:
+   - Windows (PowerShell): `Invoke-Item "<absolute path>"`
+   - Windows (Git Bash / cmd): `start "" "<absolute path>"`
+   - macOS: `open "<absolute path>"`  ·  Linux: `xdg-open "<absolute path>"`
+2. **If the harness has a way to send the visitor a file** (Claude Code's
+   `SendUserFile` when the session is bridged to a phone or browser, an
+   equivalent in another assistant), send the file that way as well —
+   the viewer window is for the person at the keyboard, the sent file for
+   someone following remotely.
+3. Read the image yourself only when *you* need to see it (verification
+   in processing step 6, checking a photo is square). That never counts
+   as showing it to the visitor.
 
 ## Processing ("process the queue")
 

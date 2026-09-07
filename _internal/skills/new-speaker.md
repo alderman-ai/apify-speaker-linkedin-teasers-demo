@@ -20,9 +20,15 @@ and two images.
 
 ## Procedure
 
-1. **Ask for the speaker's name** — one question, e.g. *"Speaker's name? (or
-   'skip' to use a numbered folder)"*. If the operator already gave a name in
-   their request, don't re-ask.
+1. **Ask for the speaker's name** — one question, in plain words: *"Who's
+   the speaker? Usually that's you. (No name yet? Say 'skip'.)"* Never
+   mention folders, numbering or any other mechanism in the question — a
+   visitor asked "or 'skip' for a numbered folder" on 2026-09-07 had to
+   ask what a numbered folder was, and the demo unravelled from there.
+   If the operator already gave a name in their request, don't re-ask.
+   In the session-menu demo (line 1) the finished example card is shown
+   *before* this question — see the `apify-speaker-card` skill's Line 1
+   section.
 
 2. **Pick the folder name.**
    - **Name given** → kebab-case it: lowercase, every run of non-alphanumerics
@@ -56,16 +62,23 @@ and two images.
      and the frontmatter `speaker_name`.
    - `README.md` — a copy of `_internal/speaker-folder-README.md`.
 
-   Say the folder's absolute path, then **offer the fork** in one question:
-   - **fill it in yourself** — *"Open `<path>/intake.md`, type into each
-     labelled fence under 'Input presentation details here', drop the two
-     square images into the folder as `company-logo.png` and `speaker.png`,
-     and say 'done'. I'll check it and ask you here for anything that's
-     missing."* On "done", hand the folder to the `apify-speaker-card`
-     skill's **Line 1, step 3 gate**: it reverts any frontmatter edits
-     (and says so), asks inline for whatever is missing or non-compliant,
-     writes the answers into the form itself, then processes.
-   - **give the answers in chat** — continue with step 5.
+   Say the folder's absolute path, then **offer the fork** in one question,
+   in everyday words (no "fence", "frontmatter" or "square images" — the
+   `apify-speaker-card` skill's "Talking to a visitor" rules apply):
+   - **fill it in yourself** — *"Open `<path>/intake.md` in any text
+     editor — it's a form with a labelled box for each answer. Type your
+     answers into the boxes, copy the two pictures into that same folder
+     as `speaker.png` (a square photo of the speaker) and
+     `company-logo.png` (the logo), and say 'done'. I'll check it and ask
+     you here for anything that's missing."* On "done", hand the folder
+     to the `apify-speaker-card` skill's **Line 1, step 4 gate**: it
+     reverts any frontmatter edits (and says so), asks inline for whatever
+     is missing or non-compliant, writes the answers into the form itself,
+     then processes.
+   - **give the answers in chat** — *"Tell me the job title, company,
+     topic, minutes and blurb, and where the two pictures are on your
+     computer — in any order — and I'll fill the form for you."* →
+     continue with step 5.
 
    If the operator's original request already made the choice ("I'll fill
    it in", or they gave the details up front), don't ask.
@@ -82,6 +95,11 @@ and two images.
    - **speaker photo** — a path to an exactly square PNG/JPG/JPEG, at most
      800×800 (262×262 is the perfect fit); it is scaled into the slot,
      never cropped or reframed, so the operator squares it themselves
+
+   Phrase the two picture lines for a visitor as *"a square photo of the
+   speaker (PNG or JPG)"* and *"a logo"*, plus *"tell me where each one
+   is on your computer"*; keep the pixel limits for the check in step 6
+   and mention them only when a file actually breaks one.
 
    Anything the operator already said in their request counts as given —
    don't re-ask for it. If they say they'd rather fill the form by hand,

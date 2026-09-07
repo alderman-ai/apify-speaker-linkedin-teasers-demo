@@ -50,7 +50,8 @@ Open this folder in your assistant and say:
 > show me the demo
 
 It answers with a short menu. Pick the first line and you make a card for
-a speaker of your choosing: it asks the name, sets up the folder, then asks
+a speaker of your choosing: it opens a finished example card so you can
+see what you're making, asks the name, sets up the folder, then asks
 whether you want to fill in the form yourself (it checks your work and
 tells you what to fix) or give it the role, company, talk blurb, topic,
 minutes and two square images right there in chat. Either way it then runs

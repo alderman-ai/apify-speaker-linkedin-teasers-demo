@@ -43,6 +43,13 @@ git — three read-only queries and one branch switch, nothing published,
 nothing sent anywhere. If the folder isn't a git repo, it is skipped
 silently.
 
+And one more, added 2026-09-07: during the demo the assistant **opens an
+image in your default picture viewer** — the finished example card before
+it asks you anything, and your own card once it is rendered. That is the
+operating system's ordinary "open this file" command (`Invoke-Item` or
+`start` on Windows, `open` on macOS, `xdg-open` on Linux) pointed at a
+PNG inside this folder; it runs no code and touches nothing else.
+
 ## Related safety rails
 
 - The two generation sources (the canon template image and the blank
