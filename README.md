@@ -93,7 +93,7 @@ to-process/<speaker>/                 the assistant builds this from what you
                                       tell it: intake.md, README.md,
                                       company-logo.png, speaker.png
 processed/<speaker>/                  the folder moves here on success (archive)
-generated-images/<speaker>.png        the finished render — publish from here
+generated-images/<speaker>-final.png        the finished render — publish from here
 ```
 
 A folder lives in exactly one stage. Successes move whole; failures stay
@@ -181,7 +181,7 @@ from `CLAUDE.md` / `AGENTS.md`.
 ```
 README.md                     you are here — the only doc you need to start
 to-process/  processed/       the queue — built and moved by the assistant
-generated-images/             the finished PNGs (<speaker>.png)
+generated-images/             the finished PNGs (<speaker>-final.png)
 demo-and-more-help/           lost, curious, or cautious? three subfolders:
                               filling-in-the-form/, example-speakers/ and
                               about-this-project/ — start at its README.md

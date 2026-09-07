@@ -9,5 +9,5 @@ rest of the details and the two images in chat and writes them in itself
 
 Processing the queue runs every folder here; each success **moves whole**
 to `processed/` and its finished PNG lands in
-`generated-images/<speaker>.png`. Failures stay put with the reason.
+`generated-images/<speaker>-final.png`. Failures stay put with the reason.
 This file is not a speaker folder and is ignored by processing.

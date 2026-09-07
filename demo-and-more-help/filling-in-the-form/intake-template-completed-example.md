@@ -70,7 +70,7 @@ speaker_w:          294
 speaker_h:          336
 
 # --- 7. render options -------------------------------------------------------
-# output is optional. Default: generated-images/<speaker-name>.png
+# output is optional. Default: generated-images/<speaker-name>-final.png
 output:             ""
 card_width:         400
 desc_lines:         2
@@ -503,7 +503,7 @@ scale.
 ### `output` — string, optional
 
 Destination for the finished PNG. Left empty, it defaults to
-`generated-images/<speaker-name>.png`.
+`generated-images/<speaker-name>-final.png`.
 
 **States:** path free → written · file exists → written under a `-<NN>`
 suffix (lowest free number, first dupe = 01) and reported; **the existing
@@ -535,7 +535,7 @@ to-process/<speaker-folder>/     one folder per card:
     speaker.png
 processed/<speaker-folder>/      the whole folder lands here on success
                                  (archive: form + assets)
-generated-images/<speaker>.png       the finished render, delivered separately
+generated-images/<speaker>-final.png       the finished render, delivered separately
 ```
 
 1. **Scaffold**: tell the assistant *"new speaker Alex Alderman"* (the
@@ -552,7 +552,7 @@ generated-images/<speaker>.png       the finished render, delivered separately
    frontmatter (§1b) → card-ratio sanity check → renders in a headless
    Chromium browser, all fonts local → verifies output dimensions and the
    two slots by inspection → writes the PNG to
-   `generated-images/<speaker>.png` → **moves the whole folder to
+   `generated-images/<speaker>-final.png` → **moves the whole folder to
    `processed/`**.
 5. **Missing images**: the run stops for that folder and asks —
    *"resubmit with the image(s) added, or generate now with a placeholder

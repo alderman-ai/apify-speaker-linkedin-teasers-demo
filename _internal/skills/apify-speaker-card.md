@@ -25,7 +25,7 @@ filled reference copy); consult it for field rules rather than improvising.
 ```
 to-process/<speaker>/              intake.md + README.md + company-logo + speaker images
 processed/<speaker>/               the whole folder moves here on success (archive)
-generated-images/<speaker>.png     the finished render, delivered separately
+generated-images/<speaker>-final.png     the finished render, delivered separately
 ```
 
 A folder is always in exactly one queue. Failures stay put with the reason
@@ -260,7 +260,7 @@ the speaker element shows a square portrait framed by the `#454545` shell
 (PRAGUE orange); starfield visible below the actor card. Anything off →
 halt that folder, delete the bad screenshot, report.
 
-Then: move the PNG to `generated-images/<kebab-name>.png`, delete the
+Then: move the PNG to `generated-images/<kebab-name>-final.png`, delete the
 `_run-*.html`, and move the whole folder to `processed/<kebab-name>/`
 (renaming `new-speaker-<NN>` to the kebab speaker name from the form).
 **Duplicate names suffix, never refuse**: if `<kebab-name>` is already

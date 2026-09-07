@@ -98,7 +98,7 @@ The queue:
 |---|---|
 | `to-process/<speaker>/` | one folder per pending card: `intake.md`, `README.md`, `company-logo.*`, `speaker.*` |
 | `processed/<speaker>/` | the folder after success (archive — form + assets). Never overwrite here — a taken name gets `-<NN>`. Archives are historical: intakes from before the 2026-09-01 tree reorganisation reference old paths; never take current paths from an archive |
-| `generated-images/<speaker>.png` | the finished render, one PNG per speaker. Never overwrite here — a taken name gets `-<NN>` |
+| `generated-images/<speaker>-final.png` | the finished render, one PNG per speaker. Never overwrite here — a taken name gets `-<NN>` |
 
 Render machinery (`_internal/` — use, never restructure):
 
@@ -159,7 +159,7 @@ message, show the session menu.
   folder in `to-process/` (or the ones named) through its procedure:
   validate → load the fixed geometry from the form → ratio sanity check →
   render in a headless Chromium browser → verify by inspection → PNG to
-  `generated-images/<speaker>.png`, folder to `processed/`.
+  `generated-images/<speaker>-final.png`, folder to `processed/`.
 - **Demo intent** — "show me the demo", "demo", "run the example", or a
   pick of line 1 from the menu → the "Line 1" section of
   `_internal/skills/apify-speaker-card.md` (name → scaffold → fork →
