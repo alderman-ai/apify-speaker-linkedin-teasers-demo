@@ -12,8 +12,11 @@ description: >
 # new-speaker — scaffold one speaker folder and fill it from chat
 
 Creates one folder under `to-process/` holding everything one card needs —
-the intake form and the two images — and fills the form from what the
-operator tells you in chat. The operator never has to open the form.
+the intake form and the two images — then, at the operator's choice, either
+fills the form from what they tell you in chat or lets them fill it by hand
+and checks it. Neither path involves geometry: the template's block
+positions are fixed constants in the form; the operator supplies only text
+and two images.
 
 ## Procedure
 
@@ -53,6 +56,20 @@ operator tells you in chat. The operator never has to open the form.
      and the frontmatter `speaker_name`.
    - `README.md` — a copy of `_internal/speaker-folder-README.md`.
 
+   Say the folder's absolute path, then **offer the fork** in one question:
+   - **fill it in yourself** — *"Open `<path>/intake.md`, type into each
+     labelled fence under 'Input presentation details here', drop the two
+     square images into the folder as `company-logo.png` and `speaker.png`,
+     and say 'done'. I'll check it against the form's rules and tell you
+     what to fix, if anything."* On "done", hand the folder to the
+     `apify-speaker-card` skill's **Line 1, step 3 gate**: it validates the
+     fences and images, lists every non-compliance with its fix, and waits
+     for the operator to correct it — nothing is ever fixed silently.
+   - **give the answers in chat** — continue with step 5.
+
+   If the operator's original request already made the choice ("I'll fill
+   it in", or they gave the details up front), don't ask.
+
 5. **Collect the rest in chat.** In one message, ask for everything still
    missing, each with its rule, so the operator can answer in a single
    reply (in any order, across several messages if they prefer):
@@ -73,7 +90,7 @@ operator tells you in chat. The operator never has to open the form.
 6. **Write each value into the form as it arrives** — into its labelled
    body fence AND its frontmatter key, so the two never disagree.
    Validate on the way in, out loud and briefly:
-   - count the blurb; over 100 → say the count and ask for a shorter one —
+   - count the blurb; over 115 → say the count and ask for a shorter one —
      **never trim it yourself**
    - position/company not lowercase-kebab → offer the kebab-cased form and
      use it only on a yes; never silently alter what they typed
@@ -97,8 +114,10 @@ operator tells you in chat. The operator never has to open the form.
 - A numbered folder is renamed to the speaker's kebab name automatically at
   processing time, taken from the form's `speaker_name`.
 - A form the operator filled by hand (fences typed, frontmatter untouched)
-  is still accepted as is — the generator transfers the fences at
-  processing time. Chat input is the documented path; hand-filling is
-  merely not forbidden.
+  is a first-class path — the generator transfers the fences into the
+  frontmatter at processing time, and the gate reports anything
+  non-compliant for the operator to fix. Both paths end in the same form.
+- The eight geometry keys in the form's frontmatter (§6) are constants for
+  the template version. Neither path ever asks about them or edits them.
 - This skill only scaffolds and fills. Generation belongs to the
   `apify-speaker-card` skill.

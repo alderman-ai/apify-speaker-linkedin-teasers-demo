@@ -7,7 +7,7 @@ them.
 
 | file | what |
 |---|---|
-| `speaker-teaser-linkedin_v3.png` | the canon visual template (1200×1200), currently version 3. Its coloured blocks ARE the layout: purple = actor card, green = speaker element; geometry is measured off this image every run |
+| `speaker-teaser-linkedin_v3.png` | the canon visual template (1200×1200), version 3 — **final for this demo**. Its coloured blocks show the layout: purple = actor card, green = speaker element. Their geometry was measured once when this version was built and lives as constants in `intake-template.md` §6 (see below); no run measures the image |
 | `intake-template.md` | the blank intake form — the whole input contract, versioned in its own frontmatter (`version` / `versioned_at`). Copied into each new speaker folder as `intake.md`; the copy is what operators fill, never this file |
 
 ## Changing a template
@@ -21,8 +21,14 @@ A template change is a deliberate, versioned event:
 - the visual template bumps its `_v<N>` filename suffix and every
   reference to it (`CLAUDE.md` / `AGENTS.md`, both skills, the READMEs,
   the completed example in `demo-and-more-help/filling-in-the-form/`, the
-  demo speaker's `intake.md`);
-- render one card afterwards to confirm the result.
+  demo speaker's `intake.md`), and its two blocks are measured once — the
+  exact-colour footprint of each (`#AE81FF`, `#20A34E`), whole pixels,
+  taking the dense rectangle rather than a raw bounding box so the Apify
+  logo's green in the header cannot widen the read — with the eight
+  numbers written into `intake-template.md` §6 as the new constants (which
+  is itself an intake-form version bump);
+- render one card afterwards to confirm the result — both blocks covered
+  to their last edge pixel.
 
 Want a different look for one speaker without changing canon? Copy the
 template, edit the copy, and point that speaker's `base_image` at it.
@@ -31,12 +37,21 @@ template, edit the copy, and point that speaker's `base_image` at it.
 
 The pipeline supports exactly **one** visual template with fixed
 dimensions. The purple block is where the card lands, the green block is
-where the speaker element lands, and their geometry is read off the image
-every run. For sub-pixel accuracy a future template may paste Canva's
-Width/Height/X/Y readout panel inside each block; the skill reads it and
-sanity-checks it against the visible block. One constraint is enforced at
-run time: the purple block's proportions must match the card as it
-actually renders (see `intake-template.md` section 1b).
+where the speaker element lands. Their geometry is a **fixed constant per
+template version**, measured once at build and recorded in
+`intake-template.md` §6:
+
+| block | fixed geometry (v3) |
+|---|---|
+| purple `#AE81FF` — actor card | 799×307 @ (201, 748) |
+| green `#20A34E` — speaker element | 294×336 @ (706, 345) |
+
+Whole pixels, verified 2026-09-07: the template's block edges are crisp
+and integer-aligned, and a render at these values covers both blocks to
+the last edge pixel (the card's 1px hover ring sits just outside its block
+by design). One constraint is re-checked per run as a sanity gate: the
+purple block's proportions must match the card as it actually renders
+(see `intake-template.md` section 1b).
 
 The current canon template is **machine-built** (2026-09-01), superseding
 the operator's original Canva export: baked gradient starfield + blocks
@@ -45,9 +60,10 @@ redrawn at the operator's locked layout — green speaker block 294×336 @
 on the header's right title box) and purple card block 799×307 @
 (200.5, 748) (right edge shared with the speaker block, centred on the
 canvas x-axis, vertically centred between the speaker block and the bottom
-frame line). There are no printed readout panels; geometry reads are
-mask-only. Earlier operator drafts (`template base edit*.png`) live only
-in git history.
+frame line). Those design-time coordinates are the half-pixel intent; the
+rendered PNG's blocks sit on whole pixels, which is what §6 records.
+Earlier operator drafts (`template base edit*.png`) live only in git
+history.
 
 ### Starfield rebuild recipe
 

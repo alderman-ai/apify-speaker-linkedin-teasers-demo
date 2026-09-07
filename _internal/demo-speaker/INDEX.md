@@ -1,6 +1,7 @@
 # _internal/demo-speaker/ — the bundled demo speaker
 
-A complete, ready-to-run speaker folder for the repo author, Alex Alderman:
+A complete, filled speaker folder for the repo author, Alex Alderman — the
+worked example of what a finished form and its two assets look like:
 
 | file | what |
 |---|---|
@@ -9,9 +10,10 @@ A complete, ready-to-run speaker folder for the repo author, Alex Alderman:
 | `company-logo.png` | the alderman.ai mark, 1181×1181 |
 | `speaker.png` | the portrait, 262×262 — the photo slot's exact size on template v3 |
 
-Line 1 of the session menu ("see the workflow in action") **copies** this
-folder into `to-process/` and processes the copy — the "Demo run" section
-of `_internal/skills/apify-speaker-card.md` has the steps. Never process
-or edit this folder in place: it must stay pristine so every demo run
-starts from the same input. When the intake template is versioned,
-refresh `intake.md` here together with the completed example.
+Line 1 of the session menu ("make your own speaker card") does not use
+this folder — the visitor makes a card for a speaker of their own. Point
+them here when they ask what "done" looks like. Never process or edit this
+folder in place; if someone explicitly asks to render it, **copy** it into
+`to-process/` under the duplicate rule (`alex-alderman-<NN>`) and process
+the copy. When the intake template is versioned, refresh `intake.md` here
+together with the completed example.

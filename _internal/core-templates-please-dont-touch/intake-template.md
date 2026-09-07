@@ -13,8 +13,8 @@
 
 # --- 0. template version -- DO NOT EDIT --------------------------------------
 # Bumped only when this template itself changes, never per speaker.
-version:            3
-versioned_at:       "2026-09-03 00:50"
+version:            4
+versioned_at:       "2026-09-07 12:00"
 
 # --- 1. base template --------------------------------------------------------
 # Fixed for this demo: ONE visual template with fixed dimensions (1200x1200).
@@ -47,27 +47,29 @@ topic_category:     ""
 level:              "For All Levels"
 duration_minutes:   ""              # number only — the card renders 10 (mins)
 
-# --- 6. placement -- DERIVED, DO NOT AUTHOR ----------------------------------
-# The template image is canon. The skill measures both placeholders from
-# base_image at generation time and writes the eight values back here as a
-# record of what it used. Anything you type is overwritten. See §1b.
-# Values below are from the last run, not a specification.
+# --- 6. placement -- FIXED GEOMETRY, DO NOT EDIT -----------------------------
+# Template v3 is final for this demo. Its two coloured blocks were measured
+# ONCE when the template was built (exact-colour footprint, whole pixels,
+# render-verified 2026-09-07) and the result is recorded here as a constant.
+# Nothing measures the image at run time; the generator reads these eight
+# numbers and plugs them straight into the render page. They change only
+# with a new template version, never per speaker. See §1b.
 
 # actor card block — purple placeholder
-card_x:             200.5
-card_y:             748.028
+card_x:             201
+card_y:             748
 card_w:             799
-card_h:             306.949
+card_h:             307
 
 # speaker card block — green placeholder (the full footprint of the
 # card-style speaker component: square photo + "Join me in PRAGUE" bar)
-speaker_x:          705.5
+speaker_x:          706
 speaker_y:          345
 speaker_w:          294
 speaker_h:          336
 
 # --- 7. render options -------------------------------------------------------
-# output is optional. Default: generated-images/<speaker-name>-final.png
+# output is optional. Default: generated-images/<speaker-name>.png
 output:             ""
 card_width:         400
 desc_lines:         2
@@ -145,9 +147,9 @@ fence label is the enforced character budget: the two-line capacity of the
 render width (`card_width: 400`), operator-calibrated against real renders.
 Exceeding the budget rejects the form; the card is never silently truncated.
 
-```presentation-description-100-char-max
+```presentation-description-115-char-max
 
-[type here -- for reference this bracketed line including the brackets is exactly one hundred chars]
+[type here -- for your reference, this bracketed line, brackets included, is exactly one hundred and fifteen chars]
 ```
 
 ## End of inputs
@@ -285,8 +287,8 @@ A template missing either one is rejected before any rendering starts.
 
 | Block | Placeholder colour | Geometry | Holds |
 |---|---|---|---|
-| **actor card** | purple `#AE81FF` | measured per run | the rendered card, scaled from CSS width 400 |
-| **speaker element** | green `#20A34E` | measured per run | the `.SpeakerCard` component, rendered 1:1 |
+| **actor card** | purple `#AE81FF` | fixed: 799×307 @ (201, 748) | the rendered card, scaled from CSS width 400 |
+| **speaker element** | green `#20A34E` | fixed: 294×336 @ (706, 345) | the `.SpeakerCard` component, rendered 1:1 |
 
 ### The speaker element
 
@@ -306,31 +308,33 @@ header's right title box (x centre 852.5). Inside it:
 No outer ring. Nothing about the element's chrome or copy is an input;
 only the photo changes per speaker.
 
-### The template image is canon
+### The geometry is fixed
 
-**Whatever is on the template is the geometry for that generation.** The
-skill re-measures both blocks every run from the colour masks — green
-`G > R+40 and G > B+40`, purple `B > G+40 and R > G+20`, dilated 3px to
-absorb anti-aliased edges. The current canon template carries no printed
-readout panels; if a future template adds them (Canva's Width/Height/X/Y
-card pasted inside a block), the printed values win after agreeing with
-the mask within 6px — a disagreement halts with both numbers reported.
+**The coloured blocks are how a template is designed; the numbers are how
+it is rendered.** When a template version is built, each block's position
+and size are measured once from its exact-colour footprint, on whole
+pixels, and render-verified. Those eight numbers are then written into §6
+of this form as constants, and every run reads them from there. Nothing
+measures the image at generation time, so a logo that happens to share a
+placeholder colour cannot disturb placement.
 
-The current canon template is **machine-built** (see
-`_internal/core-templates-please-dont-touch/README.md`): baked starfield,
-blocks drawn at the locked
-layout. It supersedes the operator's original Canva export. Re-exporting
-over it means re-staging that recipe, not just dropping in a new PNG.
+Template v3 is final for this demo. Its blocks are purple 799×307 at
+(201, 748) and green 294×336 at (706, 345); the render page's hover ring
+extends 1px outside each block by design. The template is **machine-built**
+(see `_internal/core-templates-please-dont-touch/README.md`): baked
+starfield, blocks drawn at the locked layout. A new template version means
+re-measuring its blocks the same way and bumping this form's version with
+the new constants — never editing the numbers per speaker.
 
-The eight `*_x / *_y / *_w / *_h` keys in the frontmatter are **outputs**.
-The skill measures both blocks, writes the values back into the intake file
-as a record of what it used, and reports them. Hand-typed values are
-overwritten; the frontmatter is never consulted for geometry.
+The eight `*_x / *_y / *_w / *_h` keys in the frontmatter are **inputs the
+operator never touches**: the generator reads them verbatim and reports
+them; hand edits are a template change and belong in a version bump.
 
 ### The one check: can the card block hold a card?
 
 The **card block is constrained**, because the card's height is quantised
-(§1a) and cannot be stretched. Per run:
+(§1a) and cannot be stretched. Checked once per template version, and
+re-checked by the generator as a cheap sanity gate:
 
 ```
 scale      = card_w / card_width         # card_width = the CSS render width
@@ -426,15 +430,16 @@ resubmit requested.
 The first fenced block after the frontmatter whose info string starts with
 `presentation-description`. The number in the label is the budget:
 
-    ```presentation-description-100-char-max
+    ```presentation-description-115-char-max
     How we cut lead research from six hours a week to twenty minutes.
     ```
 
 - Inter 12px / 400 / `#a3a3a3`, clamped to `desc_lines` (2 lines).
-- **Budget: 100 characters** — a safe two-line capacity of the description
+- **Budget: 115 characters** — a safe two-line capacity of the description
   slot at the card's native CSS render width, measured 2026-09-03 against
-  real renders (ordinary prose fits 114–123, wide capitals as few as 72). The budget is parsed from the fence label itself, so
-  retuning it for a different card width means renaming the fence.
+  real renders (ordinary prose fits 114–123, wide capitals as few as 72).
+  The budget is parsed from the fence label itself, so retuning it for a
+  different card width means renaming the fence.
 - Newlines inside the fence are collapsed to spaces; leading/trailing
   whitespace is trimmed. One plain paragraph — no markdown.
 
@@ -498,7 +503,7 @@ scale.
 ### `output` — string, optional
 
 Destination for the finished PNG. Left empty, it defaults to
-`generated-images/<speaker-name>-final.png`.
+`generated-images/<speaker-name>.png`.
 
 **States:** path free → written · file exists → written under a `-<NN>`
 suffix (lowest free number, first dupe = 01) and reported; **the existing
@@ -530,7 +535,7 @@ to-process/<speaker-folder>/     one folder per card:
     speaker.png
 processed/<speaker-folder>/      the whole folder lands here on success
                                  (archive: form + assets)
-generated-images/<speaker>-final.png the finished render, delivered separately
+generated-images/<speaker>.png       the finished render, delivered separately
 ```
 
 1. **Scaffold**: tell the assistant *"new speaker Alex Alderman"* (the
@@ -543,12 +548,12 @@ generated-images/<speaker>-final.png the finished render, delivered separately
    folder in `to-process/`, or just the ones you name. No batch cap.
 4. Per form the skill: transfers the fenced inputs into the frontmatter
    and validates them → checks both image assets are present and the
-   photo is an accepted square (§2) → measures both placeholders off
-   `base_image` (colour mask; printed panels win when present, §1b) →
-   card-ratio check → renders in a headless Chromium browser, all fonts
-   local → verifies output dimensions and pixels by inspection → writes
-   the PNG to `generated-images/<speaker>-final.png` → **moves the whole
-   folder to `processed/`**, geometry written back into the form.
+   photo is an accepted square (§2) → reads the fixed geometry from the
+   frontmatter (§1b) → card-ratio sanity check → renders in a headless
+   Chromium browser, all fonts local → verifies output dimensions and the
+   two slots by inspection → writes the PNG to
+   `generated-images/<speaker>.png` → **moves the whole folder to
+   `processed/`**.
 5. **Missing images**: the run stops for that folder and asks —
    *"resubmit with the image(s) added, or generate now with a placeholder
    outline?"* In placeholder mode the missing slot renders as a dashed

@@ -4,7 +4,7 @@ Three things. The skill refuses (or asks about placeholders) until it has them.
 
 | file | what |
 |---|---|
-| `intake.md` | the filled-in form — type only in its labelled fences; the assistant fills the frontmatter from them |
+| `intake.md` | the form — type only in its labelled fences (or give the answers in chat and the assistant types them); the assistant fills the frontmatter from the fences. Leave the frontmatter's geometry block alone: those numbers are the template's fixed constants |
 | `company-logo.(png/jpg)` | the speaker's company logo — square, ideally 80×80+ |
 | `speaker.(png/jpg/jpeg)` | the speaker photo — **square (1:1), at most 800×800** |
 
@@ -30,7 +30,13 @@ corner rounding).
 ## Text limits
 
 name 30 · position/company 39 (including the ` / ` joiner) ·
-description 100 · topic 26. The audience level is fixed (`For All
+description 115 · topic 26. The audience level is fixed (`For All
 Levels`) and is not typed.
 The description budget is enforced from the fence label; over it, the form is
 rejected rather than truncated. Everything else ellipsises.
+
+## Filled it in yourself?
+
+Say "done". The assistant checks every fence and both images against these
+rules and lists anything non-compliant with its fix — it never edits your
+values for you. Fix, say "done" again, and it renders.

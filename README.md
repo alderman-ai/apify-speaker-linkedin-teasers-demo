@@ -49,13 +49,14 @@ Open this folder in your assistant and say:
 
 > show me the demo
 
-It answers with a short menu. Pick the first line and it runs the whole
-pipeline in front of you on the bundled demo speaker — form checked,
-template measured, card rendered in a headless browser, result inspected,
-finished PNG delivered to `generated-images/`. Then it offers to do the same
-for a real speaker: you give it the name, role, company, talk blurb, topic,
-minutes and two square images right there in chat, and it
-takes it from there. (The other two menu lines aren't built yet.)
+It answers with a short menu. Pick the first line and you make a card for
+a speaker of your choosing: it asks the name, sets up the folder, then asks
+whether you want to fill in the form yourself (it checks your work and
+tells you what to fix) or give it the role, company, talk blurb, topic,
+minutes and two square images right there in chat. Either way it then runs
+the whole pipeline in front of you — form checked, card rendered in a
+headless browser, result inspected, finished PNG delivered to
+`generated-images/`. (The other two menu lines aren't built yet.)
 
 If anything is off — blurb too long, an image missing or not square, a
 template box the wrong shape — the run stops and says exactly what to fix.
@@ -92,14 +93,14 @@ to-process/<speaker>/                 the assistant builds this from what you
                                       tell it: intake.md, README.md,
                                       company-logo.png, speaker.png
 processed/<speaker>/                  the folder moves here on success (archive)
-generated-images/<speaker>-final.png  the finished render — publish from here
+generated-images/<speaker>.png        the finished render — publish from here
 ```
 
 A folder lives in exactly one stage. Successes move whole; failures stay
 put with a printed reason and never write partial output. Nothing is ever
-overwritten — a name that's already taken gets a `-01`, `-02`… suffix,
-which is also why the demo run lands as `alex-alderman-01`: the author's
-original card already holds the bare name.
+overwritten — a name that's already taken gets a `-01`, `-02`… suffix
+(the author's own card already holds `alex-alderman`, so a second Alex
+lands as `alex-alderman-01`).
 
 **Missing images** stop the run with a choice: resubmit, or render now with
 a dashed placeholder outline that a correctly sized image covers completely
@@ -118,7 +119,7 @@ labelled boxes say what goes where.) The short version:
 | company logo | 40×40 top-left of the card | square image, ≥80×80 |
 | speaker name | card title | 30 chars |
 | position / company | monospace line, joined as `position / company` | 39 chars incl. the ` / ` |
-| description | card body, clamps at 2 lines | 100 chars |
+| description | card body, clamps at 2 lines | 115 chars |
 | topic category | card footer left | 26 chars |
 | level | card footer, after 👥 | fixed: `For All Levels` — not an input |
 | duration | card footer, after ★ | number only — card shows `10 (mins)` |
@@ -140,10 +141,13 @@ the budgets table.
 
 This demo ships exactly one visual template,
 `_internal/core-templates-please-dont-touch/speaker-teaser-linkedin_v3.png`
-(1200×1200). Whatever that PNG says, goes — the coloured placeholder blocks
-on it are measured per run and decide exactly where the two elements land.
-As the folder name suggests: don't touch it in passing. A deliberate
-template change is a versioned event — that folder's README says how.
+(1200×1200), and for this demo v3 is final. The coloured placeholder
+blocks on it show where the two elements land; the exact pixel geometry
+was measured once when the template was built and is a fixed constant in
+the intake form — a run never re-measures the image, and you are never
+asked about it. As the folder name suggests: don't touch it in passing. A
+deliberate template change is a versioned event — that folder's README
+says how.
 
 The current template is **machine-built**: the original Canva export (the
 one with the green and purple squares) has been superseded by a version
@@ -166,8 +170,8 @@ to them:
 
 | skill | file | what it does |
 |---|---|---|
-| `new-speaker` | `_internal/skills/new-speaker.md` | scaffolds one speaker folder in `to-process/` and collects the speaker's details from you in chat, writing them into the form |
-| `apify-speaker-card` | `_internal/skills/apify-speaker-card.md` | the whole generator: validates the form, measures the template, renders, verifies, delivers — and holds the demo run the menu's first line executes |
+| `new-speaker` | `_internal/skills/new-speaker.md` | scaffolds one speaker folder in `to-process/`, then either lets you fill the form yourself or collects the speaker's details from you in chat and writes them in |
+| `apify-speaker-card` | `_internal/skills/apify-speaker-card.md` | the whole generator: validates the form, loads the fixed geometry, renders, verifies, delivers — and holds the "Line 1" flow the menu's first line executes |
 
 This README is written for you, the human; your assistant orients itself
 from `CLAUDE.md` / `AGENTS.md`.
@@ -177,7 +181,7 @@ from `CLAUDE.md` / `AGENTS.md`.
 ```
 README.md                     you are here — the only doc you need to start
 to-process/  processed/       the queue — built and moved by the assistant
-generated-images/             the finished PNGs (<speaker>-final.png)
+generated-images/             the finished PNGs (<speaker>.png)
 demo-and-more-help/           lost, curious, or cautious? three subfolders:
                               filling-in-the-form/, example-speakers/ and
                               about-this-project/ — start at its README.md

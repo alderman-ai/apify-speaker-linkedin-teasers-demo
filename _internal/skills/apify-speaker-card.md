@@ -4,8 +4,8 @@ description: >
   Mass-produce Apify-styled speaker teaser images: renders a pixel-faithful
   Apify actor card (repurposed as a speaker card) and a card-style speaker
   portrait element into the canon template, one finished PNG per speaker.
-  Use when the operator picks line 1 of the session menu ("see the workflow
-  in action" / "show me the demo" — the Demo run section), says "process
+  Use when the operator picks line 1 of the session menu ("make your own
+  speaker card" / "show me the demo" — the Line 1 section), says "process
   the intake forms", "process the queue", "generate the speaker cards",
   "new speaker <name>", or drops folders into to-process/.
 ---
@@ -25,7 +25,7 @@ filled reference copy); consult it for field rules rather than improvising.
 ```
 to-process/<speaker>/              intake.md + README.md + company-logo + speaker images
 processed/<speaker>/               the whole folder moves here on success (archive)
-generated-images/<speaker>-final.png   the finished render, delivered separately
+generated-images/<speaker>.png     the finished render, delivered separately
 ```
 
 A folder is always in exactly one queue. Failures stay put with the reason
@@ -41,32 +41,49 @@ collects every other field and the two images in chat and writes them into
 the form; declined name → `new-speaker-<NN>`, lowest free number,
 zero-padded). If the operator asks this skill to scaffold, invoke that one.
 
-## Demo run (line 1 of the session menu — "show me the demo")
+## Line 1 of the session menu — "make your own speaker card"
 
-The bundled demo speaker lives in `_internal/demo-speaker/`: a complete
-speaker folder (filled `intake.md`, `README.md`, `company-logo.png`,
-`speaker.png`) for the repo author, Alex Alderman. It is input, never a
-working folder — **never process or edit it in place.**
+Line 1 is the whole demo: the visitor makes a card for a speaker of their
+choosing, in about ten minutes, and sees exactly where the pipeline's
+inputs stop and its fixed parts begin. Nothing about geometry is ever
+asked or explained during it — the template's block positions are
+constants (step 3) and the visitor only supplies text and two images.
 
-1. Say in one line what is about to happen: the bundled demo speaker is
-   copied into the queue, then goes through exactly the pipeline a real
-   speaker goes through.
-2. **Copy** (never move) the whole folder to `to-process/alex-alderman/`,
-   applying the `new-speaker` duplicate rule: if `alex-alderman` is already
-   taken in `to-process/`, `processed/` or `generated-images/` — it is in
-   the shipped repo, where the author's own card sits as the worked
-   example — the copy becomes `to-process/alex-alderman-<NN>/`, lowest
-   free number, first dupe = 01. Say which name it got and why (nothing is
-   ever overwritten).
-3. Process **that one folder** with the procedure below, narrating each
+1. **Ask for the speaker's name** — one question. Then scaffold the folder
+   with the `new-speaker` skill (steps 1–4 there): `to-process/<name>/`
+   holding a fresh copy of the intake form (name pre-filled) and the
+   README. Say the folder's path.
+2. **Offer the fork** — one question, two options, verbatim in spirit:
+   - **Fill it in yourself.** *"Open `<absolute path>/intake.md`, type in
+     each labelled fence under 'Input presentation details here', drop the
+     two square images into the folder as `company-logo.png` and
+     `speaker.png`, and tell me 'done' when it's ready. I'll check it
+     against the form's rules and tell you what to fix, if anything."*
+   - **Give me the answers here.** *"Tell me the role, company, topic,
+     minutes, blurb and the two image paths, in any order, and I'll fill
+     the form for you."* → continue with `new-speaker` steps 5–7.
+3. **Self-filled path — the gate.** On "done" (or any message saying the
+   form is ready), run step 1 and step 2 of the processing procedure below
+   on that folder **and stop before rendering**. Report every
+   non-compliance in one list — an empty or `[type here]` fence, a blurb
+   over the fence's budget (give the count), a missing image, a non-square
+   or oversized photo, position/company not kebab-case — each with what
+   would fix it. **Never fix a value yourself**: the visitor edits and
+   says "done" again; repeat until the list is empty. (Offering the
+   kebab-cased form of a position/company and using it on a "yes" is the
+   one exception, as in `new-speaker` step 6.) Then continue.
+4. **Process that one folder** with the procedure below, narrating each
    stage in a single line as you pass it: form validated → both assets
-   checked → geometry measured off the template → card-ratio check →
-   rendered headless → verified by inspection → delivered.
-4. Report as in step 7, show the finished PNG's path, and offer the next
-   step: the same for a real speaker — name, role, company, blurb, topic,
-   minutes and two square images, all given here in chat (the
-   `new-speaker` skill). Line 1 of the menu asks no further questions
-   before running; the offer at the end is the only prompt.
+   checked → fixed geometry loaded → card-ratio sanity check → rendered
+   headless → verified by inspection → delivered.
+5. Report as in step 7 and show the finished PNG's path.
+
+The bundled demo speaker in `_internal/demo-speaker/` (the repo author's
+complete, filled folder) is the **worked example** of a finished form, not
+an input to line 1. Point a visitor at it when they ask what a filled form
+looks like. **Never process or edit it in place**; if someone explicitly
+asks to render it, copy it into `to-process/` under the `new-speaker`
+duplicate rule (`alex-alderman-<NN>`) and process the copy.
 
 ## Processing ("process the queue")
 
@@ -119,37 +136,37 @@ fetch a real stand-in image.
 The company logo stays flexible: square, ideally 80×80 or larger
 (`object-fit: cover` centre-crops a non-square logo).
 
-### 3 · Geometry — the template image is canon
+### 3 · Geometry — fixed constants, read from the form
 
 Read `base_image` (the Read tool shows its true pixel size — use that as
-page size, don't assume 1200×1200). Two placeholders: **purple `#AE81FF` =
-actor card block, green `#20A34E` = speaker element block**; both must
-exist or the template is rejected.
+page size; it is 1200×1200 for template v3). **Do not measure the image.**
+The two coloured blocks are how the template was designed; where they sit
+was measured once when template v3 was built and is recorded as a constant
+in §6 of the intake form — the eight keys `card_x/y/w/h` and
+`speaker_x/y/w/h`. Read them from the frontmatter verbatim:
 
-Measure each block's bounding box by colour mask — green
-`G > R+40 and G > B+40`, purple `B > G+40 and R > G+20` — dilated 3px to
-recover anti-aliased edges. The current canon template is machine-built
-and carries **no printed readout panels**; if a future template shows them
-(Canva's Width/Height/X/Y card pasted inside a block), read them off the
-image and require agreement with the mask within 6px — on disagreement,
-halt and report both numbers. Precedence: printed panel → colour mask.
-The frontmatter is never consulted for geometry.
+| block | placeholder colour | fixed geometry (template v3) |
+|---|---|---|
+| actor card | purple `#AE81FF` | 799×307 @ (201, 748) |
+| speaker element | green `#20A34E` | 294×336 @ (706, 345) |
+
+A form whose eight values differ from the template README's constants for
+its `base_image` has been hand-edited: halt and report both sets — the
+numbers are not per-speaker inputs. Never derive them from colour masks:
+the Apify logo in the header shares the placeholder green and a company
+logo can share the purple, so any mask read is unreliable by construction.
 
 **The green block hosts the speaker element, not a bare photo**: the
 shell's `.SpeakerCard` component, rendered 1:1 at the block's own size —
-a `#454545` (button-grey) shell that IS the element's border. On the
-current template the block spans the two central orange crosses
-vertically (y 345..681) and is centred on the header's right title box
-(x centre 852.5). Inside: the portrait as an exact square inset 16px from
-the left, top and right edges (slot 262×262), and below it the grey strip
-holding only `Join me in PRAGUE` (PRAGUE in the crosses' orange
-`#f5641f`) at 80% of the strip's width, centred on both axes. No outer
-ring — that stays exclusive to the actor card's hover state.
+a `#454545` (button-grey) shell that IS the element's border. On template
+v3 the block spans the two central orange crosses vertically and is
+centred on the header's right title box. Inside: the portrait as an exact
+square inset 16px from the left, top and right edges (slot 262×262), and
+below it the grey strip holding only `Join me in PRAGUE` (PRAGUE in the
+crosses' orange `#f5641f`) at 80% of the strip's width, centred on both
+axes. No outer ring — that stays exclusive to the actor card's hover state.
 
-Write the eight values back into the frontmatter (`card_x/y/w/h`,
-`speaker_x/y/w/h`) — they are outputs, never inputs.
-
-### 4 · The card-ratio check
+### 4 · The card-ratio sanity check
 
 ```
 scale     = card_w / card_width          (card_width default 400)
@@ -160,11 +177,13 @@ implied_h = card_h / scale
 form's text — the quantised table: no desc 113.667 · empty-string desc
 121.667 · 1 line 137.667 · 2 lines 153.667 · 3 lines 169.667. (A ≤115-char
 description at width 400 renders 2 lines when over ~70 chars, 1 line under.)
-On failure, report the height the block should be (`actual_h × scale`) and
-halt that folder. **Never stretch, letterbox or crop the card to fit.**
+With fixed geometry this only fails when a form's `desc_lines` or
+`card_width` has been changed, or a blurb renders one line; on failure,
+report the height the block would need (`actual_h × scale`) and halt that
+folder. **Never stretch, letterbox or crop the card to fit.**
 
-Worked against the current template: `scale = 799/400 = 1.9975`,
-`implied_h = 306.949/1.9975 = 153.667` → exact.
+Worked against template v3: `scale = 799/400 = 1.9975`,
+`implied_h = 307/1.9975 = 153.69` → within tolerance of 153.667.
 
 ### 5 · Fill the shell and render
 
@@ -175,7 +194,7 @@ purpose; the render must never touch a network). Replace every `{{TOKEN}}`:
 | token | value |
 |---|---|
 | `PAGE_W/H` | template pixel size |
-| `CARD_X/Y/W/H`, `SPK_X/Y/W/H` | the geometry from step 3 |
+| `CARD_X/Y/W/H`, `SPK_X/Y/W/H` | the fixed geometry from step 3, verbatim |
 | `CARD_CSS_WIDTH` | `card_width` (default 400) |
 | `CARD_SCALE` | `card_w / card_width`, 6 decimals |
 | `SPK_SCALE` | `1.000000` — the speaker element renders 1:1 at the block's own output size |
@@ -204,9 +223,13 @@ one of these is already on the machine.
 ### 6 · Verify with your eyes, then deliver
 
 Read the screenshot. Confirm: exact template dimensions; both blocks fully
-covered (no purple or green anywhere — check edges and corners, not just
-centres; a centre-only check once passed while most of a block showed);
-untouched template areas identical; text right; footer reads
+covered — **look at each block's four edges and corners** for any
+placeholder purple or green peeking out (a centre-only check once passed
+while most of a block showed). Judge this at the block boundaries only:
+purple or green *inside* a rendered element is content, not a leak — the
+Apify header logo is placeholder-green and a company logo may well be
+placeholder-purple, and neither is a fault. Untouched template areas
+identical; text right; footer reads
 `(?) topic · ★ N (mins) · 👥 For All Levels` with the `?` icon orange-ringed and two
 spaces before the topic; hover ring visible around the actor card body;
 the speaker element shows a square portrait framed by the `#454545` shell
@@ -214,7 +237,7 @@ the speaker element shows a square portrait framed by the `#454545` shell
 (PRAGUE orange); starfield visible below the actor card. Anything off →
 halt that folder, delete the bad screenshot, report.
 
-Then: move the PNG to `generated-images/<kebab-name>-final.png`, delete the
+Then: move the PNG to `generated-images/<kebab-name>.png`, delete the
 `_run-*.html`, and move the whole folder to `processed/<kebab-name>/`
 (renaming `new-speaker-<NN>` to the kebab speaker name from the form).
 **Duplicate names suffix, never refuse**: if `<kebab-name>` is already
@@ -227,9 +250,9 @@ after text edits, a namesake).
 
 ### 7 · Report
 
-Per folder: OK/FAIL, output path, the eight geometry values and their
-source (panel vs visual), the implied-vs-actual card heights, every
-warning. Then totals. One bad folder never stops the rest.
+Per folder: OK/FAIL, output path, the eight fixed geometry values as read
+from the form, the implied-vs-actual card heights, every warning. Then
+totals. One bad folder never stops the rest.
 
 ## Fixed facts (do not rediscover)
 
@@ -255,7 +278,9 @@ warning. Then totals. One bad folder never stops the rest.
   copy live in the shell, not in any asset.
 - The canon template is machine-built (baked gradient starfield, drawn
   blocks — recipe in `_internal/core-templates-please-dont-touch/README.md`)
-  and supersedes the
-  operator's original Canva export.
+  and supersedes the operator's original Canva export. **Template v3 is
+  final for this demo**; its block geometry is a constant in the intake
+  form, measured once at build time (exact-colour footprint, whole pixels,
+  render-verified 2026-09-07), never re-measured per run.
 - GT Walsheim is not part of the render and must never be added to this
   repo.
