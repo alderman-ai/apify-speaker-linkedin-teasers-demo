@@ -37,6 +37,7 @@ rejected rather than truncated. Everything else ellipsises.
 
 ## Filled it in yourself?
 
-Say "done". The assistant checks every fence and both images against these
-rules and lists anything non-compliant with its fix — it never edits your
-values for you. Fix, say "done" again, and it renders.
+Say "done". The assistant puts the frontmatter back to the template's
+text if anything up there was changed (and tells you), then asks you in
+chat for anything missing or over a limit, writes your answers into the
+form, and renders. Type only in the fences; the frontmatter is its job.

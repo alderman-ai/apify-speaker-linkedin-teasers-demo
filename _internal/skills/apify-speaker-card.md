@@ -58,20 +58,28 @@ constants (step 3) and the visitor only supplies text and two images.
      each labelled fence under 'Input presentation details here', drop the
      two square images into the folder as `company-logo.png` and
      `speaker.png`, and tell me 'done' when it's ready. I'll check it
-     against the form's rules and tell you what to fix, if anything."*
+     and ask you here for anything that's missing."*
    - **Give me the answers here.** *"Tell me the role, company, topic,
      minutes, blurb and the two image paths, in any order, and I'll fill
      the form for you."* → continue with `new-speaker` steps 5–7.
 3. **Self-filled path — the gate.** On "done" (or any message saying the
    form is ready), run step 1 and step 2 of the processing procedure below
-   on that folder **and stop before rendering**. Report every
-   non-compliance in one list — an empty or `[type here]` fence, a blurb
-   over the fence's budget (give the count), a missing image, a non-square
-   or oversized photo, position/company not kebab-case — each with what
-   would fix it. **Never fix a value yourself**: the visitor edits and
-   says "done" again; repeat until the list is empty. (Offering the
-   kebab-cased form of a position/company and using it on a "yes" is the
-   one exception, as in `new-speaker` step 6.) Then continue.
+   on that folder. Step 1 begins with the **frontmatter check**: anything
+   the visitor changed in the frontmatter is reverted and mentioned in a
+   friendly line. Then:
+   - **Everything present and compliant** → continue straight to 4.
+   - **Something missing** — an empty or `[type here]` fence, a missing
+     image — → ask for exactly those things, inline, in one message; as
+     each answer arrives, write it into the form yourself (fence and
+     frontmatter key) or copy the image in, exactly as `new-speaker`
+     step 6 does. Do not send them back to the file.
+   - **Something non-compliant** — a blurb over the fence's budget (give
+     the count), a non-square or oversized photo, position/company not
+     kebab-case — → say what and why, ask for a replacement inline, and
+     write the replacement in yourself. Never trim, crop or reword a
+     value on your own; the kebab-case offer used on a "yes" is the one
+     exception.
+   Repeat until the form is complete, then continue.
 4. **Process that one folder** with the procedure below, narrating each
    stage in a single line as you pass it: form validated → both assets
    checked → fixed geometry loaded → card-ratio sanity check → rendered
@@ -91,6 +99,21 @@ For each folder in `to-process/` (or the ones named), in order:
 
 ### 1 · Parse and validate `intake.md`
 
+- **Frontmatter check — first, before anything is transferred.** Compare
+  the form's frontmatter against the current
+  `_internal/core-templates-please-dont-touch/intake-template.md`, key by
+  key. Every key except the five the fences feed (`speaker_name`,
+  `speaker_position`, `speaker_company`, `topic_category`,
+  `duration_minutes`; the description has no key) must be byte-identical
+  to the template: `version`, `versioned_at`, `base_image`,
+  `assets_root`, `company_logo`, `speaker_image`, `level`, the eight
+  geometry keys, `output`, `card_width`, `desc_lines`, `href`, and every
+  comment line. Any difference — an edited number, a deleted comment, a
+  changed path — is **reverted to the template's text**, then mentioned
+  kindly in one line (*"I put the frontmatter back the way the template
+  has it — those values are fixed for the template, and nothing you typed
+  in the fences was touched."*). Never halt on it, never keep an edited
+  value, never argue.
 - Operator values live in labelled body fences: `speaker-name`,
   `speaker-position`, `speaker-company`, `topic-category`,
   `duration-minutes`, and the first ```presentation-description-NN-char-max
@@ -139,27 +162,27 @@ The company logo stays flexible: square, ideally 80×80 or larger
 ### 3 · Geometry — fixed constants, read from the form
 
 Read `base_image` (the Read tool shows its true pixel size — use that as
-page size; it is 1200×1200 for template v3). **Do not measure the image.**
+page size; it is 1200×1200 for template v4). **Do not measure the image.**
 The two coloured blocks are how the template was designed; where they sit
-was measured once when template v3 was built and is recorded as a constant
+was measured once when template v4 was built and is recorded as a constant
 in §6 of the intake form — the eight keys `card_x/y/w/h` and
 `speaker_x/y/w/h`. Read them from the frontmatter verbatim:
 
-| block | placeholder colour | fixed geometry (template v3) |
+| block | placeholder colour | fixed geometry (template v4) |
 |---|---|---|
 | actor card | purple `#AE81FF` | 799×307 @ (201, 748) |
 | speaker element | green `#20A34E` | 294×336 @ (706, 345) |
 
-A form whose eight values differ from the template README's constants for
-its `base_image` has been hand-edited: halt and report both sets — the
-numbers are not per-speaker inputs. Never derive them from colour masks:
+They cannot differ from the template's by the time you get here — the
+frontmatter check in step 1 already reverted any hand edit — so read them
+and go. Never derive them from colour masks:
 the Apify logo in the header shares the placeholder green and a company
 logo can share the purple, so any mask read is unreliable by construction.
 
 **The green block hosts the speaker element, not a bare photo**: the
 shell's `.SpeakerCard` component, rendered 1:1 at the block's own size —
 a `#454545` (button-grey) shell that IS the element's border. On template
-v3 the block spans the two central orange crosses vertically and is
+v4 the block spans the two central orange crosses vertically and is
 centred on the header's right title box. Inside: the portrait as an exact
 square inset 16px from the left, top and right edges (slot 262×262), and
 below it the grey strip holding only `Join me in PRAGUE` (PRAGUE in the
@@ -182,7 +205,7 @@ With fixed geometry this only fails when a form's `desc_lines` or
 report the height the block would need (`actual_h × scale`) and halt that
 folder. **Never stretch, letterbox or crop the card to fit.**
 
-Worked against template v3: `scale = 799/400 = 1.9975`,
+Worked against template v4: `scale = 799/400 = 1.9975`,
 `implied_h = 307/1.9975 = 153.69` → within tolerance of 153.667.
 
 ### 5 · Fill the shell and render
@@ -278,7 +301,7 @@ totals. One bad folder never stops the rest.
   copy live in the shell, not in any asset.
 - The canon template is machine-built (baked gradient starfield, drawn
   blocks — recipe in `_internal/core-templates-please-dont-touch/README.md`)
-  and supersedes the operator's original Canva export. **Template v3 is
+  and supersedes the operator's original Canva export. **Template v4 is
   final for this demo**; its block geometry is a constant in the intake
   form, measured once at build time (exact-colour footprint, whole pixels,
   render-verified 2026-09-07), never re-measured per run.

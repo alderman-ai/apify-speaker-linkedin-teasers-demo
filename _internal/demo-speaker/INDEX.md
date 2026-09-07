@@ -8,7 +8,7 @@ worked example of what a finished form and its two assets look like:
 | `intake.md` | the filled form — a byte-for-byte copy of `demo-and-more-help/filling-in-the-form/intake-template-completed-example.md` |
 | `README.md` | the standard speaker-folder checklist (a copy of `_internal/speaker-folder-README.md`) |
 | `company-logo.png` | the alderman.ai mark, 1181×1181 |
-| `speaker.png` | the portrait, 262×262 — the photo slot's exact size on template v3 |
+| `speaker.png` | the portrait, 262×262 — the photo slot's exact size on template v4 |
 
 Line 1 of the session menu ("make your own speaker card") does not use
 this folder — the visitor makes a card for a speaker of their own. Point

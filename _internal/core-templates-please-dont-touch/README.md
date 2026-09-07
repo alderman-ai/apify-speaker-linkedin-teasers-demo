@@ -7,7 +7,7 @@ them.
 
 | file | what |
 |---|---|
-| `speaker-teaser-linkedin_v3.png` | the canon visual template (1200×1200), version 3 — **final for this demo**. Its coloured blocks show the layout: purple = actor card, green = speaker element. Their geometry was measured once when this version was built and lives as constants in `intake-template.md` §6 (see below); no run measures the image |
+| `speaker-teaser-linkedin_v4.png` | the canon visual template (1200×1200), version 4 — **final for this demo**. Its coloured blocks show the layout: purple = actor card, green = speaker element. Their geometry was measured once when this version was built and lives as constants in `intake-template.md` §6 (see below); no run measures the image |
 | `intake-template.md` | the blank intake form — the whole input contract, versioned in its own frontmatter (`version` / `versioned_at`). Copied into each new speaker folder as `intake.md`; the copy is what operators fill, never this file |
 
 ## Changing a template
@@ -41,7 +41,7 @@ where the speaker element lands. Their geometry is a **fixed constant per
 template version**, measured once at build and recorded in
 `intake-template.md` §6:
 
-| block | fixed geometry (v3) |
+| block | fixed geometry (v4) |
 |---|---|
 | purple `#AE81FF` — actor card | 799×307 @ (201, 748) |
 | green `#20A34E` — speaker element | 294×336 @ (706, 345) |
@@ -53,7 +53,10 @@ by design). One constraint is re-checked per run as a sanity gate: the
 purple block's proportions must match the card as it actually renders
 (see `intake-template.md` section 1b).
 
-The current canon template is **machine-built** (2026-09-01), superseding
+Version 4 (2026-09-07) is the v3 image renumbered, pixel for pixel, so
+the visual template and the intake form carry the same version number;
+the two are versioned together from here on. The image itself is
+**machine-built** (2026-09-01), superseding
 the operator's original Canva export: baked gradient starfield + blocks
 redrawn at the operator's locked layout — green speaker block 294×336 @
 (705.5, 345) (spanning the two central orange crosses vertically, centred

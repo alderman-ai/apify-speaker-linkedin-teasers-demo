@@ -12,13 +12,14 @@
 # =============================================================================
 
 # --- 0. template version -- DO NOT EDIT --------------------------------------
-# Bumped only when this template itself changes, never per speaker.
+# Bumped only when this template itself changes, never per speaker. The
+# form and the visual template share one version number (both v4).
 version:            4
 versioned_at:       "2026-09-07 12:00"
 
 # --- 1. base template --------------------------------------------------------
 # Fixed for this demo: ONE visual template with fixed dimensions (1200x1200).
-base_image:         "../../_internal/core-templates-please-dont-touch/speaker-teaser-linkedin_v3.png"
+base_image:         "../../_internal/core-templates-please-dont-touch/speaker-teaser-linkedin_v4.png"
 
 # --- 2. images ---------------------------------------------------------------
 # NOTE: the small circle icon in the card footer is STATIC across every
@@ -48,7 +49,7 @@ level:              "For All Levels"
 duration_minutes:   ""              # number only — the card renders 10 (mins)
 
 # --- 6. placement -- FIXED GEOMETRY, DO NOT EDIT -----------------------------
-# Template v3 is final for this demo. Its two coloured blocks were measured
+# Template v4 is final for this demo. Its two coloured blocks were measured
 # ONCE when the template was built (exact-colour footprint, whole pixels,
 # render-verified 2026-09-07) and the result is recorded here as a constant.
 # Nothing measures the image at run time; the generator reads these eight
@@ -318,7 +319,7 @@ of this form as constants, and every run reads them from there. Nothing
 measures the image at generation time, so a logo that happens to share a
 placeholder colour cannot disturb placement.
 
-Template v3 is final for this demo. Its blocks are purple 799×307 at
+Template v4 is final for this demo. Its blocks are purple 799×307 at
 (201, 748) and green 294×336 at (706, 345); the render page's hover ring
 extends 1px outside each block by design. The template is **machine-built**
 (see `_internal/core-templates-please-dont-touch/README.md`): baked
@@ -476,11 +477,11 @@ off-spec · either half empty → the line collapses.
   spaces of clearance. Title Case. Single line, ellipsises.
 - Budget: **26 characters** before it collides with the footer's
   right-hand group (shortened from 33 when `level` became the fixed
-  `For All Levels`, template v3).
+  `For All Levels`, since template v3).
 
 ### `level` — **fixed, not an input**
 
-- Every card reads `For All Levels` right of the 👥 glyph (template v3).
+- Every card reads `For All Levels` right of the 👥 glyph (since template v3).
   The frontmatter value ships filled; the assistant leaves it alone. If a
   future footer change makes it clip, the sanctioned fallback is
   `All Levels`.

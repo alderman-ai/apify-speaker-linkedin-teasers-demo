@@ -60,11 +60,11 @@ and two images.
    - **fill it in yourself** — *"Open `<path>/intake.md`, type into each
      labelled fence under 'Input presentation details here', drop the two
      square images into the folder as `company-logo.png` and `speaker.png`,
-     and say 'done'. I'll check it against the form's rules and tell you
-     what to fix, if anything."* On "done", hand the folder to the
-     `apify-speaker-card` skill's **Line 1, step 3 gate**: it validates the
-     fences and images, lists every non-compliance with its fix, and waits
-     for the operator to correct it — nothing is ever fixed silently.
+     and say 'done'. I'll check it and ask you here for anything that's
+     missing."* On "done", hand the folder to the `apify-speaker-card`
+     skill's **Line 1, step 3 gate**: it reverts any frontmatter edits
+     (and says so), asks inline for whatever is missing or non-compliant,
+     writes the answers into the form itself, then processes.
    - **give the answers in chat** — continue with step 5.
 
    If the operator's original request already made the choice ("I'll fill
@@ -113,10 +113,10 @@ and two images.
 
 - A numbered folder is renamed to the speaker's kebab name automatically at
   processing time, taken from the form's `speaker_name`.
-- A form the operator filled by hand (fences typed, frontmatter untouched)
-  is a first-class path — the generator transfers the fences into the
-  frontmatter at processing time, and the gate reports anything
-  non-compliant for the operator to fix. Both paths end in the same form.
+- A form the operator filled by hand is a first-class path — the
+  generator reverts any frontmatter edits, transfers the fences into the
+  frontmatter, and asks inline for anything missing. Both paths end in
+  the same form.
 - The eight geometry keys in the form's frontmatter (§6) are constants for
   the template version. Neither path ever asks about them or edits them.
 - This skill only scaffolds and fills. Generation belongs to the

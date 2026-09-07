@@ -69,8 +69,9 @@ it directly, no menu.
   and follow the **"Line 1"** section of
   `_internal/skills/apify-speaker-card.md`: ask the speaker's name,
   scaffold the folder, then offer the fork — fill the form yourself and
-  say "done" (the assistant then checks it and reports what to fix), or
-  give the answers in chat and the assistant fills it. Then process that
+  say "done" (the assistant reverts any frontmatter edits, then asks
+  inline for anything missing and fills it in), or give the answers in
+  chat and the assistant fills it. Then process that
   folder end to end, narrating each stage in a line.
 - **Line 2 or 3** → reply with exactly this sentence, then show the menu
   again: `Sorry, this option is temporarily out of order, please try again
@@ -86,7 +87,7 @@ Procedure and contract (`_internal/`):
 | path | what |
 |---|---|
 | `_internal/skills/apify-speaker-card.md` | **the generator's complete operating procedure — read it in full before processing anything; follow it, don't improvise.** Mass-produces Apify-styled speaker teaser images: renders a pixel-faithful Apify actor card (repurposed as a speaker card) and a card-style speaker portrait element into the canon template at its fixed geometry, one finished PNG per speaker. Holds the **"Line 1"** section that line 1 of the session menu executes (name → scaffold → fill-it-yourself or fill-it-in-chat fork → gate → render). Use when the operator picks line 1, says "process the intake forms", "process the queue", "generate the speaker cards", "new speaker <name>", or drops folders into `to-process/` |
-| `_internal/skills/new-speaker.md` | **the scaffolder's complete procedure — read it in full before scaffolding.** Adds a new speaker folder to the queue, then offers the fork: the operator fills the form by hand and says "done" (the generator's gate checks it), or gives the details in chat — name, role, company, topic, minutes, blurb and the two images (audience level is fixed) — and the assistant writes them into the form (asks the name; declined → `new-speaker-<NN>`, lowest free number; a repeat name → `<name>-<NN>`, first dupe = 01). Use when the operator says "new speaker", "/new-speaker", "add a speaker", "scaffold a speaker folder", or names a person to add to the lineup |
+| `_internal/skills/new-speaker.md` | **the scaffolder's complete procedure — read it in full before scaffolding.** Adds a new speaker folder to the queue, then offers the fork: the operator fills the form by hand and says "done" (the generator's gate reverts frontmatter edits and asks for what's missing), or gives the details in chat — name, role, company, topic, minutes, blurb and the two images (audience level is fixed) — and the assistant writes them into the form (asks the name; declined → `new-speaker-<NN>`, lowest free number; a repeat name → `<name>-<NN>`, first dupe = 01). Use when the operator says "new speaker", "/new-speaker", "add a speaker", "scaffold a speaker folder", or names a person to add to the lineup |
 | `_internal/demo-speaker/` | the bundled demo speaker: a complete, filled speaker folder (`intake.md`, `README.md`, `company-logo.png`, `speaker.png`) for the repo author — the worked example of a finished form, shown to visitors who ask what "done" looks like. Not an input to line 1. **Never process or edit it in place**; an explicit request to render it copies it into `to-process/` under the duplicate rule |
 | `_internal/core-templates-please-dont-touch/intake-template.md` | the input contract: every field, budget, failure mode; the operator's values live in labelled body fences (typed by hand, or filled from chat by you), mirrored into the frontmatter. Section 6 of its frontmatter holds the template's **fixed block geometry** — constants, never measured per run and never edited per speaker. Versioned in its frontmatter (`version` / `versioned_at`, currently v4). Copied into each folder as `intake.md` |
 | `demo-and-more-help/filling-in-the-form/intake-template-completed-example.md` | the same template with every fence and frontmatter value filled in — what "done" looks like (byte-identical to the demo speaker's `intake.md`) |
@@ -110,7 +111,7 @@ Render machinery (`_internal/` — use, never restructure):
 | `_internal/fonts/*.woff2` | Inter 400/500/600 + IBM Plex Mono 500, latin + latin-ext |
 | `_internal/fonts/licenses/` | the two OFL licence texts |
 | `_internal/speaker-folder-README.md` | copied into each new speaker folder as its `README.md` |
-| `_internal/core-templates-please-dont-touch/speaker-teaser-linkedin_v3.png` | the one canon template (1200×1200, v3 — **final for this demo**), **machine-built**: baked gradient starfield + purple card block + green speaker block. The blocks show where things land; the numbers that place them were measured once at build and live in the intake form's section 6. Supersedes the operator's original Canva export |
+| `_internal/core-templates-please-dont-touch/speaker-teaser-linkedin_v4.png` | the one canon template (1200×1200, v4 — **final for this demo**), **machine-built**: baked gradient starfield + purple card block + green speaker block. The blocks show where things land; the numbers that place them were measured once at build and live in the intake form's section 6. Supersedes the operator's original Canva export |
 
 Reference (`demo-and-more-help/` — the operator-facing help and showcase
 folder; its root holds only `INDEX.md` and `README.md`, everything else
@@ -147,9 +148,10 @@ message, show the session menu.
   for our next speaker" → read `_internal/skills/new-speaker.md`, then
   scaffold `to-process/alex-alderman/` (intake form + README; without a
   name, `new-speaker-<NN>` at the lowest free number), then **offer the
-  fork**: they fill the form by hand and say "done" (you check it and
-  report what to fix), or they give the details in chat and you write
-  them into the form. If the operator asked for the image, not just the
+  fork**: they fill the form by hand and say "done" (you revert any
+  frontmatter edits, then ask inline for anything missing and write it
+  in), or they give the details in chat and you write them into the
+  form. If the operator asked for the image, not just the
   folder, and everything is present, continue straight into generation.
 - **Generate intent** — "process the queue", "process the intake forms",
   "generate the speaker cards", "run the pipeline", "render the pending
@@ -181,7 +183,7 @@ message, show the session menu.
   with the eight numbers written into the intake form's section 6 as the
   new constants. Render one card afterwards to confirm. That folder's
   README has the details and the starfield rebuild recipe. For this demo,
-  visual template v3 is final.
+  visual template v4 is final.
 - **Maintainer-local slash skills** — on the author's machine only:
   `/init-new-speaker <name>` (scaffold the folder for manual intake and
   stop), `/create-speaker <name>` (chat intake → render; a folder that
@@ -199,27 +201,29 @@ message, show the session menu.
 
 - **Input is text and two images, nothing else.** The intake form is the
   machine record and the contract. The operator chooses at scaffold time:
-  fill the fences by hand and say "done", after which you check the form
-  and report every non-compliance with its fix (never fixing silently);
-  or answer in chat, in which case you ask for each field with its
+  fill the fences by hand and say "done", after which you revert any
+  frontmatter edits (saying so kindly), ask inline for anything missing
+  or non-compliant and write the answers in yourself; or answer in chat, in which case you ask for each field with its
   budget, validate as you go (character counts, kebab-case — offer the
   fix, never silently alter), and write the value into both its body
   fence and its frontmatter key yourself. Images arrive as file paths;
   copy them into the folder, never move the original.
 - **The geometry is fixed.** The template's coloured blocks — purple =
   actor card, green = speaker element — show where the elements land;
-  the numbers that place them were measured once when template v3 was
+  the numbers that place them were measured once when template v4 was
   built and are constants in the intake form's section 6. A run reads
-  those eight values verbatim and never measures the image, never
-  rewrites them, and never asks the operator about them.
+  those eight values verbatim and never measures the image, never asks
+  the operator about them, and reverts any hand edit to the frontmatter
+  back to the template before processing. The visual template and the
+  intake form share one version number (both v4).
 - **Core templates change on purpose only.** A run reads them and never
   writes them; a deliberate change follows the versioning convention
   under template-change routing above.
 - **Halt, don't degrade.** Over-budget description, missing assets (ask:
   resubmit vs placeholder outline), an off-spec speaker photo (must be an
   exact square PNG/JPG/JPEG ≤800×800 — you scale it to the slot, you never
-  crop or reframe it), block/card ratio mismatch, hand-edited geometry
-  keys — each is a stop with a clear report, never a silent workaround. Never
+  crop or reframe it), block/card ratio mismatch — each is a stop with a
+  clear report, never a silent workaround. Never
   trim operator text, never stretch the card, never overwrite anything.
 - **Duplicate names suffix, never block.** A repeat name is legitimate (a
   rebuilt card, a fresh start after text edits, a namesake, a demo run):

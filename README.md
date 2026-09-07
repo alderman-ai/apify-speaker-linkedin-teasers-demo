@@ -140,8 +140,8 @@ the budgets table.
 ## The template is canon
 
 This demo ships exactly one visual template,
-`_internal/core-templates-please-dont-touch/speaker-teaser-linkedin_v3.png`
-(1200×1200), and for this demo v3 is final. The coloured placeholder
+`_internal/core-templates-please-dont-touch/speaker-teaser-linkedin_v4.png`
+(1200×1200), and for this demo v4 is final. The coloured placeholder
 blocks on it show where the two elements land; the exact pixel geometry
 was measured once when the template was built and is a fixed constant in
 the intake form — a run never re-measures the image, and you are never
