@@ -7,7 +7,7 @@
 
 Want to just dive in?
 ```path-1-create-new-image
-
+Help me create a new LinkedIn teaser image.
 ```
 
 
