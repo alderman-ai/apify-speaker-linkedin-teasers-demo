@@ -14,8 +14,9 @@ as it ran.
 | Bojack Horseman | `bojack-horseman` | fictional character; rehearsal folder holds the form and logo only, no portrait file |
 | Božena Němcová | `bozena-nemcova-1` … `bozena-nemcova-4` | four parallel builds of the same name — the skill fans out several attempts and keeps the first good one |
 | Jaroslav Hašek | `jaroslav-hasek` | the card prepared in advance as the show's fallback, in case the live run failed |
+| Emil Zátopek | `emil-zatopek-1` … `emil-zatopek-4` | the full dress rehearsal of the show, run from the stage session: four parallel builds, slot 1 went to the live page |
 
 Portraits are public domain or Creative Commons; the exact source of each
-is in that folder's `credits.md`. The Němcová set uses a real historical
+is in that folder's `credits.md`. The Němcová and Zátopek sets use a real historical
 figure's name and likeness as demo material only — don't publish it as
 real event material.
