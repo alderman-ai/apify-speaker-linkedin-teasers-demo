@@ -29,8 +29,10 @@ No run measures the picture again.
 A gate is a check a computer can answer yes or no to. Written words only
 reach the fixed layout through these:
 
-1. **The form is checked.** Every field is counted against its budget. Over
-   budget is rejected with the count — the text is never quietly shortened.
+1. **The form is checked.** Every field is counted against its budget as the
+   details come in. The blurb is the hard gate: over budget, the form is
+   rejected with the count — the text is never quietly shortened. The
+   one-line fields end in an ellipsis on the card rather than wrap or shrink.
    Anything typed into the machine-readable part of the form is put back the
    way the template has it. (The budgets are pictured in
    [Actor card text budgets.png](../filling-in-the-form/Actor%20card%20text%20budgets.png).)

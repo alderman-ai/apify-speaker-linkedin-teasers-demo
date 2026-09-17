@@ -38,8 +38,10 @@ Every card here is one picture built from both piles.
 The **variable pile** is the words on the card, typed by a person or written by
 a model: the speaker's name (30 characters), the position and company (39
 together, lowercase and hyphenated), the topic (26), and the talk blurb (115).
-Each has a mechanical gate. Over budget is rejected with the count, never
-quietly trimmed. The audience level is not even a question — every card reads
+Each is counted against its budget as the answers come in. The blurb is the
+hard gate: over budget, the form is rejected with the count, never quietly
+trimmed. The one-line fields end in an ellipsis on the card rather than wrap
+or shrink. The audience level is not even a question — every card reads
 `For All Levels`.
 
 The **exact pile** is everything else: the 1200×1200 backdrop, the card's

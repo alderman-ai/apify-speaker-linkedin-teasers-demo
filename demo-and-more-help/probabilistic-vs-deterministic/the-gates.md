@@ -53,8 +53,9 @@ check catches it.
 
 ## 5. Halt, don't degrade
 
-Fail a gate and the run stops with a plain reason. Over-budget text is rejected
-with its character count, never trimmed. A missing image stops with a choice:
+Fail a gate and the run stops with a plain reason. An over-budget blurb is rejected
+with its character count, never trimmed; the one-line fields are counted as
+you answer and, on the card, end in an ellipsis rather than wrap or shrink. A missing image stops with a choice:
 resubmit, or render now with a dashed placeholder outline that the real image
 will cover exactly. A shape mismatch reports the height the block should be.
 Nothing is ever overwritten — a repeated name gets `-01`, `-02` and so on.

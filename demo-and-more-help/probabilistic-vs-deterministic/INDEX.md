@@ -44,6 +44,8 @@ defined where it first appears.
    code with different words, seen side by side.
 6. [Try it yourself](try-it-yourself.md) — back to line 1 of the menu to
    make a card and watch the split happen.
+7. [Three questions this folder provokes](faq.md) — can I use my own
+   brand's template, what does a card cost, and is this official Apify.
 
 Every fact and number on these pages comes from a file in this repo — the
 intake form, the skills, the render page, the help graphics and the

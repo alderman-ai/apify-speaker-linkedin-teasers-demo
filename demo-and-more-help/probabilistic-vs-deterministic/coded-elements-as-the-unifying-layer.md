@@ -21,8 +21,9 @@ faces apify.com actually serves — ship inside this folder, so the letterforms
 are the letterforms. A long role line ends in a real ellipsis (the "…" a
 browser adds when text runs out of room), and the blurb clamps at two lines.
 The card's height is even stepped by how many description lines there are:
-113.667px with no description, 137.667px at one line, 153.667px at two,
-169.667px at three. Real components have real measurements.
+113.667px with no description at all, 121.667px when the description is
+present but empty (it still contributes its 8px top margin), 137.667px at one
+line, 153.667px at two, 169.667px at three. Real components have real measurements.
 
 **Rendering is boring, on purpose.** "Render" here means a browser already on
 your machine opens the page invisibly ("headless" — no window, nobody

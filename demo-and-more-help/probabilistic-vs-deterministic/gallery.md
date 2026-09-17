@@ -28,7 +28,10 @@ Two things worth knowing before you reuse anything here. Some of the fictional
 portraits and one logo come from CC BY-SA sources, so publishing them carries
 an attribution obligation — the credit lines sit in the folders. And the
 real-people set uses real names and likenesses for an internal test only, so
-please don't publish any of it as real event material.
+please don't publish any of it as real event material. And the card design
+itself is an unofficial, non-commercial homage: Apify's name, logo and visual
+design belong to Apify, so these are community-event teasers, not Apify
+material.
 
 ## The author's card
 
