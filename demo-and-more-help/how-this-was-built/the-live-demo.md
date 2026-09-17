@@ -7,8 +7,9 @@ page that advances on cue, and a generator that cannot stall.
 ## The page: pre-built states, promoted on a tick
 
 The public page `alderman.ai/apify-live-demo` is not built during the show.
-Four page states are deployed to Vercel ahead of time as checkpoints -- title
-plus QR code, a paper-card state, the crowd-sourced card, then a gallery.
+Five page states are deployed to Vercel ahead of time as checkpoints -- a QR
+code alone, the title with its terminal line, a paper-card state, the
+crowd-sourced card, then a gallery.
 Going live is an instant promote of an already-built deployment, in either
 direction, so any checkpoint can be re-shown if a beat goes wrong.
 
