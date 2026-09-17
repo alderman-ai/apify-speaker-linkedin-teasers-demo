@@ -14,10 +14,10 @@ one of five subfolders.
 | folder | send them here when | contains |
 |---|---|---|
 | `filling-in-the-form/` | they're writing an intake and don't know what a field means, where it lands on the card, or how much text fits | the annotated field-mapping graphic, the character-budget table, both HTML sources, and a fully filled-in example intake |
-| `example-speakers/` | they want to see the range of output, or a real example of a completed speaker folder | eighteen speakers already through the pipeline — finished PNGs plus the archived folders that produced them |
+| `example-speakers/` | they want to see the range of output, or a real example of a completed speaker folder | twenty-three speakers already through the pipeline — finished PNGs plus the archived folders that produced them |
 | `about-this-project/` | they're wary of running a cloned repo, or want evidence the pipeline holds up | the code-and-security inventory and the ten-speaker stress-test report |
-| `probabilistic-vs-deterministic/` | they picked line 2 of the session menu, or want the idea behind the project: why brand assets need deterministic code and probabilistic prose, and how this pipeline combines both | a short explainer in seven one-screen pages, starting at its `INDEX.md` |
-| `how-this-was-built/` | they picked line 3 of the session menu, or are technical and want the internals: the architecture, the verified card CSS, the template geometry, the intake contract, the render command, the git timeline and what the live demo added | seven one-screen pages plus `images/`, starting at its `INDEX.md` |
+| `probabilistic-vs-deterministic/` | they picked line 2 of the session menu, or want the idea behind the project: why brand assets need deterministic code and probabilistic prose, and how this pipeline combines both | a short explainer in seven one-screen pages (concept, worked example, coded elements, gates, gallery, try it, FAQ), starting at its `INDEX.md` |
+| `how-this-was-built/` | they picked line 3 of the session menu, or are technical and want the internals: the architecture, the verified card CSS, the template geometry, the intake contract, the render command, the git timeline and what the live demo added | eight one-screen pages plus `images/`, starting at its `INDEX.md` |
 
 Each subfolder carries its own `INDEX.md` with file-level detail.
 
@@ -70,6 +70,7 @@ how-this-was-built/
   the-render-step.md               the headless Chromium command, local fonts, no network
   timeline.md                      the git history in seven phases; the stress test's findings
   the-live-demo.md                 what the on-stage version added
+  forking-for-your-own-brand.md    what a developer replaces to rebrand; licensing state
   images/                          the author's template drafts, an early render, one screenshot
 ```
 

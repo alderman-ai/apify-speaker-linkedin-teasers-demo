@@ -9,7 +9,7 @@ between is a program.
 to-process/<speaker>/                _internal/render/
   intake.md  (fences -> YAML)   -->  shell.html  --copy-->  _run-<name>.html
   company-logo.*                        {{TOKEN}}s filled: geometry, text,
-  speaker.*  (square, <=800)             file:/// image URIs
+  speaker.*  (roughly square)            file:/// image URIs
         |                                        |
         v                                        v
    validate + ratio check              headless Chromium --screenshot
@@ -69,7 +69,7 @@ to-process/ processed/ generated-images/     the queue
 _internal/skills/                            the two markdown procedures
 _internal/render/                            shell.html, footer icon, particles
 _internal/fonts/                             Inter + IBM Plex Mono (OFL)
-_internal/core-templates-please-dont-touch/  intake-template.md + the v4 PNG
+_internal/core-templates-please-dont-touch/  intake-template.md (v5) + the v4 PNG
 demo-and-more-help/                          help, examples, this page
 CLAUDE.md / AGENTS.md                        intent routing
 ```

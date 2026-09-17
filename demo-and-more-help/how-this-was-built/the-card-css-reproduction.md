@@ -2,14 +2,26 @@
 
 The actor card is apify.com's `ActorStoreItem`, rebuilt from scratch in plain
 HTML and CSS in [`_internal/render/shell.html`](../../_internal/render/shell.html)
-and **verified box-for-box against the live site to 0.001px**. No framework, no
-JavaScript, no design export — one `<style>` block and a static DOM that the
-generator fills and screenshots with headless Chromium.
+and **verified box-for-box against the live site to 0.001px**. Honesty note:
+that verification was a one-time measurement at build time (the extracted
+boxes compared against the live page's); no fixture or test ships in this
+repo, and the only check that runs here is the generator's verify-by-
+inspection of each finished PNG. No framework, no JavaScript, no design
+export — one `<style>` block and a static DOM that the generator fills and
+screenshots with headless Chromium.
 
 ## The measurements
 
-At `card_width` 400 the card renders **400 × 153.667**. Width is free; height
-is not continuous. It quantises in 16px steps (the description's line-height):
+At `card_width` 400 the card renders **400 × 153.667**. The shell's own
+comment says "384x153.667 at native width": 384 is the outer width the live
+card had in apify.com's grid when it was extracted, and the CSS itself sets
+no fixed width — `.ActorCard{ width:var(--card-css-width) }`, filled from the
+form's `card_width`, default 400 — so this pipeline renders the same box
+model 16px wider (outer `padding:2px`, then `.ActorCard-body{ padding:16px }`,
+leaving 364px of text width at 400). The height is the same at both, and at
+300 and 700 (the intake template's check), because it depends on the
+description's line count, not the width. Width is free; height is not
+continuous. It quantises in 16px steps (the description's line-height):
 
 | description state | height |
 |---|---|

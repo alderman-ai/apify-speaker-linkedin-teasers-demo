@@ -69,11 +69,14 @@ v4, frontmatter edits reverted and missing fields asked inline
 (`d821804`); `<speaker>-final.png` naming restored (`8e74b24`); line 1
 shows the finished example first (`7fed3a1`).
 
-## 7 · Today — 2026-09-17 (`c8cc63d`, `2f0dda6`)
+## 7 · Today — 2026-09-17
 
-Rehearsal cards archived under `example-speakers/`; menu line 2's
-probabilistic-prose-vs-deterministic-assets explainer — and this line-3
-folder.
+"Archive today's rehearsal cards under example-speakers" (`07a2731`), "Menu
+line 2: probabilistic prose vs deterministic assets explainer" (`09c815b`),
+"Menu line 3: how this demo was built, for technical readers" (`5aee31a`),
+then the visitor-walk fixes, the intake form's v5 photo rule and the
+Zátopek dress-rehearsal archive. Hashes are as of the day's rebase onto the
+remote; the subjects are what to search for if one has moved.
 
 ## The fences always win
 

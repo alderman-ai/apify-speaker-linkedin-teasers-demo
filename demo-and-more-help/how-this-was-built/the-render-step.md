@@ -32,9 +32,8 @@ chrome --headless=new --disable-gpu --hide-scrollbars --force-color-profile=srgb
   `font-display:block` faces before shooting.
 - `--window-size` — the viewport, set to the template's true pixel size
   (1200x1200 on v4), which is also the PNG's size.
-- `--screenshot` — full-viewport capture, written to the temp dir: the browser is
-  denied write access to Desktop folders (observed: Access denied), so the PNG is
-  moved to `generated-images/` afterwards.
+- `--screenshot` — full-viewport capture. The skill writes it to a temp folder
+  first and moves the PNG into `generated-images/` afterwards.
 
 Any Chromium-based browser takes these exact flags. The lookup order is the
 `CHROME` env var, then Chrome's install path, then the Edge preinstalled on

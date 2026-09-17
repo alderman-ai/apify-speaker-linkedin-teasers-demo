@@ -7,8 +7,10 @@ The pipeline composites into exactly one background:
 block where the actor card lands, a green block where the speaker
 element lands — drawn at the operator's locked layout, superseding the
 original hand-composed Canva teaser. v4 (2026-09-07) is v3 renumbered
-pixel for pixel so the image and the intake form carry one version
-number.
+pixel for pixel so the image and the intake form carried one version
+number. The form has since moved to v5 (2026-09-17, a relaxed speaker-photo
+rule) while the image stays v4: a form-only change moves no pixel and
+leaves the §6 constants untouched, so it bumps the form alone.
 
 ## The eight numbers
 

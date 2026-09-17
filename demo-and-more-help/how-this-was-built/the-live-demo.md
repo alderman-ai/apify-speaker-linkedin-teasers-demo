@@ -13,7 +13,8 @@ Going live is an instant promote of an already-built deployment, in either
 direction, so any checkpoint can be re-shown if a beat goes wrong.
 
 A detached background loop promotes the sequence on a fixed 20-second tick.
-Every state also polls a small static feed every 5 seconds, so a phone that
+Every state also polls a small static feed (every 5 seconds, per the
+author's description of the page), so a phone that
 scanned the QR during the first state reloads itself when a later one goes
 live, and a newly generated PNG landing in `generated-images/` swaps the
 placeholder card for the real one without a rebuild.
@@ -27,7 +28,7 @@ builds a complete card on its own -- portrait, logo, copy, render -- using a
 different portrait-sourcing strategy, so the four fail in different ways and
 one snag never sinks the demo. The parent publishes the first good card (a
 monogram-only card after 150 seconds if no photo card has landed), never asks a
-question, and finishes in about four minutes. A fallback card is rendered in
+question, and finishes in about three minutes. A fallback card is rendered in
 advance in case everything fails.
 
 ## Why it is split that way

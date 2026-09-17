@@ -23,7 +23,7 @@ rendered.
 
 → **`example-speakers/`**
 
-Eighteen speakers that have already been through the pipeline, each with
+Twenty-three speakers that have already been through the pipeline, each with
 their finished 1200×1200 PNG *and* the exact folder that produced it — so
 you can read a real filled-in form next to the image it became. Folklore
 characters, real Czech public figures used as stress-test material, and

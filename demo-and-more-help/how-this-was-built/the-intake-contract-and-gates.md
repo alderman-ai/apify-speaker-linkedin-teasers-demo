@@ -28,9 +28,10 @@ constants, `card_width`, `desc_lines`, and every comment line -- is compared
 byte-for-byte against the core template before anything is transferred. Any
 difference is **reverted to the template's text** and mentioned in one
 friendly line. It never halts, never keeps the edited value, never argues.
-The form carries its own `version` / `versioned_at` (currently v4), shared
-with the visual template: one number covers the geometry constants and the
-PNG they were measured from.
+The form carries its own `version` / `versioned_at` (currently v5). It was
+renumbered together with the visual template at v4; v5 is a form-only
+change (the relaxed speaker-photo rule), so the image stays v4 — its §6
+constants are still the v4 measurements. An image change bumps both.
 
 Scaffolding forks at the folder: fill the form by hand and say "done" (the
 gate reverts frontmatter edits, then asks inline for whatever is missing or
@@ -50,7 +51,7 @@ speaker name; no name gives `new-speaker-<NN>`, and a taken name gives
 | `duration_minutes` | number only, no unit | required |
 | `level` | fixed `For All Levels` | not an input; left as is |
 | `company_logo` | square, ideally 80x80+ | missing file = hard fail |
-| `speaker_image` | exactly square, PNG/JPG/JPEG, max 800x800 (262x262 ideal) | **halt**, actual size reported |
+| `speaker_image` | PNG/JPG/JPEG, any size, `max(W,H) <= 1.25 * min(W,H)`; trimmed evenly to a square (centre crop, no guessing), resized to 262x262 | outside 25%: **halt**, measured W×H reported, "crop it roughly square and resend" |
 | geometry (8 keys) | read verbatim from section 6 | hand edits already reverted |
 | card ratio | `implied_h = card_h / (card_w / card_width)` within +/-2px of the card's real height | **halt** |
 
@@ -72,9 +73,10 @@ Each failure mode has a defined report, and none of them has a workaround:
 - **Missing asset** -- stop and ask: resubmit with the images added, or
   render now with a dashed placeholder outline drawn *inside* the block, so
   a real image pasted over it covers it completely.
-- **Off-spec photo** -- halt, reporting the actual dimensions and format. An
-  accepted square is scaled to the slot; nothing is ever cropped, padded or
-  reframed. Squaring it is the operator's call.
+- **Off-spec photo** -- halt, reporting the measured W×H and format, with the
+  one-line fix. An accepted photo (sides within 25%) is trimmed evenly on the
+  longer dimension -- `offset = (longer - shorter) // 2`, no face detection --
+  then resized to the slot; nothing is ever padded or stretched.
 - **Ratio mismatch** -- halt, reporting the block's ratio, the card's actual
   ratio, and the height the block would need for the current text
   (`actual_h x scale`). The card is never stretched or letterboxed, because

@@ -55,6 +55,8 @@ advance.
 7. [What the on-stage live demo added](the-live-demo.md) — pre-built page
    checkpoints on a tick, a polled feed, and a four-way parallel build with a
    fallback.
+8. [Forking it for your own brand](forking-for-your-own-brand.md) — what a
+   developer replaces to rebrand, what stays, and the licensing state.
 
 `images/` holds copies of the author's working files used on the template
 and timeline pages (template drafts, an early render, a screenshot of an
