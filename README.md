@@ -5,6 +5,15 @@
 > Apify's name, logo and visual design belong to Apify. No social or custom-coded web assets were **==` seriously  harmed`== ** in the process of making this demo, **==` just a minor scrape `==** 🥰
 # Start here
 
+**Were you at the meetup? Paste this into your agentic assistant** (Claude Code, Cursor, Codex, or any agent that can read a folder) and follow along:
+
+```text
+Clone https://github.com/alderman-ai/apify-speaker-linkedin-teasers-demo and open the folder.
+Read its CLAUDE.md, then show me the demo.
+```
+
+You get a three-line menu: make your own speaker card from a few details and two pictures (a selfie cropped roughly square is fine), learn why brand assets need deterministic code and probabilistic prose, or find out how this was built. Everything runs locally; the only requirement is a Chromium browser already on your machine.
+
 Want to just dive in?
 ```path-1-create-new-image
 Help me create a new LinkedIn teaser image.
