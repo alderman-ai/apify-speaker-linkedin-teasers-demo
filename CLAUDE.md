@@ -61,8 +61,8 @@ it directly, no menu.
 >
 > 1. **Make your own speaker card** — a templated social media image from
 >    a few details and two images, in about ten minutes.
-> 2. **Learn about text-field-mapped visual assets** in general, and why
->    they enable pixel-perfect branded content.
+> 2. **Learn why brand assets need deterministic code and probabilistic
+>    prose**, and how this project combines both.
 > 3. **Find out how this demo was built.**
 
 - **Line 1** → the visitor makes a card. Read both skill files in full
@@ -80,10 +80,24 @@ it directly, no menu.
   "actor card", "square images" — per that skill's "Talking to a visitor"
   rules; a visitor who says they don't understand is shown the example
   again and told what it is, not asked the same question twice.
-- **Line 2 or 3** → reply with exactly this sentence, then show the menu
-  again: `Sorry, this option is temporarily out of order, please try again
-  from another line.` Do not improvise content for these lines; they are
-  not built yet.
+- **Line 2** → read `demo-and-more-help/probabilistic-vs-deterministic/INDEX.md`
+  in full. Give the visitor the concept in plain words — the INDEX's
+  opening paragraph, said conversationally, not pasted — then offer its
+  pages as a numbered pick list (title plus the INDEX's one-line
+  description for each). On a pick, read that page and present its
+  content conversationally in everyday words: keep every fact and number
+  as written, define any term the page defines, drop nothing and add
+  nothing; then offer the list again plus "back to the main menu". The
+  same "everyday words" rule as line 1 applies to every line addressed to
+  the visitor; a visitor who says they don't follow gets the same point
+  again in simpler words, never the same paragraph twice. Relative links
+  in a page are read as file paths from that folder; if the visitor wants
+  to see a card the gallery page names, open the PNG in their image
+  viewer. Do not invent claims beyond what the pages say.
+- **Line 3** → reply with exactly this sentence, then show the menu again:
+  `Sorry, this option is temporarily out of order, please try again from
+  another line.` Do not improvise content for this line; it is not built
+  yet.
 - Anything else (a number outside 1–3, a question) → answer in a line,
   then show the menu again.
 
@@ -122,7 +136,8 @@ Render machinery (`_internal/` — use, never restructure):
 
 Reference (`demo-and-more-help/` — the operator-facing help and showcase
 folder; its root holds only `INDEX.md` and `README.md`, everything else
-sits in `filling-in-the-form/`, `example-speakers/` or `about-this-project/`):
+sits in `filling-in-the-form/`, `example-speakers/`, `about-this-project/`
+or `probabilistic-vs-deterministic/`):
 
 | path | what |
 |---|---|
@@ -133,6 +148,8 @@ sits in `filling-in-the-form/`, `example-speakers/` or `about-this-project/`):
 | `demo-and-more-help/about-this-project/pipeline-evaluation.md` | the 2026-09-01 ten-speaker stress test of the docs and pipeline |
 | `demo-and-more-help/example-speakers/fictional-characters/` | the fictional demo speakers (folklore characters + synthetic personas), archived out of the live queue: `processed/` folders + `generated-images/` PNGs |
 | `demo-and-more-help/example-speakers/real-people-stress-test/` | the simulated-"real" stress-test speakers (real Czech public figures), kept as mid-project snapshots: `processed/` + `generated-images/` |
+| `demo-and-more-help/example-speakers/live-demo-rehearsals/` | the 2026-09-17 rehearsal runs of the on-stage skill (Bojack Horseman, Božena Němcová ×4), archived out of the live queue: `processed/` + `generated-images/`; portrait sources in each folder's `credits.md` |
+| `demo-and-more-help/probabilistic-vs-deterministic/` | **where menu line 2 lands.** The idea behind the project — language models are probabilistic, brands need determinism, this pipeline codes the exact parts and gates the generated parts — as an `INDEX.md` (the concept in about ten sentences plus the page list) and six one-screen pages: `the-concept.md`, `this-project-as-an-example.md`, `coded-elements-as-the-unifying-layer.md`, `the-gates.md`, `gallery.md`, `try-it-yourself.md`. Every fact in them traces to a file in this repo |
 
 Every folder carries its own `INDEX.md` for routing. `README.md` is
 reserved for orientation: the root README (the human entry point), the

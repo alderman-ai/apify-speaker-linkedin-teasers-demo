@@ -7,15 +7,16 @@ assistants orienting a human.
 
 The folder root holds only this file and `README.md` (the same routing,
 written for a person rather than an assistant). Everything else lives in
-one of three subfolders.
+one of four subfolders.
 
 ## Routing — where to send someone
 
 | folder | send them here when | contains |
 |---|---|---|
 | `filling-in-the-form/` | they're writing an intake and don't know what a field means, where it lands on the card, or how much text fits | the annotated field-mapping graphic, the character-budget table, both HTML sources, and a fully filled-in example intake |
-| `example-speakers/` | they want to see the range of output, or a real example of a completed speaker folder | twelve speakers already through the pipeline — finished PNGs plus the archived folders that produced them |
+| `example-speakers/` | they want to see the range of output, or a real example of a completed speaker folder | seventeen speakers already through the pipeline — finished PNGs plus the archived folders that produced them |
 | `about-this-project/` | they're wary of running a cloned repo, or want evidence the pipeline holds up | the code-and-security inventory and the ten-speaker stress-test report |
+| `probabilistic-vs-deterministic/` | they picked line 2 of the session menu, or want the idea behind the project: why brand assets need deterministic code and probabilistic prose, and how this pipeline combines both | a short explainer in six one-screen pages, starting at its `INDEX.md` |
 
 Each subfolder carries its own `INDEX.md` with file-level detail.
 
@@ -39,12 +40,24 @@ example-speakers/
   real-people-stress-test/         5 speakers — real Czech public figures
     generated-images/              their finished 1200x1200 PNGs
     processed/                     their archived folders (form + assets)
+  live-demo-rehearsals/            5 — 2026-09-17 rehearsal runs of the on-stage skill
+    generated-images/              their finished 1200x1200 PNGs
+    processed/                     their archived folders (form + assets)
 
 about-this-project/
   scripts-and-security.md          every piece of code in the repo, and when
                                    it runs (short version: no scripts at all)
   pipeline-evaluation.md           the 2026-09-01 ten-speaker stress test
   apify-live-demo-qr.png           QR code for alderman.ai/apify-live-demo (slide asset)
+
+probabilistic-vs-deterministic/
+  INDEX.md                         the concept in ten sentences + the page list (menu line 2 lands here)
+  the-concept.md                   prose vs assets, when each wins, how to split a task
+  this-project-as-an-example.md    which pieces here vary, which never do, where the gates sit
+  coded-elements-as-the-unifying-layer.md   why a verified CSS card beats an image model
+  the-gates.md                     the mechanical checks, with the real numbers
+  gallery.md                       the example cards — same code, different words
+  try-it-yourself.md               back to menu line 1
 ```
 
 ## Two standing cautions

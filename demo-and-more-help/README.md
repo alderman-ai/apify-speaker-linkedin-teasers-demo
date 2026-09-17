@@ -23,11 +23,23 @@ rendered.
 
 → **`example-speakers/`**
 
-Twelve speakers that have already been through the pipeline, each with
+Seventeen speakers that have already been through the pipeline, each with
 their finished 1200×1200 PNG *and* the exact folder that produced it — so
 you can read a real filled-in form next to the image it became. Folklore
-characters in one half, real Czech public figures used as stress-test
-material in the other.
+characters, real Czech public figures used as stress-test material, and
+the rehearsal runs made the day of the live demo.
+
+## "Why code the card instead of just asking an AI to draw one?"
+
+→ **`probabilistic-vs-deterministic/`**
+
+The idea behind the whole project, in six short pages: language models
+give a slightly different answer every time, brands need the same result
+every time, and the trick is to code the parts that must be exact and
+generate the parts that benefit from variation — then check the generated
+words with mechanical rules before they touch the layout. Start at its
+`INDEX.md`, or pick line 2 of the assistant's menu and it will walk you
+through.
 
 ## "I cloned a repo off the internet. Is it going to do something to my machine?"
 

@@ -57,7 +57,9 @@ tells you what to fix) or give it the role, company, talk blurb, topic,
 minutes and two square images right there in chat. Either way it then runs
 the whole pipeline in front of you — form checked, card rendered in a
 headless browser, result inspected, finished PNG delivered to
-`generated-images/`. (The other two menu lines aren't built yet.)
+`generated-images/`. The second line explains the idea behind the project —
+why brand assets need deterministic code and probabilistic prose — one
+short page at a time; the third isn't built yet.
 
 If anything is off — blurb too long, an image missing or not square, a
 template box the wrong shape — the run stops and says exactly what to fix.
@@ -70,7 +72,7 @@ slate at any time.
 
 Want to see what "done" looks like first? The finished PNG in
 `generated-images/` is the author's own card, and
-`demo-and-more-help/example-speakers/` holds twelve more.
+`demo-and-more-help/example-speakers/` holds seventeen more.
 
 ## What the image looks like
 
@@ -183,9 +185,11 @@ from `CLAUDE.md` / `AGENTS.md`.
 README.md                     you are here — the only doc you need to start
 to-process/  processed/       the queue — built and moved by the assistant
 generated-images/             the finished PNGs (<speaker>-final.png)
-demo-and-more-help/           lost, curious, or cautious? three subfolders:
-                              filling-in-the-form/, example-speakers/ and
-                              about-this-project/ — start at its README.md
+demo-and-more-help/           lost, curious, or cautious? four subfolders:
+                              filling-in-the-form/, example-speakers/,
+                              about-this-project/ and
+                              probabilistic-vs-deterministic/ (the idea
+                              behind the project) — start at its README.md
 _internal/                    machinery you never edit: the skills, the
                               bundled demo speaker, the render page,
                               self-hosted fonts, and the two core templates
