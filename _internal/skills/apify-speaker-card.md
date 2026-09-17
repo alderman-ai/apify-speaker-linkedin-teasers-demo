@@ -43,9 +43,10 @@ zero-padded). If the operator asks this skill to scaffold, invoke that one.
 
 ## Line 1 of the session menu — "make your own speaker card"
 
-Line 1 is the whole demo: the visitor makes a card for a speaker of their
-choosing, in about ten minutes, and sees exactly where the pipeline's
-inputs stop and its fixed parts begin. Nothing about geometry is ever
+Line 1 is the hands-on line of the three-line menu (lines 2 and 3 are
+the two reading paths under `demo-and-more-help/`): the visitor makes a
+card for a speaker of their choosing, in about ten minutes, and sees
+exactly where the pipeline's inputs stop and its fixed parts begin. Nothing about geometry is ever
 asked or explained during it — the template's block positions are
 constants (step 3 of processing) and the visitor only supplies text and
 two images.
@@ -66,8 +67,8 @@ the visitor follows the "Talking to a visitor" rules below.
    they will supply: *"This is the finished thing — a LinkedIn teaser
    announcing one person as a meetup speaker. Everything on it is fixed
    except what you give me: the speaker's name, job title, company, talk
-   topic, talk length in minutes, a one-sentence blurb, a square photo of
-   the speaker, and a logo."*
+   topic, talk length in minutes, a one-sentence blurb, a photo of the speaker
+   (roughly square is fine — a selfie cropped by eye works), and a logo."*
 2. **Ask for the speaker's name** — one question, plain words: *"Who's the
    speaker? Usually that's you. (No name yet? Say 'skip'.)"* Then scaffold
    the folder with the `new-speaker` skill (steps 2–4 there):
@@ -77,7 +78,7 @@ the visitor follows the "Talking to a visitor" rules below.
    - **Fill it in yourself.** *"Open `<absolute path>/intake.md` in any
      text editor — it's a form with a labelled box for each answer. Type
      your answers into the boxes, copy the two pictures into that same
-     folder as `speaker.png` (the square photo) and `company-logo.png`
+     folder as `speaker.png` (the photo) and `company-logo.png`
      (the logo), and tell me 'done'. I'll check it and ask you here for
      anything that's missing."*
    - **Give me the answers here.** *"Tell me the job title, company,
@@ -96,7 +97,7 @@ the visitor follows the "Talking to a visitor" rules below.
      frontmatter key) or copy the image in, exactly as `new-speaker`
      step 6 does. Do not send them back to the file.
    - **Something non-compliant** — a blurb over the fence's budget (give
-     the count), a non-square or oversized photo, position/company not
+     the count), a photo far from square (sides more than 25% apart), position/company not
      kebab-case — → say what and why, ask for a replacement inline, and
      write the replacement in yourself. Never trim, crop or reword a
      value on your own; the kebab-case offer used on a "yes" is the one
@@ -129,8 +130,9 @@ rule (`alex-alderman-<NN>`) and process the copy.
 - **Never lead with a mechanism.** The visitor decides between *giving a
   name* and *not giving one*, not between a named and a numbered folder;
   the folder name is your bookkeeping. Same for image sizes: ask for "a
-  square photo of the speaker" and check the pixels yourself; mention
-  the 800×800 limit only if a photo actually breaks it.
+  photo of you — roughly square is fine, a selfie cropped by eye works"
+  and measure the pixels yourself; mention the 25% tolerance only if a
+  photo actually breaks it.
 - **Lost visitor.** If they say anything like "I don't understand what
   we're doing" or "I've never seen the image", do not repeat the last
   question. Show the finished example (step 1's method) again, explain it
@@ -158,7 +160,7 @@ a Read is the exact failure from 2026-09-07. To actually show an image:
    the viewer window is for the person at the keyboard, the sent file for
    someone following remotely.
 3. Read the image yourself only when *you* need to see it (verification
-   in processing step 6, checking a photo is square). That never counts
+   in processing step 6, measuring a photo). That never counts
    as showing it to the visitor.
 
 ## Processing ("process the queue")
@@ -213,16 +215,28 @@ fetch a real stand-in image.
 
 **Speaker photo acceptance** — ask for the ideal, accept the reasonable:
 
-- **Ideal supply**: the photo slot's exact rendered size — **262×262** on
-  the current template.
-- **Accepted**: any **exactly square (1:1)** PNG / JPG / JPEG up to
-  **800×800**. Scale an accepted square to the slot size with
-  high-quality resampling and archive the result beside the form as
-  `speaker.png` (keep the operator's original file untouched); the render
-  uses the slot-sized copy. Square onto square — nothing is ever cropped.
-- **Halt** that folder, reporting the actual dimensions/format, for
-  anything non-square, larger than 800×800, or in another format. Never
-  crop, pad or reframe a photo — squaring it is the operator's decision.
+- **Accepted** (form v5): PNG / JPG / JPEG, **any size, roughly square** —
+  the longer side at most 1.25 × the shorter. A selfie cropped by eye on a
+  phone qualifies.
+- **Measure first.** Read the file's true pixel width and height with your
+  image tooling (the Read tool reports it), or with Python/Pillow if
+  present (`Image.open(p).size`). Check `max(W, H) <= 1.25 * min(W, H)`.
+- **Square it by trimming, never by guessing.** If W ≠ H, remove
+  `(longer − shorter)` pixels from the longer dimension, split as evenly as
+  possible between its two sides (`offset = (longer − shorter) // 2`; the
+  odd pixel, if any, goes to the far side). That is a plain centre crop:
+  no face detection, no reframing, and exactly the same trim whether or
+  not you can view the image — an assistant that cannot see pictures
+  applies the arithmetic and nothing else. Pillow:
+  `im.crop((left, top, left + s, top + s))` with `s = min(W, H)`.
+- **Resize** the square to the slot's rendered size — **262×262** on
+  template v4 — with high-quality resampling (Pillow `LANCZOS`), and
+  archive the result beside the form as `speaker.png`; the render uses that
+  copy. Keep the operator's original file untouched (if it was already
+  `speaker.png`, keep the original as `speaker-original.<ext>`).
+- **Halt** that folder, reporting the measured W×H, for a photo outside the
+  25% tolerance or in another format, with the one-line fix: *"crop it
+  roughly square on your phone and resend"*. Never pad or stretch a photo.
 
 The company logo stays flexible: square, ideally 80×80 or larger
 (`object-fit: cover` centre-crops a non-square logo).
@@ -363,9 +377,9 @@ totals. One bad folder never stops the rest.
   measured against real two-line renders at width 400 on 2026-09-03) ·
   topic 26 (shortened from 33 by the fixed level text). `level` is
   static since template v3: `For All Levels`, never an input.
-- The speaker photo is accepted as any exact square PNG/JPG/JPEG up to
-  800×800 and scaled to the slot (262×262 currently); it is never
-  cropped or reframed, and the element's chrome and `Join me in PRAGUE`
+- The speaker photo (form v5) is accepted as any PNG/JPG/JPEG whose sides
+  are within 25% of each other; it is trimmed evenly to a square, resized
+  to the slot (262×262 currently) and never padded or stretched, and the element's chrome and `Join me in PRAGUE`
   copy live in the shell, not in any asset.
 - The canon template is machine-built (baked gradient starfield, drawn
   blocks — recipe in `_internal/core-templates-please-dont-touch/README.md`)

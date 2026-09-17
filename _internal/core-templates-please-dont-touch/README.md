@@ -54,8 +54,11 @@ purple block's proportions must match the card as it actually renders
 (see `intake-template.md` section 1b).
 
 Version 4 (2026-09-07) is the v3 image renumbered, pixel for pixel, so
-the visual template and the intake form carry the same version number;
-the two are versioned together from here on. The image itself is
+the visual template and the intake form carried the same version number.
+Since then the form has moved to v5 (2026-09-17, the relaxed speaker-photo
+rule) while the image stays v4: a form-only change bumps the form alone,
+because it moves no pixel here and the section-6 constants are still the
+v4 measurements; an image change bumps both. The image itself is
 **machine-built** (2026-09-01), superseding
 the operator's original Canva export: baked gradient starfield + blocks
 redrawn at the operator's locked layout — green speaker block 294×336 @

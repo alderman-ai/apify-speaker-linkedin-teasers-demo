@@ -68,7 +68,7 @@ and two images.
    - **fill it in yourself** — *"Open `<path>/intake.md` in any text
      editor — it's a form with a labelled box for each answer. Type your
      answers into the boxes, copy the two pictures into that same folder
-     as `speaker.png` (a square photo of the speaker) and
+     as `speaker.png` (a photo of the speaker — roughly square is fine) and
      `company-logo.png` (the logo), and say 'done'. I'll check it and ask
      you here for anything that's missing."* On "done", hand the folder
      to the `apify-speaker-card` skill's **Line 1, step 4 gate**: it
@@ -92,12 +92,13 @@ and two images.
    - **duration** — minutes, number only
    - **blurb** — one plain paragraph, up to 115 characters
    - **company logo** — a path to a square image, ideally 80×80 or larger
-   - **speaker photo** — a path to an exactly square PNG/JPG/JPEG, at most
-     800×800 (262×262 is the perfect fit); it is scaled into the slot,
-     never cropped or reframed, so the operator squares it themselves
+   - **speaker photo** — a path to a PNG/JPG/JPEG that is roughly square
+     (width and height within 25% of each other, any size); the generator
+     trims the longer side evenly to a square and resizes it to the slot
 
-   Phrase the two picture lines for a visitor as *"a square photo of the
-   speaker (PNG or JPG)"* and *"a logo"*, plus *"tell me where each one
+   Phrase the two picture lines for a visitor as *"a photo of you —
+   roughly square is fine, a selfie cropped by eye works (PNG or JPG)"*
+   and *"a logo"*, plus *"tell me where each one
    is on your computer"*; keep the pixel limits for the check in step 6
    and mention them only when a file actually breaks one.
 
@@ -116,8 +117,9 @@ and two images.
      ellipsises these; the operator decides)
    - images: **copy** the file into the folder as `company-logo.<ext>` /
      `speaker.<ext>` — never move or edit the operator's original. Read the
-     photo's real dimensions now: non-square, larger than 800×800, or
-     another format → report the actual size and ask for a square resubmit
+     photo's real dimensions now: sides more than 25% apart (longer side
+     over 1.25 × the shorter), or another format → report the measured
+     W×H and ask them to crop it roughly square on their phone and resend,
      rather than letting it fail at processing time.
 
 7. **Close the loop.** If anything is still missing, list exactly what (the

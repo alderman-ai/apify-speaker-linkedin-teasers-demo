@@ -20,3 +20,9 @@ Portraits are public domain or Creative Commons; the exact source of each
 is in that folder's `credits.md`. The Němcová and Zátopek sets use a real historical
 figure's name and likeness as demo material only — don't publish it as
 real event material.
+
+The `alex-alderman-mobile-test` row is not a rehearsal but the form-v5
+mobile-photo contract test: the demo speaker rendered from a deliberately
+non-square 800×960 portrait (kept as `speaker-original.png`), trimmed
+evenly to 800×800 and resized to 262×262 by the rule, confirming the
+relaxed photo gate.

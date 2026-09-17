@@ -33,7 +33,7 @@
 <p class="sub">Measured on the rendered card at its 400 px CSS render width · companion to “Actor card field mapping”</p>
 
 <table>
-  <caption>Text budgets — measured on the rendered card at 400&nbsp;px width (description and topic re-measured 2026-09-03, template v3; budgets as of intake form v4)</caption>
+  <caption>Text budgets — measured on the rendered card at 400&nbsp;px width (description and topic re-measured 2026-09-03, template v3; budgets as of intake form v5)</caption>
   <tr><th>field</th><th>card position</th><th>format</th><th>max chars</th><th>overflow behaviour</th></tr>
   <tr><td class="k">speaker_name</td><td class="m">top, line 1</td><td>Title Case</td><td class="n"><b>30</b> <span style="color:#888">(fits ~33)</span></td><td class="m">one line, cut with …</td></tr>
   <tr><td class="k">speaker_position/company</td><td class="m">top, line 2 · monospace</td><td>lowercase-kebab/lowercase-kebab</td><td class="n"><b>39</b> <span style="color:#888">(fits 43 — mono, exact)</span></td><td class="m">one line, cut with …</td></tr>
@@ -42,7 +42,7 @@
   <tr><td class="k">duration_minutes</td><td class="m">footer, after ★</td><td>number — rendered 10 (mins), "(mins)" static</td><td class="n">—</td><td class="m">number only</td></tr>
   <tr><td class="k">level</td><td class="m">footer, after 👥</td><td>For All Levels</td><td class="n">—</td><td class="m">static since template v3 — not an input</td></tr>
   <tr><td class="k">company_logo</td><td class="m">top left, 40×40, radius 8</td><td>square image ≥ 80×80</td><td class="n">—</td><td class="m">centre-cropped; sits on #f3f3f3 plate</td></tr>
-  <tr><td class="k">speaker_image</td><td class="m">speaker element, square photo slot</td><td>square PNG/JPG/JPEG ≤ 800×800 (262×262 ideal)</td><td class="n">—</td><td class="m">scaled to the slot, never cropped; off-spec halts the run</td></tr>
+  <tr><td class="k">speaker_image</td><td class="m">speaker element, square photo slot</td><td>PNG/JPG/JPEG, any size, roughly square — longer side ≤ 1.25 × shorter (form v5)</td><td class="n">—</td><td class="m">trimmed evenly to a square, resized to 262×262; outside 25% halts with the measured W×H</td></tr>
   <tr class="static"><td class="k">(footer help icon)</td><td class="m">footer left, 20×20 circle</td><td>orange ? in an orange-ringed circle, bundled</td><td class="n">—</td><td class="m">static on every generated card</td></tr>
 </table>
 

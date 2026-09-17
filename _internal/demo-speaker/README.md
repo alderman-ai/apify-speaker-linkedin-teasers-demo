@@ -6,7 +6,7 @@ Three things. The skill refuses (or asks about placeholders) until it has them.
 |---|---|
 | `intake.md` | the form — type only in its labelled fences (or give the answers in chat and the assistant types them); the assistant fills the frontmatter from the fences. Leave the frontmatter's geometry block alone: those numbers are the template's fixed constants |
 | `company-logo.(png/jpg)` | the speaker's company logo — square, ideally 80×80+ |
-| `speaker.(png/jpg/jpeg)` | the speaker photo — **square (1:1), at most 800×800** |
+| `speaker.(png/jpg/jpeg)` | the speaker photo — **roughly square** (sides within 25% of each other), any size |
 
 ## The speaker photo — what's accepted
 

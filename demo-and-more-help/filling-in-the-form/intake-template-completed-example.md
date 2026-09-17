@@ -12,10 +12,16 @@
 # =============================================================================
 
 # --- 0. template version -- DO NOT EDIT --------------------------------------
-# Bumped only when this template itself changes, never per speaker. The
-# form and the visual template share one version number (both v4).
-version:            4
-versioned_at:       "2026-09-07 12:00"
+# Bumped only when this template itself changes, never per speaker.
+# Form v5 / visual template v4. They were renumbered together at v4; a
+# form-only change bumps the form alone, because it moves no pixel of the
+# image and its §6 constants are still the v4 measurements.
+# History: v4 2026-09-07 — form and image renumbered together ·
+# v5 2026-09-17 — mobile-friendly speaker photo rule (roughly square,
+# within 25%, trimmed evenly to a square); visual template stays v4, no
+# geometry changed.
+version:            5
+versioned_at:       "2026-09-17 15:30"
 
 # --- 1. base template --------------------------------------------------------
 # Fixed for this demo: ONE visual template with fixed dimensions (1200x1200).
@@ -26,8 +32,9 @@ base_image:         "../../_internal/core-templates-please-dont-touch/speaker-te
 # generated card and is bundled with the skill. It is not an input.
 assets_root:        ""              # images live beside this form, in the folder
 company_logo:       "company-logo.png"
-speaker_image:      "speaker.png"   # square 1:1, PNG/JPG/JPEG, at most 800x800.
-                                     # Ideal: 262x262 (the slot's exact size).
+speaker_image:      "speaker.png"   # PNG/JPG/JPEG, any size, roughly square:
+                                     # longer side <= 1.25 x shorter. Trimmed
+                                     # evenly to a square, resized to 262x262.
                                      # The skill scales an accepted square to
                                      # fit; anything off-spec halts the run.
 
@@ -160,16 +167,17 @@ ai-slop >> ai-ops. How to automate pixel perfect branded visual assets :)
 >You did it! all done! A couple things to couple check:
 >- (you did delete the `[brackets]` right?)
 >- this file should be in the `to-process/<speaker-name>/` along with:
-	>- their speaker photo — **square (1:1)**, PNG/JPG/JPEG, at most 800×800; 262×262 is the ideal supply
+	>- their speaker photo — **roughly square** (sides within 25% of each other), PNG/JPG/JPEG, any size; a selfie cropped by eye works
 	>- their company logo - **accepted file types**: (PNG | ICO | JPG | JPEG)
 >
 >`</instructions_for_operator>`
 
 That's everything to type. Two things remain to **drop into this folder as
 files** (see the folder's README): the company logo (`company-logo.png`) and
-the speaker photo (`speaker.png`) — **square, at most 800×800**, framed the
-way you want it shown. The skill scales a square photo into the slot
-exactly; it never crops or reframes one. Everything below this line is for
+the speaker photo (`speaker.png`) — **roughly square** (width and height
+within 25% of each other), any size; a selfie cropped by eye on a phone is
+fine. The skill trims the longer side evenly to make it a square, then
+resizes it to the slot; it never stretches, pads or guesses at a framing. Everything below this line is for
 the agents.
 
 ---
@@ -409,21 +417,24 @@ The speaker's company logo, 40×40, upper-left of the card body.
 The portrait filling the square photo slot of the speaker element (§1b).
 Resolved against `assets_root`.
 
-- **Accepted:** exactly square (1:1), PNG / JPG / JPEG, **at most
-  800×800**. The ideal supply is **262×262** — the slot's exact rendered
-  size on the current template — but any square within the cap works: the
-  skill scales it into the slot losslessly (square onto square, nothing
-  cropped) and archives a slot-sized copy as `speaker.png`.
-- **Rejected, with the actual dimensions reported:** non-square, larger
-  than 800×800, or any other format. The skill never crops, pads or
-  reframes a photo — squaring it is the operator's call to make.
+- **Accepted:** PNG / JPG / JPEG, **any size, roughly square**: the longer
+  side is at most 1.25 × the shorter (`max(W, H) <= 1.25 × min(W, H)`). A
+  selfie cropped by eye on a phone qualifies. The skill makes it an exact
+  square by **trimming the longer dimension evenly on both sides** (a centre
+  crop — no face detection, no guessing; the same trim whether or not the
+  assistant can view images), then resizes it to the slot's rendered size
+  (**262×262** on template v4) and archives that copy as `speaker.png`. The
+  operator's original file is never modified.
+- **Rejected, with the measured W×H reported:** a photo outside the 25%
+  tolerance, or any other format. The one-line fix: *crop it roughly square
+  on your phone and resend.* The skill never pads or stretches a photo.
 - The element's chrome (grey border, radii, `Join me in PRAGUE` bar) comes
   from the render shell, never from this asset.
 
-**States:** valid square ≤800 → scaled and drawn · empty or omitted →
+**States:** within 25% → trimmed evenly, resized, drawn · empty or omitted →
 **rejected**; both blocks must be filled · missing file → hard fail ·
-off-spec dimensions/format → **halt**, actual size reported, square
-resubmit requested.
+outside the 25% tolerance or wrong format → **halt**, measured W×H reported,
+"crop it roughly square on your phone and resend".
 
 ### The presentation description — **required**, lives in the BODY
 

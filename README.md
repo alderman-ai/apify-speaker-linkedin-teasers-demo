@@ -59,7 +59,7 @@ a speaker of your choosing: it opens a finished example card so you can
 see what you're making, asks the name, sets up the folder, then asks
 whether you want to fill in the form yourself (it checks your work and
 tells you what to fix) or give it the role, company, talk blurb, topic,
-minutes and two square images right there in chat. Either way it then runs
+minutes and two pictures — a logo and a roughly square photo — right there in chat. Either way it then runs
 the whole pipeline in front of you — form checked, card rendered in a
 headless browser, result inspected, finished PNG delivered to
 `generated-images/`. The second line explains the idea behind the project —
@@ -67,10 +67,11 @@ why brand assets need deterministic code and probabilistic prose — one
 short page at a time; the third walks a technical reader through how the
 demo was built.
 
-If anything is off — blurb too long, an image missing or not square, a
-template box the wrong shape — the run stops and says exactly what to fix.
-It never silently crops your text, reframes your photo, or stretches the
-card. And it works on a branch of its own: unless you are the author, the
+If anything is off — blurb too long, an image missing or far from square,
+a template box the wrong shape — the run stops and says exactly what to
+fix. It never silently trims your text, guesses at how to reframe your
+photo (a roughly square one is trimmed evenly to a square, nothing more),
+or stretches the card. And it works on a branch of its own: unless you are the author, the
 assistant puts your session on `session/<date>-<NN>` before it touches
 anything, so `main` — and the core template every card is built from —
 stays exactly as you cloned it. `git switch main` gets you back to a clean
@@ -78,7 +79,7 @@ slate at any time.
 
 Want to see what "done" looks like first? The finished PNG in
 `generated-images/` is the author's own card, and
-`demo-and-more-help/example-speakers/` holds eighteen more.
+`demo-and-more-help/example-speakers/` holds twenty-three more.
 
 ## What the image looks like
 
@@ -92,7 +93,7 @@ template):
   audience level is fixed at "For All Levels"); real Inter and IBM Plex Mono, real ellipsis behaviour, the real
   hover ring.
 - **The speaker element** — a matching grey-framed card holding your
-  square photo with **Join me in PRAGUE** underneath. Its frame, corners
+  photo, made square, with **Join me in PRAGUE** underneath. Its frame, corners
   and copy are fixed; only the photo is yours.
 
 ## The three queue stages
@@ -125,19 +126,22 @@ labelled boxes say what goes where.) The short version:
 
 | field | where it lands | budget |
 |---|---|---|
-| company logo | 40×40 top-left of the card | square image, ≥80×80 |
+| company logo | 40×40 top-left of the card | square PNG/ICO/JPG/JPEG, ≥80×80, with its own background (it sits on a light plate) |
 | speaker name | card title | 30 chars |
 | position / company | monospace line, joined as `position / company` | 39 chars incl. the ` / ` |
 | description | card body, clamps at 2 lines | 115 chars |
 | topic category | card footer left | 26 chars |
 | level | card footer, after 👥 | fixed: `For All Levels` — not an input |
 | duration | card footer, after ★ | number only — card shows `10 (mins)` |
-| speaker photo | square photo slot of the speaker element | square PNG/JPG/JPEG ≤800×800 (262×262 ideal) |
+| speaker photo | square photo slot of the speaker element | PNG/JPG/JPEG, any size, roughly square (sides within 25% of each other) |
 
-The speaker photo must be **square** (same width as height) and no bigger
-than 800×800. The pipeline scales it into place without cropping a single
-pixel; what it will never do is crop or reframe for you — square it
-yourself, framed the way you want to be seen. Over-budget descriptions are
+The speaker photo only has to be **roughly square** — width and height
+within 25% of each other, any size; a selfie cropped by eye on a phone is
+fine. The pipeline trims the longer side evenly to make an exact square
+(a plain centre crop, no guessing) and resizes it into place; it never
+pads or stretches a photo, and a picture further from square than that
+stops the run with its measured size and one fix: crop it roughly square
+and resend. Over-budget descriptions are
 rejected, not silently cut. The footer's small orange `?` circle is static
 on every card and ships with the repo.
 
@@ -150,7 +154,10 @@ the budgets table.
 
 This demo ships exactly one visual template,
 `_internal/core-templates-please-dont-touch/speaker-teaser-linkedin_v4.png`
-(1200×1200), and for this demo v4 is final. The coloured placeholder
+(1200×1200), and for this demo v4 is final. (The intake form is at v5:
+the two were numbered together at v4, and a form-only change — the
+relaxed photo rule — bumps the form alone, since no pixel of the image
+and none of its measured constants changed.) The coloured placeholder
 blocks on it show where the two elements land; the exact pixel geometry
 was measured once when the template was built and is a fixed constant in
 the intake form — a run never re-measures the image, and you are never
@@ -165,7 +172,8 @@ The rebuild recipe lives in that folder's README, so a future design
 change is a re-run of that recipe, not a hunt.
 
 One rule is enforced every run: **the purple block's proportions must match
-the card as it actually renders** (±2px at render scale). The card's height
+the card as it actually renders** (±2px at the card's own scale, about 4px
+on the finished image). The card's height
 is quantised by its description line count, so it cannot be stretched to
 fit a wrong box — the run halts and tells you the height the block should
 be.
@@ -193,10 +201,11 @@ to-process/  processed/       the queue — built and moved by the assistant
 generated-images/             the finished PNGs (<speaker>-final.png)
 demo-and-more-help/           lost, curious, or cautious? five subfolders:
                               filling-in-the-form/, example-speakers/,
-                              about-this-project/ and
+                              about-this-project/,
                               probabilistic-vs-deterministic/ (the idea
-                              behind the project) and how-this-was-built/
-                              (for technical readers) — start at its README.md
+                              behind the project, menu line 2) and
+                              how-this-was-built/ (for technical readers,
+                              menu line 3) — start at its README.md
 _internal/                    machinery you never edit: the skills, the
                               bundled demo speaker, the render page,
                               self-hosted fonts, and the two core templates

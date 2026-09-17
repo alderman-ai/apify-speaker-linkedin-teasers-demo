@@ -2,7 +2,8 @@
 
 You are in a self-contained demo repo that mass-produces LinkedIn teaser
 images for meetup speakers, styled as Apify actor cards. The operator gives
-you a handful of details per speaker — in chat — and two square images;
+you a handful of details per speaker — in chat — and two pictures (a logo
+and a roughly square photo);
 you render a pixel-faithful actor card and a card-style speaker portrait
 element into the canon template at its fixed geometry and deliver a
 finished PNG. **You are the engine** — there are deliberately no build
@@ -97,8 +98,12 @@ it directly, no menu.
   never the same paragraph twice. Relative links in a page are file paths
   from that page's folder, with URL encoding such as `%20` decoded to
   spaces; if the visitor wants to see a card the gallery page names, open
-  the PNG in their image viewer. Do not invent claims beyond what the
-  pages say.
+  the PNG in their image viewer. A free-form question asked inside the
+  line is answered from that line's pages first, then from the rest of
+  `demo-and-more-help/` if needed, staying inside the line and
+  re-offering the pick list afterwards (the "answer in a line, then show
+  the menu" rule below applies only at the main menu). Do not invent
+  claims beyond what the pages say.
 - **Line 3** → the same procedure as line 2, for a technical reader, from
   `demo-and-more-help/how-this-was-built/INDEX.md`: read it in full, give
   the build story conversationally (its opening section), offer its pages
@@ -106,9 +111,11 @@ it directly, no menu.
   number, command and code excerpt as written (jargon is allowed once the
   page defines it; plain words are still good), then offer the list again
   plus "back to the main menu". Same rules for "back", repeat picks,
-  relative links and image files — the template page embeds images, offer
-  to open them in the visitor's image viewer. Do not invent claims beyond
-  what the pages say.
+  relative links, image files and free-form questions (answered from this
+  line's pages first, then the rest of `demo-and-more-help/`, staying
+  inside the line) — the template page embeds images, offer to open them
+  in the visitor's image viewer. Do not invent claims beyond what the
+  pages say.
 - Anything else (a number outside 1–3, a question) → answer in a line,
   then show the menu again.
 
@@ -160,8 +167,8 @@ sits in `filling-in-the-form/`, `example-speakers/`, `about-this-project/`,
 | `demo-and-more-help/example-speakers/fictional-characters/` | the fictional demo speakers (folklore characters + synthetic personas), archived out of the live queue: `processed/` folders + `generated-images/` PNGs |
 | `demo-and-more-help/example-speakers/real-people-stress-test/` | the simulated-"real" stress-test speakers (real Czech public figures), kept as mid-project snapshots: `processed/` + `generated-images/` |
 | `demo-and-more-help/example-speakers/live-demo-rehearsals/` | the 2026-09-17 rehearsal runs of the on-stage skill (Bojack Horseman, Božena Němcová ×4, Jaroslav Hašek), archived out of the live queue: `processed/` + `generated-images/`; portrait sources in each folder's `credits.md` |
-| `demo-and-more-help/probabilistic-vs-deterministic/` | **where menu line 2 lands.** The idea behind the project — language models are probabilistic, brands need determinism, this pipeline codes the exact parts and gates the generated parts — as an `INDEX.md` (the concept in about ten sentences plus the page list) and six one-screen pages: `the-concept.md`, `this-project-as-an-example.md`, `coded-elements-as-the-unifying-layer.md`, `the-gates.md`, `gallery.md`, `try-it-yourself.md`. Every fact in them traces to a file in this repo |
-| `demo-and-more-help/how-this-was-built/` | **where menu line 3 lands.** How the demo was built, for a technical reader — an `INDEX.md` (the build story in about ten sentences plus the page list) and seven one-screen pages: `architecture.md`, `the-card-css-reproduction.md`, `template-geometry-and-constants.md`, `the-intake-contract-and-gates.md`, `the-render-step.md`, `timeline.md`, `the-live-demo.md`, with `images/` (the author's template drafts and two screenshots). Every fact traces to a file in this repo or to `git log` |
+| `demo-and-more-help/probabilistic-vs-deterministic/` | **where menu line 2 lands.** The idea behind the project — language models are probabilistic, brands need determinism, this pipeline codes the exact parts and gates the generated parts — as an `INDEX.md` (the concept in about ten sentences plus the page list) and seven one-screen pages: `the-concept.md`, `this-project-as-an-example.md`, `coded-elements-as-the-unifying-layer.md`, `the-gates.md`, `gallery.md`, `try-it-yourself.md`, `faq.md`. Every fact in them traces to a file in this repo |
+| `demo-and-more-help/how-this-was-built/` | **where menu line 3 lands.** How the demo was built, for a technical reader — an `INDEX.md` (the build story in about ten sentences plus the page list) and seven one-screen pages: `architecture.md`, `the-card-css-reproduction.md`, `template-geometry-and-constants.md`, `the-intake-contract-and-gates.md`, `the-render-step.md`, `timeline.md`, `the-live-demo.md`, `forking-for-your-own-brand.md`, with `images/` (the author's template drafts and two screenshots). Every fact traces to a file in this repo or to `git log` |
 | `live-demo/` | **author-local, gitignored, never a visitor input.** On the author's machine only: the stage-show machinery for the 2026-09-17 meetup (a page loop and publishing helpers). A clone never contains it; nothing in the visitor path runs it; never read it for a visitor and never touch it |
 
 Every folder carries its own `INDEX.md` for routing. `README.md` is
@@ -251,15 +258,19 @@ message, show the session menu.
   built and are constants in the intake form's section 6. A run reads
   those eight values verbatim and never measures the image, never asks
   the operator about them, and reverts any hand edit to the frontmatter
-  back to the template before processing. The visual template and the
-  intake form share one version number (both v4).
+  back to the template before processing. The visual template is v4 and
+  the intake form is v5: they were renumbered together at v4, and a
+  form-only change (v5 relaxed the speaker-photo rule) bumps the form
+  alone because it moves no pixel of the image and the section-6
+  constants are still the v4 measurements.
 - **Core templates change on purpose only.** A run reads them and never
   writes them; a deliberate change follows the versioning convention
   under template-change routing above.
 - **Halt, don't degrade.** Over-budget description, missing assets (ask:
-  resubmit vs placeholder outline), an off-spec speaker photo (must be an
-  exact square PNG/JPG/JPEG ≤800×800 — you scale it to the slot, you never
-  crop or reframe it), block/card ratio mismatch — each is a stop with a
+  resubmit vs placeholder outline), an off-spec speaker photo (PNG/JPG/JPEG, any size, width and
+  height within 25% of each other — you trim the longer side evenly to a
+  square and resize it to the slot; outside the tolerance is a halt with
+  the measured W×H and "crop it roughly square on your phone and resend"), block/card ratio mismatch — each is a stop with a
   clear report, never a silent workaround. Never
   trim operator text, never stretch the card, never overwrite anything.
 - **Duplicate names suffix, never block.** A repeat name is legitimate (a

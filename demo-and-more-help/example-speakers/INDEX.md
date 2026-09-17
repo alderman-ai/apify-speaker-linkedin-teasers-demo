@@ -1,6 +1,6 @@
 # example-speakers/
 
-Eighteen speakers that have already been through the pipeline, archived
+Twenty-three speakers that have already been through the pipeline, archived
 out of the live queue and kept purely as a showcase. Each half mirrors the
 live tree shape, so a folder here reads exactly like a folder there:
 
