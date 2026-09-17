@@ -63,7 +63,9 @@ it directly, no menu.
 >    a few details and two images, in about ten minutes.
 > 2. **Learn why brand assets need deterministic code and probabilistic
 >    prose**, and how this project combines both.
-> 3. **Find out how this demo was built.**
+> 3. **Find out how this demo was built** — the architecture, the card
+>    CSS, the template geometry and the render step, for a technical
+>    reader.
 
 - **Line 1** → the visitor makes a card. Read both skill files in full
   and follow the **"Line 1"** section of
@@ -76,9 +78,10 @@ it directly, no menu.
   inline for anything missing and fills it in), or give the answers in
   chat and the assistant fills it. Then process that folder end to end,
   narrating each stage in a line. **Every line addressed to the visitor
-  is in everyday words** — no "fence", "frontmatter", "numbered folder",
-  "actor card", "square images" — per that skill's "Talking to a visitor"
-  rules; a visitor who says they don't understand is shown the example
+  is in everyday words** — in line 1's form-filling talk that means no
+  "fence", "frontmatter", "numbered folder", "actor card", "square
+  images", per that skill's "Talking to a visitor" rules (on lines 2 and
+  3 a term is fine once the page being presented has defined it); a visitor who says they don't understand is shown the example
   again and told what it is, not asked the same question twice.
 - **Line 2** → read `demo-and-more-help/probabilistic-vs-deterministic/INDEX.md`
   in full. Give the visitor the concept in plain words — the INDEX's
@@ -86,18 +89,26 @@ it directly, no menu.
   pages as a numbered pick list (title plus the INDEX's one-line
   description for each). On a pick, read that page and present its
   content conversationally in everyday words: keep every fact and number
-  as written, define any term the page defines, drop nothing and add
-  nothing; then offer the list again plus "back to the main menu". The
-  same "everyday words" rule as line 1 applies to every line addressed to
-  the visitor; a visitor who says they don't follow gets the same point
-  again in simpler words, never the same paragraph twice. Relative links
-  in a page are read as file paths from that folder; if the visitor wants
-  to see a card the gallery page names, open the PNG in their image
-  viewer. Do not invent claims beyond what the pages say.
-- **Line 3** → reply with exactly this sentence, then show the menu again:
-  `Sorry, this option is temporarily out of order, please try again from
-  another line.` Do not improvise content for this line; it is not built
-  yet.
+  as written, define any term the page defines (once defined it may be
+  used), drop nothing and add nothing; then offer the list again plus
+  "back to the main menu". "Back" returns to the three-line menu; picking
+  the same line again re-offers the pick list, not the opening. A visitor
+  who says they don't follow gets the same point again in simpler words,
+  never the same paragraph twice. Relative links in a page are file paths
+  from that page's folder, with URL encoding such as `%20` decoded to
+  spaces; if the visitor wants to see a card the gallery page names, open
+  the PNG in their image viewer. Do not invent claims beyond what the
+  pages say.
+- **Line 3** → the same procedure as line 2, for a technical reader, from
+  `demo-and-more-help/how-this-was-built/INDEX.md`: read it in full, give
+  the build story conversationally (its opening section), offer its pages
+  as a numbered pick list, present a picked page keeping every fact,
+  number, command and code excerpt as written (jargon is allowed once the
+  page defines it; plain words are still good), then offer the list again
+  plus "back to the main menu". Same rules for "back", repeat picks,
+  relative links and image files — the template page embeds images, offer
+  to open them in the visitor's image viewer. Do not invent claims beyond
+  what the pages say.
 - Anything else (a number outside 1–3, a question) → answer in a line,
   then show the menu again.
 
@@ -136,8 +147,8 @@ Render machinery (`_internal/` — use, never restructure):
 
 Reference (`demo-and-more-help/` — the operator-facing help and showcase
 folder; its root holds only `INDEX.md` and `README.md`, everything else
-sits in `filling-in-the-form/`, `example-speakers/`, `about-this-project/`
-or `probabilistic-vs-deterministic/`):
+sits in `filling-in-the-form/`, `example-speakers/`, `about-this-project/`,
+`probabilistic-vs-deterministic/` or `how-this-was-built/`):
 
 | path | what |
 |---|---|
@@ -148,8 +159,10 @@ or `probabilistic-vs-deterministic/`):
 | `demo-and-more-help/about-this-project/pipeline-evaluation.md` | the 2026-09-01 ten-speaker stress test of the docs and pipeline |
 | `demo-and-more-help/example-speakers/fictional-characters/` | the fictional demo speakers (folklore characters + synthetic personas), archived out of the live queue: `processed/` folders + `generated-images/` PNGs |
 | `demo-and-more-help/example-speakers/real-people-stress-test/` | the simulated-"real" stress-test speakers (real Czech public figures), kept as mid-project snapshots: `processed/` + `generated-images/` |
-| `demo-and-more-help/example-speakers/live-demo-rehearsals/` | the 2026-09-17 rehearsal runs of the on-stage skill (Bojack Horseman, Božena Němcová ×4), archived out of the live queue: `processed/` + `generated-images/`; portrait sources in each folder's `credits.md` |
+| `demo-and-more-help/example-speakers/live-demo-rehearsals/` | the 2026-09-17 rehearsal runs of the on-stage skill (Bojack Horseman, Božena Němcová ×4, Jaroslav Hašek), archived out of the live queue: `processed/` + `generated-images/`; portrait sources in each folder's `credits.md` |
 | `demo-and-more-help/probabilistic-vs-deterministic/` | **where menu line 2 lands.** The idea behind the project — language models are probabilistic, brands need determinism, this pipeline codes the exact parts and gates the generated parts — as an `INDEX.md` (the concept in about ten sentences plus the page list) and six one-screen pages: `the-concept.md`, `this-project-as-an-example.md`, `coded-elements-as-the-unifying-layer.md`, `the-gates.md`, `gallery.md`, `try-it-yourself.md`. Every fact in them traces to a file in this repo |
+| `demo-and-more-help/how-this-was-built/` | **where menu line 3 lands.** How the demo was built, for a technical reader — an `INDEX.md` (the build story in about ten sentences plus the page list) and seven one-screen pages: `architecture.md`, `the-card-css-reproduction.md`, `template-geometry-and-constants.md`, `the-intake-contract-and-gates.md`, `the-render-step.md`, `timeline.md`, `the-live-demo.md`, with `images/` (the author's template drafts and two screenshots). Every fact traces to a file in this repo or to `git log` |
+| `live-demo/` | **author-local, gitignored, never a visitor input.** On the author's machine only: the stage-show machinery for the 2026-09-17 meetup (a page loop and publishing helpers). A clone never contains it; nothing in the visitor path runs it; never read it for a visitor and never touch it |
 
 Every folder carries its own `INDEX.md` for routing. `README.md` is
 reserved for orientation: the root README (the human entry point), the

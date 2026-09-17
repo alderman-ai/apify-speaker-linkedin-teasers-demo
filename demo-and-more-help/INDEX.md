@@ -7,16 +7,17 @@ assistants orienting a human.
 
 The folder root holds only this file and `README.md` (the same routing,
 written for a person rather than an assistant). Everything else lives in
-one of four subfolders.
+one of five subfolders.
 
 ## Routing — where to send someone
 
 | folder | send them here when | contains |
 |---|---|---|
 | `filling-in-the-form/` | they're writing an intake and don't know what a field means, where it lands on the card, or how much text fits | the annotated field-mapping graphic, the character-budget table, both HTML sources, and a fully filled-in example intake |
-| `example-speakers/` | they want to see the range of output, or a real example of a completed speaker folder | seventeen speakers already through the pipeline — finished PNGs plus the archived folders that produced them |
+| `example-speakers/` | they want to see the range of output, or a real example of a completed speaker folder | eighteen speakers already through the pipeline — finished PNGs plus the archived folders that produced them |
 | `about-this-project/` | they're wary of running a cloned repo, or want evidence the pipeline holds up | the code-and-security inventory and the ten-speaker stress-test report |
-| `probabilistic-vs-deterministic/` | they picked line 2 of the session menu, or want the idea behind the project: why brand assets need deterministic code and probabilistic prose, and how this pipeline combines both | a short explainer in six one-screen pages, starting at its `INDEX.md` |
+| `probabilistic-vs-deterministic/` | they picked line 2 of the session menu, or want the idea behind the project: why brand assets need deterministic code and probabilistic prose, and how this pipeline combines both | a short explainer in seven one-screen pages, starting at its `INDEX.md` |
+| `how-this-was-built/` | they picked line 3 of the session menu, or are technical and want the internals: the architecture, the verified card CSS, the template geometry, the intake contract, the render command, the git timeline and what the live demo added | seven one-screen pages plus `images/`, starting at its `INDEX.md` |
 
 Each subfolder carries its own `INDEX.md` with file-level detail.
 
@@ -40,7 +41,7 @@ example-speakers/
   real-people-stress-test/         5 speakers — real Czech public figures
     generated-images/              their finished 1200x1200 PNGs
     processed/                     their archived folders (form + assets)
-  live-demo-rehearsals/            5 — 2026-09-17 rehearsal runs of the on-stage skill
+  live-demo-rehearsals/            6 — 2026-09-17 rehearsal runs of the on-stage skill
     generated-images/              their finished 1200x1200 PNGs
     processed/                     their archived folders (form + assets)
 
@@ -58,6 +59,18 @@ probabilistic-vs-deterministic/
   the-gates.md                     the mechanical checks, with the real numbers
   gallery.md                       the example cards — same code, different words
   try-it-yourself.md               back to menu line 1
+  faq.md                           own template? cost? official Apify? — three answers
+
+how-this-was-built/
+  INDEX.md                         the build story in ten sentences + the page list (menu line 3 lands here)
+  architecture.md                  text + two images in, HTML/CSS render, PNG out; no scripts by design
+  the-card-css-reproduction.md     the verified ActorStoreItem CSS and its load-bearing oddities
+  template-geometry-and-constants.md   the canon image, the eight constants, how the template evolved
+  the-intake-contract-and-gates.md the form as schema; the gates as executable checks
+  the-render-step.md               the headless Chromium command, local fonts, no network
+  timeline.md                      the git history in seven phases; the stress test's findings
+  the-live-demo.md                 what the on-stage version added
+  images/                          the author's template drafts, an early render, one screenshot
 ```
 
 ## Two standing cautions

@@ -23,7 +23,7 @@ rendered.
 
 → **`example-speakers/`**
 
-Seventeen speakers that have already been through the pipeline, each with
+Eighteen speakers that have already been through the pipeline, each with
 their finished 1200×1200 PNG *and* the exact folder that produced it — so
 you can read a real filled-in form next to the image it became. Folklore
 characters, real Czech public figures used as stress-test material, and
@@ -40,6 +40,18 @@ generate the parts that benefit from variation — then check the generated
 words with mechanical rules before they touch the layout. Start at its
 `INDEX.md`, or pick line 2 of the assistant's menu and it will walk you
 through.
+
+## "I'm technical. How does it actually work?"
+
+→ **`how-this-was-built/`**
+
+The internals, one screen per topic: the architecture (a markdown form,
+two images, one static HTML page, one headless-browser screenshot), the
+verified CSS reproduction of the actor card and why its oddities stay,
+the template's eight fixed constants, the intake contract as executable
+checks, the exact render command, the git timeline with the stress test's
+findings, and what the on-stage live demo added. Start at its `INDEX.md`,
+or pick line 3 of the assistant's menu.
 
 ## "I cloned a repo off the internet. Is it going to do something to my machine?"
 

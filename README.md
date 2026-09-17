@@ -10,6 +10,8 @@ Want to just dive in?
 Help me create a new LinkedIn teaser image.
 ```
 
+Or open this folder in your assistant, say **show me the demo** and pick a line; the rest of this page is the long version.
+
 
 ## Demo Summary
 
@@ -41,7 +43,10 @@ is fetched from the internet at any point, and there are no scripts or
 packages. Wary of cloned repos? Good instinct —
 `demo-and-more-help/about-this-project/scripts-and-security.md` is a
 plain-English inventory of every piece of code in this project and when it
-runs (short version: there are **zero executable scripts** here).
+runs (short version: there are **zero executable scripts** here). The one
+footnote: the author's own machine carries an untracked, gitignored
+`live-demo/` folder with the stage-show machinery for the meetup; it is not
+part of the repo and nothing in the visitor path runs it.
 
 
 
@@ -59,7 +64,8 @@ the whole pipeline in front of you — form checked, card rendered in a
 headless browser, result inspected, finished PNG delivered to
 `generated-images/`. The second line explains the idea behind the project —
 why brand assets need deterministic code and probabilistic prose — one
-short page at a time; the third isn't built yet.
+short page at a time; the third walks a technical reader through how the
+demo was built.
 
 If anything is off — blurb too long, an image missing or not square, a
 template box the wrong shape — the run stops and says exactly what to fix.
@@ -72,7 +78,7 @@ slate at any time.
 
 Want to see what "done" looks like first? The finished PNG in
 `generated-images/` is the author's own card, and
-`demo-and-more-help/example-speakers/` holds seventeen more.
+`demo-and-more-help/example-speakers/` holds eighteen more.
 
 ## What the image looks like
 
@@ -185,11 +191,12 @@ from `CLAUDE.md` / `AGENTS.md`.
 README.md                     you are here — the only doc you need to start
 to-process/  processed/       the queue — built and moved by the assistant
 generated-images/             the finished PNGs (<speaker>-final.png)
-demo-and-more-help/           lost, curious, or cautious? four subfolders:
+demo-and-more-help/           lost, curious, or cautious? five subfolders:
                               filling-in-the-form/, example-speakers/,
                               about-this-project/ and
                               probabilistic-vs-deterministic/ (the idea
-                              behind the project) — start at its README.md
+                              behind the project) and how-this-was-built/
+                              (for technical readers) — start at its README.md
 _internal/                    machinery you never edit: the skills, the
                               bundled demo speaker, the render page,
                               self-hosted fonts, and the two core templates
