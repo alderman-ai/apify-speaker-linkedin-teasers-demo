@@ -36,8 +36,9 @@ reach the fixed layout through these:
    Anything typed into the machine-readable part of the form is put back the
    way the template has it. (The budgets are pictured in
    [Actor card text budgets.png](../filling-in-the-form/Actor%20card%20text%20budgets.png).)
-2. **Both pictures are checked.** The photo must be exactly square, a PNG or
-   JPG, at most 800×800; it is scaled into its 262×262 slot, never cropped.
+2. **Both pictures are checked.** The photo must be roughly square — a PNG or
+   JPG with sides within 25% of each other; the longer side is trimmed evenly
+   to make a square, which is then resized into its 262×262 slot.
 3. **The eight fixed numbers are loaded** from the form, exactly as written.
 4. **One ratio check.** The block is 799 wide and the card is drawn 400 wide,
    so it is enlarged by 1.9975 — which means the block has to match a card

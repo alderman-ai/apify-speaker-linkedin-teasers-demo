@@ -24,6 +24,14 @@ container for this, because the same code draws every card while gated
 prose fills the slots. Different words on every card; the same card, to
 the pixel, every time.
 
+## What you supply, and who writes the words
+
+A visitor supplies a few words — name, job title, company, topic, talk
+length, a short blurb — and two pictures: a logo and a photo of themselves
+(roughly square is fine). The blurb is the visitor's by default; if they
+prefer, the assistant drafts it from what they say in chat. Either way it
+passes the same gates before it touches the card.
+
 ## The pages
 
 Each is one screen long, in plain words. Any term that needs defining is

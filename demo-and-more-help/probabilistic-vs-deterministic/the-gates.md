@@ -32,12 +32,18 @@ Some fields aren't questions at all.
 
 ## 3. Images
 
-- **Company logo** — square, ideally 80×80 pixels or larger so it survives the
-  render.
-- **Speaker photo** — an exact square (same width as height), PNG, JPG or JPEG,
-  no larger than 800×800; 262×262 is the perfect size. It is scaled into its
-  slot, never cropped or reframed. How you want to be seen is your call, not
-  the pipeline's.
+- **Company logo** — PNG, ICO, JPG or JPEG; square, ideally 80×80 pixels or
+  larger so it survives the render (it is drawn at 40×40 with rounded
+  corners, and a non-square logo is centre-cropped, not squashed). It sits
+  on a light `#f3f3f3` plate, so a white-on-transparent logo will vanish —
+  supply one with its own background.
+- **Speaker photo** — PNG, JPG or JPEG, any size, **roughly square**: the
+  longer side at most 1.25 × the shorter, so a selfie cropped by eye on a
+  phone is fine. The pipeline trims the longer side evenly on both sides to
+  make an exact square (a plain centre crop — no face detection, no
+  guessing) and resizes it to the slot; it never pads or stretches. Further
+  from square than that is a stop with the measured width and height and one
+  fix: crop it roughly square on your phone and resend.
 
 ## 4. Geometry
 
@@ -46,8 +52,10 @@ once, when the template was built, and stored as constants in section 6 of the
 [intake form](../../_internal/core-templates-please-dont-touch/intake-template.md).
 No run re-measures the picture, and a hand edit to those numbers is reverted
 before anything renders. One check runs every time: the purple block's
-proportions must match the card as it actually renders, within **±2 pixels** at
-render scale. Card height moves in fixed steps, set by how many lines the blurb
+proportions must match the card as it actually renders, within **±2 pixels**
+at the card's own CSS scale — the check divides the block's height by the
+1.9975 enlargement first, so on the finished 1200×1200 image that is about
+4 pixels of slack. Card height moves in fixed steps, set by how many lines the blurb
 wraps to — so a blurb that shrinks to one line changes the shape, and this
 check catches it.
 
