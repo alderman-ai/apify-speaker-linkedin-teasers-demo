@@ -13,11 +13,9 @@ as it ran.
 |---|---|---|
 | Bojack Horseman | `bojack-horseman` | fictional character; rehearsal folder holds the form and logo only, no portrait file |
 | Božena Němcová | `bozena-nemcova-1` … `bozena-nemcova-4` | four parallel builds of the same name — the skill fans out several attempts and keeps the first good one |
+| Jaroslav Hašek | `jaroslav-hasek` | the card prepared in advance as the show's fallback, in case the live run failed |
 
 Portraits are public domain or Creative Commons; the exact source of each
 is in that folder's `credits.md`. The Němcová set uses a real historical
 figure's name and likeness as demo material only — don't publish it as
 real event material.
-
-Tonight's fallback card (`jaroslav-hasek`) stays in the live
-`processed/` and `generated-images/` folders on purpose; it is not here.

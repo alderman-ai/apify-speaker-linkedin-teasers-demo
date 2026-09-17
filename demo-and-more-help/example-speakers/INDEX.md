@@ -1,6 +1,6 @@
 # example-speakers/
 
-Seventeen speakers that have already been through the pipeline, archived
+Eighteen speakers that have already been through the pipeline, archived
 out of the live queue and kept purely as a showcase. Each half mirrors the
 live tree shape, so a folder here reads exactly like a folder there:
 
@@ -12,7 +12,7 @@ live tree shape, so a folder here reads exactly like a folder there:
 |---|---|---|
 | `fictional-characters/` | 7 — folklore characters (Baba Yaga, Krteček, Pat a Mat, Santa Claus, Vodník) and synthetic personas (Jana Novakova, Petr Svoboda) | showing the range of what the pipeline produces, with nobody real involved |
 | `real-people-stress-test/` | 5 — real Czech public figures (Antonín Dvořák, Jaromír Jágr, Karel Čapek, Martina Navrátilová, Václav Havel) | the 2026-09-01 stress test, kept as a record of the project mid-flight |
-| `live-demo-rehearsals/` | 5 — rehearsal runs of the on-stage skill on 2026-09-17 (Bojack Horseman, Božena Němcová ×4) | what the crowd-picks-a-name flow produces when it is run for real; portraits public domain / CC, credited per folder |
+| `live-demo-rehearsals/` | 6 — rehearsal runs of the on-stage skill on 2026-09-17 (Bojack Horseman, Božena Němcová ×4, Jaroslav Hašek) | what the crowd-picks-a-name flow produces when it is run for real; portraits public domain / CC, credited per folder |
 
 ## Three cautions
 

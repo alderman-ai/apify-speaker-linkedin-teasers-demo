@@ -10,6 +10,12 @@ package manifests that pull dependencies. That's deliberate design, not an
 accident: the AI assistant *is* the engine, following plain-markdown
 procedures you can read yourself in `_internal/skills/`.
 
+One honest footnote: on the author's own machine an untracked,
+gitignored `live-demo/` folder holds the stage-show machinery for the
+2026-09-17 meetup (a page loop and publishing helpers). It is not part of
+this repo — a clone never contains it — and nothing in the visitor path
+runs it.
+
 ## Every piece of code in this repo, itemised
 
 This is the complete list. If code is ever added to this repo, this file
