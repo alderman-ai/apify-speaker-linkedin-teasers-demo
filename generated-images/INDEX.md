@@ -16,5 +16,7 @@ second card for the same name lands beside it as `alex-alderman-<NN>-final.png`.
 Cards made from the session menu land here under the speaker's own name.
 The demo-era renders
 (fictional characters and the simulated-"real" stress-test speakers) were
-archived into `demo-and-more-help/example-speakers/fictional-characters/` and
-`demo-and-more-help/example-speakers/real-people-stress-test/`.
+archived into `demo-and-more-help/example-speakers/fictional-characters/`,
+`demo-and-more-help/example-speakers/real-people-stress-test/` and
+`demo-and-more-help/example-speakers/live-demo-rehearsals/` (the 2026-09-17
+rehearsal runs of the on-stage skill).

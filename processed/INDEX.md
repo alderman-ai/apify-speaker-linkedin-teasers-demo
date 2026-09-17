@@ -12,8 +12,10 @@ is the live worked example (its render is
 menu land beside it as `alex-alderman-<NN>/`. The demo-era speakers were
 archived out of the live queue into
 `demo-and-more-help/example-speakers/fictional-characters/` (fictional characters and
-synthetic personas) and `demo-and-more-help/example-speakers/real-people-stress-test/` (the
-simulated-"real" stress-test speakers).
+synthetic personas), `demo-and-more-help/example-speakers/real-people-stress-test/` (the
+simulated-"real" stress-test speakers) and
+`demo-and-more-help/example-speakers/live-demo-rehearsals/` (the 2026-09-17
+rehearsal runs of the on-stage skill).
 
 Archived files are historical records and are left as they ran: intakes
 archived before the 2026-09-01 tree reorganisation still reference the old
